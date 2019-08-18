@@ -35,15 +35,15 @@ return [
     ],
 
     'mediamanager' => [
-        'insert_link' => "Infoga medialänk",
-        'insert_image' => "Infoga bild",
-        'insert_video' => "Infoga video",
-        'insert_audio' => "Infoga ljud",
-        'invalid_file_empty_insert' => "Vänligen välj en fil att infoga till länken.",
-        'invalid_file_single_insert' => "Vänligen välj en enskild fil.",
-        'invalid_image_empty_insert' => "Vänligen välj bild(er) att infoga.",
-        'invalid_video_empty_insert' => "Vänligen välj en video att infoga.",
-        'invalid_audio_empty_insert' => "Vänligen välj en ljudfil att infoga.",
+        'insert_link' => 'Infoga medialänk',
+        'insert_image' => 'Infoga bild',
+        'insert_video' => 'Infoga video',
+        'insert_audio' => 'Infoga ljud',
+        'invalid_file_empty_insert' => 'Vänligen välj en fil att infoga till länken.',
+        'invalid_file_single_insert' => 'Vänligen välj en enskild fil.',
+        'invalid_image_empty_insert' => 'Vänligen välj bild(er) att infoga.',
+        'invalid_video_empty_insert' => 'Vänligen välj en video att infoga.',
+        'invalid_audio_empty_insert' => 'Vänligen välj en ljudfil att infoga.',
     ],
 
     'alert' => [

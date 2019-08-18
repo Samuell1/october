@@ -1,14 +1,15 @@
-<?php namespace System\Classes;
+<?php
+
+namespace System\Classes;
 
 /**
- * Composer manager
+ * Composer manager.
  *
  * This class manages composer packages introduced by plugins. Each loaded
  * package is added to a global pool to ensure a package is not loaded
  * twice by the composer instance introduced by a plugin. This class
  * is used as a substitute for the vendor/autoload.php file.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class ComposerManager
@@ -30,7 +31,7 @@ class ComposerManager
 
     public function init()
     {
-        $this->loader = include base_path() .'/vendor/autoload.php';
+        $this->loader = include base_path().'/vendor/autoload.php';
         $this->preloadPools();
     }
 
@@ -45,9 +46,9 @@ class ComposerManager
     protected function preloadIncludeFilesPool()
     {
         $result = [];
-        $vendorPath = base_path() .'/vendor';
+        $vendorPath = base_path().'/vendor';
 
-        if (file_exists($file = $vendorPath . '/composer/autoload_files.php')) {
+        if (file_exists($file = $vendorPath.'/composer/autoload_files.php')) {
             $includeFiles = require $file;
             foreach ($includeFiles as $includeFile) {
                 $relativeFile = $this->stripVendorDir($includeFile, $vendorPath);
@@ -65,27 +66,31 @@ class ComposerManager
      */
     public function autoload($vendorPath)
     {
-        $dir = $vendorPath . '/composer';
+        $dir = $vendorPath.'/composer';
 
-        if (file_exists($file = $dir . '/autoload_namespaces.php')) {
+        if (file_exists($file = $dir.'/autoload_namespaces.php')) {
             $map = require $file;
             foreach ($map as $namespace => $path) {
-                if (isset($this->namespacePool[$namespace])) continue;
+                if (isset($this->namespacePool[$namespace])) {
+                    continue;
+                }
                 $this->loader->set($namespace, $path);
                 $this->namespacePool[$namespace] = true;
             }
         }
 
-        if (file_exists($file = $dir . '/autoload_psr4.php')) {
+        if (file_exists($file = $dir.'/autoload_psr4.php')) {
             $map = require $file;
             foreach ($map as $namespace => $path) {
-                if (isset($this->psr4Pool[$namespace])) continue;
+                if (isset($this->psr4Pool[$namespace])) {
+                    continue;
+                }
                 $this->loader->setPsr4($namespace, $path);
                 $this->psr4Pool[$namespace] = true;
             }
         }
 
-        if (file_exists($file = $dir . '/autoload_classmap.php')) {
+        if (file_exists($file = $dir.'/autoload_classmap.php')) {
             $classMap = require $file;
             if ($classMap) {
                 $classMapDiff = array_diff_key($classMap, $this->classMapPool);
@@ -94,11 +99,13 @@ class ComposerManager
             }
         }
 
-        if (file_exists($file = $dir . '/autoload_files.php')) {
+        if (file_exists($file = $dir.'/autoload_files.php')) {
             $includeFiles = require $file;
             foreach ($includeFiles as $includeFile) {
                 $relativeFile = $this->stripVendorDir($includeFile, $vendorPath);
-                if (isset($this->includeFilesPool[$relativeFile])) continue;
+                if (isset($this->includeFilesPool[$relativeFile])) {
+                    continue;
+                }
                 require $includeFile;
                 $this->includeFilesPool[$relativeFile] = true;
             }

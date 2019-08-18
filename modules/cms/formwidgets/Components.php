@@ -1,22 +1,23 @@
-<?php namespace Cms\FormWidgets;
+<?php
 
-use Backend\Classes\FormWidgetBase;
-use Cms\Classes\ComponentManager;
-use Cms\Classes\ComponentHelpers;
-use Cms\Components\UnknownComponent;
+namespace Cms\FormWidgets;
+
 use Exception;
+use Cms\Classes\ComponentHelpers;
+use Cms\Classes\ComponentManager;
+use Backend\Classes\FormWidgetBase;
+use Cms\Components\UnknownComponent;
 
 /**
  * Component Builder
  * Builds a collection of Cms components and configures them.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class Components extends FormWidgetBase
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
@@ -29,7 +30,7 @@ class Components extends FormWidgetBase
     {
         $result = [];
 
-        if (!isset($this->model->settings['components'])) {
+        if (! isset($this->model->settings['components'])) {
             return $result;
         }
 
@@ -55,8 +56,7 @@ class Components extends FormWidgetBase
                         $componentObj->pluginIcon = $pluginDetails['icon'];
                     }
                 }
-            }
-            catch (Exception $ex) {
+            } catch (Exception $ex) {
                 $componentObj = new UnknownComponent(null, $properties, $ex->getMessage());
                 $componentObj->alias = $alias;
                 $componentObj->pluginIcon = 'icon-bug';

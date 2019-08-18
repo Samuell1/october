@@ -1,4 +1,6 @@
-<?php namespace System\Controllers;
+<?php
+
+namespace System\Controllers;
 
 use Lang;
 use Flash;
@@ -8,9 +10,8 @@ use Backend\Classes\Controller;
 use System\Classes\SettingsManager;
 
 /**
- * Mail layouts controller
+ * Mail layouts controller.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class MailLayouts extends Controller

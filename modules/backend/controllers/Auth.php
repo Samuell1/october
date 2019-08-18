@@ -1,23 +1,23 @@
-<?php namespace Backend\Controllers;
+<?php
+
+namespace Backend\Controllers;
 
 use Mail;
 use Flash;
 use Backend;
+use Exception;
 use Validator;
 use BackendAuth;
+use ValidationException;
+use ApplicationException;
 use Backend\Models\AccessLog;
 use Backend\Classes\Controller;
 use System\Classes\UpdateManager;
-use ApplicationException;
-use ValidationException;
-use Exception;
 
 /**
- * Authentication controller
+ * Authentication controller.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
- *
  */
 class Auth extends Controller
 {
@@ -39,7 +39,7 @@ class Auth extends Controller
         })->only('signin');
 
         // Only run on HTTPS connections
-        if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "on") {
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
             $this->middleware(function ($request, $response) {
                 // Add HTTP Header 'Clear Site Data' to remove all Sensitive Data when signout, see github issue: #3707
                 $response->headers->set('Clear-Site-Data', 'cache, cookies, storage, executionContexts');
@@ -47,7 +47,7 @@ class Auth extends Controller
         }
 
         // Add JS File to un-install SW to avoid Cookie Cache Issues when Signin, see github issue: #3707
-        $this->addJs(url("/modules/backend/assets/js/auth/uninstall-sw.js"));
+        $this->addJs(url('/modules/backend/assets/js/auth/uninstall-sw.js'));
         $this->layout = 'auth';
     }
 
@@ -72,8 +72,7 @@ class Auth extends Controller
             }
 
             $this->bodyClass .= ' preload';
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             Flash::error($ex->getMessage());
         }
     }
@@ -82,7 +81,7 @@ class Auth extends Controller
     {
         $rules = [
             'login'    => 'required|between:2,255',
-            'password' => 'required|between:4,255'
+            'password' => 'required|between:4,255',
         ];
 
         $validation = Validator::make(post(), $rules);
@@ -97,14 +96,13 @@ class Auth extends Controller
         // Authenticate user
         $user = BackendAuth::authenticate([
             'login' => post('login'),
-            'password' => post('password')
+            'password' => post('password'),
         ], $remember);
 
         try {
             // Load version updates
             UpdateManager::instance()->update();
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             Flash::error($ex->getMessage());
         }
 
@@ -138,8 +136,7 @@ class Auth extends Controller
             if (post('postback')) {
                 return $this->restore_onSubmit();
             }
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             Flash::error($ex->getMessage());
         }
     }
@@ -147,7 +144,7 @@ class Auth extends Controller
     public function restore_onSubmit()
     {
         $rules = [
-            'login' => 'required|between:2,255'
+            'login' => 'required|between:2,255',
         ];
 
         $validation = Validator::make(post(), $rules);
@@ -156,9 +153,9 @@ class Auth extends Controller
         }
 
         $user = BackendAuth::findUserByLogin(post('login'));
-        if (!$user) {
+        if (! $user) {
             throw new ValidationException([
-                'login' => trans('backend::lang.account.restore_error', ['login' => post('login')])
+                'login' => trans('backend::lang.account.restore_error', ['login' => post('login')]),
             ]);
         }
 
@@ -189,11 +186,10 @@ class Auth extends Controller
                 return $this->reset_onSubmit();
             }
 
-            if (!$userId || !$code) {
+            if (! $userId || ! $code) {
                 throw new ApplicationException(trans('backend::lang.account.reset_error'));
             }
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             Flash::error($ex->getMessage());
         }
 
@@ -203,12 +199,12 @@ class Auth extends Controller
 
     public function reset_onSubmit()
     {
-        if (!post('id') || !post('code')) {
+        if (! post('id') || ! post('code')) {
             throw new ApplicationException(trans('backend::lang.account.reset_error'));
         }
 
         $rules = [
-            'password' => 'required|between:4,255'
+            'password' => 'required|between:4,255',
         ];
 
         $validation = Validator::make(post(), $rules);
@@ -219,11 +215,11 @@ class Auth extends Controller
         $code = post('code');
         $user = BackendAuth::findUserById(post('id'));
 
-        if (!$user->checkResetPasswordCode($code)) {
+        if (! $user->checkResetPasswordCode($code)) {
             throw new ApplicationException(trans('backend::lang.account.reset_error'));
         }
 
-        if (!$user->attemptResetPassword($code, post('password'))) {
+        if (! $user->attemptResetPassword($code, post('password'))) {
             throw new ApplicationException(trans('backend::lang.account.reset_fail'));
         }
 

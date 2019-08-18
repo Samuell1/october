@@ -1,13 +1,14 @@
-<?php namespace System\Controllers;
+<?php
+
+namespace System\Controllers;
 
 use BackendMenu;
 use Backend\Classes\Controller;
 use System\Classes\SettingsManager;
 
 /**
- * Mail partials controller
+ * Mail partials controller.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class MailPartials extends Controller

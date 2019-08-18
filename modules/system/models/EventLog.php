@@ -1,4 +1,6 @@
-<?php namespace System\Models;
+<?php
+
+namespace System\Models;
 
 use App;
 use Str;
@@ -6,9 +8,8 @@ use Model;
 use Exception;
 
 /**
- * Model for logging system errors and debug trace messages
+ * Model for logging system errors and debug trace messages.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class EventLog extends Model
@@ -29,17 +30,16 @@ class EventLog extends Model
      */
     public static function useLogging()
     {
-        return (
+        return
             class_exists('Model') &&
             Model::getConnectionResolver() &&
             App::hasDatabase() &&
-            !defined('OCTOBER_NO_EVENT_LOGGING') &&
-            LogSetting::get('log_events')
-        );
+            ! defined('OCTOBER_NO_EVENT_LOGGING') &&
+            LogSetting::get('log_events');
     }
 
     /**
-     * Creates a log record
+     * Creates a log record.
      * @param string $message Specifies the message text
      * @param string $level Specifies the logging level
      * @param string $details Specifies the error details string
@@ -57,8 +57,8 @@ class EventLog extends Model
 
         try {
             $record->save();
+        } catch (Exception $ex) {
         }
-        catch (Exception $ex) {}
 
         return $record;
     }

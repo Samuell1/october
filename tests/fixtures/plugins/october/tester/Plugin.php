@@ -1,16 +1,17 @@
-<?php namespace October\Tester;
+<?php
+
+namespace October\Tester;
 
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
 {
-
     public function pluginDetails()
     {
         return [
             'name' => 'October Test Plugin',
             'description' => 'Test plugin used by unit tests.',
-            'author' => 'Alexey Bobkov, Samuel Georges'
+            'author' => 'Alexey Bobkov, Samuel Georges',
         ];
     }
 
@@ -30,8 +31,8 @@ class Plugin extends PluginBase
         return [
             'October\Tester\FormWidgets\Preview' => [
                 'label' => 'Preview',
-                'code'  => 'preview'
-            ]
+                'code'  => 'preview',
+            ],
         ];
     }
 
@@ -50,17 +51,16 @@ class Plugin extends PluginBase
                         'label'       => 'Posts',
                         'icon'        => 'icon-copy',
                         'url'         => 'http://rainlab.tld/blog/posts',
-                        'permissions' => ['rainlab.blog.access_posts']
+                        'permissions' => ['rainlab.blog.access_posts'],
                     ],
                     'categories' => [
                         'label'       => 'Categories',
                         'icon'        => 'icon-list-ul',
                         'url'         => 'http://rainlab.tld/blog/categories',
-                        'permissions' => ['rainlab.blog.access_categories']
+                        'permissions' => ['rainlab.blog.access_categories'],
                     ],
-                ]
-            ]
+                ],
+            ],
         ];
     }
-
 }

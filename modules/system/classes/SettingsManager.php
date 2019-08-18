@@ -1,4 +1,6 @@
-<?php namespace System\Classes;
+<?php
+
+namespace System\Classes;
 
 use Event;
 use Backend;
@@ -8,7 +10,6 @@ use SystemException;
 /**
  * Manages the system settings.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class SettingsManager
@@ -16,21 +17,34 @@ class SettingsManager
     use \October\Rain\Support\Traits\Singleton;
 
     /**
-     * Allocated category types
+     * Allocated category types.
      */
     const CATEGORY_CMS = 'system::lang.system.categories.cms';
+
     const CATEGORY_MISC = 'system::lang.system.categories.misc';
+
     const CATEGORY_MAIL = 'system::lang.system.categories.mail';
+
     const CATEGORY_LOGS = 'system::lang.system.categories.logs';
+
     const CATEGORY_SHOP = 'system::lang.system.categories.shop';
+
     const CATEGORY_TEAM = 'system::lang.system.categories.team';
+
     const CATEGORY_USERS = 'system::lang.system.categories.users';
+
     const CATEGORY_SOCIAL = 'system::lang.system.categories.social';
+
     const CATEGORY_SYSTEM = 'system::lang.system.categories.system';
+
     const CATEGORY_EVENTS = 'system::lang.system.categories.events';
+
     const CATEGORY_BACKEND = 'system::lang.system.categories.backend';
+
     const CATEGORY_CUSTOMERS = 'system::lang.system.categories.customers';
+
     const CATEGORY_MYSETTINGS = 'system::lang.system.categories.my_settings';
+
     const CATEGORY_NOTIFICATIONS = 'system::lang.system.categories.notifications';
 
     /**
@@ -70,7 +84,7 @@ class SettingsManager
         'permissions' => [],
         'order'       => 500,
         'context'     => 'system',
-        'keywords'    => null
+        'keywords'    => null,
     ];
 
     /**
@@ -102,7 +116,7 @@ class SettingsManager
 
         foreach ($plugins as $id => $plugin) {
             $items = $plugin->registerSettings();
-            if (!is_array($items)) {
+            if (! is_array($items)) {
                 continue;
             }
 
@@ -133,7 +147,7 @@ class SettingsManager
         $catItems = [];
         foreach ($this->items as $code => $item) {
             $category = $item->category ?: self::CATEGORY_MISC;
-            if (!isset($catItems[$category])) {
+            if (! isset($catItems[$category])) {
                 $catItems[$category] = [];
             }
 
@@ -144,7 +158,7 @@ class SettingsManager
     }
 
     /**
-     * Returns a collection of all settings by group, filtered by context
+     * Returns a collection of all settings by group, filtered by context.
      * @param  string $context
      * @return array
      */
@@ -171,7 +185,6 @@ class SettingsManager
     {
         $filteredItems = [];
         foreach ($items as $categoryName => $category) {
-
             $filteredCategory = [];
             foreach ($category as $item) {
                 $itemContext = is_array($item->context) ? $item->context : [$item->context];
@@ -193,7 +206,7 @@ class SettingsManager
      * The callback function should register setting items by calling the manager's
      * registerSettingItems() function. The manager instance is passed to the
      * callback function as an argument.
-     * Usage:
+     * Usage:.
      *
      *     SettingsManager::registerCallback(function($manager){
      *         $manager->registerSettingItems([...]);
@@ -224,7 +237,7 @@ class SettingsManager
      */
     public function registerSettingItems($owner, array $definitions)
     {
-        if (!$this->items) {
+        if (! $this->items) {
             $this->items = [];
         }
 
@@ -232,7 +245,7 @@ class SettingsManager
     }
 
     /**
-     * Dynamically add an array of setting items
+     * Dynamically add an array of setting items.
      * @param string $owner
      * @param array  $definitions
      */
@@ -244,7 +257,7 @@ class SettingsManager
     }
 
     /**
-     * Dynamically add a single setting item
+     * Dynamically add a single setting item.
      * @param string $owner
      * @param string $code
      * @param array  $definitions
@@ -259,38 +272,37 @@ class SettingsManager
 
         $item = array_merge(self::$itemDefaults, array_merge($definition, [
             'code' => $code,
-            'owner' => $owner
+            'owner' => $owner,
         ]));
 
         /*
          * Link to the generic settings page if a URL is not provided
          */
-        if (isset($item['class']) && !isset($item['url'])) {
+        if (isset($item['class']) && ! isset($item['url'])) {
             $uri = [];
 
             if (strpos($owner, '.') !== null) {
                 list($author, $plugin) = explode('.', $owner);
                 $uri[] = strtolower($author);
                 $uri[] = strtolower($plugin);
-            }
-            else {
+            } else {
                 $uri[] = strtolower($owner);
             }
 
             $uri[] = strtolower($code);
-            $uri =  implode('/', $uri);
-            $item['url'] = Backend::url('system/settings/update/' . $uri);
+            $uri = implode('/', $uri);
+            $item['url'] = Backend::url('system/settings/update/'.$uri);
         }
 
         $this->items[$itemKey] = (object) $item;
     }
 
     /**
-     * Removes a single setting item
+     * Removes a single setting item.
      */
     public function removeSettingItem($owner, $code)
     {
-        if (!$this->items) {
+        if (! $this->items) {
             throw new SystemException('Unable to remove settings item before items are loaded.');
         }
 
@@ -329,12 +341,12 @@ class SettingsManager
     {
         return (object) [
             'itemCode' => $this->contextItemCode,
-            'owner' => $this->contextOwner
+            'owner' => $this->contextOwner,
         ];
     }
 
     /**
-     * Locates a setting item object by it's owner and code
+     * Locates a setting item object by it's owner and code.
      * @param string $owner
      * @param string $code
      * @return mixed The item object or FALSE if nothing is found
@@ -366,7 +378,7 @@ class SettingsManager
     protected function filterItemPermissions($user, array $items)
     {
         $items = array_filter($items, function ($item) use ($user) {
-            if (!$item->permissions || !count($item->permissions)) {
+            if (! $item->permissions || ! count($item->permissions)) {
                 return true;
             }
 

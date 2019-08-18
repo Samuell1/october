@@ -1,18 +1,19 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use File;
 use Lang;
 use Config;
 use Request;
+use ValidationException;
+use ApplicationException;
 use Cms\Helpers\File as FileHelper;
 use October\Rain\Extension\Extendable;
-use ApplicationException;
-use ValidationException;
 
 /**
  * The CMS theme asset file class.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class Asset extends Extendable
@@ -52,7 +53,7 @@ class Asset extends Extendable
      */
     protected $fillable = [
         'fileName',
-        'content'
+        'content',
     ];
 
     /**
@@ -115,12 +116,12 @@ class Asset extends Extendable
     {
         $filePath = $this->getFilePath($fileName);
 
-        if (!File::isFile($filePath)) {
-            return null;
+        if (! File::isFile($filePath)) {
+            return;
         }
 
         if (($content = @File::get($filePath)) === false) {
-            return null;
+            return;
         }
 
         $this->fileName = $fileName;
@@ -128,6 +129,7 @@ class Asset extends Extendable
         $this->mtime = File::lastModified($filePath);
         $this->content = $content;
         $this->exists = true;
+
         return $this;
     }
 
@@ -138,7 +140,7 @@ class Asset extends Extendable
     public function fill(array $attributes)
     {
         foreach ($attributes as $key => $value) {
-            if (!in_array($key, $this->fillable)) {
+            if (! in_array($key, $this->fillable)) {
                 throw new ApplicationException(Lang::get(
                     'cms::lang.cms_object.invalid_property',
                     ['name' => $key]
@@ -166,8 +168,8 @@ class Asset extends Extendable
         }
 
         $dirPath = $this->theme->getPath().'/'.$this->dirName;
-        if (!file_exists($dirPath) || !is_dir($dirPath)) {
-            if (!File::makeDirectory($dirPath, 0777, true, true)) {
+        if (! file_exists($dirPath) || ! is_dir($dirPath)) {
+            if (! File::makeDirectory($dirPath, 0777, true, true)) {
                 throw new ApplicationException(Lang::get(
                     'cms::lang.cms_object.error_creating_directory',
                     ['name'=>$dirPath]
@@ -178,7 +180,7 @@ class Asset extends Extendable
         if (($pos = strpos($this->fileName, '/')) !== false) {
             $dirPath = dirname($fullPath);
 
-            if (!is_dir($dirPath) && !File::makeDirectory($dirPath, 0777, true, true)) {
+            if (! is_dir($dirPath) && ! File::makeDirectory($dirPath, 0777, true, true)) {
                 throw new ApplicationException(Lang::get(
                     'cms::lang.cms_object.error_creating_directory',
                     ['name'=>$dirPath]
@@ -208,23 +210,23 @@ class Asset extends Extendable
         $this->originalFileName = $this->fileName;
         $this->exists = true;
     }
-    
+
     public function delete()
     {
         $fileName = Request::input('fileName');
         $fullPath = $this->getFilePath($fileName);
-        
+
         $this->validateFileName($fileName);
 
         if (File::exists($fullPath)) {
-            if (!@File::delete($fullPath)) {
+            if (! @File::delete($fullPath)) {
                 throw new ApplicationException(Lang::get(
                     'cms::lang.asset.error_deleting_file',
                     ['name' => $fileName]
                 ));
-            }            
+            }
         }
-    }    
+    }
 
     /**
      * Validate the supplied filename, extension and path.
@@ -238,29 +240,26 @@ class Asset extends Extendable
 
         $fileName = trim($fileName);
 
-        if (!strlen($fileName)) {
-            throw new ValidationException(['fileName' =>
-                Lang::get('cms::lang.cms_object.file_name_required', [
+        if (! strlen($fileName)) {
+            throw new ValidationException(['fileName' => Lang::get('cms::lang.cms_object.file_name_required', [
                     'allowed' => implode(', ', $this->allowedExtensions),
-                    'invalid' => pathinfo($fileName, PATHINFO_EXTENSION)
-                ])
+                    'invalid' => pathinfo($fileName, PATHINFO_EXTENSION),
+                ]),
             ]);
         }
 
-        if (!FileHelper::validateExtension($fileName, $this->allowedExtensions, false)) {
-            throw new ValidationException(['fileName' =>
-                Lang::get('cms::lang.cms_object.invalid_file_extension', [
+        if (! FileHelper::validateExtension($fileName, $this->allowedExtensions, false)) {
+            throw new ValidationException(['fileName' => Lang::get('cms::lang.cms_object.invalid_file_extension', [
                     'allowed' => implode(', ', $this->allowedExtensions),
-                    'invalid' => pathinfo($fileName, PATHINFO_EXTENSION)
-                ])
+                    'invalid' => pathinfo($fileName, PATHINFO_EXTENSION),
+                ]),
             ]);
         }
 
-        if (!FileHelper::validatePath($fileName, null)) {
-            throw new ValidationException(['fileName' =>
-                Lang::get('cms::lang.cms_object.invalid_file', [
-                    'name' => $fileName
-                ])
+        if (! FileHelper::validatePath($fileName, null)) {
+            throw new ValidationException(['fileName' => Lang::get('cms::lang.cms_object.invalid_file', [
+                    'name' => $fileName,
+                ]),
             ]);
         }
     }
@@ -295,10 +294,10 @@ class Asset extends Extendable
      */
     public static function getEditableExtensions()
     {
-        $defaultTypes =  ['css', 'js', 'less', 'sass', 'scss'];
+        $defaultTypes = ['css', 'js', 'less', 'sass', 'scss'];
 
         $configTypes = Config::get('cms.editableAssetTypes');
-        if (!$configTypes) {
+        if (! $configTypes) {
             return $defaultTypes;
         }
 

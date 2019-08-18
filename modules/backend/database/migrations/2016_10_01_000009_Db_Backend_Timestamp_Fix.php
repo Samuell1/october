@@ -27,15 +27,13 @@ class DbBackendTimestampFix extends Migration
         // Use this opportunity to reset backend preferences and styles for stable
         Db::table('system_settings')
             ->where('item', 'backend_brand_settings')
-            ->delete()
-        ;
+            ->delete();
 
         Db::table('backend_user_preferences')
             ->where('namespace', 'backend')
             ->where('group', 'backend')
             ->where('item', 'preferences')
-            ->delete()
-        ;
+            ->delete();
     }
 
     public function down()

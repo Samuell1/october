@@ -29,8 +29,8 @@ return [
             'social' => 'ソーシャル',
             'events' => 'イベント',
             'customers' => 'カスタマー',
-            'my_settings' => 'マイ設定'
-        ]
+            'my_settings' => 'マイ設定',
+        ],
     ],
     'plugin' => [
         'unnamed' => '名前なしプラグイン',
@@ -55,7 +55,7 @@ return [
         'disable_confirm' => '無効にしていいですか？',
         'disable_success' => 'プラグインを無効にしました。',
         'enable_success' => 'プラグインを有効にしました。',
-        'unknown_plugin' => 'システムから見知らぬプラグインを削除しました。'
+        'unknown_plugin' => 'システムから見知らぬプラグインを削除しました。',
     ],
     'project' => [
         'name' => 'プロジェクト',
@@ -77,7 +77,7 @@ return [
         'missing_model' => 'モデルの定義が見つかりません。',
         'update_success' => ':name を設定しました。',
         'return' => 'システム設定へ戻る',
-        'search' => '検索'
+        'search' => '検索',
     ],
     'mail' => [
         'log_file' => 'ログファイル',
@@ -103,7 +103,7 @@ return [
         'mailgun_domain' => 'Mailgunドメイン',
         'mailgun_domain_comment' => 'Mailgunドメイン名を指定してください。',
         'mailgun_secret' => 'Mailgun APIキー',
-        'mailgun_secret_comment' => 'Mailgun APIキーを指定してください。'
+        'mailgun_secret_comment' => 'Mailgun APIキーを指定してください。',
     ],
     'mail_templates' => [
         'menu_label' => 'メールテンプレート',
@@ -127,7 +127,7 @@ return [
         'content_text' => 'プレーンテキスト',
         'test_send' => 'テストメッセージを送信する',
         'test_success' => 'テストメッセージが送信されました。',
-        'return' => 'テンプレートリストに戻る'
+        'return' => 'テンプレートリストに戻る',
     ],
     'install' => [
         'project_label' => 'プロジェクト追加',
@@ -205,7 +205,7 @@ return [
         'id_label' => 'イベントID',
         'created_at' => '日付と時間',
         'message' => 'メッセージ',
-        'level' => 'レベル'
+        'level' => 'レベル',
     ],
     'request_log' => [
         'hint' => 'This log displays a list of browser requests that may require attention. For example, if a visitor opens a CMS page that cannot be found, a record is created with the status code 404.',
@@ -220,7 +220,7 @@ return [
         'count' => 'カウンタ',
         'referer' => '参照元',
         'url' => 'URL',
-        'status_code' => 'ステータス'
+        'status_code' => 'ステータス',
     ],
     'permissions' => [
         'name' => 'システム',
@@ -228,6 +228,6 @@ return [
         'manage_software_updates' => 'ソフトウェアアップデートの管理',
         'manage_mail_templates' => 'メールテンプレートの管理',
         'manage_other_administrators' => '他のアドミニストレーターの管理',
-        'view_the_dashboard' => 'ダッシュボードの表示'
+        'view_the_dashboard' => 'ダッシュボードの表示',
     ],
 ];

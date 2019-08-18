@@ -10,17 +10,17 @@ return [
         'invalid_file_extension'=>'Ungültige Dateiendung: :invalid. Erlaubt sind: :allowed.',
         'error_deleting' => 'Fehler beim Löschen der Template-Datei ":name".',
         'delete_success' => 'Templates wurden erfolgreich gelöscht: :count.',
-        'file_name_required' => 'Ein Dateiname ist erforderlich.'
+        'file_name_required' => 'Ein Dateiname ist erforderlich.',
     ],
     'theme' => [
         'not_found_name' => "Das Theme ':name' konnte nicht gefunden werden.",
         'active' => [
-            'not_set' => "Aktives Theme nicht definiert",
+            'not_set' => 'Aktives Theme nicht definiert',
         ],
         'edit' => [
-            'not_set' => "Edit Theme nicht definiert",
-            'not_found' => "Edit Theme nicht gefunden.",
-            'not_match' => "Das Objekt, das sie anzupassen versuchen gehört nicht zum Theme in Bearbeitung. Bitte laden Sie die Seite erneut."
+            'not_set' => 'Edit Theme nicht definiert',
+            'not_found' => 'Edit Theme nicht gefunden.',
+            'not_match' => 'Das Objekt, das sie anzupassen versuchen gehört nicht zum Theme in Bearbeitung. Bitte laden Sie die Seite erneut.',
         ],
         'settings_menu' => 'Frontend Theme',
         'settings_menu_description' => 'Rufe eine Liste installierter Themes auf und wähle ein aktives aus.',
@@ -84,17 +84,17 @@ return [
         'settings_menu' => 'Wartungsmodus',
         'settings_menu_description' => 'Konfigurieren Sie den Wartungsmodus.',
         'is_enabled' => 'Wartungsmodus aktivieren',
-        'is_enabled_comment' => 'Sobald aktiviert, werden Besucher die unten ausgewählte Seite sehen.'
+        'is_enabled_comment' => 'Sobald aktiviert, werden Besucher die unten ausgewählte Seite sehen.',
     ],
     'page' => [
         'not_found_name' => "Die Seite ':name' konnte nicht gefunden werden",
         'not_found' => [
-            'label' => "Seite nicht gefunden",
-            'help' => "Die angeforderte Seite kann nicht gefunden werden.",
+            'label' => 'Seite nicht gefunden',
+            'help' => 'Die angeforderte Seite kann nicht gefunden werden.',
         ],
         'custom_error' => [
-            'label' => "Seitenfehler",
-            'help' => "Entschuldigung, ein Fehler trat auf, sodass die gewünschte Seite nicht angezeigt werden kann.",
+            'label' => 'Seitenfehler',
+            'help' => 'Entschuldigung, ein Fehler trat auf, sodass die gewünschte Seite nicht angezeigt werden kann.',
         ],
         'menu_label' => 'Seiten',
         'no_list_records' => 'Keine Seiten gefunden',
@@ -102,7 +102,7 @@ return [
         'invalid_url' => 'Ungültiges URL-Format. Die URL muss mit einem Slash beginnen und darf nur Ziffern, lateinische Zeichen und die folgenden Symbole beinhalten: ._-[]:?|/+*^$',
         'delete_confirm_multiple' => 'Wollen Sie die ausgewählten Seiten wirklich löschen?',
         'delete_confirm_single' => 'Wollen Sie diese Seite wirklich löschen?',
-        'no_layout' => '-- Kein Layout --'
+        'no_layout' => '-- Kein Layout --',
     ],
     'layout' => [
         'not_found_name' => "Das Layout ':name' wurde nicht gefunden",
@@ -110,16 +110,16 @@ return [
         'no_list_records' => 'Keine Layouts gefunden',
         'new' => 'Neues Layout',
         'delete_confirm_multiple' => 'Wollen Sie die ausgewählten Layouts wirklich löschen?',
-        'delete_confirm_single' => 'Wollen Sie das ausgewählte Layout wirklich löschen?'
+        'delete_confirm_single' => 'Wollen Sie das ausgewählte Layout wirklich löschen?',
     ],
     'partial' => [
         'not_found_name' => "Das Partial ':name' wurde nicht gefunden.",
-        'invalid_name' => "Ungültiger Partial-Name: :name.",
+        'invalid_name' => 'Ungültiger Partial-Name: :name.',
         'menu_label' => 'Partials',
         'no_list_records' => 'Keine Partials gefunden',
         'delete_confirm_multiple' => 'Wollen Sie die ausgewählten Partials wirklich löschen?',
         'delete_confirm_single' => 'Wollen Sie das ausgewählte Partial wirklich löschen?',
-        'new' => 'Neues Partial'
+        'new' => 'Neues Partial',
     ],
     'content' => [
         'not_found_name' => "Die Inhaltsdatei ':name' wurde nicht gefunden.",
@@ -127,18 +127,18 @@ return [
         'no_list_records' => 'Keine Inhaltsdateien gefunden',
         'delete_confirm_multiple' => 'Wollen Sie die ausgewählten Inhalte und Verzeichnisse wirklich löschen?',
         'delete_confirm_single' => 'Wollen Sie diese Inhaltsdatei wirklich löschen?',
-        'new' => 'Neue Inhaltsdatei'
+        'new' => 'Neue Inhaltsdatei',
     ],
     'ajax_handler' => [
-        'invalid_name' => "Ungültiger Name für AJAX Handler: :name.",
+        'invalid_name' => 'Ungültiger Name für AJAX Handler: :name.',
         'not_found' => "AJAX Handler ':name' wurde nicht gefunden.",
     ],
     'cms' => [
-        'menu_label' => "CMS"
+        'menu_label' => 'CMS',
     ],
     'sidebar' => [
         'add' => 'Hinzufügen',
-        'search' => 'Suchen...'
+        'search' => 'Suchen...',
     ],
     'editor' => [
         'settings' => 'Einstellungen',
@@ -158,10 +158,10 @@ return [
         'hidden' => 'Versteckt',
         'hidden_comment' => 'Versteckte Seiten können nur von eingeloggten Backend-Benutzern genutzt werden.',
         'enter_fullscreen' => 'In den Vollbildmodus wechseln',
-        'exit_fullscreen' => 'Vollbildmodus beenden'
+        'exit_fullscreen' => 'Vollbildmodus beenden',
     ],
     'asset' => [
-        'menu_label' => "Assets",
+        'menu_label' => 'Assets',
         'drop_down_add_title' => 'Hinzufügen...',
         'drop_down_operation_title' => 'Aktion...',
         'upload_files' => 'Datei(en) hochladen',
@@ -196,24 +196,24 @@ return [
         'error_moving_file' => 'Fehler beim Verschieben der Datei :file',
         'error_moving_directory' => 'Fehler beim Verschieben des Verzeichnisses :dir',
         'error_deleting_directory' => 'Fehler beim Löschen des Originalverzeichnisses :dir',
-        'path' => 'Pfad'
+        'path' => 'Pfad',
     ],
     'component' => [
-        'menu_label' => "Komponenten",
-        'unnamed' => "Unbenannt",
-        'no_description' => "Keine Beschreibung angegeben",
-        'alias' => "Verknüpfung",
-        'alias_description' => "Dieser Komponente wird ein eindeutiger Name gegeben, wenn sie im Code von Seite oder Layout benutzt wird.",
-        'validation_message' => "Komponentenverknüpfungen werden benötigt und dürfen nur lateinische Zeichen, Ziffern und Unterstriche beinhalten. Die Verknüpfungen müssen mit einem lateinischen Zeichen beginnen.",
-        'invalid_request' => "Aufgrund ungültiger Komponentendaten kann das Template nicht gespeichert werden.",
+        'menu_label' => 'Komponenten',
+        'unnamed' => 'Unbenannt',
+        'no_description' => 'Keine Beschreibung angegeben',
+        'alias' => 'Verknüpfung',
+        'alias_description' => 'Dieser Komponente wird ein eindeutiger Name gegeben, wenn sie im Code von Seite oder Layout benutzt wird.',
+        'validation_message' => 'Komponentenverknüpfungen werden benötigt und dürfen nur lateinische Zeichen, Ziffern und Unterstriche beinhalten. Die Verknüpfungen müssen mit einem lateinischen Zeichen beginnen.',
+        'invalid_request' => 'Aufgrund ungültiger Komponentendaten kann das Template nicht gespeichert werden.',
         'no_records' => 'Keine Komponenten gefunden',
         'not_found' => "Die Komponente ':name' wurde nicht gefunden.",
         'method_not_found' => "Die Komponente ':name' enthält keine Methode mit Namen ':method'.",
     ],
     'template' => [
-        'invalid_type' => "Unbekannter Template-Typ.",
-        'not_found' => "Das angeforderte Template wurde nicht gefunden.",
-        'saved'=> "Das Template wurde erfolgreich gespeichert."
+        'invalid_type' => 'Unbekannter Template-Typ.',
+        'not_found' => 'Das angeforderte Template wurde nicht gefunden.',
+        'saved'=> 'Das Template wurde erfolgreich gespeichert.',
     ],
     'permissions' => [
         'name' => 'Cms',

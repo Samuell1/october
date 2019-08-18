@@ -1,49 +1,49 @@
-<?php namespace Backend\Models;
+<?php
+
+namespace Backend\Models;
 
 use File;
 use Lang;
 use Model;
 use Response;
-use League\Csv\Writer as CsvWriter;
-use ApplicationException;
 use SplTempFileObject;
+use ApplicationException;
+use League\Csv\Writer as CsvWriter;
 
 /**
- * Model used for exporting data
+ * Model used for exporting data.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 abstract class ExportModel extends Model
 {
     /**
      * Called when data is being exported.
-     * The return value should be an array in the format of:
+     * The return value should be an array in the format of:.
      *
      *   [
      *       'db_name1' => 'Some attribute value',
      *       'db_name2' => 'Another attribute value'
      *   ],
      *   [...]
-     *
      */
     abstract public function exportData($columns, $sessionKey = null);
 
     /**
      * Export data based on column names and labels.
-     * The $columns array should be in the format of:
+     * The $columns array should be in the format of:.
      *
      *   [
      *       'db_name1' => 'Column label',
      *       'db_name2' => 'Another label',
      *       ...
      *   ]
-     *
      */
     public function export($columns, $options)
     {
         $sessionKey = array_get($options, 'sessionKey');
         $data = $this->exportData(array_keys($columns), $sessionKey);
+
         return $this->processExportData($columns, $data, $options);
     }
 
@@ -53,12 +53,12 @@ abstract class ExportModel extends Model
      */
     public function download($name, $outputName = null)
     {
-        if (!preg_match('/^oc[0-9a-z]*$/i', $name)) {
+        if (! preg_match('/^oc[0-9a-z]*$/i', $name)) {
             throw new ApplicationException(Lang::get('backend::lang.import_export.file_not_found_error'));
         }
 
-        $csvPath = temp_path() . '/' . $name;
-        if (!file_exists($csvPath)) {
+        $csvPath = temp_path().'/'.$name;
+        if (! file_exists($csvPath)) {
             throw new ApplicationException(Lang::get('backend::lang.import_export.file_not_found_error'));
         }
 
@@ -73,7 +73,7 @@ abstract class ExportModel extends Model
         /*
          * Validate
          */
-        if (!$results) {
+        if (! $results) {
             throw new ApplicationException(Lang::get('backend::lang.import_export.empty_error'));
         }
 
@@ -86,7 +86,7 @@ abstract class ExportModel extends Model
             'fileName' => 'export.csv',
             'delimiter' => null,
             'enclosure' => null,
-            'escape' => null
+            'escape' => null,
         ];
 
         $options = array_merge($defaultOptions, $options);
@@ -96,7 +96,7 @@ abstract class ExportModel extends Model
          * Prepare CSV
          */
         $csv = CsvWriter::createFromFileObject(new SplTempFileObject);
-        
+
         $csv->setOutputBOM(CsvWriter::BOM_UTF8);
 
         if ($options['delimiter'] !== null) {
@@ -193,8 +193,7 @@ abstract class ExportModel extends Model
         foreach ($data as $value) {
             if (is_array($value)) {
                 $newData[] = 'Array';
-            }
-            else {
+            } else {
                 $newData[] = str_replace($delimeter, '\\'.$delimeter, $value);
             }
         }

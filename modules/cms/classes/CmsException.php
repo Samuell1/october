@@ -1,17 +1,18 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use File;
+use Exception;
 use Twig\Error\Error as TwigError;
 use October\Rain\Exception\ApplicationException;
 use October\Rain\Halcyon\Processors\SectionParser;
-use Exception;
 
 /**
  * The CMS exception class.
  * The exception class handles CMS related errors. Allows the masking of other exception types which
  * uses actual source CMS files -- instead of cached files -- for their error content.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class CmsException extends ApplicationException
@@ -28,7 +29,7 @@ class CmsException extends ApplicationException
         100 => 'General',
         200 => 'INI Settings',
         300 => 'PHP Content',
-        400 => 'Twig Template'
+        400 => 'Twig Template',
     ];
 
     /**
@@ -70,14 +71,17 @@ class CmsException extends ApplicationException
         switch ($this->code) {
             case 200:
                 $result = $this->processIni($exception);
+
                 break;
 
             case 300:
                 $result = $this->processPhp($exception);
+
                 break;
 
             case 400:
                 $result = $this->processTwig($exception);
+
                 break;
         }
         if ($result !== false) {
@@ -104,7 +108,7 @@ class CmsException extends ApplicationException
         /*
          * Expecting: syntax error, unexpected '!' in Unknown on line 4
          */
-        if (!starts_with($message, 'syntax error')) {
+        if (! starts_with($message, 'syntax error')) {
             return false;
         }
         if (strpos($message, 'Unknown') === false) {
@@ -120,7 +124,7 @@ class CmsException extends ApplicationException
          */
         $parts = explode(' ', $message);
         $line = array_pop($parts);
-        $this->line = (int)$line;
+        $this->line = (int) $line;
 
         // Find where the ini settings section begins
         $offsetArray = SectionParser::parseOffset($this->compoundObject->getContent());
@@ -154,22 +158,21 @@ class CmsException extends ApplicationException
             }
 
             // Expected: */storage/cms/cache/39/05/home.htm.php
-            if (strpos($exception->getFile(), $this->compoundObject->getFileName() . '.php')) {
+            if (strpos($exception->getFile(), $this->compoundObject->getFileName().'.php')) {
                 $check = true;
             }
 
-            if (!$check) {
+            if (! $check) {
                 return false;
             }
-        /*
-         * Errors occurring the PHP code base class (Cms\Classes\CodeBase)
-         */
-        }
-        else {
+            /*
+             * Errors occurring the PHP code base class (Cms\Classes\CodeBase)
+             */
+        } else {
             $trace = $exception->getTrace();
             if (isset($trace[1]['class'])) {
                 $class = $trace[1]['class'];
-                if (!is_subclass_of($class, CodeBase::class)) {
+                if (! is_subclass_of($class, CodeBase::class)) {
                     return false;
                 }
             }
@@ -199,7 +202,7 @@ class CmsException extends ApplicationException
     protected function processTwig(Exception $exception)
     {
         // Must be a Twig related exception
-        if (!$exception instanceof TwigError) {
+        if (! $exception instanceof TwigError) {
             return false;
         }
 
@@ -230,6 +233,7 @@ class CmsException extends ApplicationException
     {
         if ($this->code == 100 || $this->processCompoundObject($exception) === false) {
             parent::applyMask($exception);
+
             return;
         }
     }

@@ -1,15 +1,15 @@
-<?php namespace System\Traits;
+<?php
+
+namespace System\Traits;
 
 /**
- * Property container trait
+ * Property container trait.
  *
  * Adds properties and methods for classes that could define properties,
  * like components or report widgets.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
-
 trait PropertyContainer
 {
     /**
@@ -63,7 +63,7 @@ trait PropertyContainer
     }
 
     /**
-     * Sets a property value
+     * Sets a property value.
      * @param string $name
      * @param mixed $value
      * @return void
@@ -96,7 +96,7 @@ trait PropertyContainer
     }
 
     /**
-     * Returns options for multi-option properties (drop-downs, etc.)
+     * Returns options for multi-option properties (drop-downs, etc.).
      * @param string $property Specifies the property name
      * @return array Return an array of option values and descriptions
      */

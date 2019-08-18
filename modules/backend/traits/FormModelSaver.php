@@ -1,4 +1,6 @@
-<?php namespace Backend\Traits;
+<?php
+
+namespace Backend\Traits;
 
 use Str;
 use Backend\Classes\FormField;
@@ -9,7 +11,6 @@ use October\Rain\Halcyon\Model as HalcyonModel;
  * filling the model attributes and attributes of any related models. This is a
  * customized, safer and simplified version of `$model->push()`.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 trait FormModelSaver
@@ -39,6 +40,7 @@ trait FormModelSaver
         $this->modelsToSave = [];
         $this->setModelAttributes($model, $saveData);
         $this->modelsToSave = array_reverse($this->modelsToSave);
+
         return $this->modelsToSave;
     }
 
@@ -53,12 +55,13 @@ trait FormModelSaver
     {
         $this->modelsToSave[] = $model;
 
-        if (!is_array($saveData)) {
+        if (! is_array($saveData)) {
             return;
         }
 
         if ($model instanceof HalcyonModel) {
             $model->fill($saveData);
+
             return;
         }
 
@@ -73,8 +76,7 @@ trait FormModelSaver
 
             if ($isNested && is_array($value)) {
                 $this->setModelAttributes($model->{$attribute}, $value);
-            }
-            elseif ($value !== FormField::NO_SAVE_DATA) {
+            } elseif ($value !== FormField::NO_SAVE_DATA) {
                 if (Str::startsWith($attribute, '_')) {
                     $attributesToPurge[] = $attribute;
                 }
@@ -97,7 +99,7 @@ trait FormModelSaver
      */
     protected function deferPurgedSaveAttributes($model, $attributesToPurge)
     {
-        if (!is_array($attributesToPurge)) {
+        if (! is_array($attributesToPurge)) {
             return;
         }
 
@@ -108,8 +110,7 @@ trait FormModelSaver
          */
         if (method_exists($model, 'getPurgeableAttributes')) {
             $model->addPurgeable($attributesToPurge);
-        }
-        else {
+        } else {
             $model->bindEventOnce('model.saveInternal', function () use ($model, $attributesToPurge) {
                 foreach ($attributesToPurge as $attribute) {
                     unset($model->attributes[$attribute]);

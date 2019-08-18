@@ -1,18 +1,20 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use Db;
 use App;
-use Str;
 use PDO;
+use Str;
 use File;
 use Config;
-use Backend\Database\Seeds\SeedSetupAdmin;
-use System\Classes\UpdateManager;
-use October\Rain\Config\ConfigWriter;
-use Illuminate\Console\Command;
-use Illuminate\Encryption\Encrypter;
-use Symfony\Component\Console\Input\InputOption;
 use Exception;
+use Illuminate\Console\Command;
+use System\Classes\UpdateManager;
+use Illuminate\Encryption\Encrypter;
+use October\Rain\Config\ConfigWriter;
+use Backend\Database\Seeds\SeedSetupAdmin;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Console command to install October.
@@ -21,7 +23,6 @@ use Exception;
  * configuration items, including application URL and database config, and then
  * perform a database migration.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class OctoberInstall extends Command
@@ -62,7 +63,7 @@ class OctoberInstall extends Command
 
         if (
             App::hasDatabase() &&
-            !$this->confirm('Application appears to be installed already. Continue anyway?', false)
+            ! $this->confirm('Application appears to be installed already. Continue anyway?', false)
         ) {
             return;
         }
@@ -77,19 +78,18 @@ class OctoberInstall extends Command
             $this->setupEncryptionKey();
             $this->setupAdvancedValues();
             $chosenToInstall = $this->askToInstallPlugins();
-        }
-        else {
+        } else {
             $this->setupEncryptionKey(true);
         }
 
         $this->setupMigrateDatabase();
 
         foreach ($chosenToInstall as $pluginCode) {
-            $this->output->writeln('<info>Installing plugin ' . $pluginCode . '</info>');
+            $this->output->writeln('<info>Installing plugin '.$pluginCode.'</info>');
             $this->callSilent('plugin:install', [
-                'name' => $pluginCode
+                'name' => $pluginCode,
             ]);
-            $this->output->writeln('<info>' . $pluginCode . ' installed successfully.</info>');
+            $this->output->writeln('<info>'.$pluginCode.' installed successfully.</info>');
         }
 
         $this->displayOutro();
@@ -130,7 +130,8 @@ class OctoberInstall extends Command
         $this->writeToConfig('app', ['debug' => $debug]);
     }
 
-    protected function askToInstallPlugins() {
+    protected function askToInstallPlugins()
+    {
         $chosenToInstall = [];
         if ($this->confirm('Install the October.Drivers plugin?', false)) {
             $chosenToInstall[] = 'October.Drivers';
@@ -138,6 +139,7 @@ class OctoberInstall extends Command
         if ($this->confirm('Install the Rainlab.Builder plugin?', false)) {
             $chosenToInstall[] = 'Rainlab.Builder';
         }
+
         return $chosenToInstall;
     }
 
@@ -154,14 +156,13 @@ class OctoberInstall extends Command
 
         if ($force) {
             $key = $randomKey;
-        }
-        else {
+        } else {
             $this->line(sprintf('Enter a new value of %s characters, or press ENTER to use the generated key', $keyLength));
 
-            while (!$validKey) {
+            while (! $validKey) {
                 $key = $this->ask('Application key', $randomKey);
                 $validKey = Encrypter::supported($key, $cipher);
-                if (!$validKey) {
+                if (! $validKey) {
                     $this->error(sprintf('[ERROR] Invalid key length for "%s" cipher. Supplied key must be %s characters in length.', $cipher, $keyLength));
                 }
             }
@@ -230,6 +231,7 @@ class OctoberInstall extends Command
         $result['database'] = $this->ask('Database Name', Config::get('database.connections.mysql.database'));
         $result['username'] = $this->ask('MySQL Login', Config::get('database.connections.mysql.username'));
         $result['password'] = $this->ask('MySQL Password', Config::get('database.connections.mysql.password') ?: false) ?: '';
+
         return $result;
     }
 
@@ -241,6 +243,7 @@ class OctoberInstall extends Command
         $result['database'] = $this->ask('Database Name', Config::get('database.connections.pgsql.database'));
         $result['username'] = $this->ask('Postgres Login', Config::get('database.connections.pgsql.username'));
         $result['password'] = $this->ask('Postgres Password', Config::get('database.connections.pgsql.password') ?: false) ?: '';
+
         return $result;
     }
 
@@ -249,16 +252,15 @@ class OctoberInstall extends Command
         $filename = $this->ask('Database path', Config::get('database.connections.sqlite.database'));
 
         try {
-            if (!file_exists($filename)) {
+            if (! file_exists($filename)) {
                 $directory = dirname($filename);
-                if (!is_dir($directory)) {
+                if (! is_dir($directory)) {
                     mkdir($directory, 0777, true);
                 }
 
                 new PDO('sqlite:'.$filename);
             }
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->error($ex->getMessage());
             $this->setupDatabaseSqlite();
         }
@@ -274,6 +276,7 @@ class OctoberInstall extends Command
         $result['database'] = $this->ask('Database Name', Config::get('database.connections.sqlsrv.database'));
         $result['username'] = $this->ask('SQL Login', Config::get('database.connections.sqlsrv.username'));
         $result['password'] = $this->ask('SQL Password', Config::get('database.connections.sqlsrv.password') ?: false) ?: '';
+
         return $result;
     }
 
@@ -291,7 +294,7 @@ class OctoberInstall extends Command
         SeedSetupAdmin::$login = $this->ask('Admin Login', SeedSetupAdmin::$login);
         SeedSetupAdmin::$password = $this->ask('Admin Password', SeedSetupAdmin::$password);
 
-        if (!$this->confirm('Is the information correct?', true)) {
+        if (! $this->confirm('Is the information correct?', true)) {
             $this->setupAdminUser();
         }
     }
@@ -305,10 +308,8 @@ class OctoberInstall extends Command
 
             UpdateManager::instance()
                 ->setNotesOutput($this->output)
-                ->update()
-            ;
-        }
-        catch (Exception $ex) {
+                ->update();
+        } catch (Exception $ex) {
             $this->error($ex->getMessage());
             $this->setupDatabaseConfig();
             $this->setupMigrateDatabase();
@@ -322,17 +323,17 @@ class OctoberInstall extends Command
     protected function displayIntro()
     {
         $message = [
-            ".====================================================================.",
-            "                                                                      ",
-            " .d8888b.   .o8888b.   db  .d8888b.  d8888b. d88888b d8888b.  .d888b. ",
+            '.====================================================================.',
+            '                                                                      ',
+            ' .d8888b.   .o8888b.   db  .d8888b.  d8888b. d88888b d8888b.  .d888b. ',
             ".8P    Y8. d8P    Y8   88 .8P    Y8. 88  `8D 88'     88  `8D .8P , Y8.",
             "88      88 8P      oooo88 88      88 88oooY' 88oooo  88oobY' 88  |  88",
-            "88      88 8b      ~~~~88 88      88 88~~~b. 88~~~~  88`8b   88  |/ 88",
+            '88      88 8b      ~~~~88 88      88 88~~~b. 88~~~~  88`8b   88  |/ 88',
             "`8b    d8' Y8b    d8   88 `8b    d8' 88   8D 88.     88 `88. `8b | d8'",
             " `Y8888P'   `Y8888P'   YP  `Y8888P'  Y8888P' Y88888P 88   YD  `Y888P' ",
-            "                                                                      ",
+            '                                                                      ',
             "`=========================== INSTALLATION ==========================='",
-            "",
+            '',
         ];
 
         $this->line($message);
@@ -341,18 +342,18 @@ class OctoberInstall extends Command
     protected function displayOutro()
     {
         $message = [
-            ".=========================================.",
-            "                ,@@@@@@@,                  ",
-            "        ,,,.   ,@@@@@@/@@,  .oo8888o.      ",
+            '.=========================================.',
+            '                ,@@@@@@@,                  ',
+            '        ,,,.   ,@@@@@@/@@,  .oo8888o.      ',
             "     ,&%%&%&&%,@@@@@/@@@@@@,8888\88/8o     ",
             "    ,%&\%&&%&&%,@@@\@@@/@@@88\88888/88'    ",
             "    %&&%&%&/%&&%@@\@@/ /@@@88888\88888'    ",
             "    %&&%/ %&%%&&@@\ V /@@' `88\8 `/88'     ",
             "    `&%\ ` /%&'    |.|        \ '|8'       ",
-            "        |o|        | |         | |         ",
-            "        |.|        | |         | |         ",
+            '        |o|        | |         | |         ',
+            '        |.|        | |         | |         ',
             "`========= INSTALLATION COMPLETE ========='",
-            "",
+            '',
         ];
 
         $this->line($message);

@@ -1,24 +1,24 @@
-<?php namespace System\Controllers;
+<?php
 
-use Lang;
+namespace System\Controllers;
+
 use File;
+use Lang;
 use Flash;
 use Config;
 use Redirect;
 use BackendMenu;
-use System\Models\MailBrandSetting;
-use System\Classes\SettingsManager;
-use System\Classes\MailManager;
-use Backend\Classes\Controller;
 use System\Models\MailLayout;
+use Backend\Classes\Controller;
+use System\Classes\MailManager;
 use System\Models\MailTemplate;
+use System\Classes\SettingsManager;
+use System\Models\MailBrandSetting;
 
 /**
- * Mail brand customization controller
+ * Mail brand customization controller.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
- *
  */
 class MailBrandSettings extends Controller
 {
@@ -26,7 +26,7 @@ class MailBrandSettings extends Controller
      * @var array Extensions implemented by this controller.
      */
     public $implement = [
-        \Backend\Behaviors\FormController::class
+        \Backend\Behaviors\FormController::class,
     ];
 
     /**
@@ -101,7 +101,7 @@ class MailBrandSettings extends Controller
         $data = [
             'subject' => Config::get('app.name'),
             'appName' => Config::get('app.name'),
-            'texts' => Lang::get('system::lang.mail_brand.sample_template')
+            'texts' => Lang::get('system::lang.mail_brand.sample_template'),
         ];
 
         $layout = new MailLayout;

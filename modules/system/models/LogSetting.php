@@ -1,11 +1,12 @@
-<?php namespace System\Models;
+<?php
+
+namespace System\Models;
 
 use Model;
 
 /**
- * System log settings
+ * System log settings.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class LogSetting extends Model
@@ -16,7 +17,7 @@ class LogSetting extends Model
      * @var array Behaviors implemented by this model.
      */
     public $implement = [
-        \System\Behaviors\SettingsModel::class
+        \System\Behaviors\SettingsModel::class,
     ];
 
     /**
@@ -30,27 +31,28 @@ class LogSetting extends Model
     public $settingsFields = 'fields.yaml';
 
     /**
-     * Validation rules
+     * Validation rules.
      */
     public $rules = [];
 
     public static function filterSettingItems($manager)
     {
-        if (!self::isConfigured()) {
+        if (! self::isConfigured()) {
             $manager->removeSettingItem('October.System', 'request_logs');
             $manager->removeSettingItem('October.Cms', 'theme_logs');
+
             return;
         }
 
-        if (!self::get('log_events')) {
+        if (! self::get('log_events')) {
             $manager->removeSettingItem('October.System', 'event_logs');
         }
 
-        if (!self::get('log_requests')) {
+        if (! self::get('log_requests')) {
             $manager->removeSettingItem('October.System', 'request_logs');
         }
 
-        if (!self::get('log_theme')) {
+        if (! self::get('log_theme')) {
             $manager->removeSettingItem('October.Cms', 'theme_logs');
         }
     }

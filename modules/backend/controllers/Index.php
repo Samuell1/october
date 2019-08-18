@@ -1,4 +1,6 @@
-<?php namespace Backend\Controllers;
+<?php
+
+namespace Backend\Controllers;
 
 use Redirect;
 use BackendMenu;
@@ -6,11 +8,9 @@ use Backend\Classes\Controller;
 use Backend\Widgets\ReportContainer;
 
 /**
- * Dashboard controller
+ * Dashboard controller.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
- *
  */
 class Index extends Controller
 {
@@ -55,7 +55,7 @@ class Index extends Controller
     }
 
     /**
-     * Prepare the report widget used by the dashboard
+     * Prepare the report widget used by the dashboard.
      * @param Model $model
      * @return void
      */
@@ -70,8 +70,10 @@ class Index extends Controller
      */
     protected function checkPermissionRedirect()
     {
-        if (!$this->user->hasAccess('backend.access_dashboard')) {
-            $true = function () { return true; };
+        if (! $this->user->hasAccess('backend.access_dashboard')) {
+            $true = function () {
+                return true;
+            };
             if ($first = array_first(BackendMenu::listMainMenuItems(), $true)) {
                 return Redirect::intended($first->url);
             }

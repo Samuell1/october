@@ -1,17 +1,18 @@
-<?php namespace System\Console;
+<?php
 
-use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
+namespace System\Console;
+
 use Cms\Classes\Theme;
 use Cms\Classes\ThemeManager;
+use Illuminate\Console\Command;
 use System\Classes\UpdateManager;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Console command to list themes.
  *
  * This lists all the available themes in the system. It also shows the active theme.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class ThemeList extends Command
@@ -38,7 +39,7 @@ class ThemeList extends Command
             $flag = $theme->isActiveTheme() ? '[*] ' : '[-] ';
             $themeId = $theme->getId();
             $themeName = $themeManager->findByDirName($themeId) ?: $themeId;
-            $this->info($flag . $themeName);
+            $this->info($flag.$themeName);
         }
 
         if ($this->option('include-marketplace')) {
@@ -48,13 +49,13 @@ class ThemeList extends Command
             $popularThemes = $updateManager->requestPopularProducts('theme');
 
             foreach ($popularThemes as $popularTheme) {
-                if (!$themeManager->isInstalled($popularTheme['code'])) {
+                if (! $themeManager->isInstalled($popularTheme['code'])) {
                     $this->info('[ ] '.$popularTheme['code']);
                 }
             }
         }
 
-        $this->info(PHP_EOL."[*] Active    [-] Installed    [ ] Not installed");
+        $this->info(PHP_EOL.'[*] Active    [-] Installed    [ ] Not installed');
     }
 
     /**
@@ -63,7 +64,7 @@ class ThemeList extends Command
     protected function getOptions()
     {
         return [
-            ['include-marketplace', 'm', InputOption::VALUE_NONE, 'Include downloadable themes from the October marketplace.']
+            ['include-marketplace', 'm', InputOption::VALUE_NONE, 'Include downloadable themes from the October marketplace.'],
         ];
     }
 }

@@ -31,7 +31,7 @@ return [
         'link' => 'Hivatkozás',
         'horizontalrule' => 'Vonal beszúrása',
         'fullscreen' => 'Teljes képernyő',
-        'preview' => 'Előnézet'
+        'preview' => 'Előnézet',
     ],
 
     'mediamanager' => [
@@ -43,13 +43,13 @@ return [
         'invalid_file_single_insert' => 'Kérjük jelöljön ki egy fájlt.',
         'invalid_image_empty_insert' => 'Válasszon ki legalább egy képet a beszúráshoz.',
         'invalid_video_empty_insert' => 'Válasszon ki legalább egy videót a beszúráshoz.',
-        'invalid_audio_empty_insert' => 'Válasszon ki legalább egy audiót a beszúráshoz.'
+        'invalid_audio_empty_insert' => 'Válasszon ki legalább egy audiót a beszúráshoz.',
     ],
 
     'alert' => [
         'confirm_button_text' => 'OK',
         'cancel_button_text' => 'Mégsem',
-        'widget_remove_confirm' => 'Valóban törölni akarja?'
+        'widget_remove_confirm' => 'Valóban törölni akarja?',
     ],
 
     'datepicker' => [
@@ -57,12 +57,12 @@ return [
         'nextMonth' => 'Következő hónap',
         'months' => ['január', 'február', 'március', 'április', 'május', 'június', 'július', 'augusztus', 'szeptember', 'október', 'november', 'december'],
         'weekdays' => ['vasárnap', 'hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek', 'szombat'],
-        'weekdaysShort' => ['va', 'hé', 'ke', 'sze', 'cs', 'pé', 'szo']
+        'weekdaysShort' => ['va', 'hé', 'ke', 'sze', 'cs', 'pé', 'szo'],
     ],
 
     'filter' => [
         'group' => [
-            'all' => 'összes'
+            'all' => 'összes',
         ],
         'dates' => [
             'all' => 'összes',
@@ -70,15 +70,15 @@ return [
             'reset_button_text'  => 'Alaphelyzet',
             'date_placeholder' => 'Dátum',
             'after_placeholder' => 'Kezdete',
-            'before_placeholder' => 'Vége'
+            'before_placeholder' => 'Vége',
         ],
         'numbers' => [
             'all' => 'összes',
             'filter_button_text' => 'Szűrés',
             'reset_button_text'  => 'Alaphelyzet',
             'min_placeholder' => 'Minimum',
-            'max_placeholder' => 'Maximum'
-        ]
+            'max_placeholder' => 'Maximum',
+        ],
     ],
 
     'eventlog' => [
@@ -94,7 +94,7 @@ return [
             'openWith' => 'Megnyitás mint',
             'remember_choice' => 'Kiválasztott beállítások megjegyzése ebben a munkamenetben',
             'open' => 'Megnyitás',
-            'cancel' => 'Mégsem'
-        ]
-    ]
+            'cancel' => 'Mégsem',
+        ],
+    ],
 ];

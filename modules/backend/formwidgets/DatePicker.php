@@ -1,4 +1,6 @@
-<?php namespace Backend\FormWidgets;
+<?php
+
+namespace Backend\FormWidgets;
 
 use Config;
 use Carbon\Carbon;
@@ -10,7 +12,6 @@ use System\Helpers\DateTime as DateTimeHelper;
  * Date picker
  * Renders a date picker field.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class DatePicker extends FormWidgetBase
@@ -68,12 +69,12 @@ class DatePicker extends FormWidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'datepicker';
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -104,25 +105,26 @@ class DatePicker extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
         $this->prepareVars();
+
         return $this->makePartial('datepicker');
     }
 
     /**
-     * Prepares the list data
+     * Prepares the list data.
      */
     public function prepareVars()
     {
         if ($value = $this->getLoadValue()) {
             $value = DateTimeHelper::makeCarbon($value, false);
-            if ($this->mode === 'date' && !$this->ignoreTimezone) {
+            if ($this->mode === 'date' && ! $this->ignoreTimezone) {
                 $backendTimeZone = \Backend\Models\Preference::get('timezone');
                 $value->setTimezone($backendTimeZone);
-                $value->setTime(0,0,0);
+                $value->setTime(0, 0, 0);
                 $value->setTimezone(Config::get('app.timezone'));
             }
             $value = $value->toDateTimeString();
@@ -144,7 +146,7 @@ class DatePicker extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getSaveValue($value)
     {
@@ -152,15 +154,15 @@ class DatePicker extends FormWidgetBase
             return FormField::NO_SAVE_DATA;
         }
 
-        if (!strlen($value)) {
-            return null;
+        if (! strlen($value)) {
+            return;
         }
 
         return $value;
     }
 
     /**
-     * Convert PHP format to JS format
+     * Convert PHP format to JS format.
      */
     protected function getDateFormatMoment()
     {
@@ -175,16 +177,14 @@ class DatePicker extends FormWidgetBase
     protected function getDateFormatAlias()
     {
         if ($this->format) {
-            return null;
+            return;
         }
 
         if ($this->mode == 'time') {
             return 'time';
-        }
-        elseif ($this->mode == 'date') {
+        } elseif ($this->mode == 'date') {
             return 'dateLong';
-        }
-        else {
+        } else {
             return 'dateTimeLong';
         }
     }

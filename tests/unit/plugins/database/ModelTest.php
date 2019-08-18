@@ -17,8 +17,8 @@ class ModelTest extends PluginTestCase
     {
         Post::truncate();
         $post = new Post;
-        $post->title = "First post";
-        $post->description = "Yay!!";
+        $post->title = 'First post';
+        $post->description = 'Yay!!';
         $post->save();
         $this->assertEquals(1, $post->id);
     }

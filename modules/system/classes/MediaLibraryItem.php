@@ -1,24 +1,29 @@
-<?php namespace System\Classes;
+<?php
+
+namespace System\Classes;
 
 use File;
 use Config;
-use October\Rain\Filesystem\Definitions as FileDefinitions;
 use Carbon\Carbon;
+use October\Rain\Filesystem\Definitions as FileDefinitions;
 
 /**
  * Represents a file or folder in the Media Library.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class MediaLibraryItem
 {
     const TYPE_FILE = 'file';
+
     const TYPE_FOLDER = 'folder';
 
     const FILE_TYPE_IMAGE = 'image';
+
     const FILE_TYPE_VIDEO = 'video';
+
     const FILE_TYPE_AUDIO = 'audio';
+
     const FILE_TYPE_DOCUMENT = 'document';
 
     /**
@@ -27,14 +32,14 @@ class MediaLibraryItem
     public $path;
 
     /**
-     * @var integer Specifies the item size.
+     * @var int Specifies the item size.
      * For files the item size is measured in bytes. For folders it
      * contains the number of files in the folder.
      */
     public $size;
 
     /**
-     * @var integer Contains the last modification time (Unix timestamp).
+     * @var int Contains the last modification time (Unix timestamp).
      */
     public $lastModified;
 
@@ -92,23 +97,23 @@ class MediaLibraryItem
 
     /**
      * Returns the file type by its name.
-     * The known file types are: image, video, audio, document
+     * The known file types are: image, video, audio, document.
      * @return string Returns the file type or NULL if the item is a folder.
      */
     public function getFileType()
     {
-        if (!$this->isFile()) {
-            return null;
+        if (! $this->isFile()) {
+            return;
         }
 
-        if (!self::$imageExtensions) {
+        if (! self::$imageExtensions) {
             self::$imageExtensions = array_map('strtolower', Config::get('cms.storage.media.imageExtensions', FileDefinitions::get('imageExtensions')));
             self::$videoExtensions = array_map('strtolower', Config::get('cms.storage.media.videoExtensions', FileDefinitions::get('videoExtensions')));
             self::$audioExtensions = array_map('strtolower', Config::get('cms.storage.media.audioExtensions', FileDefinitions::get('audioExtensions')));
         }
 
         $extension = strtolower(pathinfo($this->path, PATHINFO_EXTENSION));
-        if (!strlen($extension)) {
+        if (! strlen($extension)) {
             return self::FILE_TYPE_DOCUMENT;
         }
 
@@ -146,8 +151,8 @@ class MediaLibraryItem
      */
     public function lastModifiedAsString()
     {
-        if (!($date = $this->lastModified)) {
-            return null;
+        if (! ($date = $this->lastModified)) {
+            return;
         }
 
         return Carbon::createFromTimestamp($date)->toFormattedDateString();

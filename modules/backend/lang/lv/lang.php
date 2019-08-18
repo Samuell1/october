@@ -2,29 +2,29 @@
 
 return [
     'auth' => [
-        'title' => 'Administrācijas vide'
+        'title' => 'Administrācijas vide',
     ],
     'field' => [
         'invalid_type' => 'Nederīgs lauka tips :type.',
-        'options_method_not_exists' => "Moduļa klasei :model jādefinē metodi :method() atgrieztās vērtības ':field' formas laukam."
+        'options_method_not_exists' => "Moduļa klasei :model jādefinē metodi :method() atgrieztās vērtības ':field' formas laukam.",
     ],
     'widget' => [
         'not_registered' => "Logrīka klases nosaukums ':name' nav reģistrēts",
-        'not_bound' => "Logrīks ar klases nosaukumu ':name' nav piesaistīts kontrolierim"
+        'not_bound' => "Logrīks ar klases nosaukumu ':name' nav piesaistīts kontrolierim",
     ],
     'page' => [
         'untitled' => 'Bez nosaukuma',
         'access_denied' => [
             'label' => 'Piekļuve liegta',
-            'help' => "Jums nav piekļuves tiesību, lai skatītu šo lapu.",
-            'cms_link' => 'Atgriezties back-end'
+            'help' => 'Jums nav piekļuves tiesību, lai skatītu šo lapu.',
+            'cms_link' => 'Atgriezties back-end',
         ],
         'invalid_token' => [
-            'label' => 'Nederīga drošības atslēga'
-        ]
+            'label' => 'Nederīga drošības atslēga',
+        ],
     ],
     'partial' => [
-        'not_found_name' => "Daļa ':name' nav atrasta."
+        'not_found_name' => "Daļa ':name' nav atrasta.",
     ],
     'account' => [
         'sign_out' => 'Izrakstīties',
@@ -47,7 +47,7 @@ return [
         'apply' => 'Apstiprināt',
         'cancel' => 'Atcelt',
         'delete' => 'Dzēst',
-        'ok' => 'OK'
+        'ok' => 'OK',
     ],
     'dashboard' => [
         'menu_label' => 'Mērinstrumentu panelis',
@@ -67,8 +67,8 @@ return [
         'widget_title_error' => 'Logrīka virsraksts ir obligāts.',
         'status' => [
             'widget_title_default' => 'Sistēmas statuss',
-            'update_available' => '{0} atjauninājumi pieejami!|{1} atjauninājums pieejams!|[2,Inf] atjauninājumi pieejami!'
-        ]
+            'update_available' => '{0} atjauninājumi pieejami!|{1} atjauninājums pieejams!|[2,Inf] atjauninājumi pieejami!',
+        ],
     ],
     'user' => [
         'name' => 'Administrātors',
@@ -111,11 +111,11 @@ return [
             'new' => 'Jauna Administrātoru Grupa',
             'delete_confirm' => 'Vai tiešām vēlaties dzēst šo administrātoru grupu?',
             'return' => 'Atgriezties grupu sarakstā',
-            'users_count' => 'Lietotāji'
+            'users_count' => 'Lietotāji',
         ],
         'preferences' => [
-            'not_authenticated' => 'Nav autentificēts lietotājs, kuram ielādēt vai saglabāt iestatījumus.'
-        ]
+            'not_authenticated' => 'Nav autentificēts lietotājs, kuram ielādēt vai saglabāt iestatījumus.',
+        ],
     ],
     'list' => [
         'default_title' => 'Saraksts',
@@ -143,7 +143,7 @@ return [
         'delete_selected_confirm' => 'Dzēst izvēlētos ierakstus?',
         'delete_selected_success' => 'Izvēlētie ieraksti veiksmīgi dzēsti.',
         'column_switch_true' => 'Jā',
-        'column_switch_false' => 'Nē'
+        'column_switch_false' => 'Nē',
     ],
     'fileupload' => [
         'attachment' => 'Pielikums',
@@ -155,7 +155,7 @@ return [
         'upload_file' => 'Augšupielādēt failu',
         'upload_error' => 'Augšupielādes kļūda',
         'remove_confirm' => 'Vai esat pārliecināts?',
-        'remove_file' => 'Noņemt failu'
+        'remove_file' => 'Noņemt failu',
     ],
     'form' => [
         'create_title' => 'Jauns :name',
@@ -209,44 +209,44 @@ return [
         'insert_row_below' => 'Ievietot riendu zemāk',
         'delete_row' => 'Dzēst rindu',
         'concurrency_file_changed_title' => 'Fails tika modificēts',
-        'concurrency_file_changed_description' => "Fails, kuru labojat ir ticis modificēts no cita lietotāja puses. Jūs varat pārlādēt failu un zaudēt savas izmaiņas vai arī pārrakstīt esošo failu uz diska.",
-        'return_to_list' => 'Atgriezties uz sarakstu'
+        'concurrency_file_changed_description' => 'Fails, kuru labojat ir ticis modificēts no cita lietotāja puses. Jūs varat pārlādēt failu un zaudēt savas izmaiņas vai arī pārrakstīt esošo failu uz diska.',
+        'return_to_list' => 'Atgriezties uz sarakstu',
     ],
     'recordfinder' => [
-        'find_record' => 'Atrast ierakstu'
+        'find_record' => 'Atrast ierakstu',
     ],
     'relation' => [
         'missing_config' => "Relācijām nav norādīta nekāda konfigurācija ':config'.",
         'missing_definition' => "Relācijām nav definēts lauks ':field'.",
-        'missing_model' => "Relācijās izmantotajai klasei :class nav moduļa definīcijas.",
-        'invalid_action_single' => "Šī darbība nevar tikt veikta ar vienmoduļa relāciju.",
-        'invalid_action_multi' => "Šī darbība nevar tikt veikta ar daudzmoduļu relāciju.",
-        'help' => "Spiediet uz vienuma, lai pievienotu",
-        'related_data' => "Saistītie :name dati",
-        'add' => "Pievienot",
-        'add_selected' => "Pievienot izvēlētos",
-        'add_a_new' => "Pievienot jaunu :name",
-        'link_selected' => "Saite izvēlēta",
-        'link_a_new' => "Saistīt jaunu :name",
-        'cancel' => "Atcelt",
-        'close' => "Aizvērt",
-        'add_name' => "Pievienot :name",
-        'create' => "Izveidot",
-        'create_name' => "Izveidot :name",
-        'update' => "Atjaunot",
-        'update_name' => "Atjaunot :name",
-        'preview' => "Priekšskatīt",
-        'preview_name' => "Priekšskatīt :name",
-        'remove' => "Noņemt",
-        'remove_name' => "Noņemt :name",
-        'delete' => "Dzēst",
-        'delete_name' => "Dzēst :name",
-        'delete_confirm' => "Vai esat pārliecināts?",
-        'link' => "Saistīt",
-        'link_name' => "Saistīt :name",
-        'unlink' => "Atsaistīt",
-        'unlink_name' => "Atsaistīt :name",
-        'unlink_confirm' => "Vai esat pārliecināts?",
+        'missing_model' => 'Relācijās izmantotajai klasei :class nav moduļa definīcijas.',
+        'invalid_action_single' => 'Šī darbība nevar tikt veikta ar vienmoduļa relāciju.',
+        'invalid_action_multi' => 'Šī darbība nevar tikt veikta ar daudzmoduļu relāciju.',
+        'help' => 'Spiediet uz vienuma, lai pievienotu',
+        'related_data' => 'Saistītie :name dati',
+        'add' => 'Pievienot',
+        'add_selected' => 'Pievienot izvēlētos',
+        'add_a_new' => 'Pievienot jaunu :name',
+        'link_selected' => 'Saite izvēlēta',
+        'link_a_new' => 'Saistīt jaunu :name',
+        'cancel' => 'Atcelt',
+        'close' => 'Aizvērt',
+        'add_name' => 'Pievienot :name',
+        'create' => 'Izveidot',
+        'create_name' => 'Izveidot :name',
+        'update' => 'Atjaunot',
+        'update_name' => 'Atjaunot :name',
+        'preview' => 'Priekšskatīt',
+        'preview_name' => 'Priekšskatīt :name',
+        'remove' => 'Noņemt',
+        'remove_name' => 'Noņemt :name',
+        'delete' => 'Dzēst',
+        'delete_name' => 'Dzēst :name',
+        'delete_confirm' => 'Vai esat pārliecināts?',
+        'link' => 'Saistīt',
+        'link_name' => 'Saistīt :name',
+        'unlink' => 'Atsaistīt',
+        'unlink_name' => 'Atsaistīt :name',
+        'unlink_confirm' => 'Vai esat pārliecināts?',
     ],
     'reorder' => [
         'default_title' => 'Pārkārtot ierakstus',
@@ -259,13 +259,13 @@ return [
         'missing_relation' => "Modulis ':class' nesniedz informāciju par ':relation'.",
         'missing_method' => "Modulis ':class' nesatur metodi ':method'.",
         'invalid_class' => "Modulis :model lietots :class ir nederīgs, tam jābūt mantotam no \Moduļa klases.",
-        'mass_assignment_failed' => "Masveida saistīšana neizdevās Moduļa atribūtam ':attribute'."
+        'mass_assignment_failed' => "Masveida saistīšana neizdevās Moduļa atribūtam ':attribute'.",
     ],
     'warnings' => [
         'tips' => 'Sistēmas konfigurācijas padomi',
         'tips_description' => 'Ir lietas, kurām vajadzētu pievērst uzmanību, lai konfigurētu sistēmu pareizi.',
         'permissions'  => 'Mape :name vai tās apakšmapes nav ierakstāmas ar PHP. Lūdzu iestatiet pareizas tiesības web serverim šajā mapē.',
-        'extension' => 'PHP paplašinājums :name nav instalēts. Lūdzu instalējiet šo papildinājumu un aktivizējiet to.'
+        'extension' => 'PHP paplašinājums :name nav instalēts. Lūdzu instalējiet šo papildinājumu un aktivizējiet to.',
     ],
     'editor' => [
         'menu_label' => 'Koda labotāja iestatījumi',
@@ -284,19 +284,19 @@ return [
         'enable_live_autocompletion'=> 'Iespējot dzīvo automātisko pabeigšanu',
         'display_indent_guides'=> 'Rādīt atkāpju ceļvežus',
         'show_print_margin'=> 'Rādīt printēšanas rezervi',
-        'theme' => 'Krāsu shēma'
+        'theme' => 'Krāsu shēma',
     ],
     'tooltips' => [
-        'preview_website' => 'Priekšskatīt web lapu'
+        'preview_website' => 'Priekšskatīt web lapu',
     ],
     'mysettings' => [
         'menu_label' => 'Mani Iestatījumi',
-        'menu_description' => 'Iestatījumi saistībā ar jūsu administrātora kontu'
+        'menu_description' => 'Iestatījumi saistībā ar jūsu administrātora kontu',
     ],
     'myaccount' => [
         'menu_label' => 'Mans konts',
         'menu_description' => 'Atjaunojiet sava konta detaļas, piemēram, vārdu, epastu un paroli.',
-        'menu_keywords' => 'drošība login'
+        'menu_keywords' => 'drošība login',
     ],
     'branding' => [
         'menu_label' => 'Back-end pielāgošana',
@@ -327,7 +327,7 @@ return [
         'code_editor' => 'Koda redaktors',
         'timezone' => 'Laika josla',
         'locale' => 'Valoda',
-        'locale_comment' => 'Izvēlieties kādu valodu izmantosiet.'
+        'locale_comment' => 'Izvēlieties kādu valodu izmantosiet.',
     ],
     'access_log' => [
         'hint' => 'Šis žurnāls rāda sarakstu ar vieksmīgajiem ielogošanās mēģinājumiem no administrātoriem. Ieraksti tiek saglabāti :days dienas.',
@@ -338,10 +338,10 @@ return [
         'ip_address' => 'IP adrese',
         'first_name' => 'Vārds',
         'last_name' => 'Uzvārds',
-        'email' => 'Epasts'
+        'email' => 'Epasts',
     ],
     'filter' => [
-        'all' => 'visi'
+        'all' => 'visi',
     ],
     'import_export' => [
         'upload_csv_file' => '1. Augšupielādējiet CSV failu',
@@ -396,10 +396,10 @@ return [
         'encoding_format' => 'Faila kodējums',
     ],
     'permissions' => [
-        'manage_media' => 'Pārvaldīt multividi'
+        'manage_media' => 'Pārvaldīt multividi',
     ],
     'mediafinder' => [
-        'default_prompt' => 'Klikšķiniet uz %s pogas, lai atrastu multividi'
+        'default_prompt' => 'Klikšķiniet uz %s pogas, lai atrastu multividi',
     ],
     'media' => [
         'menu_label' => 'Multimēdija',
@@ -457,6 +457,6 @@ return [
         'selection_mode' => 'Iezīmēšanas režīms',
         'resize_image' => 'Mērogot attēlu',
         'image_size' => 'Attēla izmērs:',
-        'selected_size' => 'Izvēlēts:'
-    ]
+        'selected_size' => 'Izvēlēts:',
+    ],
 ];

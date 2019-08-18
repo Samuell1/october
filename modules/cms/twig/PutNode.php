@@ -1,12 +1,13 @@
-<?php namespace Cms\Twig;
+<?php
+
+namespace Cms\Twig;
 
 use Twig\Node\Node as TwigNode;
 use Twig\Compiler as TwigCompiler;
 
 /**
- * Represents a put node
+ * Represents a put node.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class PutNode extends TwigNode
@@ -27,8 +28,7 @@ class PutNode extends TwigNode
             ->addDebugInfo($this)
             ->write("echo \$this->env->getExtension('Cms\Twig\Extension')->startBlock(")
             ->raw("'".$this->getAttribute('name')."'")
-            ->write(");\n")
-        ;
+            ->write(");\n");
 
         $isOverwrite = strtolower($this->getAttribute('endType')) == 'overwrite';
 
@@ -38,7 +38,6 @@ class PutNode extends TwigNode
             ->addDebugInfo($this)
             ->write("echo \$this->env->getExtension('Cms\Twig\Extension')->endBlock(")
             ->raw($isOverwrite ? 'false' : 'true')
-            ->write(");\n")
-        ;
+            ->write(");\n");
     }
 }

@@ -1,15 +1,16 @@
-<?php namespace Backend\Models;
+<?php
 
-use Backend\Behaviors\ImportExportController\TranscodeFilter;
+namespace Backend\Models;
+
 use Str;
 use Lang;
 use Model;
 use League\Csv\Reader as CsvReader;
+use Backend\Behaviors\ImportExportController\TranscodeFilter;
 
 /**
- * Model used for importing data
+ * Model used for importing data.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 abstract class ImportModel extends Model
@@ -23,7 +24,7 @@ abstract class ImportModel extends Model
     protected $guarded = [];
 
     /**
-     * Relations
+     * Relations.
      */
     public $attachOne = [
         'import_file' => [\System\Models\File::class, 'public' => false],
@@ -37,25 +38,24 @@ abstract class ImportModel extends Model
         'created' => 0,
         'errors' => [],
         'warnings' => [],
-        'skipped' => []
+        'skipped' => [],
     ];
 
     /**
      * Called when data is being imported.
-     * The $results array should be in the format of:
+     * The $results array should be in the format of:.
      *
      *    [
      *        'db_name1' => 'Some value',
      *        'db_name2' => 'Another value'
      *    ],
      *    [...]
-     *
      */
     abstract public function importData($results, $sessionKey = null);
 
     /**
      * Import data based on column names matching header indexes in the CSV.
-     * The $matches array should be in the format of:
+     * The $matches array should be in the format of:.
      *
      *    [
      *        0 => [db_name1, db_name2],
@@ -71,12 +71,13 @@ abstract class ImportModel extends Model
         $sessionKey = array_get($options, 'sessionKey');
         $path = $this->getImportFilePath($sessionKey);
         $data = $this->processImportData($path, $matches, $options);
+
         return $this->importData($data, $sessionKey);
     }
 
     /**
      * Converts column index to database column map to an array containing
-     * database column names and values pulled from the CSV file. Eg:
+     * database column names and values pulled from the CSV file. Eg:.
      *
      *   [0 => [first_name], 1 => [last_name]]
      *
@@ -98,7 +99,7 @@ abstract class ImportModel extends Model
             'delimiter' => null,
             'enclosure' => null,
             'escape' => null,
-            'encoding' => null
+            'encoding' => null,
         ];
 
         $options = array_merge($defaultOptions, $options);
@@ -169,14 +170,16 @@ abstract class ImportModel extends Model
     }
 
     /**
-     * Explodes a string using pipes (|) to a single dimension array
+     * Explodes a string using pipes (|) to a single dimension array.
      * @return array
      */
     protected function decodeArrayValue($value, $delimeter = '|')
     {
-        if (strpos($value, $delimeter) === false) return [$value];
+        if (strpos($value, $delimeter) === false) {
+            return [$value];
+        }
 
-        $data = preg_split('~(?<!\\\)' . preg_quote($delimeter, '~') . '~', $value);
+        $data = preg_split('~(?<!\\\)'.preg_quote($delimeter, '~').'~', $value);
         $newData = [];
 
         foreach ($data as $_value) {
@@ -196,18 +199,17 @@ abstract class ImportModel extends Model
             ->import_file()
             ->withDeferred($sessionKey)
             ->orderBy('id', 'desc')
-            ->first()
-        ;
+            ->first();
 
-        if (!$file) {
-            return null;
+        if (! $file) {
+            return;
         }
 
         return $file->getLocalPath();
     }
 
     /**
-     * Returns all available encodings values from the localization config
+     * Returns all available encodings values from the localization config.
      * @return array
      */
     public function getFormatEncodingOptions()
@@ -230,7 +232,7 @@ abstract class ImportModel extends Model
             'iso-8859-14',
             'iso-8859-15',
             'Windows-1251',
-            'Windows-1252'
+            'Windows-1252',
         ];
 
         $translated = array_map(function ($option) {

@@ -1,4 +1,6 @@
-<?php namespace Backend\Widgets;
+<?php
+
+namespace Backend\Widgets;
 
 use Lang;
 use Backend\Classes\WidgetBase;
@@ -7,7 +9,6 @@ use Backend\Classes\WidgetBase;
  * Search Widget
  * Used for building a toolbar, Renders a search container.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class Search extends WidgetBase
@@ -51,7 +52,7 @@ class Search extends WidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'search';
 
@@ -104,7 +105,7 @@ class Search extends WidgetBase
     }
 
     /**
-     * Prepares the view data
+     * Prepares the view data.
      */
     public function prepareVars()
     {
@@ -162,6 +163,6 @@ class Search extends WidgetBase
      */
     public function getName()
     {
-        return $this->alias . '[term]';
+        return $this->alias.'[term]';
     }
 }

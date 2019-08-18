@@ -19,7 +19,7 @@ class WidgetManagerTest extends TestCase
         $manager = WidgetManager::instance();
         $manager->registerReportWidget('Acme\Fake\ReportWidget\HelloWorld', [
             'name' => 'Hello World Test',
-            'context' => 'dashboard'
+            'context' => 'dashboard',
         ]);
         $widgets = $manager->listReportWidgets();
 
@@ -31,11 +31,11 @@ class WidgetManagerTest extends TestCase
         $manager = WidgetManager::instance();
         $manager->registerReportWidget('Acme\Fake\ReportWidget\HelloWorld', [
             'name' => 'Hello World Test',
-            'context' => 'dashboard'
+            'context' => 'dashboard',
         ]);
         $manager->registerReportWidget('Acme\Fake\ReportWidget\ByeWorld', [
             'name' => 'Hello World Bye',
-            'context' => 'dashboard'
+            'context' => 'dashboard',
         ]);
 
         $manager->removeReportWidget('Acme\Fake\ReportWidget\ByeWorld');
@@ -44,5 +44,4 @@ class WidgetManagerTest extends TestCase
 
         $this->assertCount(1, $widgets);
     }
-
 }

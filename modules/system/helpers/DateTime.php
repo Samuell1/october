@@ -1,15 +1,17 @@
-<?php namespace System\Helpers;
+<?php
 
+namespace System\Helpers;
+
+use Exception;
 use Carbon\Carbon;
 use DateTime as PhpDateTime;
 use InvalidArgumentException;
-use Exception;
 
 class DateTime
 {
     /**
      * Returns a human readable time difference from the value to the
-     * current time. Eg: **10 minutes ago**
+     * current time. Eg: **10 minutes ago**.
      *
      * @return string
      */
@@ -35,11 +37,9 @@ class DateTime
 
         if ($datetime->isToday()) {
             $date = 'Today';
-        }
-        elseif ($datetime->isYesterday()) {
+        } elseif ($datetime->isYesterday()) {
             $date = 'Yesterday';
-        }
-        elseif ($datetime->isTomorrow()) {
+        } elseif ($datetime->isTomorrow()) {
             $date = 'Tomorrow';
         }
 
@@ -55,23 +55,20 @@ class DateTime
     {
         if ($value instanceof Carbon) {
             // Do nothing
-        }
-        elseif ($value instanceof PhpDateTime) {
+        } elseif ($value instanceof PhpDateTime) {
             $value = Carbon::instance($value);
-        }
-        elseif (is_numeric($value)) {
+        } elseif (is_numeric($value)) {
             $value = Carbon::createFromTimestamp($value);
-        }
-        elseif (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $value)) {
+        } elseif (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $value)) {
             $value = Carbon::createFromFormat('Y-m-d', $value)->startOfDay();
-        }
-        else {
+        } else {
             try {
                 $value = Carbon::parse($value);
-            } catch (Exception $ex) {}
+            } catch (Exception $ex) {
+            }
         }
 
-        if (!$value instanceof Carbon && $throwException) {
+        if (! $value instanceof Carbon && $throwException) {
             throw new InvalidArgumentException('Invalid date value supplied to DateTime helper.');
         }
 
@@ -131,5 +128,4 @@ class DateTime
 
         return strtr($format, $replacements);
     }
-
 }

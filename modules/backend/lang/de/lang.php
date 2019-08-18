@@ -2,7 +2,7 @@
 
 return [
     'auth' => [
-        'title' => 'Admin-Bereich'
+        'title' => 'Admin-Bereich',
     ],
     'field' => [
         'invalid_type' => 'Ungültiger Feldtyp :type.',
@@ -14,20 +14,20 @@ return [
         'not_bound' => "Ein Widget mit dem Klassennamen ':name' wurde nicht mit dem Controller verbunden",
     ],
     'page' => [
-        'untitled' => "Unbenannt",
+        'untitled' => 'Unbenannt',
         'access_denied' => [
-            'label' => "Zugriff verweigert",
-            'help' => "Sie haben nicht die erforderlichen Berechtigungen, um diese Seite zu sehen.",
-            'cms_link' => "Zum CMS-Backend",
+            'label' => 'Zugriff verweigert',
+            'help' => 'Sie haben nicht die erforderlichen Berechtigungen, um diese Seite zu sehen.',
+            'cms_link' => 'Zum CMS-Backend',
         ],
         'no_database' => [
             'label' => 'Datenbank fehlt',
-            'help' => "Eine Datenbank wird benötigt um Zugriff auf das Backend zu haben. Überprüfe die Datenbankkonfiguration und migriere die Datenbank bevor du es noch einmal probierst.",
-            'cms_link' => 'Zurück zur Homepage'
+            'help' => 'Eine Datenbank wird benötigt um Zugriff auf das Backend zu haben. Überprüfe die Datenbankkonfiguration und migriere die Datenbank bevor du es noch einmal probierst.',
+            'cms_link' => 'Zurück zur Homepage',
         ],
         'invalid_token' => [
-            'label' => 'Ungültiges Sicherheitstoken'
-        ]
+            'label' => 'Ungültiges Sicherheitstoken',
+        ],
     ],
     'partial' => [
         'not_found_name' => "Das Partial ':name' wurde nicht gefunden.",
@@ -39,17 +39,17 @@ return [
         'restore' => 'Wiederherstellen',
         'login_placeholder' => 'Benutzername',
         'password_placeholder' => 'Passwort',
-        'forgot_password' => "Passwort vergessen?",
-        'enter_email' => "Bitte E-Mail-Adresse eingeben",
-        'enter_login' => "Bitte Benutzernamen eingeben",
-        'email_placeholder' => "E-Mail",
-        'enter_new_password' => "Bitte ein neues Passwort eingeben",
-        'password_reset' => "Passwort zurücksetzen",
-        'restore_success' => "Eine E-Mail mit weiteren Anweisungen zum Zurücksetzen Ihres Passworts wurde an Sie versandt",
+        'forgot_password' => 'Passwort vergessen?',
+        'enter_email' => 'Bitte E-Mail-Adresse eingeben',
+        'enter_login' => 'Bitte Benutzernamen eingeben',
+        'email_placeholder' => 'E-Mail',
+        'enter_new_password' => 'Bitte ein neues Passwort eingeben',
+        'password_reset' => 'Passwort zurücksetzen',
+        'restore_success' => 'Eine E-Mail mit weiteren Anweisungen zum Zurücksetzen Ihres Passworts wurde an Sie versandt',
         'restore_error' => "Ein Benutzer mit dem Namen ':login' wurde nicht gefunden",
-        'reset_success' => "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt anmelden.",
-        'reset_error' => "Konnte Passwort nicht zurücksetzen. Bitte erneut versuchen!",
-        'reset_fail' => "Passwort-Zurücksetzung nicht möglich!",
+        'reset_success' => 'Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt anmelden.',
+        'reset_error' => 'Konnte Passwort nicht zurücksetzen. Bitte erneut versuchen!',
+        'reset_fail' => 'Passwort-Zurücksetzung nicht möglich!',
         'apply' => 'Anwenden',
         'cancel' => 'Abbrechen',
         'delete' => 'Löschen',
@@ -102,7 +102,7 @@ return [
             'last_sign_in' => 'Ihr letzter Login war',
             'view_access_logs' => 'Zugriffsprotokoll betrachten',
             'nice_message' => 'Wir wünschen einen schönen Tag!',
-        ]
+        ],
     ],
     'user' => [
         'name' => 'Administrator',
@@ -134,7 +134,7 @@ return [
         'activated' => 'Aktiviert',
         'last_login' => 'Letzer login',
         'created_at' => 'Erstellt am',
-        'updated_at' => 'Aktualisiert am',        
+        'updated_at' => 'Aktualisiert am',
         'group' => [
             'name' => 'Gruppe',
             'name_comment' => 'Der Name, der angezeigt wird wenn  name is displayed in the group list on the Create/Edit Administrator form.',
@@ -152,8 +152,8 @@ return [
             'users_count' => 'Benutzer',
         ],
         'preferences' => [
-            'not_authenticated' => 'Zum Speichern oder Anzeigen dieser Einstellungen liegt kein Nutzerkonto vor'
-        ]
+            'not_authenticated' => 'Zum Speichern oder Anzeigen dieser Einstellungen liegt kein Nutzerkonto vor',
+        ],
     ],
     'list' => [
         'default_title' => 'Auflisten',
@@ -184,7 +184,7 @@ return [
         'delete_selected_confirm' => 'Markierte Einträge löschen?',
         'delete_selected_success' => 'Markierte Einträge erfolgreich gelöscht.',
         'column_switch_true' => 'Ja',
-        'column_switch_false' => 'Nein'
+        'column_switch_false' => 'Nein',
     ],
     'fileupload' => [
         'attachment' => 'Anhang',
@@ -199,14 +199,14 @@ return [
         'remove_file' => 'Datei entfernen',
     ],
     'form' => [
-        'create_title' => "Neuer :name",
-        'update_title' => "Bearbeite :name",
-        'preview_title' => "Vorschau für :name",
+        'create_title' => 'Neuer :name',
+        'update_title' => 'Bearbeite :name',
+        'preview_title' => 'Vorschau für :name',
         'create_success' => ':name wurde erfolgreich erzeugt',
         'update_success' => ':name wurde erfolgreich aktualisiert',
         'delete_success' => ':name wurde erfolgreich gelöscht',
         'reset_success' => 'Zurücksetzung abgeschlossen',
-        'missing_id' => "Formulardatensatz-ID (Form record ID) fehlt.",
+        'missing_id' => 'Formulardatensatz-ID (Form record ID) fehlt.',
         'missing_model' => 'In :class genutztes Formularverhalten (behaviour) hat kein definiertes Model',
         'missing_definition' => "Formverhalten fehlt ein Feld für ':field'.",
         'not_found' => 'Formulareintrag mit der ID :id kann nicht gefunden werden.',
@@ -253,7 +253,7 @@ return [
         'delete_row' => 'Reihe löschen',
         'concurrency_file_changed_title' => 'Datei wurde geändert',
         'concurrency_file_changed_description' => 'Die Datei, welche Sie bearbeiten, wurde auf von einem anderen Benutzer geändert. Sie können die Datei entweder erneut laden, wodurch Ihre Änderungen verloren gehen oder Sie überschreiben die Datei auf dem Server',
-        'return_to_list' => 'Zurück zur Liste'
+        'return_to_list' => 'Zurück zur Liste',
     ],
     'recordfinder' => [
         'find_record' => 'Finde Eintrag',
@@ -261,49 +261,49 @@ return [
     ],
     'pagelist' => [
         'page_link' => 'Seitenlink',
-        'select_page' => 'Wähle eine Seite...'
-    ],    
+        'select_page' => 'Wähle eine Seite...',
+    ],
     'relation' => [
         'missing_config' => "Verhalten (behaviour) der Verbindung hat keine Konfiguration für ':config'.",
         'missing_definition' => "Verhalten (behaviour) der Verbindung umfasst keine Definition für ':field'.",
-        'missing_model' => "Verhalten (behaviour) der Verbindung, die in :class benutzt wird, hat kein definiertes Model",
-        'invalid_action_single' => "Dieser Vorgang kann nicht auf eine Einwege-Verbindung (singular) angewendet werden.",
-        'invalid_action_multi' => "Dieser Vorgang kann nicht auf eine Mehrwege-Verbindung (multiple) angewendet werden.",
-        'help'  => "Zum Hinzufügen auf ein Item klicken",
-        'related_data' => "Verwandte :name Daten",
-        'add' => "Hinzufügen",
+        'missing_model' => 'Verhalten (behaviour) der Verbindung, die in :class benutzt wird, hat kein definiertes Model',
+        'invalid_action_single' => 'Dieser Vorgang kann nicht auf eine Einwege-Verbindung (singular) angewendet werden.',
+        'invalid_action_multi' => 'Dieser Vorgang kann nicht auf eine Mehrwege-Verbindung (multiple) angewendet werden.',
+        'help'  => 'Zum Hinzufügen auf ein Item klicken',
+        'related_data' => 'Verwandte :name Daten',
+        'add' => 'Hinzufügen',
         'add_selected' => 'Auswahl hinzufügen',
         'add_a_new' => ':name hinzufügen',
         'link_selected' => 'Auswahl verlinken',
         'link_a_new' => ':name  verlinken',
         'cancel' => 'Abbrechen',
         'close' => 'Schließen',
-        'add_name' => ":name hinzufügen",
-        'create' => "Erstellen",
-        'create_name' => "Erstelle :name",
-        'update' => "Update",
-        'update_name' => "Update :name",
+        'add_name' => ':name hinzufügen',
+        'create' => 'Erstellen',
+        'create_name' => 'Erstelle :name',
+        'update' => 'Update',
+        'update_name' => 'Update :name',
         'preview' => 'Vorschaue',
         'preview_name' => 'Vorschau :name',
-        'remove' => "Entfernen",
-        'remove_name' => ":name entfernen",
-        'delete' => "Löschen",
-        'delete_name' => ":name löschen",
-        'delete_confirm' => "Sind Sie sicher?",
+        'remove' => 'Entfernen',
+        'remove_name' => ':name entfernen',
+        'delete' => 'Löschen',
+        'delete_name' => ':name löschen',
+        'delete_confirm' => 'Sind Sie sicher?',
         'link' => 'Link',
         'link_name' => 'Link :name',
         'unlink' => 'Link entfernen',
         'unlink_name' => 'Link von :name entfernen',
-        'unlink_confirm' => 'Sind Sie sicher?'
+        'unlink_confirm' => 'Sind Sie sicher?',
     ],
     'reorder' => [
         'default_title' => 'Einträge sortieren',
-        'no_records' => 'Es gibt keine Einträge zum sortieren.'
+        'no_records' => 'Es gibt keine Einträge zum sortieren.',
     ],
     'model' => [
-        'name' => "Model",
+        'name' => 'Model',
         'not_found' => "Model ':class' mit ID :id konnte nicht gefunden werden",
-        'missing_id' => "Für diesen Model-Datensatz ist keine ID angegeben",
+        'missing_id' => 'Für diesen Model-Datensatz ist keine ID angegeben',
         'missing_relation' => "Model ':class' hat keine definierte Verbindung ':relation'.",
         'missing_method' => "Model ':class' besitzt keine Methode ':method'.",
         'invalid_class' => "In :class benutztes Model :model ist ungültig, da es von der Klasse \Model abgeleitet sein muss (inherit).",
@@ -359,11 +359,11 @@ return [
         'no_wrap' => 'Tags nicht wrappen',
         'no_wrap_comment' => 'Die Liste von Tags welche nicht in Block-Tags gepackt werden sollen.',
         'remove_tags' => 'Entferne Tags',
-        'remove_tags_comment' => 'Die Liste an Tags welche nicht zusammen entfernt werden mit ihren Inhalt.'
+        'remove_tags_comment' => 'Die Liste an Tags welche nicht zusammen entfernt werden mit ihren Inhalt.',
 
     ],
     'tooltips' => [
-        'preview_website' => 'Vorschau der Webseite'
+        'preview_website' => 'Vorschau der Webseite',
     ],
     'mysettings' => [
         'menu_label' => 'Meine Einstellungen',
@@ -372,7 +372,7 @@ return [
     'myaccount' => [
         'menu_label' => 'Mein Account',
         'menu_description' => 'Updaten Sie Ihre Account-Details wie z.B. den Namen, die E-Mail-Adresse und das Passwort.',
-        'menu_keywords' => 'Sicheres Anmelden'
+        'menu_keywords' => 'Sicheres Anmelden',
     ],
     'branding' => [
         'menu_label' => 'Backend anpassen',
@@ -394,7 +394,7 @@ return [
         'menu_mode' => 'Menustyles',
         'menu_mode_inline' => 'Inline',
         'menu_mode_tile' => 'Tiles',
-        'menu_mode_collapsed' => 'Collapsed'
+        'menu_mode_collapsed' => 'Collapsed',
     ],
     'backend_preferences' => [
         'menu_label' => 'Backend Einstellungen',
@@ -420,7 +420,7 @@ return [
     'filter' => [
       'all' => 'Alle',
       'options_method_not_exists' => "Die Modelklasse :model muss eine methode :method() definiert haben und returning options for the ':filter' filter.",
-      'date_all' => 'Ganzen Zeitraum'
+      'date_all' => 'Ganzen Zeitraum',
     ],
     'import_export' => [
         'upload_csv_file' => '1. CSV-Datei hochladen',
@@ -492,15 +492,15 @@ return [
             'iso_8859_14' => 'ISO-8859-14 (Latin-8, Celtic)',
             'iso_8859_15' => 'ISO-8859-15 (Latin-9, Western European revision with euro sign)',
             'windows_1251' => 'Windows-1251 (CP1251)',
-            'windows_1252' => 'Windows-1252 (CP1252)'
-        ]
+            'windows_1252' => 'Windows-1252 (CP1252)',
+        ],
     ],
     'permissions' => [
         'manage_media' => 'Medien verwalten',
     ],
     'mediafinder' => [
         'label' => 'Media Finder',
-        'default_prompt' => 'Klicke auf %s um eine Mediendatei auszuwählen'
+        'default_prompt' => 'Klicke auf %s um eine Mediendatei auszuwählen',
     ],
     'media' => [
         'menu_label' => 'Medien',
@@ -558,6 +558,6 @@ return [
         'selection_mode' => 'Selection mode',
         'resize_image' => 'Bildgröße anpassen',
         'image_size' => 'Dimensionen:',
-        'selected_size' => 'Ausgewählt:'
-    ]
+        'selected_size' => 'Ausgewählt:',
+    ],
 ];

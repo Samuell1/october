@@ -2,35 +2,35 @@
 
 return [
     'auth' => [
-        'title' => '管理'
+        'title' => '管理',
     ],
     'field' => [
         'invalid_type' => '不合法的字段类型 :type.',
         'options_method_invalid_model' => "属性 ':field' 不能解析为有效模型. 请尝试为模型类:model指定一个可选方法.",
-        'options_method_not_exists' => "模型 :model 必须定义一个返回 ':field' 表单字段选项的方法 :method()。"
+        'options_method_not_exists' => "模型 :model 必须定义一个返回 ':field' 表单字段选项的方法 :method()。",
     ],
     'widget' => [
         'not_registered' => "未注册部件 ':name' ",
-        'not_bound' => "部件 ':name' 未绑定至控制器"
+        'not_bound' => "部件 ':name' 未绑定至控制器",
     ],
     'page' => [
         'untitled' => '未命名',
         'access_denied' => [
             'label' => '拒绝访问',
-            'help' => "您没有访问该页面所需的权限.",
-            'cms_link' => '返回后台'
+            'help' => '您没有访问该页面所需的权限.',
+            'cms_link' => '返回后台',
         ],
         'no_database' => [
             'label' => '无法找到数据库',
-            'help' => "需要数据库以访问后端。请在再次尝试之前检查数据库的配置和迁移。",
-            'cms_link' => '返回首页'
+            'help' => '需要数据库以访问后端。请在再次尝试之前检查数据库的配置和迁移。',
+            'cms_link' => '返回首页',
         ],
         'invalid_token' => [
-            'label' => '非法安全令牌'
-        ]
+            'label' => '非法安全令牌',
+        ],
     ],
     'partial' => [
-        'not_found_name' => "未找到部件 ':name' "
+        'not_found_name' => "未找到部件 ':name' ",
     ],
     'account' => [
         'sign_out' => '登出',
@@ -53,7 +53,7 @@ return [
         'apply' => '应用',
         'cancel' => '取消',
         'delete' => '删除',
-        'ok' => 'OK'
+        'ok' => 'OK',
     ],
     'dashboard' => [
         'menu_label' => '仪表盘',
@@ -102,7 +102,7 @@ return [
             'last_sign_in' => '您最后登陆是',
             'view_access_logs' => '访问登陆日志',
             'nice_message' => '祝你有美好的一天！',
-        ]
+        ],
     ],
     'user' => [
         'name' => '管理员',
@@ -149,11 +149,11 @@ return [
             'new' => '新管理组',
             'delete_confirm' => '您真的想要删除这个管理组?',
             'return' => '返回组列表',
-            'users_count' => '用户'
+            'users_count' => '用户',
         ],
         'preferences' => [
-            'not_authenticated' => '无认证用户加载或保存设置.'
-        ]
+            'not_authenticated' => '无认证用户加载或保存设置.',
+        ],
     ],
     'list' => [
         'default_title' => '列表',
@@ -184,7 +184,7 @@ return [
         'delete_selected_confirm' => '删除选中的项?',
         'delete_selected_success' => '成功删除选择项',
         'column_switch_true' => '是',
-        'column_switch_false' => '否'
+        'column_switch_false' => '否',
     ],
     'fileupload' => [
         'attachment' => '附件',
@@ -196,7 +196,7 @@ return [
         'upload_file' => '上传文件',
         'upload_error' => '上传错误',
         'remove_confirm' => '你确定吗？',
-        'remove_file' => '删除文件'
+        'remove_file' => '删除文件',
     ],
     'form' => [
         'create_title' => '新 :name',
@@ -252,8 +252,8 @@ return [
         'insert_row_below' => '在下面插入行',
         'delete_row' => '删除行',
         'concurrency_file_changed_title' => '文件改动',
-        'concurrency_file_changed_description' => "您正在编辑的文件正在被其他用户修改，您可以重载或覆盖磁盘上的文件。",
-        'return_to_list' => '返回列表'
+        'concurrency_file_changed_description' => '您正在编辑的文件正在被其他用户修改，您可以重载或覆盖磁盘上的文件。',
+        'return_to_list' => '返回列表',
     ],
     'recordfinder' => [
         'find_record' => '查找记录',
@@ -261,44 +261,44 @@ return [
     ],
     'pagelist' => [
         'page_link' => '页面链接',
-        'select_page' => '选择一个页面...'
+        'select_page' => '选择一个页面...',
     ],
     'relation' => [
         'missing_config' => "关系无配置文件 ':config'",
         'missing_definition' => "关系无定义 ':field' ",
-        'missing_model' => ":class 关系中无已定义模型",
-        'invalid_action_single' => "此操作无法在单一关系上执行.",
-        'invalid_action_multi' => "此操作无法在多重关系上执行.",
-        'help' => "点击增加",
-        'related_data' => "相关的 :name",
-        'add' => "增加",
-        'add_selected' => "增加选中",
-        'add_a_new' => "增加新的 :name",
-        'link_selected' => "关联选中",
-        'link_a_new' => "关联新的 :name",
-        'cancel' => "取消",
-        'close' => "关闭",
-        'add_name' => "增加 :name",
-        'create' => "创建",
-        'create_name' => "创建 :name",
-        'update' => "更新",
-        'update_name' => "更新 :name",
-        'preview' => "预览",
-        'preview_name' => "预览 :name",
-        'remove' => "移除",
-        'remove_name' => "移除 :name",
-        'delete' => "删除",
-        'delete_name' => "删除 :name",
-        'delete_confirm' => "您确定?",
-        'link' => "关联",
-        'link_name' => "关联 :name",
-        'unlink' => "取消关联",
-        'unlink_name' => "取消关联 :name",
-        'unlink_confirm' => "您确定?",
+        'missing_model' => ':class 关系中无已定义模型',
+        'invalid_action_single' => '此操作无法在单一关系上执行.',
+        'invalid_action_multi' => '此操作无法在多重关系上执行.',
+        'help' => '点击增加',
+        'related_data' => '相关的 :name',
+        'add' => '增加',
+        'add_selected' => '增加选中',
+        'add_a_new' => '增加新的 :name',
+        'link_selected' => '关联选中',
+        'link_a_new' => '关联新的 :name',
+        'cancel' => '取消',
+        'close' => '关闭',
+        'add_name' => '增加 :name',
+        'create' => '创建',
+        'create_name' => '创建 :name',
+        'update' => '更新',
+        'update_name' => '更新 :name',
+        'preview' => '预览',
+        'preview_name' => '预览 :name',
+        'remove' => '移除',
+        'remove_name' => '移除 :name',
+        'delete' => '删除',
+        'delete_name' => '删除 :name',
+        'delete_confirm' => '您确定?',
+        'link' => '关联',
+        'link_name' => '关联 :name',
+        'unlink' => '取消关联',
+        'unlink_name' => '取消关联 :name',
+        'unlink_confirm' => '您确定?',
     ],
     'reorder' => [
         'default_title' => '重新排序记录',
-        'no_records' => '没有可供排序的记录.'
+        'no_records' => '没有可供排序的记录.',
     ],
     'model' => [
         'name' => '模型',
@@ -306,15 +306,15 @@ return [
         'missing_id' => '无法找到指定ID的模型记录.',
         'missing_relation' => "模型 ':class' 不包含 ':relation'.",
         'missing_method' => "模型 ':class' 不包含 ':method'.",
-        'invalid_class' => "模型 :model 在 :class 中是不合法的，它必须继承 \\Model 类.",
-        'mass_assignment_failed' => "为模型属性':attribute'赋值失败."
+        'invalid_class' => '模型 :model 在 :class 中是不合法的，它必须继承 \\Model 类.',
+        'mass_assignment_failed' => "为模型属性':attribute'赋值失败.",
     ],
     'warnings' => [
         'tips' => '系统配置小技巧',
         'tips_description' => '您需要注意以下问题以使系统更好工作。',
         'permissions' => '目录 :name 或子目录对PHP不可写. 请在服务器中对此目录设置正确权限。',
         'extension' => 'PHP扩展 :name 未安装，请安装此库并激活扩展.',
-        'plugin_missing' => '依赖于未安装的插件 :name，请安装该插件.'
+        'plugin_missing' => '依赖于未安装的插件 :name，请安装该插件.',
     ],
     'editor' => [
         'menu_label' => '代码编辑器选项',
@@ -360,19 +360,19 @@ return [
         'no_wrap' => '无法包裹标签',
         'no_wrap_comment' => '所列标签无法包裹于快级标签中.',
         'remove_tags' => '移除标签',
-        'remove_tags_comment' => '所列标签将与其包裹的内容一起删除.'
+        'remove_tags_comment' => '所列标签将与其包裹的内容一起删除.',
     ],
     'tooltips' => [
-        'preview_website' => '预览网站'
+        'preview_website' => '预览网站',
     ],
     'mysettings' => [
         'menu_label' => '我的设置',
-        'menu_description' => '涉及您管理帐号的设置'
+        'menu_description' => '涉及您管理帐号的设置',
     ],
     'myaccount' => [
         'menu_label' => '我的账户',
         'menu_description' => '更新你的账户细节, 如姓名、邮件地址和密码.',
-        'menu_keywords' => '安全登录'
+        'menu_keywords' => '安全登录',
     ],
     'branding' => [
         'menu_label' => '自定义后台',
@@ -394,7 +394,7 @@ return [
         'menu_mode' => '菜单样式',
         'menu_mode_inline' => '行内',
         'menu_mode_tile' => '标题',
-        'menu_mode_collapsed' => '已折叠'
+        'menu_mode_collapsed' => '已折叠',
     ],
     'backend_preferences' => [
         'menu_label' => '后台设置',
@@ -404,7 +404,7 @@ return [
         'timezone' => '时区',
         'timezone_comment' => '选择您希望使用的本地语言。',
         'locale' => '语言',
-        'locale_comment' => '选择您想要的语言环境.'
+        'locale_comment' => '选择您想要的语言环境.',
     ],
     'access_log' => [
         'hint' => '此日志显示管理员成功登录信息。记录将保存 :days 天。',
@@ -415,12 +415,12 @@ return [
         'ip_address' => 'IP地址',
         'first_name' => '名',
         'last_name' => '姓',
-        'email' => '电子邮箱'
+        'email' => '电子邮箱',
     ],
     'filter' => [
         'all' => '全部',
         'options_method_not_exists' => "模型 :model 必须定义方法 :method() 并为过滤器 ':filter'返回可选项.",
-        'date_all' => '所有日期'
+        'date_all' => '所有日期',
     ],
     'import_export' => [
         'upload_csv_file' => '1. 上传一个 CSV 文件',
@@ -491,15 +491,15 @@ return [
             'iso_8859_14' => 'ISO-8859-14 (Latin-8, Celtic)',
             'iso_8859_15' => 'ISO-8859-15 (Latin-9, Western European revision with euro sign)',
             'windows_1251' => 'Windows-1251 (CP1251)',
-            'windows_1252' => 'Windows-1252 (CP1252)'
-        ]
+            'windows_1252' => 'Windows-1252 (CP1252)',
+        ],
     ],
     'permissions' => [
-        'manage_media' => '管理媒体'
+        'manage_media' => '管理媒体',
     ],
     'mediafinder' => [
         'label' => '媒体查找器',
-        'default_prompt' => '点击 %s 按钮查找媒体项'
+        'default_prompt' => '点击 %s 按钮查找媒体项',
     ],
    'media' => [
         'menu_label' => '媒体',
@@ -557,6 +557,6 @@ return [
         'selection_mode' => '选择模式',
         'resize_image' => '调整图片',
         'image_size' => '图片大小:',
-        'selected_size' => '选中:'
-    ]
+        'selected_size' => '选中:',
+    ],
 ];

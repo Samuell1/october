@@ -1,11 +1,12 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use October\Rain\Support\Collection as CollectionBase;
 
 /**
  * This class represents a collection of Cms Objects.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class CmsObjectCollection extends CollectionBase
@@ -19,12 +20,10 @@ class CmsObjectCollection extends CollectionBase
     public function withComponent($components, $callback = null)
     {
         return $this->filter(function ($object) use ($components, $callback) {
-
             $hasComponent = false;
 
             foreach ((array) $components as $componentName) {
-
-                if (!$callback && $object->hasComponent($componentName)) {
+                if (! $callback && $object->hasComponent($componentName)) {
                     $hasComponent = true;
                 }
 
@@ -47,8 +46,7 @@ class CmsObjectCollection extends CollectionBase
     public function where($property, $value, $strict = true)
     {
         return $this->filter(function ($object) use ($property, $value, $strict) {
-
-            if (!array_key_exists($property, $object->settings)) {
+            if (! array_key_exists($property, $object->settings)) {
                 return false;
             }
 
@@ -69,30 +67,28 @@ class CmsObjectCollection extends CollectionBase
     public function whereComponent($components, $property, $value, $strict = false)
     {
         return $this->filter(function ($object) use ($components, $property, $value, $strict) {
-
             $hasComponent = false;
 
             foreach ((array) $components as $componentName) {
-
-                if (!$componentAlias = $object->hasComponent($componentName)) {
+                if (! $componentAlias = $object->hasComponent($componentName)) {
                     continue;
                 }
 
                 $componentSettings = array_get($object->settings, 'components', []);
 
-                if (!array_key_exists($componentAlias, $componentSettings)) {
+                if (! array_key_exists($componentAlias, $componentSettings)) {
                     continue;
                 }
 
                 $settings = $componentSettings[$componentAlias];
 
-                if (!array_key_exists($property, $settings)) {
+                if (! array_key_exists($property, $settings)) {
                     continue;
                 }
 
                 if (
                     ($strict && $settings[$property] === $value) ||
-                    (!$strict && $settings[$property] == $value)
+                    (! $strict && $settings[$property] == $value)
                 ) {
                     $hasComponent = true;
                 }
@@ -101,5 +97,4 @@ class CmsObjectCollection extends CollectionBase
             return $hasComponent;
         });
     }
-
 }

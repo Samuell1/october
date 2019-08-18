@@ -1,17 +1,18 @@
-<?php namespace System\Models;
+<?php
+
+namespace System\Models;
 
 use View;
 use Model;
-use System\Classes\MailManager;
-use October\Rain\Mail\MailParser;
-use ApplicationException;
 use Exception;
 use File as FileHelper;
+use ApplicationException;
+use System\Classes\MailManager;
+use October\Rain\Mail\MailParser;
 
 /**
- * Mail partial
+ * Mail partial.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class MailPartial extends Model
@@ -44,7 +45,7 @@ class MailPartial extends Model
 
     public function afterFetch()
     {
-        if (!$this->is_custom) {
+        if (! $this->is_custom) {
             $this->fillFromCode();
         }
     }
@@ -52,16 +53,15 @@ class MailPartial extends Model
     public static function findOrMakePartial($code)
     {
         try {
-            if (!$template = self::whereCode($code)->first()) {
+            if (! $template = self::whereCode($code)->first()) {
                 $template = new self;
                 $template->code = $code;
                 $template->fillFromCode($code);
             }
 
             return $template;
-        }
-        catch (Exception $ex) {
-            return null;
+        } catch (Exception $ex) {
+            return;
         }
     }
 
@@ -96,7 +96,7 @@ class MailPartial extends Model
             $code = $this->code;
         }
 
-        if (!$definition = array_get($definitions, $code)) {
+        if (! $definition = array_get($definitions, $code)) {
             throw new ApplicationException('Unable to find a registered partial with code: '.$code);
         }
 
@@ -108,7 +108,7 @@ class MailPartial extends Model
         $sections = self::getTemplateSections($path);
 
         $this->name = array_get($sections, 'settings.name', '???');
-        $this->content_html =  array_get($sections, 'html');
+        $this->content_html = array_get($sections, 'html');
         $this->content_text = array_get($sections, 'text');
     }
 

@@ -19,7 +19,7 @@ return [
             'online' => 'En ligne',
             'maintenance' => 'En cours de maintenance',
             'manage_themes' => 'Gestion des thèmes',
-        ]
+        ],
     ],
     'theme' => [
         'not_found_name' => 'Le thème ":name" n’a pas été trouvé.',
@@ -30,7 +30,7 @@ return [
         'edit' => [
             'not_set' => 'Le thème à modifier n’est pas activé.',
             'not_found' => 'Le thème à modifier est introuvable.',
-            'not_match' => 'L’objet auquel vous souhaitez accéder n’appartient pas au thème en cours de modification. Veuillez recharger la page.'
+            'not_match' => 'L’objet auquel vous souhaitez accéder n’appartient pas au thème en cours de modification. Veuillez recharger la page.',
         ],
         'settings_menu' => 'Thème frontal',
         'settings_menu_description' => 'Aperçu des thèmes installés et sélection du thème actif.',
@@ -97,7 +97,7 @@ return [
         'settings_menu_description' => 'Configurer la page de maintenance et ajuster ses options.',
         'is_enabled' => 'Activer la maintenance',
         'is_enabled_comment' => 'Si activé, la page choisie ci-dessous sera affichée pour les visiteurs du site Web.',
-        'hint' => 'Le mode maintenance affichera la page de maintenance pour les visiteurs qui ne sont pas authentifiés dans l’interface d’administration.'
+        'hint' => 'Le mode maintenance affichera la page de maintenance pour les visiteurs qui ne sont pas authentifiés dans l’interface d’administration.',
     ],
     'page' => [
         'not_found_name' => 'La page ":name" est introuvable',
@@ -120,7 +120,7 @@ return [
         'cms_page' => 'Page CMS',
         'title' => 'Titre de la page',
         'url' => 'URL de la page',
-        'file_name' => 'Nom du fichier de la page'
+        'file_name' => 'Nom du fichier de la page',
     ],
     'layout' => [
         'not_found_name' => 'La maquette ":name" est introuvable',
@@ -129,7 +129,7 @@ return [
         'no_list_records' => 'Aucune maquette n’a été trouvée',
         'new' => 'Nouvelle maquette',
         'delete_confirm_multiple' => 'Confirmer la suppression des maquettes sélectionnées ?',
-        'delete_confirm_single' => 'Confirmer la suppression de cette maquette ?'
+        'delete_confirm_single' => 'Confirmer la suppression de cette maquette ?',
     ],
     'partial' => [
         'not_found_name' => 'Le modèle partiel ":name" est introuvable.',
@@ -139,7 +139,7 @@ return [
         'no_list_records' => 'Aucun  modèle partiel n’a été trouvé',
         'delete_confirm_multiple' => 'Confirmer la suppression des modèles partiels sélectionnés ?',
         'delete_confirm_single' => 'Confirmer la suppression de ce modèle partiel ?',
-        'new' => 'Nouveau modèle partiel'
+        'new' => 'Nouveau modèle partiel',
     ],
     'content' => [
         'not_found_name' => 'Le fichier de contenu ":name" est introuvable.',
@@ -148,18 +148,18 @@ return [
         'no_list_records' => 'Aucun fichier de contenu n’a été trouvé',
         'delete_confirm_multiple' => 'Confirmer la suppression des fichiers de contenu ou répertoires sélectionnés ?',
         'delete_confirm_single' => 'Confirmer la suppression de ce fichier de contenu ?',
-        'new' => 'Nouveau fichier de contenu'
+        'new' => 'Nouveau fichier de contenu',
     ],
     'ajax_handler' => [
         'invalid_name' => 'Nom du gestionnaire AJAX invalide : :name.',
         'not_found' => 'Le gestionnaire AJAX ":name" est introuvable.',
     ],
     'cms' => [
-        'menu_label' => 'CMS'
+        'menu_label' => 'CMS',
     ],
     'sidebar' => [
         'add' => 'Ajouter',
-        'search' => 'Rechercher…'
+        'search' => 'Rechercher…',
     ],
     'editor' => [
         'settings' => 'Configuration',
@@ -183,7 +183,7 @@ return [
         'open_searchbox' => 'Ouvrir la boîte de dialogue Rechercher',
         'close_searchbox'  => 'Fermer la boîte de dialogue Rechercher',
         'open_replacebox' => 'Ouvrir la boîte de dialogue Remplacer',
-        'close_replacebox'  => 'Fermer la boîte de dialogue Remplacer'
+        'close_replacebox'  => 'Fermer la boîte de dialogue Remplacer',
     ],
     'asset' => [
         'menu_label' => 'Assets',
@@ -227,7 +227,7 @@ return [
         'error_deleting_directory' => 'Erreur lors de la suppression du répertoire d’origine :dir',
         'no_list_records' => 'Aucun fichier trouvé',
         'delete_confirm' => 'Supprimer les fichiers ou répertoires sélectionnés ?',
-        'path' => 'Chemin'
+        'path' => 'Chemin',
     ],
     'component' => [
         'menu_label' => 'Composants',
@@ -247,7 +247,7 @@ return [
         'saved'=> 'Le modèle a été sauvegardé avec succès.',
         'no_list_records' => 'Aucun enregistrement trouvé',
         'delete_confirm' => 'Supprimer les modèles sélectionnés ?',
-        'order_by' =>'Trier par'
+        'order_by' =>'Trier par',
     ],
     'permissions' => [
         'name' => 'CMS',

@@ -1,13 +1,14 @@
-<?php namespace Backend\Controllers;
+<?php
+
+namespace Backend\Controllers;
 
 use BackendMenu;
 use Backend\Classes\Controller;
 use Backend\Widgets\MediaManager;
 
 /**
- * Backend Media Manager
+ * Backend Media Manager.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class Media extends Controller

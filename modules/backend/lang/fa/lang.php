@@ -14,20 +14,20 @@ return [
         'not_bound' => "ابزارکی تعریف شده در کلاس با نام ':name' به هیچ کنترلری ارتباط داده نشده است",
     ],
     'page' => [
-        'untitled' => "بدون عنوان",
+        'untitled' => 'بدون عنوان',
         'access_denied' => [
-            'label' => "شما مجوز دسترسی ندارید",
-            'help' => "شما مجوز لازم براس دسترسی به این صفحه را ندارید.",
-            'cms_link' => "بازگشت به مدیریت",
+            'label' => 'شما مجوز دسترسی ندارید',
+            'help' => 'شما مجوز لازم براس دسترسی به این صفحه را ندارید.',
+            'cms_link' => 'بازگشت به مدیریت',
         ],
         'no_database' => [
             'label' => 'پایگاه داده یافت نشد',
-            'help' => "جهت استفاده از بخش مدیریت به یک پایگاه داده نیاز دارید. تنظیمات پایگاه داده را بررسی نموده و از نصب جدولها در آن اطمینان حاصل کنید.",
-            'cms_link' => 'Return to the homepage'
+            'help' => 'جهت استفاده از بخش مدیریت به یک پایگاه داده نیاز دارید. تنظیمات پایگاه داده را بررسی نموده و از نصب جدولها در آن اطمینان حاصل کنید.',
+            'cms_link' => 'Return to the homepage',
         ],
         'invalid_token' => [
-            'label' => 'کلید امنیتی معتبر نمی باشد'
-        ]
+            'label' => 'کلید امنیتی معتبر نمی باشد',
+        ],
     ],
     'partial' => [
         'not_found_name' => "بخشی با نام ':name' یافت نشد.",
@@ -41,17 +41,17 @@ return [
         'login_placeholder' => 'ورود',
         'password_placeholder' => 'کلمه عبور',
         'remember_me' => 'مرا به خاطر نگهدار',
-        'forgot_password' => "کلمه عبور خود را فراموش کرده اید؟",
-        'enter_email' => "پست الکترونیکی خود را وارد نمایید",
-        'enter_login' => "نام کاربری خود را وارد نمایید",
-        'email_placeholder' => "پست الکترونیکی",
-        'enter_new_password' => "کلمه عبور جدید را وارد نمایید",
-        'password_reset' => "بازنشاندن کلمه عبور",
-        'restore_success' => "یک نامه به پست الکترونیکی شما جهت شروع عملیات بارگرداندن کلمه عبور ارسال شد.",
+        'forgot_password' => 'کلمه عبور خود را فراموش کرده اید؟',
+        'enter_email' => 'پست الکترونیکی خود را وارد نمایید',
+        'enter_login' => 'نام کاربری خود را وارد نمایید',
+        'email_placeholder' => 'پست الکترونیکی',
+        'enter_new_password' => 'کلمه عبور جدید را وارد نمایید',
+        'password_reset' => 'بازنشاندن کلمه عبور',
+        'restore_success' => 'یک نامه به پست الکترونیکی شما جهت شروع عملیات بارگرداندن کلمه عبور ارسال شد.',
         'restore_error' => "کاربری با نام کاریری ':login' یافت نشد.",
-        'reset_success' => "کلمه عبور شما بارگردانی شد و شما هم اکنون میتوانید وارد سیستم شوید.",
-        'reset_error' => "اطلاعات رمز عبور نا معتبر است , لطفا مجددا تلاش نمایید!",
-        'reset_fail' => "عدم توانایی در بازنشاندن کلمه عبور شما!",
+        'reset_success' => 'کلمه عبور شما بارگردانی شد و شما هم اکنون میتوانید وارد سیستم شوید.',
+        'reset_error' => 'اطلاعات رمز عبور نا معتبر است , لطفا مجددا تلاش نمایید!',
+        'reset_fail' => 'عدم توانایی در بازنشاندن کلمه عبور شما!',
         'apply' => 'اعمال کردن',
         'cancel' => 'انصراف',
         'delete' => 'حذف',
@@ -104,7 +104,7 @@ return [
             'last_sign_in' => 'آخرین ورود شما',
             'view_access_logs' => 'نمایش گزارش دسترسی ها',
             'nice_message' => 'روز خوبی داشته باشید',
-        ]
+        ],
     ],
     'user' => [
         'name' => 'مدیریت',
@@ -112,22 +112,22 @@ return [
         'menu_description' => 'مدیریت کاربران , گروه ها و دسترسی های مدیران.',
         'list_title' => 'مدیریت مدیران',
         'new' => 'مدیر جدید',
-        'login' => "ورود",
-        'first_name' => "نام",
-        'last_name' => "نام خانوادگی",
-        'full_name' => "نام کامل",
-        'email' => "ایمیل",
+        'login' => 'ورود',
+        'first_name' => 'نام',
+        'last_name' => 'نام خانوادگی',
+        'full_name' => 'نام کامل',
+        'email' => 'ایمیل',
         'role_field' => 'نقش',
         'role_comment' => 'نقش ها، مجوز های کاربران را تعیین می کنند که توسط سطوح کاربرای در سربرگ مجوز ها می توانند مورد ارجحیت قرار گیرند و تغییر کنند.',
-        'groups' => "گروه ها",
-        'groups_comment' => "اختصاص به گروهی که این شخص به آن تعلق دارد.",
-        'avatar' => "نمایه",
-        'password' => "کلمه عبور",
-        'password_confirmation' => "تکرار کلمه عبور",
+        'groups' => 'گروه ها',
+        'groups_comment' => 'اختصاص به گروهی که این شخص به آن تعلق دارد.',
+        'avatar' => 'نمایه',
+        'password' => 'کلمه عبور',
+        'password_confirmation' => 'تکرار کلمه عبور',
         'permissions' => 'مجوز های دسترسی',
         'account' => 'حساب کاربری',
-        'superuser' => "کاربر ممتاز",
-        'superuser_comment' => "اگر میخواهید این شخص به تمام قسمت ها دسترسی داشته باشد این گزینه را فعال نمایید.",
+        'superuser' => 'کاربر ممتاز',
+        'superuser_comment' => 'اگر میخواهید این شخص به تمام قسمت ها دسترسی داشته باشد این گزینه را فعال نمایید.',
         'send_invite' => 'دعوت نامه توسط پست الکترونیکی ارسال شود',
         'send_invite_comment' => 'جهت ارسال دعوت نامه به پست الکترونیکی این شخص این گزینه را فعال نمایید',
         'delete_confirm' => 'آیا از حذف این مدیر اطمینان دارید؟',
@@ -153,7 +153,7 @@ return [
             'new' => 'گروه مدیریت جدید',
             'delete_confirm' => 'آیا از حذف این گروه از مدیران اطمینان دارید?',
             'return' => 'بازگشت به لیست گروه ها',
-            'users_count' => 'کاربران'
+            'users_count' => 'کاربران',
         ],
         'role' => [
             'name' => 'نقش',
@@ -167,11 +167,11 @@ return [
             'new' => 'نقش جدید',
             'delete_confirm' => 'آیا از حذف این نقش اطمینان دارید؟',
             'return' => 'بازگشت به لیست نقش ها',
-            'users_count' => 'کاربران'
+            'users_count' => 'کاربران',
         ],
         'preferences' => [
-            'not_authenticated' => 'هیچ کاربر ثبت شده ای جهت بارگذاری یا ذخیره تنظیمات وجود ندارد.'
-        ]
+            'not_authenticated' => 'هیچ کاربر ثبت شده ای جهت بارگذاری یا ذخیره تنظیمات وجود ندارد.',
+        ],
     ],
     'list' => [
         'default_title' => 'لیست',
@@ -202,7 +202,7 @@ return [
         'delete_selected_confirm' => 'آیا میخواهید موارد انتخابی را حذف کنید؟',
         'delete_selected_success' => 'حدف موارد انخابی انجام شد.',
         'column_switch_true' => 'بله',
-        'column_switch_false' => 'خیر'
+        'column_switch_false' => 'خیر',
     ],
     'fileupload' => [
         'attachment' => 'فایل ضمیمه',
@@ -214,21 +214,21 @@ return [
         'upload_file' => 'ارسال فایل',
         'upload_error' => 'خطا در ارسال فایل',
         'remove_confirm' => 'آیا اطمینان دارید؟',
-        'remove_file' => 'حذف فایل'
+        'remove_file' => 'حذف فایل',
     ],
     'form' => [
-        'create_title' => ":name جدید",
-        'update_title' => "ویرایش :name",
-        'preview_title' => "پیش نمایش :name",
+        'create_title' => ':name جدید',
+        'update_title' => 'ویرایش :name',
+        'preview_title' => 'پیش نمایش :name',
         'create_success' => ':name با موفقیت ایجاد شد.',
         'update_success' => ':name با موفقیت به روز رسانی شد.',
         'delete_success' => ':name با موفقیت حذف شد.',
         'reset_success' => 'بازنشانی موفق بود',
-        'missing_id' => "رکورد مشخصه (ID) برای فرم انتخاب نشده است.",
+        'missing_id' => 'رکورد مشخصه (ID) برای فرم انتخاب نشده است.',
         'missing_model' => 'مدلی برای فرن تعریف شده در کلاس :class مشخص نشده است.',
         'missing_definition' => "فرم مورد نظر شامل فیلدی برای ':field' نمی باشد.",
         'not_found' => 'فرمی با مشخصه :id یافت نشد.',
-        'action_confirm' => "آیا اطمینان دارید؟",
+        'action_confirm' => 'آیا اطمینان دارید؟',
         'create' => 'ایجاد',
         'create_and_close' => 'ایجاد و خروج',
         'creating' => 'در حال ایجاد...',
@@ -271,7 +271,7 @@ return [
         'delete_row' => 'حذف سطر',
         'concurrency_file_changed_title' => 'فایل تغییر کرد',
         'concurrency_file_changed_description' => 'فایلی که شما ویرایش کردید توسط کاربر دیگری تغییر یافته و ذخیره شده است. شما میتوانید فایل را مجددا بارگذاری نمایید و تغییراتی که اعمال کرده اید را از دست بدهید و یا تغییرات اعمال شده توسط آن کاربر را بین برده و فایل را بازنویسی نمایید.',
-        'return_to_list' => 'بازگشت به لیست'
+        'return_to_list' => 'بازگشت به لیست',
     ],
     'recordfinder' => [
         'find_record' => 'انتخاب مورد',
@@ -279,49 +279,49 @@ return [
     ],
     'pagelist' => [
         'page_link' => 'لینک صفحه',
-        'select_page' => 'صفحه ای را انتخاب نمایید...'
+        'select_page' => 'صفحه ای را انتخاب نمایید...',
     ],
     'relation' => [
         'missing_config' => "کنترل کننده ارتباطات پایگاه داده شامل تعریفی برای ':config' نمی باشد.",
         'missing_definition' => "در ارتباط مورد نظر فیلد ':field' وجود ندارد.",
-        'missing_model' => "مدلی برای ارتباط موجود در :class وجود ندارد.",
-        'invalid_action_single' => "این عمل در ارتباط یک تعرفه نمبتواند اعمال شود.",
-        'invalid_action_multi' => "این عمل در ارتباط چند طرفه نمیتواند اعمال شود.",
-        'help' => "بر روی یک گزینه کلیک کنید تا افزوده شود",
-        'related_data' => "اطلاعات :name مرتبط",
-        'add' => "افزودن",
-        'add_selected' => "افرودن انتخاب شده ها",
-        'add_a_new' => ":name جدید",
-        'link_selected' => "لینک انتخاب شده ها",
-        'link_a_new' => "لینک :name جدید",
-        'cancel' => "انصراف",
-        'close' => "بستن",
-        'add_name' => "افزودن :name",
-        'create' => "ایجاد",
-        'create_name' => "ایجاد :name",
-        'update' => "بروز رسانی",
-        'update_name' => "بروز رسانی :name",
-        'preview' => "پیش نمایش",
-        'preview_name' => "پیش نمایش :name",
-        'remove' => "حذف",
-        'remove_name' => "حذف :name",
-        'delete' => "حذف",
-        'delete_name' => "حذف :name",
-        'delete_confirm' => "آیا اطمینان دارید؟",
-        'link' => "لینک",
-        'link_name' => "لینک :name",
-        'unlink' => "حذف لینک",
-        'unlink_name' => "حذف لینک :name",
-        'unlink_confirm' => "آبا اطمینان دارید؟",
+        'missing_model' => 'مدلی برای ارتباط موجود در :class وجود ندارد.',
+        'invalid_action_single' => 'این عمل در ارتباط یک تعرفه نمبتواند اعمال شود.',
+        'invalid_action_multi' => 'این عمل در ارتباط چند طرفه نمیتواند اعمال شود.',
+        'help' => 'بر روی یک گزینه کلیک کنید تا افزوده شود',
+        'related_data' => 'اطلاعات :name مرتبط',
+        'add' => 'افزودن',
+        'add_selected' => 'افرودن انتخاب شده ها',
+        'add_a_new' => ':name جدید',
+        'link_selected' => 'لینک انتخاب شده ها',
+        'link_a_new' => 'لینک :name جدید',
+        'cancel' => 'انصراف',
+        'close' => 'بستن',
+        'add_name' => 'افزودن :name',
+        'create' => 'ایجاد',
+        'create_name' => 'ایجاد :name',
+        'update' => 'بروز رسانی',
+        'update_name' => 'بروز رسانی :name',
+        'preview' => 'پیش نمایش',
+        'preview_name' => 'پیش نمایش :name',
+        'remove' => 'حذف',
+        'remove_name' => 'حذف :name',
+        'delete' => 'حذف',
+        'delete_name' => 'حذف :name',
+        'delete_confirm' => 'آیا اطمینان دارید؟',
+        'link' => 'لینک',
+        'link_name' => 'لینک :name',
+        'unlink' => 'حذف لینک',
+        'unlink_name' => 'حذف لینک :name',
+        'unlink_confirm' => 'آبا اطمینان دارید؟',
     ],
     'reorder' => [
         'default_title' => 'مرتب سازی موارد',
         'no_records' => 'موردی جهت مرتب سازی یافت نشد.',
     ],
     'model' => [
-        'name' => "مدل",
+        'name' => 'مدل',
         'not_found' => "مدل ':class' با مشخصه ی :id یافت نشد",
-        'missing_id' => "مشخصه ای برای مودل مورد نظر یافت نشد.",
+        'missing_id' => 'مشخصه ای برای مودل مورد نظر یافت نشد.',
         'missing_relation' => "مدل ':class' شامل تعریفی از ':relation'.",
         'missing_method' => "مدل ':class' متدی با نام ':method' ندارد.",
         'invalid_class' => "مدل :model استفاده شده در :class معتبر نمی باشد، این مدل باید از کلاس \Model ارث برده باشد.",
@@ -383,7 +383,7 @@ return [
         'toolbar_buttons_comment' => 'دکمه های پیشفرض جهت نمایش در ویرایشگر. [fullscreen, bold, italic, underline, strikeThrough, subscript, superscript, fontFamily, fontSize, |, color, emoticons, inlineStyle, paragraphStyle, |, paragraphFormat, align, formatOL, formatUL, outdent, indent, quote, insertHR, -, insertLink, insertImage, insertVideo, insertAudio, insertFile, insertTable, undo, redo, clearFormatting, selectAll, html]',
     ],
     'tooltips' => [
-        'preview_website' => 'پیش نمایش وب سایت'
+        'preview_website' => 'پیش نمایش وب سایت',
     ],
     'mysettings' => [
         'menu_label' => 'تنظیمات من',
@@ -392,7 +392,7 @@ return [
     'myaccount' => [
         'menu_label' => 'حساب کاربری من',
         'menu_description' => 'به روز رسانی اطلاعات حساب کار بری شما مانند نام و کلمه عبور و ... .',
-        'menu_keywords' => 'ورود امن'
+        'menu_keywords' => 'ورود امن',
     ],
     'branding' => [
         'menu_label' => 'شخصی سازی بخش مدیریت',
@@ -414,7 +414,7 @@ return [
         'menu_mode' => 'سبک منو',
         'menu_mode_inline' => 'آیکون در کنار',
         'menu_mode_tile' => 'آیکون در بالا',
-        'menu_mode_collapsed' => 'جمع شونده'
+        'menu_mode_collapsed' => 'جمع شونده',
     ],
     'backend_preferences' => [
         'menu_label' => 'تنظیمات مدیریت',
@@ -512,15 +512,15 @@ return [
             'iso_8859_14' => 'ISO-8859-14 (Latin-8, Celtic)',
             'iso_8859_15' => 'ISO-8859-15 (Latin-9, Western European revision with euro sign)',
             'windows_1251' => 'Windows-1251 (CP1251)',
-            'windows_1252' => 'Windows-1252 (CP1252)'
-        ]
+            'windows_1252' => 'Windows-1252 (CP1252)',
+        ],
     ],
     'permissions' => [
-        'manage_media' => 'مدیریت چند رسانه ها'
+        'manage_media' => 'مدیریت چند رسانه ها',
     ],
     'mediafinder' => [
         'label' => 'جستجوگر رسانه',
-        'default_prompt' => '%s را جهت انتخاب فایل چند رسانه ای انتخاب کنید'
+        'default_prompt' => '%s را جهت انتخاب فایل چند رسانه ای انتخاب کنید',
     ],
     'media' => [
         'menu_label' => 'چند رسانه ای',
@@ -583,6 +583,6 @@ return [
         'selection_mode' => 'حالت انتخابی',
         'resize_image' => 'تغییر اندازه تصویر',
         'image_size' => 'اندازه تصویر:',
-        'selected_size' => 'انتخاب شده:'
-    ]
+        'selected_size' => 'انتخاب شده:',
+    ],
 ];

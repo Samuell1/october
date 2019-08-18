@@ -1,11 +1,12 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 /**
  * Manager class for stacking nested partials and keeping track
  * of their components. Partial "objects" store the components
  * used by that partial for deferred retrieval.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class PartialStack
@@ -30,7 +31,7 @@ class PartialStack
         }
 
         $this->activePartial = [
-            'components' => []
+            'components' => [],
         ];
     }
 
@@ -49,7 +50,7 @@ class PartialStack
     {
         array_push($this->activePartial['components'], [
             'name' => $alias,
-            'obj' => $componentObj
+            'obj' => $componentObj,
         ]);
     }
 
@@ -58,8 +59,8 @@ class PartialStack
      */
     public function getComponent($name)
     {
-        if (!$this->activePartial) {
-            return null;
+        if (! $this->activePartial) {
+            return;
         }
 
         $component = $this->findComponentFromStack($name, $this->activePartial);
@@ -73,8 +74,6 @@ class PartialStack
                 return $component;
             }
         }
-
-        return null;
     }
 
     /**
@@ -87,7 +86,5 @@ class PartialStack
                 return $componentInfo['obj'];
             }
         }
-
-        return null;
     }
 }

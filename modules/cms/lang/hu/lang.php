@@ -11,7 +11,7 @@ return [
         'error_deleting' => "Hiba a(z) ':name' sablonfájl törlésekor. Ellenőrizze az írási engedélyeket.",
         'delete_success' => 'A sablonok törlése sikerült: :count.',
         'file_name_required' => 'A fájlnév mező kitöltése kötelező.',
-        'safe_mode_enabled' => 'A biztonságos mód jelenleg aktív.'
+        'safe_mode_enabled' => 'A biztonságos mód jelenleg aktív.',
     ],
     'dashboard' => [
         'active_theme' => [
@@ -19,20 +19,20 @@ return [
             'online' => 'Online',
             'maintenance' => 'Karbantartás alatt',
             'manage_themes' => 'Témák kezelése',
-            'customize_theme' => 'Téma testreszabása'
-        ]
+            'customize_theme' => 'Téma testreszabása',
+        ],
     ],
     'theme' => [
         'not_found_name' => "A következő téma nem található: ':name'",
         'by_author' => 'Fejlesztő: :name',
         'active' => [
             'not_set' => 'Nincs beállítva az aktív téma.',
-            'not_found' => 'Az aktív téma nem található.'
+            'not_found' => 'Az aktív téma nem található.',
         ],
         'edit' => [
             'not_set' => 'Nincs beállítva a szerkesztés alatt lévő téma.',
             'not_found' => 'A szerkesztés alatt lévő téma nem található.',
-            'not_match' => 'Az objektum melyhez hozzáférni próbál, nem a szerkesztés alatt lévő témához tartozik. Töltse be újra a lapot.'
+            'not_match' => 'Az objektum melyhez hozzáférni próbál, nem a szerkesztés alatt lévő témához tartozik. Töltse be újra a lapot.',
         ],
         'settings_menu' => 'Megjelenés',
         'settings_menu_description' => 'A telepített témák listája és azok testreszabása.',
@@ -92,24 +92,24 @@ return [
         'dir_name_taken' => 'A megadott könyvtár már létezik.',
         'find_more_themes' => 'További témák az OctoberCMS piacterén',
         'saving' => 'Téma mentése...',
-        'return' => 'Vissza a témákhoz'
+        'return' => 'Vissza a témákhoz',
     ],
     'maintenance' => [
         'settings_menu' => 'Karbantartás',
         'settings_menu_description' => 'A weboldal ideiglenes felfüggesztése a látogatók számára.',
         'is_enabled' => 'Karbantartás engedélyezése',
         'is_enabled_comment' => 'Aktiválása esetén a weboldal látogatói csak a kiválasztott lapot fogják látni.',
-        'hint' => 'Karbantartás módban a lentebb megadott lap fog megjelenni azon látogatók számára, akik nincsenek bejelentkezve az admin felületre.'
+        'hint' => 'Karbantartás módban a lentebb megadott lap fog megjelenni azon látogatók számára, akik nincsenek bejelentkezve az admin felületre.',
     ],
     'page' => [
         'not_found_name' => "A következő lap nem található: ':name'",
         'not_found' => [
             'label' => 'A lap nem található',
-            'help' => 'A kért lap nem található.'
+            'help' => 'A kért lap nem található.',
         ],
         'custom_error' => [
             'label' => 'Laphiba',
-            'help' => 'Sajnos valami elromlott, ezért a lap nem jeleníthető meg.'
+            'help' => 'Sajnos valami elromlott, ezért a lap nem jeleníthető meg.',
         ],
         'menu_label' => 'Lapok',
         'unsaved_label' => 'Nem mentett lap(ok)',
@@ -122,7 +122,7 @@ return [
         'cms_page' => 'Lapok',
         'title' => 'Elnevezés szerint',
         'url' => 'Webcím szerint',
-        'file_name' => 'Fájlnév szerint'
+        'file_name' => 'Fájlnév szerint',
     ],
     'layout' => [
         'not_found_name' => "A(z) ':name' elrendezés nem található",
@@ -131,7 +131,7 @@ return [
         'no_list_records' => 'Nincs találat',
         'new' => 'Új elrendezés',
         'delete_confirm_multiple' => 'Valóban törölni akarja a kijelölt elrendezéseket?',
-        'delete_confirm_single' => 'Valóban törölni akarja ezt az elrendezést?'
+        'delete_confirm_single' => 'Valóban törölni akarja ezt az elrendezést?',
     ],
     'partial' => [
         'not_found_name' => "A(z) ':name' részlap nem található.",
@@ -141,7 +141,7 @@ return [
         'no_list_records' => 'Nincs találat',
         'delete_confirm_multiple' => 'Valóban törölni akarja a kijelölt részlapokat?',
         'delete_confirm_single' => 'Valóban törölni akarja ezt a részlapot?',
-        'new' => 'Új részlap'
+        'new' => 'Új részlap',
     ],
     'content' => [
         'not_found_name' => "A(z) ':name' tartalomfájl nem található.",
@@ -150,18 +150,18 @@ return [
         'no_list_records' => 'Nincs találat',
         'delete_confirm_multiple' => 'Valóban törölni akarja a kijelölt tartalomfájlokat vagy könyvtárakat?',
         'delete_confirm_single' => 'Valóban törölni akarja ezt a tartalomfájlt?',
-        'new' => 'Új tartalomfájl'
+        'new' => 'Új tartalomfájl',
     ],
     'ajax_handler' => [
         'invalid_name' => 'Érvénytelen AJAX kezelő név: :name.',
-        'not_found' => "A(z) ':name' AJAX kezelő nem található."
+        'not_found' => "A(z) ':name' AJAX kezelő nem található.",
     ],
     'cms' => [
-        'menu_label' => 'Testreszabás'
+        'menu_label' => 'Testreszabás',
     ],
     'sidebar' => [
         'add' => 'Hozzáadás',
-        'search' => 'Keresés...'
+        'search' => 'Keresés...',
     ],
     'editor' => [
         'settings' => 'Beállítások',
@@ -185,7 +185,7 @@ return [
         'open_searchbox' => 'Keresési panel megnyitása',
         'close_searchbox'  => 'Keresési panel bezárása',
         'open_replacebox' => 'Cserepanel megnyitása',
-        'close_replacebox'  => 'Cserepanel bezárása'
+        'close_replacebox'  => 'Cserepanel bezárása',
     ],
     'asset' => [
         'menu_label' => 'Fájlok',
@@ -229,7 +229,7 @@ return [
         'error_deleting_directory' => 'Hiba a(z) :dir eredeti könyvtár áthelyezésekor.',
         'no_list_records' => 'Nincs találat',
         'delete_confirm' => 'Valóban törölni akarja a fájlokat és a könyvtárakat?',
-        'path' => 'Elérési út'
+        'path' => 'Elérési út',
     ],
     'component' => [
         'menu_label' => 'Komponensek',
@@ -241,7 +241,7 @@ return [
         'invalid_request' => 'A sablon érvénytelen komponens adatok miatt nem menthető.',
         'no_records' => 'Nem találhatók komponensek',
         'not_found' => "A(z) ':name' komponens nem található.",
-        'method_not_found' => "A(z) ':name' komponens nem tartalmaz egy ':method' metódust."
+        'method_not_found' => "A(z) ':name' komponens nem tartalmaz egy ':method' metódust.",
     ],
     'template' => [
         'invalid_type' => 'Ismeretlen sablon típus.',
@@ -249,7 +249,7 @@ return [
         'saved' => 'A módosítások sikeresen mentésre kerültek.',
         'no_list_records' => 'Nincs találat',
         'delete_confirm' => 'Valóban törölni akarja a témát?',
-        'order_by' => 'Rendezés'
+        'order_by' => 'Rendezés',
     ],
     'permissions' => [
         'name' => 'Testreszabás',
@@ -288,6 +288,6 @@ return [
         'preview_title' => 'Változtatások',
         'template_updated' => 'A fájl frissítve lett.',
         'template_created' => 'A fájl létre lett hozva.',
-        'template_deleted' => 'A fájl törölve lett.'
-    ]
+        'template_deleted' => 'A fájl törölve lett.',
+    ],
 ];

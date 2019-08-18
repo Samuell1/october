@@ -16,8 +16,8 @@ class NavigationManagerTest extends TestCase
                 'label'       => 'Dashboard',
                 'icon'        => 'icon-dashboard',
                 'url'         => 'http://dashboard.tld',
-                'order'       => 100
-            ]
+                'order'       => 100,
+            ],
         ]);
 
         $items = $manager->listMainMenuItems();
@@ -86,8 +86,8 @@ class NavigationManagerTest extends TestCase
             'print' => [
                 'label' => 'Print',
                 'icon' => 'icon-print',
-                'url' => 'javascript:window.print()'
-            ]
+                'url' => 'javascript:window.print()',
+            ],
         ]);
 
         $items = $manager->listMainMenuItems();
@@ -111,8 +111,8 @@ class NavigationManagerTest extends TestCase
             'close' => [
                 'label' => 'Close',
                 'icon' => 'icon-times',
-                'url' => 'javascript:window.close()'
-            ]
+                'url' => 'javascript:window.close()',
+            ],
         ]);
 
         $items = $manager->listMainMenuItems();
@@ -135,9 +135,9 @@ class NavigationManagerTest extends TestCase
                 'url'         => 'http://google.com',
                 'permissions' => [
                     'october.tester.access_foo',
-                    'october.tester.access_bar'
-                ]
-            ]
+                    'october.tester.access_bar',
+                ],
+            ],
         ]);
 
         $manager->setContext('October.Tester', 'blog');
@@ -169,8 +169,8 @@ class NavigationManagerTest extends TestCase
             'bar' => [
                 'label' => 'Bar',
                 'icon' => 'icon-bars',
-                'url' => 'http://yahoo.com'
-            ]
+                'url' => 'http://yahoo.com',
+            ],
         ]);
 
         $manager->setContext('October.Tester', 'blog');

@@ -19,7 +19,7 @@ return [
             'online' => 'online',
             'maintenance' => 'em manutenção',
             'manage_themes' => 'Gerenciar temas',
-        ]
+        ],
     ],
     'theme' => [
         'not_found_name' => 'O tema ":name" não foi encontrado.',
@@ -176,7 +176,7 @@ return [
         'open_searchbox' => 'Abrir caixa de busca',
         'close_searchbox'  => 'Fechar caixa de busca',
         'open_replacebox' => 'Abrir caixa de substituição',
-        'close_replacebox'  => 'Fechar caixa de substituição'
+        'close_replacebox'  => 'Fechar caixa de substituição',
     ],
     'asset' => [
         'menu_label' => 'Arquivos',

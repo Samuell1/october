@@ -3,7 +3,7 @@
 return [
     'app' => [
         'name' => 'OctoberCMS',
-        'tagline' => 'Takaisin perusteisiin'
+        'tagline' => 'Takaisin perusteisiin',
     ],
     'locale' => [
         'be' => 'Беларуская',
@@ -42,16 +42,16 @@ return [
         'tr' => 'Türkçe',
         'uk' => 'Українська мова',
         'zh-cn' => '简体中文',
-        'zh-tw' => '繁體中文'
+        'zh-tw' => '繁體中文',
     ],
     'directory' => [
-        'create_fail' => 'Ei voida luoda kansiota: :name'
+        'create_fail' => 'Ei voida luoda kansiota: :name',
     ],
     'file' => [
-        'create_fail' => 'Ei voida luoda tiedostoa: :name'
+        'create_fail' => 'Ei voida luoda tiedostoa: :name',
     ],
     'combiner' => [
-        'not_found' => "Yhdistelmätiedostoa ':name' ei löydy."
+        'not_found' => "Yhdistelmätiedostoa ':name' ei löydy.",
     ],
     'system' => [
         'name' => 'Järjestelmä',
@@ -70,15 +70,15 @@ return [
             'events' => 'Tapahtumat',
             'customers' => 'Asiakkaat',
             'my_settings' => 'Omat asetukset',
-            'notifications' => 'Notifikaatiot'
-        ]
+            'notifications' => 'Notifikaatiot',
+        ],
     ],
     'theme' => [
         'label' => 'Teema',
         'unnamed' => 'Nimetön teema',
         'name' => [
             'label' => 'Teeman nimi',
-            'help' => 'Nimeä teema uniikilla tunnuksella. Esimerkiksi RainLab.Vanilla'
+            'help' => 'Nimeä teema uniikilla tunnuksella. Esimerkiksi RainLab.Vanilla',
         ],
     ],
     'themes' => [
@@ -87,15 +87,15 @@ return [
         'installed' => 'Asennetut teemat',
         'no_themes' => 'Ei asennettuja teemoja kaupasta.',
         'recommended' => 'Suositellut',
-        'remove_confirm' => 'Haluatko varmasti poistaa tämän teeman?'
+        'remove_confirm' => 'Haluatko varmasti poistaa tämän teeman?',
     ],
     'plugin' => [
         'label' => 'Lisäosa',
         'unnamed' => 'Nimetön lisäosa',
         'name' => [
             'label' => 'Lisäosan nimi',
-            'help' => 'Anna lisäosalle uniikkikoodi. Esimerkiksi: RainLab.Blog'
-        ]
+            'help' => 'Anna lisäosalle uniikkikoodi. Esimerkiksi: RainLab.Blog',
+        ],
     ],
     'plugins' => [
         'manage' => 'Hallinnoi lisäosia',
@@ -121,7 +121,7 @@ return [
         'disable_confirm' => 'Oletko varma?',
         'disable_success' => 'Lisäosat poistettu käytöstä onnistuneesti.',
         'enable_success' => 'Lisäosat otettu käyttöön onnistuneesti.',
-        'unknown_plugin' => 'Lisäosa on poistettu järjestelmästä.'
+        'unknown_plugin' => 'Lisäosa on poistettu järjestelmästä.',
     ],
     'project' => [
         'name' => 'Projekti',
@@ -132,10 +132,10 @@ return [
         'id' => [
             'label' => 'Projektin ID',
             'help' => 'Mistä löydän projektin ID:n',
-            'missing' => 'Määrittele projektin ID.'
+            'missing' => 'Määrittele projektin ID.',
         ],
         'detach_confirm' => 'Haluatko varmasti irrottautua projektista?',
-        'unbind_success' => 'Projekti on irrotettu.'
+        'unbind_success' => 'Projekti on irrotettu.',
     ],
     'settings' => [
         'menu_label' => 'Asetukset',
@@ -143,7 +143,7 @@ return [
         'missing_model' => 'The settings page is missing a Model definition.',
         'update_success' => ':name settings updated',
         'return' => 'Palaa järjestelmän asetuksiin',
-        'search' => 'Haku'
+        'search' => 'Haku',
     ],
     'mail' => [
         'log_file' => 'Lokitiedosto',
@@ -185,7 +185,7 @@ return [
         'ses_region' => 'SES alue',
         'ses_region_comment' => 'Syötä sinun SES alue (esim: us-east-1)',
         'drivers_hint_header' => 'Ajureita ei asennettu',
-        'drivers_hint_content' => 'Tämä sähköpostimenetelmä vaatii lisäosan ":plugin" asennettavaksi ennen kuin voit lähettää sähköpostia.'
+        'drivers_hint_content' => 'Tämä sähköpostimenetelmä vaatii lisäosan ":plugin" asennettavaksi ennen kuin voit lähettää sähköpostia.',
     ],
     'mail_templates' => [
         'menu_label' => 'Sähköpostipohjat',
@@ -224,7 +224,7 @@ return [
         'deleting' => 'Poistetaan teemaa...',
         'deleting_layout' => 'Poistetaan ulkoasua...',
         'sending' => 'Lähetetään testiviestiä...',
-        'return' => 'Palaa teemalistaan'
+        'return' => 'Palaa teemalistaan',
     ],
     'mail_brand' => [
         'menu_label' => 'Sähköpostin brändäys',
@@ -238,7 +238,7 @@ return [
                 'description' => 'Kuvaus',
                 'price' => 'Hinta',
                 'centered' => 'Keskitetty',
-                'right_aligned' => 'Tasattu oikealle'
+                'right_aligned' => 'Tasattu oikealle',
             ],
             'buttons' => [
                 'primary' => 'Ensisijainen nappula',
@@ -249,7 +249,7 @@ return [
             'more' => 'Lisää tekstiä',
             'promotion' => 'Kuponkikoodi: OCTOBER',
             'subcopy' => 'Tämä on sähköpostin alateksti',
-            'thanks' => 'Kiitos'
+            'thanks' => 'Kiitos',
         ],
         'fields' => [
             '_section_background' => 'Tausta',
@@ -275,7 +275,7 @@ return [
             'panel_bg' => 'Paneelin tausta',
             'promotion_bg' => 'Promootion tausta',
             'promotion_border_color' => 'Promootion reunan väri',
-        ]
+        ],
     ],
     'install' => [
         'project_label' => 'Kiinnitä projektiin',
@@ -284,7 +284,7 @@ return [
         'missing_plugin_name' => 'Määritä asennettavan lisäosan nimi.',
         'missing_theme_name' => 'Määritä asennettavan teeman nimi.',
         'install_completing' => 'Viimeistellään asennusta',
-        'install_success' => 'Lisäosa asennettu onnistuneesti'
+        'install_success' => 'Lisäosa asennettu onnistuneesti',
     ],
     'updates' => [
         'title' => 'Hallinnoi päivityksiä',
@@ -323,17 +323,17 @@ return [
         'force_label' => 'Pakota päivitys',
         'found' => [
             'label' => 'Löydettiin uusia päivityksiä!',
-            'help' => 'Klikkaa Päivitä ohjelmisto aloittaaksesi päivitysprosessi.'
+            'help' => 'Klikkaa Päivitä ohjelmisto aloittaaksesi päivitysprosessi.',
         ],
         'none' => [
             'label' => 'Ei päivityksiä',
-            'help' => 'Uusia päivityksiä ei löytynyt.'
+            'help' => 'Uusia päivityksiä ei löytynyt.',
         ],
         'important_action' => [
             'empty' => 'Valitse toimenpide',
             'confirm' => 'Vahvista päivitys',
             'skip' => 'Jätä tämä pävitys väliin (vain kerran)',
-            'ignore' => 'Hyppää tämän päivityksen yli (aina)'
+            'ignore' => 'Hyppää tämän päivityksen yli (aina)',
         ],
         'important_action_required' => 'Toimenpiteitä vaaditaan',
         'important_view_guide' => 'Katso päivitysopas',
@@ -350,7 +350,7 @@ return [
         'details_licence' => 'Lisenssi',
         'details_licence_missing' => 'Lisenssiä ei löydy.',
         'details_current_version' => 'Tämän hetkinen versio',
-        'details_author' => 'Tekijä'
+        'details_author' => 'Tekijä',
     ],
     'server' => [
         'connect_error' => 'Palvelimeen ei saada yhteyttä.',
@@ -358,17 +358,17 @@ return [
         'response_invalid' => 'Virheellinen vastaus palvelimelta.',
         'response_empty' => 'Tyhjä vastaus palvelimelta.',
         'file_error' => 'Paketin toimitus palvelimelta epäonnistui.',
-        'file_corrupt' => 'Palvelimella oleva tiedosto on vahingoittunut.'
+        'file_corrupt' => 'Palvelimella oleva tiedosto on vahingoittunut.',
     ],
     'behavior' => [
-        'missing_property' => 'Luokan :class täytyy määritellä ominaisuus $:property, jota käyttää :behavior käyttäytyminen.'
+        'missing_property' => 'Luokan :class täytyy määritellä ominaisuus $:property, jota käyttää :behavior käyttäytyminen.',
     ],
     'config' => [
         'not_found' => 'Asetustiedostoa :file ei löydy määriteltynä kohteelle :location.',
-        'required' => "Kohteen :location asetustiedostossa on oltava arvo ':property'."
+        'required' => "Kohteen :location asetustiedostossa on oltava arvo ':property'.",
     ],
     'zip' => [
-        'extract_failed' => "Ydintiedoston ':file' purku epäonnistui."
+        'extract_failed' => "Ydintiedoston ':file' purku epäonnistui.",
     ],
     'event_log' => [
         'hint' => 'Tämä loki näyttää listan mahdollisista virheistä, jotka tapahtuvat sovelluksessa, kuten poikkeukset ja virheen korjaustiedot.',
@@ -383,7 +383,7 @@ return [
         'created_at' => 'Päivä & Aika',
         'message' => 'Viesti',
         'level' => 'Taso',
-        'preview_title' => 'Tapahtuma'
+        'preview_title' => 'Tapahtuma',
     ],
     'request_log' => [
         'hint' => 'Tämä loki näyttää listan selainten pyynnöistä, jotka saattavat vaatia huomiotasi. Esim. jos vierailijat avaavat CMS-sivun, jota ei löydy, kohde lisätään tilakoodilla 404.',
@@ -399,7 +399,7 @@ return [
         'referer' => 'Viitteet',
         'url' => 'URL',
         'status_code' => 'Tilakoodi',
-        'preview_title' => 'Pyyntö'
+        'preview_title' => 'Pyyntö',
     ],
     'permissions' => [
         'name' => 'Järjestelmä',
@@ -412,7 +412,7 @@ return [
         'manage_preferences' => 'Hallitse ylläpitopuolen asetuksia',
         'manage_editor' => 'Hallitse koodieditorin asetuksia',
         'view_the_dashboard' => 'Katso Dashboardia',
-        'manage_branding' => 'Muokkaa ylläpitoa'
+        'manage_branding' => 'Muokkaa ylläpitoa',
     ],
     'log' => [
         'menu_label' => 'Lokiasetukset',
@@ -428,5 +428,5 @@ return [
     'media' => [
         'invalid_path' => "Virheellinen tiedostopolku: ':path'.",
         'folder_size_items' => 'tiedosto(a)',
-    ]
+    ],
 ];

@@ -35,15 +35,15 @@ return [
     ],
 
     'mediamanager' => [
-        'insert_link' => "Wstaw Link",
-        'insert_image' => "Wstaw Obraz",
-        'insert_video' => "Wstaw Wideo",
-        'insert_audio' => "Wstaw Audio",
-        'invalid_file_empty_insert' => "Prosimy wybrać plik do podlinkowania.",
-        'invalid_file_single_insert' => "Prosimy wybrać pojedynczy plik.",
-        'invalid_image_empty_insert' => "Prosimy wybrać obrazy do wstawienia.",
-        'invalid_video_empty_insert' => "Prosimy wybrać wideo do wstawienia.",
-        'invalid_audio_empty_insert' => "Prosimy wybrać audio do wstawienia.",
+        'insert_link' => 'Wstaw Link',
+        'insert_image' => 'Wstaw Obraz',
+        'insert_video' => 'Wstaw Wideo',
+        'insert_audio' => 'Wstaw Audio',
+        'invalid_file_empty_insert' => 'Prosimy wybrać plik do podlinkowania.',
+        'invalid_file_single_insert' => 'Prosimy wybrać pojedynczy plik.',
+        'invalid_image_empty_insert' => 'Prosimy wybrać obrazy do wstawienia.',
+        'invalid_video_empty_insert' => 'Prosimy wybrać wideo do wstawienia.',
+        'invalid_audio_empty_insert' => 'Prosimy wybrać audio do wstawienia.',
     ],
 
     'alert' => [
@@ -56,12 +56,12 @@ return [
         'nextMonth' => 'Następny miesiąc',
         'months' => ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'],
         'weekdays' => ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
-        'weekdaysShort' => ['Nie', 'Pn', 'Wt', 'Śr', 'Czw', 'Pt', 'So']
+        'weekdaysShort' => ['Nie', 'Pn', 'Wt', 'Śr', 'Czw', 'Pt', 'So'],
     ],
 
     'filter' => [
         'group' => [
-            'all' => 'wszystkie'
+            'all' => 'wszystkie',
         ],
         'dates' => [
             'all' => 'wszystkie',
@@ -69,8 +69,8 @@ return [
             'reset_button_text'  => 'Resetuj',
             'date_placeholder' => 'Data',
             'after_placeholder' => 'Po',
-            'before_placeholder' => 'Przed'
-        ]
+            'before_placeholder' => 'Przed',
+        ],
     ],
 
     'eventlog' => [
@@ -86,7 +86,7 @@ return [
             'openWith' => 'Otwórz za pomocą',
             'remember_choice' => 'Zapamiętaj wybraną opcję dla tej sesji',
             'open' => 'Otwórz',
-            'cancel' => 'Anuluj'
-        ]
-    ]
+            'cancel' => 'Anuluj',
+        ],
+    ],
 ];

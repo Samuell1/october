@@ -1,23 +1,26 @@
-<?php namespace Cms\Models;
+<?php
+
+namespace Cms\Models;
 
 use App;
 use Model;
+use Exception;
 use BackendAuth;
 use Cms\Classes\Theme;
 use System\Models\LogSetting;
 use October\Rain\Halcyon\Model as HalcyonModel;
-use Exception;
 
 /**
- * Model for changes made to the theme
+ * Model for changes made to the theme.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class ThemeLog extends Model
 {
     const TYPE_CREATE = 'create';
+
     const TYPE_UPDATE = 'update';
+
     const TYPE_DELETE = 'delete';
 
     /**
@@ -29,7 +32,7 @@ class ThemeLog extends Model
      * @var array Relations
      */
     public $belongsTo = [
-        'user' => \Backend\Models\User::class
+        'user' => \Backend\Models\User::class,
     ];
 
     protected $themeCache;
@@ -49,20 +52,20 @@ class ThemeLog extends Model
     }
 
     /**
-     * Creates a log record
+     * Creates a log record.
      * @return self
      */
     public static function add(HalcyonModel $template, $type = null)
     {
-        if (!App::hasDatabase()) {
+        if (! App::hasDatabase()) {
             return;
         }
 
-        if (!LogSetting::get('log_theme')) {
+        if (! LogSetting::get('log_theme')) {
             return;
         }
 
-        if (!$type) {
+        if (! $type) {
             $type = self::TYPE_UPDATE;
         }
 
@@ -73,9 +76,10 @@ class ThemeLog extends Model
         $newContent = $template->toCompiled();
         $oldContent = $template->getOriginal('content');
 
-        if ($newContent === $oldContent && $templateName === $oldTemplateName && !$isDelete) {
+        if ($newContent === $oldContent && $templateName === $oldTemplateName && ! $isDelete) {
             traceLog($newContent, $oldContent);
-            traceLog('Content not dirty for: '. $template->getObjectTypeDirName().'/'.$template->fileName);
+            traceLog('Content not dirty for: '.$template->getObjectTypeDirName().'/'.$template->fileName);
+
             return;
         }
 
@@ -93,8 +97,8 @@ class ThemeLog extends Model
 
         try {
             $record->save();
+        } catch (Exception $ex) {
         }
-        catch (Exception $ex) {}
 
         return $record;
     }
@@ -103,7 +107,7 @@ class ThemeLog extends Model
     {
         $code = $this->theme;
 
-        if (!isset($this->themeCache[$code])) {
+        if (! isset($this->themeCache[$code])) {
             $this->themeCache[$code] = Theme::load($code);
         }
 
@@ -117,7 +121,7 @@ class ThemeLog extends Model
         return [
             self::TYPE_CREATE => 'cms::lang.theme_log.type_create',
             self::TYPE_UPDATE => 'cms::lang.theme_log.type_update',
-            self::TYPE_DELETE => 'cms::lang.theme_log.type_delete'
+            self::TYPE_DELETE => 'cms::lang.theme_log.type_delete',
         ];
     }
 

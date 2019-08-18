@@ -1,17 +1,18 @@
-<?php namespace System\Controllers;
+<?php
+
+namespace System\Controllers;
 
 use App;
 use Lang;
 use Flash;
 use BackendMenu;
+use System\Models\EventLog;
 use Backend\Classes\Controller;
 use System\Classes\SettingsManager;
-use System\Models\EventLog;
 
 /**
- * Event Logs controller
+ * Event Logs controller.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class EventLogs extends Controller
@@ -21,7 +22,7 @@ class EventLogs extends Controller
      */
     public $implement = [
         \Backend\Behaviors\FormController::class,
-        \Backend\Behaviors\ListController::class
+        \Backend\Behaviors\ListController::class,
     ];
 
     /**
@@ -59,21 +60,22 @@ class EventLogs extends Controller
     {
         EventLog::truncate();
         Flash::success(Lang::get('system::lang.event_log.empty_success'));
+
         return $this->listRefresh();
     }
 
     public function index_onDelete()
     {
         if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
-
             foreach ($checkedIds as $recordId) {
-                if (!$record = EventLog::find($recordId)) continue;
+                if (! $record = EventLog::find($recordId)) {
+                    continue;
+                }
                 $record->delete();
             }
 
             Flash::success(Lang::get('backend::lang.list.delete_selected_success'));
-        }
-        else {
+        } else {
             Flash::error(Lang::get('backend::lang.list.delete_selected_empty'));
         }
 
@@ -81,7 +83,7 @@ class EventLogs extends Controller
     }
 
     /**
-     * Preview page action
+     * Preview page action.
      * @return void
      */
     public function preview($id)

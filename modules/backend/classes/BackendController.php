@@ -1,17 +1,19 @@
-<?php namespace Backend\Classes;
+<?php
 
-use Str;
+namespace Backend\Classes;
+
 use App;
+use Str;
 use File;
 use View;
 use Event;
 use Config;
+use Closure;
 use Request;
 use Response;
-use Closure;
-use Illuminate\Routing\Controller as ControllerBase;
-use October\Rain\Router\Helper as RouterHelper;
 use System\Classes\PluginManager;
+use October\Rain\Router\Helper as RouterHelper;
+use Illuminate\Routing\Controller as ControllerBase;
 
 /**
  * This is the master controller for all back-end pages.
@@ -23,7 +25,6 @@ use System\Classes\PluginManager;
  * for the `Posts` controller inside the `Acme.Blog` plugin.
  *
  * @see Backend\Classes\Controller Base class for back-end controllers
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class BackendController extends ControllerBase
@@ -46,12 +47,12 @@ class BackendController extends ControllerBase
     public static $params;
 
     /**
-     * @var boolean Flag to indicate that the CMS module is handling the current request
+     * @var bool Flag to indicate that the CMS module is handling the current request
      */
     protected $cmsHandling = false;
 
     /**
-     * Stores the requested controller so that the constructor is only run once
+     * Stores the requested controller so that the constructor is only run once.
      *
      * @var Backend\Classes\Controller
      */
@@ -68,16 +69,16 @@ class BackendController extends ControllerBase
             $response = $next($request);
 
             // Find requested controller to determine if any middleware has been attached
-            $pathParts = explode('/', str_replace(Request::root() . '/', '', Request::url()));
+            $pathParts = explode('/', str_replace(Request::root().'/', '', Request::url()));
             if (count($pathParts)) {
                 // Drop off preceding backend URL part if needed
-                if (!empty(Config::get('cms.backendUri', 'backend'))) {
+                if (! empty(Config::get('cms.backendUri', 'backend'))) {
                     array_shift($pathParts);
                 }
                 $path = implode('/', $pathParts);
 
                 $requestedController = $this->getRequestedController($path);
-                if (!is_null($requestedController) && count($requestedController['controller']->getMiddleware())) {
+                if (! is_null($requestedController) && count($requestedController['controller']->getMiddleware())) {
                     $action = $requestedController['action'];
 
                     // Collect applicable middleware and insert middleware into pipeline
@@ -108,7 +109,7 @@ class BackendController extends ControllerBase
     }
 
     /**
-     * Pass unhandled URLs to the CMS Controller, if it exists
+     * Pass unhandled URLs to the CMS Controller, if it exists.
      *
      * @param string $url
      * @return Response
@@ -120,6 +121,7 @@ class BackendController extends ControllerBase
             class_exists('\Cms\Classes\Controller')
         ) {
             $this->cmsHandling = true;
+
             return App::make('Cms\Classes\Controller')->run($url);
         } else {
             return Response::make(View::make('backend::404'), 404);
@@ -140,7 +142,7 @@ class BackendController extends ControllerBase
 
         // Handle NotFoundHttpExceptions in the backend (usually triggered by abort(404))
         Event::listen('exception.beforeRender', function ($exception, $httpCode, $request) {
-            if (!$this->cmsHandling && $exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+            if (! $this->cmsHandling && $exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
                 return View::make('backend::404');
             }
         }, 1);
@@ -148,14 +150,14 @@ class BackendController extends ControllerBase
         /*
          * Database check
          */
-        if (!App::hasDatabase()) {
+        if (! App::hasDatabase()) {
             return Config::get('app.debug', false)
                 ? Response::make(View::make('backend::no_database'), 200)
                 : $this->passToCmsController($url);
         }
 
         $controllerRequest = $this->getRequestedController($url);
-        if (!is_null($controllerRequest)) {
+        if (! is_null($controllerRequest)) {
             return $controllerRequest['controller']->run(
                 $controllerRequest['action'],
                 $controllerRequest['params']
@@ -198,7 +200,7 @@ class BackendController extends ControllerBase
             return [
                 'controller' => $controllerObj,
                 'action' => $action,
-                'params' => $controllerParams
+                'params' => $controllerParams,
             ];
         }
 
@@ -208,7 +210,7 @@ class BackendController extends ControllerBase
         if (count($params) >= 2) {
             list($author, $plugin) = $params;
 
-            $pluginCode = ucfirst($author) . '.' . ucfirst($plugin);
+            $pluginCode = ucfirst($author).'.'.ucfirst($plugin);
             if (PluginManager::instance()->isDisabled($pluginCode)) {
                 return Response::make(View::make('backend::404'), 404);
             }
@@ -225,12 +227,10 @@ class BackendController extends ControllerBase
                 return [
                     'controller' => $controllerObj,
                     'action' => $action,
-                    'params' => $controllerParams
+                    'params' => $controllerParams,
                 ];
             }
         }
-
-        return null;
     }
 
     /**
@@ -250,15 +250,15 @@ class BackendController extends ControllerBase
         /*
          * Workaround: Composer does not support case insensitivity.
          */
-        if (!class_exists($controller)) {
+        if (! class_exists($controller)) {
             $controller = Str::normalizeClassName($controller);
-            $controllerFile = $inPath.strtolower(str_replace('\\', '/', $controller)) . '.php';
+            $controllerFile = $inPath.strtolower(str_replace('\\', '/', $controller)).'.php';
             if ($controllerFile = File::existsInsensitive($controllerFile)) {
                 include_once $controllerFile;
             }
         }
 
-        if (!class_exists($controller)) {
+        if (! class_exists($controller)) {
             return $this->requestedController = null;
         }
 
@@ -294,7 +294,7 @@ class BackendController extends ControllerBase
      */
     protected static function methodExcludedByOptions($method, array $options)
     {
-        return (isset($options['only']) && !in_array($method, (array) $options['only'])) ||
-            (!empty($options['except']) && in_array($method, (array) $options['except']));
+        return (isset($options['only']) && ! in_array($method, (array) $options['only'])) ||
+            (! empty($options['except']) && in_array($method, (array) $options['except']));
     }
 }

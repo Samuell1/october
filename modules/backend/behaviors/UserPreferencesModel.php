@@ -1,18 +1,19 @@
-<?php namespace Backend\Behaviors;
+<?php
 
-use System\Behaviors\SettingsModel;
+namespace Backend\Behaviors;
+
 use Backend\Models\UserPreference;
+use System\Behaviors\SettingsModel;
 
 /**
  * User Preferences model extension, identical to System\Behaviors\SettingsModel
- * except values are set against the logged in user's preferences via Backend\Models\UserPreference
+ * except values are set against the logged in user's preferences via Backend\Models\UserPreference.
  *
  * Add this the model class definition:
  *
  *     public $implement = ['Backend.Behaviors.UserPreferencesModel'];
  *     public $settingsCode = 'author.plugin::code';
  *     public $settingsFields = 'fields.yaml';
- *
  */
 class UserPreferencesModel extends SettingsModel
 {
@@ -22,7 +23,7 @@ class UserPreferencesModel extends SettingsModel
     private static $instances = [];
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct($model)
     {
@@ -32,7 +33,7 @@ class UserPreferencesModel extends SettingsModel
     }
 
     /**
-     * Create an instance of the settings model, intended as a static method
+     * Create an instance of the settings model, intended as a static method.
      */
     public function instance()
     {
@@ -40,7 +41,7 @@ class UserPreferencesModel extends SettingsModel
             return self::$instances[$this->recordCode];
         }
 
-        if (!$item = $this->getSettingsRecord()) {
+        if (! $item = $this->getSettingsRecord()) {
             $this->model->initSettingsData();
             $item = $this->model;
         }
@@ -49,7 +50,7 @@ class UserPreferencesModel extends SettingsModel
     }
 
     /**
-     * Checks if the model has been set up previously, intended as a static method
+     * Checks if the model has been set up previously, intended as a static method.
      */
     public function isConfigured()
     {
@@ -73,7 +74,7 @@ class UserPreferencesModel extends SettingsModel
 
     /**
      * Before the model is saved, ensure the record code is set
-     * and the jsonable field values
+     * and the jsonable field values.
      */
     public function beforeModelSave()
     {
@@ -91,7 +92,7 @@ class UserPreferencesModel extends SettingsModel
 
     /**
      * Checks if a key is legitimate or should be added to
-     * the field value collection
+     * the field value collection.
      */
     protected function isKeyAllowed($key)
     {
@@ -112,6 +113,7 @@ class UserPreferencesModel extends SettingsModel
     {
         $item = UserPreference::forUser();
         $userId = $item->userContext ? $item->userContext->id : 0;
+
         return $this->recordCode.'-userpreference-'.$userId;
     }
 }

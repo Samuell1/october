@@ -1,28 +1,29 @@
-<?php namespace System\Classes;
+<?php
+
+namespace System\Classes;
 
 use App;
 use Url;
 use File;
-use Lang;
 use Http;
+use Lang;
 use Cache;
-use Schema;
 use Config;
+use Schema;
+use Exception;
+use Carbon\Carbon;
 use ApplicationException;
-use Cms\Classes\ThemeManager;
 use System\Models\Parameter;
+use Cms\Classes\ThemeManager;
+use October\Rain\Filesystem\Zip;
 use System\Models\PluginVersion;
 use System\Helpers\Cache as CacheHelper;
-use October\Rain\Filesystem\Zip;
-use Carbon\Carbon;
-use Exception;
 
 /**
- * Update manager
+ * Update manager.
  *
  * Handles the CMS install and update process.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class UpdateManager
@@ -75,7 +76,7 @@ class UpdateManager
     protected $secret;
 
     /**
-     * @var boolean If set to true, core updates will not be downloaded or extracted.
+     * @var bool If set to true, core updates will not be downloaded or extracted.
      */
     protected $disableCoreUpdates = false;
 
@@ -110,7 +111,7 @@ class UpdateManager
         /*
          * Ensure temp directory exists
          */
-        if (!File::isDirectory($this->tempDirectory)) {
+        if (! File::isDirectory($this->tempDirectory)) {
             File::makeDirectory($this->tempDirectory, 0777, true);
         }
     }
@@ -127,12 +128,12 @@ class UpdateManager
     }
 
     /**
-     * Creates the migration table and updates
+     * Creates the migration table and updates.
      * @return self
      */
     public function update()
     {
-        $firstUp = !Schema::hasTable($this->getMigrationTableName());
+        $firstUp = ! Schema::hasTable($this->getMigrationTableName());
         if ($firstUp) {
             $this->repository->createRepository();
             $this->note('Migration table created');
@@ -173,7 +174,7 @@ class UpdateManager
     /**
      * Checks for new updates and returns the amount of unapplied updates.
      * Only requests from the server at a set interval (retry timer).
-     * @param  boolean $force Ignore the retry timer.
+     * @param  bool $force Ignore the retry timer.
      * @return int            Number of unapplied updates.
      */
     public function check($force = false)
@@ -189,7 +190,7 @@ class UpdateManager
         /*
          * Retry period not passed, skipping.
          */
-        if (!$force
+        if (! $force
             && ($retryTimestamp = Parameter::get('system::update.retry'))
             && Carbon::createFromTimeStamp($retryTimestamp)->isFuture()
         ) {
@@ -199,8 +200,7 @@ class UpdateManager
         try {
             $result = $this->requestUpdateList();
             $newCount = array_get($result, 'update', 0);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $newCount = 0;
         }
 
@@ -215,7 +215,7 @@ class UpdateManager
 
     /**
      * Requests an update list used for checking for new updates.
-     * @param  boolean $force Request application and plugins hash list regardless of version.
+     * @param  bool $force Request application and plugins hash list regardless of version.
      * @return array
      */
     public function requestUpdateList($force = false)
@@ -238,7 +238,7 @@ class UpdateManager
             'plugins' => serialize($versions),
             'themes' => serialize($themes),
             'build' => $build,
-            'force' => $force
+            'force' => $force,
         ];
 
         $result = $this->requestServerData('core/update', $params);
@@ -267,11 +267,10 @@ class UpdateManager
              */
             if (
                 (isset($frozen[$code]) && $frozen[$code]) ||
-                (isset($updatable[$code]) && !$updatable[$code])
+                (isset($updatable[$code]) && ! $updatable[$code])
             ) {
                 $updateCount = max(0, --$updateCount);
-            }
-            else {
+            } else {
                 $plugins[$code] = $info;
             }
         }
@@ -283,7 +282,7 @@ class UpdateManager
         if ($this->themeManager) {
             $themes = [];
             foreach (array_get($result, 'themes', []) as $code => $info) {
-                if (!$this->themeManager->isInstalled($code)) {
+                if (! $this->themeManager->isInstalled($code)) {
                     $themes[$code] = $info;
                 }
             }
@@ -341,7 +340,7 @@ class UpdateManager
         $modules = Config::get('cms.loadModules', []);
 
         foreach ($modules as $module) {
-            $paths[] = $path = base_path() . '/modules/'.strtolower($module).'/database/migrations';
+            $paths[] = $path = base_path().'/modules/'.strtolower($module).'/database/migrations';
         }
 
         /*
@@ -399,13 +398,13 @@ class UpdateManager
     }
 
     /**
-     * Run migrations on a single module
+     * Run migrations on a single module.
      * @param string $module Module name
      * @return self
      */
     public function migrateModule($module)
     {
-        $this->migrator->run(base_path() . '/modules/'.strtolower($module).'/database/migrations');
+        $this->migrator->run(base_path().'/modules/'.strtolower($module).'/database/migrations');
 
         $this->note($module);
 
@@ -417,14 +416,14 @@ class UpdateManager
     }
 
     /**
-     * Run seeds on a module
+     * Run seeds on a module.
      * @param string $module Module name
      * @return self
      */
     public function seedModule($module)
     {
         $className = '\\'.$module.'\Database\Seeds\DatabaseSeeder';
-        if (!class_exists($className)) {
+        if (! class_exists($className)) {
             return;
         }
 
@@ -432,6 +431,7 @@ class UpdateManager
         $seeder->run();
 
         $this->note(sprintf('<info>Seeded %s</info> ', $module));
+
         return $this;
     }
 
@@ -453,7 +453,7 @@ class UpdateManager
     {
         $filePath = $this->getFilePath('core');
 
-        if (!Zip::extract($filePath, $this->baseDirectory)) {
+        if (! Zip::extract($filePath, $this->baseDirectory)) {
             throw new ApplicationException(Lang::get('system::lang.zip.extract_failed', ['file' => $filePath]));
         }
 
@@ -461,7 +461,7 @@ class UpdateManager
     }
 
     /**
-     * Sets the build number and hash
+     * Sets the build number and hash.
      * @param string $hash
      * @param string $build
      * @return void
@@ -469,7 +469,7 @@ class UpdateManager
     public function setBuild($build, $hash = null)
     {
         $params = [
-            'system::core.build' => $build
+            'system::core.build' => $build,
         ];
 
         if ($hash) {
@@ -504,7 +504,7 @@ class UpdateManager
     }
 
     /**
-     * Runs update on a single plugin
+     * Runs update on a single plugin.
      * @param string $name Plugin name.
      * @return self
      */
@@ -513,8 +513,9 @@ class UpdateManager
         /*
          * Update the plugin database and version
          */
-        if (!($plugin = $this->pluginManager->findByIdentifier($name))) {
-            $this->note('<error>Unable to find:</error> ' . $name);
+        if (! ($plugin = $this->pluginManager->findByIdentifier($name))) {
+            $this->note('<error>Unable to find:</error> '.$name);
+
             return;
         }
 
@@ -523,7 +524,6 @@ class UpdateManager
         $this->versionManager->resetNotes()->setNotesOutput($this->notesOutput);
 
         if ($this->versionManager->updatePlugin($plugin) !== false) {
-
             foreach ($this->versionManager->getNotes() as $note) {
                 $this->note($note);
             }
@@ -533,7 +533,7 @@ class UpdateManager
     }
 
     /**
-     * Removes an existing plugin
+     * Removes an existing plugin.
      * @param string $name Plugin name.
      * @return self
      */
@@ -542,19 +542,21 @@ class UpdateManager
         /*
          * Remove the plugin database and version
          */
-        if (!($plugin = $this->pluginManager->findByIdentifier($name))
+        if (! ($plugin = $this->pluginManager->findByIdentifier($name))
             && $this->versionManager->purgePlugin($name)
         ) {
-            $this->note('<info>Purged from database:</info> ' . $name);
+            $this->note('<info>Purged from database:</info> '.$name);
+
             return $this;
         }
 
         if ($this->versionManager->removePlugin($plugin)) {
-            $this->note('<info>Rolled back:</info> ' . $name);
+            $this->note('<info>Rolled back:</info> '.$name);
+
             return $this;
         }
 
-        $this->note('<error>Unable to find:</error> ' . $name);
+        $this->note('<error>Unable to find:</error> '.$name);
 
         return $this;
     }
@@ -563,15 +565,15 @@ class UpdateManager
      * Downloads a plugin from the update server.
      * @param string $name Plugin name.
      * @param string $hash Expected file hash.
-     * @param boolean $installation Indicates whether this is a plugin installation request.
+     * @param bool $installation Indicates whether this is a plugin installation request.
      * @return self
      */
     public function downloadPlugin($name, $hash, $installation = false)
     {
-        $fileCode = $name . $hash;
+        $fileCode = $name.$hash;
         $this->requestServerFile('plugin/get', $fileCode, $hash, [
             'name' => $name,
-            'installation' => $installation ? 1 : 0
+            'installation' => $installation ? 1 : 0,
         ]);
     }
 
@@ -580,10 +582,10 @@ class UpdateManager
      */
     public function extractPlugin($name, $hash)
     {
-        $fileCode = $name . $hash;
+        $fileCode = $name.$hash;
         $filePath = $this->getFilePath($fileCode);
 
-        if (!Zip::extract($filePath, $this->baseDirectory . '/plugins/')) {
+        if (! Zip::extract($filePath, $this->baseDirectory.'/plugins/')) {
             throw new ApplicationException(Lang::get('system::lang.zip.extract_failed', ['file' => $filePath]));
         }
 
@@ -612,7 +614,7 @@ class UpdateManager
      */
     public function downloadTheme($name, $hash)
     {
-        $fileCode = $name . $hash;
+        $fileCode = $name.$hash;
 
         $this->requestServerFile('theme/get', $fileCode, $hash, ['name' => $name]);
     }
@@ -622,10 +624,10 @@ class UpdateManager
      */
     public function extractTheme($name, $hash)
     {
-        $fileCode = $name . $hash;
+        $fileCode = $name.$hash;
         $filePath = $this->getFilePath($fileCode);
 
-        if (!Zip::extract($filePath, $this->baseDirectory . '/themes/')) {
+        if (! Zip::extract($filePath, $this->baseDirectory.'/themes/')) {
             throw new ApplicationException(Lang::get('system::lang.zip.extract_failed', ['file' => $filePath]));
         }
 
@@ -680,7 +682,9 @@ class UpdateManager
         $requestedDetails = array_intersect_key($this->productCache[$type], array_flip($codes));
 
         foreach ($requestedDetails as $detail) {
-            if ($detail === -1) continue;
+            if ($detail === -1) {
+                continue;
+            }
             $result[] = $detail;
         }
 
@@ -722,8 +726,7 @@ class UpdateManager
 
         if (Cache::has($cacheKey)) {
             $this->productCache = @unserialize(@base64_decode(Cache::get($cacheKey))) ?: $defaultCache;
-        }
-        else {
+        } else {
             $this->productCache = $defaultCache;
         }
     }
@@ -773,8 +776,7 @@ class UpdateManager
 
         try {
             $resultData = json_decode($result->body, true);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             throw new ApplicationException(Lang::get('system::lang.server.response_invalid'));
         }
 
@@ -794,8 +796,7 @@ class UpdateManager
     {
         if ($this->notesOutput !== null) {
             $this->notesOutput->writeln($message);
-        }
-        else {
+        } else {
             $this->notes[] = $message;
         }
 
@@ -868,12 +869,11 @@ class UpdateManager
 
         try {
             $resultData = @json_decode($result->body, true);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             throw new ApplicationException(Lang::get('system::lang.server.response_invalid'));
         }
 
-        if ($resultData === false || (is_string($resultData) && !strlen($resultData))) {
+        if ($resultData === false || (is_string($resultData) && ! strlen($resultData))) {
             throw new ApplicationException(Lang::get('system::lang.server.response_invalid'));
         }
 
@@ -903,19 +903,21 @@ class UpdateManager
 
         if (md5_file($filePath) != $expectedHash) {
             @unlink($filePath);
+
             throw new ApplicationException(Lang::get('system::lang.server.file_corrupt'));
         }
     }
 
     /**
-     * Calculates a file path for a file code
+     * Calculates a file path for a file code.
      * @param  string $fileCode A unique file code
      * @return string           Full path on the disk
      */
     protected function getFilePath($fileCode)
     {
-        $name = md5($fileCode) . '.arc';
-        return $this->tempDirectory . '/' . $name;
+        $name = md5($fileCode).'.arc';
+
+        return $this->tempDirectory.'/'.$name;
     }
 
     /**
@@ -930,7 +932,7 @@ class UpdateManager
     }
 
     /**
-     * Create a complete gateway server URL from supplied URI
+     * Create a complete gateway server URL from supplied URI.
      * @param  string $uri URI
      * @return string      URL
      */
@@ -941,7 +943,7 @@ class UpdateManager
             $gateway .= '/';
         }
 
-        return $gateway . $uri;
+        return $gateway.$uri;
     }
 
     /**
@@ -958,7 +960,7 @@ class UpdateManager
         $postData['server'] = base64_encode(serialize([
             'php'   => PHP_VERSION,
             'url'   => Url::to('/'),
-            'since' => PluginVersion::orderBy('created_at')->value('created_at')
+            'since' => PluginVersion::orderBy('created_at')->value('created_at'),
         ]));
 
         if ($projectId = Parameter::get('system::project.id')) {
@@ -984,13 +986,14 @@ class UpdateManager
     }
 
     /**
-     * Create a nonce based on millisecond time
+     * Create a nonce based on millisecond time.
      * @return int
      */
     protected function createNonce()
     {
         $mt = explode(' ', microtime());
-        return $mt[1] . substr($mt[0], 2, 6);
+
+        return $mt[1].substr($mt[0], 2, 6);
     }
 
     /**

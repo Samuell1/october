@@ -1,21 +1,21 @@
-<?php namespace Backend\Controllers;
+<?php
+
+namespace Backend\Controllers;
 
 use Lang;
 use Flash;
 use Backend;
 use Redirect;
-use BackendMenu;
 use BackendAuth;
+use BackendMenu;
 use Backend\Models\UserGroup;
 use Backend\Classes\Controller;
 use System\Classes\SettingsManager;
 
 /**
- * Backend user controller
+ * Backend user controller.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
- *
  */
 class Users extends Controller
 {
@@ -24,7 +24,7 @@ class Users extends Controller
      */
     public $implement = [
         \Backend\Behaviors\FormController::class,
-        \Backend\Behaviors\ListController::class
+        \Backend\Behaviors\ListController::class,
     ];
 
     /**
@@ -63,27 +63,27 @@ class Users extends Controller
     }
 
     /**
-     * Extends the list query to hide superusers if the current user is not a superuser themselves
+     * Extends the list query to hide superusers if the current user is not a superuser themselves.
      */
     public function listExtendQuery($query)
     {
-        if (!$this->user->isSuperUser()) {
+        if (! $this->user->isSuperUser()) {
             $query->where('is_superuser', false);
         }
     }
 
     /**
-     * Prevents non-superusers from even seeing the is_superuser filter
+     * Prevents non-superusers from even seeing the is_superuser filter.
      */
     public function listFilterExtendScopes($filterWidget)
     {
-        if (!$this->user->isSuperUser()) {
+        if (! $this->user->isSuperUser()) {
             $filterWidget->removeScope('is_superuser');
         }
     }
 
     /**
-     * Strike out deleted records
+     * Strike out deleted records.
      */
     public function listInjectRowClass($record, $definition = null)
     {
@@ -93,11 +93,11 @@ class Users extends Controller
     }
 
     /**
-     * Extends the form query to prevent non-superusers from accessing superusers at all
+     * Extends the form query to prevent non-superusers from accessing superusers at all.
      */
     public function formExtendQuery($query)
     {
-        if (!$this->user->isSuperUser()) {
+        if (! $this->user->isSuperUser()) {
             $query->where('is_superuser', false);
         }
 
@@ -106,7 +106,7 @@ class Users extends Controller
     }
 
     /**
-     * Update controller
+     * Update controller.
      */
     public function update($recordId, $context = null)
     {
@@ -119,7 +119,7 @@ class Users extends Controller
     }
 
     /**
-     * Handle restoring users
+     * Handle restoring users.
      */
     public function update_onRestore($recordId)
     {
@@ -131,11 +131,11 @@ class Users extends Controller
     }
 
     /**
-     * Impersonate this user
+     * Impersonate this user.
      */
     public function update_onImpersonateUser($recordId)
     {
-        if (!$this->user->hasAccess('backend.impersonate_users')) {
+        if (! $this->user->hasAccess('backend.impersonate_users')) {
             return Response::make(Lang::get('backend::lang.page.access_denied.label'), 403);
         }
 
@@ -149,18 +149,19 @@ class Users extends Controller
     }
 
     /**
-     * My Settings controller
+     * My Settings controller.
      */
     public function myaccount()
     {
         SettingsManager::setContext('October.Backend', 'myaccount');
 
         $this->pageTitle = 'backend::lang.myaccount.menu_label';
+
         return $this->update($this->user->id, 'myaccount');
     }
 
     /**
-     * Proxy update onSave event
+     * Proxy update onSave event.
      */
     public function myaccount_onSave()
     {
@@ -188,7 +189,7 @@ class Users extends Controller
             return;
         }
 
-        if (!$this->user->isSuperUser()) {
+        if (! $this->user->isSuperUser()) {
             $form->removeField('is_superuser');
         }
 
@@ -200,7 +201,7 @@ class Users extends Controller
         /*
          * Mark default groups
          */
-        if (!$form->model->exists) {
+        if (! $form->model->exists) {
             $defaultGroupIds = UserGroup::where('is_new_user_default', true)->lists('id');
 
             $groupField = $form->getField('groups');
@@ -223,9 +224,9 @@ class Users extends Controller
                 'trigger' => [
                     'action' => 'disable',
                     'field' => 'is_superuser',
-                    'condition' => 'checked'
-                ]
-            ]
+                    'condition' => 'checked',
+                ],
+            ],
         ];
     }
 }

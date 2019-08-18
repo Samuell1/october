@@ -1,19 +1,20 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use File;
+use Exception;
 use Cms\Classes\Theme;
 use Cms\Classes\ThemeManager;
-use System\Classes\UpdateManager;
 use Illuminate\Console\Command;
+use System\Classes\UpdateManager;
 use Symfony\Component\Console\Input\InputArgument;
-use Exception;
 
 /**
  * Console command to install a new theme.
  *
  * This adds a new theme by requesting it from the October marketplace.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class ThemeInstall extends Command
@@ -44,7 +45,7 @@ class ThemeInstall extends Command
         }
 
         if ($argDirName) {
-            if (!preg_match('/^[a-z0-9\_\-]+$/i', $argDirName)) {
+            if (! preg_match('/^[a-z0-9\_\-]+$/i', $argDirName)) {
                 return $this->error('Invalid destination directory name.');
             }
 
@@ -77,7 +78,7 @@ class ThemeInstall extends Command
                 $themeDetails['product_url']
             ));
 
-            if (!$this->confirm('Do you wish to continue? [Y|n]', true)) {
+            if (! $this->confirm('Do you wish to continue? [Y|n]', true)) {
                 return;
             }
 
@@ -106,8 +107,7 @@ class ThemeInstall extends Command
             }
 
             $this->info(sprintf('The theme %s has been installed. (now %s)', $themeDetails['code'], $dirName));
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->error($ex->getMessage());
         }
     }

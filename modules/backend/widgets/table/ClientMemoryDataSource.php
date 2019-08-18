@@ -1,4 +1,6 @@
-<?php namespace Backend\Widgets\Table;
+<?php
+
+namespace Backend\Widgets\Table;
 
 /**
  * The client-memory data source for the Table widget.
@@ -24,7 +26,7 @@ class ClientMemoryDataSource extends DataSourceBase
 
     /**
      * Returns a total number of records in the data source.
-     * @return integer
+     * @return int
      */
     public function getCount()
     {
@@ -41,8 +43,8 @@ class ClientMemoryDataSource extends DataSourceBase
 
     /**
      * Return records from the data source.
-     * @param integer $offset Specifies the offset of the first record to return, zero-based.
-     * @param integer $count Specifies the number of records to return.
+     * @param int $offset Specifies the offset of the first record to return, zero-based.
+     * @param int $count Specifies the number of records to return.
      * @return array Returns the records.
      * If there are no more records, returns an empty array.
      */

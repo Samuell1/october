@@ -2,7 +2,6 @@
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
-
     /**
      * Creates the application.
      *
@@ -29,6 +28,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $class = new ReflectionClass($className);
         $method = $class->getMethod($name);
         $method->setAccessible(true);
+
         return $method->invokeArgs($object, $params);
     }
 
@@ -38,6 +38,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $class = new ReflectionClass($className);
         $property = $class->getProperty($name);
         $property->setAccessible(true);
+
         return $property->getValue($object);
     }
 
@@ -47,6 +48,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $class = new ReflectionClass($className);
         $property = $class->getProperty($name);
         $property->setAccessible(true);
+
         return $property->setValue($object, $value);
     }
 }

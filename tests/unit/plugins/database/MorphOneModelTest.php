@@ -1,8 +1,8 @@
 <?php
 
-use Database\Tester\Models\Author;
-use Database\Tester\Models\Post;
 use Database\Tester\Models\Meta;
+use Database\Tester\Models\Post;
+use Database\Tester\Models\Author;
 
 class MorphOneModelTest extends PluginTestCase
 {
@@ -21,7 +21,7 @@ class MorphOneModelTest extends PluginTestCase
     public function testSetRelationValue()
     {
         Model::unguard();
-        $post = Post::create(['title' => "First post", 'description' => "Yay!!"]);
+        $post = Post::create(['title' => 'First post', 'description' => 'Yay!!']);
         $author = Author::create(['name' => 'Stevie', 'email' => 'stevie@email.tld']);
         $meta1 = Meta::create([
             'meta_title' => 'Question',

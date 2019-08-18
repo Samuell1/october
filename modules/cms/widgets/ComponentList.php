@@ -1,17 +1,18 @@
-<?php namespace Cms\Widgets;
+<?php
+
+namespace Cms\Widgets;
 
 use App;
 use Str;
 use Lang;
 use Input;
-use System\Classes\PluginManager;
-use Cms\Classes\ComponentHelpers;
 use Backend\Classes\WidgetBase;
+use Cms\Classes\ComponentHelpers;
+use System\Classes\PluginManager;
 
 /**
  * Component list widget.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class ComponentList extends WidgetBase
@@ -37,7 +38,7 @@ class ComponentList extends WidgetBase
     public function render()
     {
         return $this->makePartial('body', [
-            'data' => $this->getData()
+            'data' => $this->getData(),
         ]);
     }
 
@@ -72,7 +73,7 @@ class ComponentList extends WidgetBase
         $items = [];
         foreach ($plugins as $plugin) {
             $components = $this->getPluginComponents($plugin);
-            if (!is_array($components)) {
+            if (! is_array($components)) {
                 continue;
             }
 
@@ -97,7 +98,7 @@ class ComponentList extends WidgetBase
                 $componentDetails = $component->componentDetails();
                 $component->alias = '--alias--';
 
-                $item = (object)[
+                $item = (object) [
                     'title'          => ComponentHelpers::getComponentName($component),
                     'description'    => ComponentHelpers::getComponentDescription($component),
                     'plugin'         => $pluginName,
@@ -108,20 +109,20 @@ class ComponentList extends WidgetBase
                     'alias'          => $alias,
                     'name'           => $componentInfo->duplicateAlias
                         ? $componentInfo->className
-                        : $componentInfo->alias
+                        : $componentInfo->alias,
                 ];
 
-                if ($searchWords && !$this->itemMatchesSearch($searchWords, $item)) {
+                if ($searchWords && ! $this->itemMatchesSearch($searchWords, $item)) {
                     continue;
                 }
 
-                if (!array_key_exists($pluginClass, $items)) {
-                    $group = (object)[
+                if (! array_key_exists($pluginClass, $items)) {
+                    $group = (object) [
                         'title'       => $pluginName,
                         'description' => $pluginDescription,
                         'pluginClass' => $pluginClass,
                         'icon'        => $pluginIcon,
-                        'items'       => []
+                        'items'       => [],
                     ];
 
                     $items[$pluginClass] = $group;
@@ -154,7 +155,7 @@ class ComponentList extends WidgetBase
         $componentList = [];
         foreach ($plugins as $plugin) {
             $components = $plugin->registerComponents();
-            if (!is_array($components)) {
+            if (! is_array($components)) {
                 continue;
             }
 
@@ -167,11 +168,11 @@ class ComponentList extends WidgetBase
                     }
                 }
 
-                $componentList[] = (object)[
+                $componentList[] = (object) [
                     'className'      => $className,
                     'alias'          => $alias,
                     'duplicateAlias' => $duplicateAlias,
-                    'pluginClass'    => get_class($plugin)
+                    'pluginClass'    => get_class($plugin),
                 ];
             }
         }
@@ -206,7 +207,7 @@ class ComponentList extends WidgetBase
     protected function updateList()
     {
         return ['#'.$this->getId('component-list') => $this->makePartial('items', [
-            'items' => $this->getData()]
+            'items' => $this->getData(), ]
         )];
     }
 
@@ -214,11 +215,11 @@ class ComponentList extends WidgetBase
     {
         foreach ($words as $word) {
             $word = trim($word);
-            if (!strlen($word)) {
+            if (! strlen($word)) {
                 continue;
             }
 
-            if (!$this->itemContainsWord($word, $item)) {
+            if (! $this->itemContainsWord($word, $item)) {
                 return false;
             }
         }

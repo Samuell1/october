@@ -1,14 +1,15 @@
-<?php namespace Backend\FormWidgets;
+<?php
+
+namespace Backend\FormWidgets;
 
 use Lang;
-use Backend\Classes\FormWidgetBase;
 use ApplicationException;
+use Backend\Classes\FormWidgetBase;
 
 /**
  * Color picker
  * Renders a color picker field.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class ColorPicker extends FormWidgetBase
@@ -48,12 +49,12 @@ class ColorPicker extends FormWidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'colorpicker';
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -65,16 +66,17 @@ class ColorPicker extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
         $this->prepareVars();
+
         return $this->makePartial('colorpicker');
     }
 
     /**
-     * Prepares the list data
+     * Prepares the list data.
      */
     public function prepareVars()
     {
@@ -83,7 +85,7 @@ class ColorPicker extends FormWidgetBase
         $this->vars['availableColors'] = $availableColors = $this->getAvailableColors();
         $this->vars['allowEmpty'] = $this->allowEmpty;
         $this->vars['showAlpha'] = $this->showAlpha;
-        $this->vars['isCustomColor'] = !in_array($value, $availableColors);
+        $this->vars['isCustomColor'] = ! in_array($value, $availableColors);
     }
 
     /**
@@ -96,8 +98,7 @@ class ColorPicker extends FormWidgetBase
         $availableColors = $this->availableColors;
         if (is_array($availableColors)) {
             return $availableColors;
-        }
-        elseif (is_string($availableColors) && !empty($availableColors)) {
+        } elseif (is_string($availableColors) && ! empty($availableColors)) {
             if ($this->model->methodExists($availableColors)) {
                 return $this->availableColors = $this->model->{$availableColors}(
                     $this->formField->fieldName,
@@ -108,14 +109,14 @@ class ColorPicker extends FormWidgetBase
                 throw new ApplicationException(Lang::get('backend::lang.field.colors_method_not_exists', [
                     'model'  => get_class($this->model),
                     'method' => $availableColors,
-                    'field'  => $this->formField->fieldName
+                    'field'  => $this->formField->fieldName,
                 ]));
             }
         }
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function loadAssets()
     {
@@ -126,7 +127,7 @@ class ColorPicker extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getSaveValue($value)
     {

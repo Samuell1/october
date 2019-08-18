@@ -1,7 +1,9 @@
-<?php namespace Backend\FormWidgets;
+<?php
 
-use System\Classes\MediaLibrary;
+namespace Backend\FormWidgets;
+
 use Backend\Classes\FormField;
+use System\Classes\MediaLibrary;
 use Backend\Classes\FormWidgetBase;
 
 /**
@@ -13,7 +15,6 @@ use Backend\Classes\FormWidgetBase;
  *        type: media
  *        prompt: Click the %s button to find a user
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class MediaFinder extends FormWidgetBase
@@ -47,12 +48,12 @@ class MediaFinder extends FormWidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'media';
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -60,7 +61,7 @@ class MediaFinder extends FormWidgetBase
             'mode',
             'prompt',
             'imageWidth',
-            'imageHeight'
+            'imageHeight',
         ]);
 
         if ($this->formField->disabled) {
@@ -69,7 +70,7 @@ class MediaFinder extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
@@ -79,7 +80,7 @@ class MediaFinder extends FormWidgetBase
     }
 
     /**
-     * Prepares the list data
+     * Prepares the list data.
      */
     public function prepareVars()
     {
@@ -97,7 +98,7 @@ class MediaFinder extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getSaveValue($value)
     {
@@ -109,7 +110,7 @@ class MediaFinder extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function loadAssets()
     {

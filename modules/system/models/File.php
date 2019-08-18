@@ -1,16 +1,17 @@
-<?php namespace System\Models;
+<?php
+
+namespace System\Models;
 
 use Url;
 use Config;
-use File as FileHelper;
 use Storage;
-use October\Rain\Database\Attach\File as FileBase;
+use File as FileHelper;
 use Backend\Controllers\Files;
+use October\Rain\Database\Attach\File as FileBase;
 
 /**
- * File attachment model
+ * File attachment model.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class File extends FileBase
@@ -21,12 +22,12 @@ class File extends FileBase
     protected $table = 'system_files';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getThumb($width, $height, $options = [])
     {
         $url = '';
-        if (!$this->isPublic() && class_exists(Files::class)) {
+        if (! $this->isPublic() && class_exists(Files::class)) {
             // Ensure that the thumb exists first
             parent::getThumb($width, $height, $options);
 
@@ -40,12 +41,12 @@ class File extends FileBase
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPath()
     {
         $url = '';
-        if (!$this->isPublic() && class_exists(Files::class)) {
+        if (! $this->isPublic() && class_exists(Files::class)) {
             $url = Files::getDownloadUrl($this);
         } else {
             $url = parent::getPath();
@@ -71,12 +72,11 @@ class File extends FileBase
 
         if ($this->isPublic()) {
             $uploadsPath .= '/public';
-        }
-        else {
+        } else {
             $uploadsPath .= '/protected';
         }
 
-        return Url::asset($uploadsPath) . '/';
+        return Url::asset($uploadsPath).'/';
     }
 
     /**
@@ -87,10 +87,10 @@ class File extends FileBase
         $uploadsFolder = Config::get('cms.storage.uploads.folder');
 
         if ($this->isPublic()) {
-            return $uploadsFolder . '/public/';
+            return $uploadsFolder.'/public/';
         }
 
-        return $uploadsFolder . '/protected/';
+        return $uploadsFolder.'/protected/';
     }
 
     /**
@@ -103,12 +103,13 @@ class File extends FileBase
     }
 
     /**
-     * Copy the local file to Storage
+     * Copy the local file to Storage.
      * @return bool True on success, false on failure.
      */
     protected function copyLocalToStorage($localPath, $storagePath)
     {
         $disk = Storage::disk(Config::get('cms.storage.uploads.disk'));
+
         return $disk->put($storagePath, FileHelper::get($localPath), $this->isPublic() ? 'public' : null);
     }
 }

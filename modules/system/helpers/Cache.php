@@ -1,9 +1,11 @@
-<?php namespace System\Helpers;
+<?php
+
+namespace System\Helpers;
 
 use App;
 use File;
-use Cache as CacheFacade;
 use Config;
+use Cache as CacheFacade;
 
 class Cache
 {
@@ -24,7 +26,7 @@ class Cache
         $instance->clearCombiner();
         $instance->clearCache();
 
-        if (!Config::get('cms.twigNoCache')) {
+        if (! Config::get('cms.twigNoCache')) {
             $instance->clearTwig();
         }
 

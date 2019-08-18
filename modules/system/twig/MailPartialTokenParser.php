@@ -1,9 +1,11 @@
-<?php namespace System\Twig;
+<?php
 
-use Twig\Node\Node as TwigNode;
+namespace System\Twig;
+
 use Twig\Token as TwigToken;
-use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
+use Twig\Node\Node as TwigNode;
 use Twig\Error\SyntaxError as TwigErrorSyntax;
+use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
 
 /**
  * Parser for the `{% partial %}` Twig tag.
@@ -14,7 +16,6 @@ use Twig\Error\SyntaxError as TwigErrorSyntax;
  *
  *     {% partial "sidebar" name='John', year=2013 %}
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class MailPartialTokenParser extends TwigTokenParser
@@ -37,12 +38,12 @@ class MailPartialTokenParser extends TwigTokenParser
         $body = null;
 
         $end = false;
-        while (!$end) {
+        while (! $end) {
             $current = $stream->next();
 
             if (
                 $current->test(TwigToken::NAME_TYPE, 'body') &&
-                !$stream->test(TwigToken::OPERATOR_TYPE, '=')
+                ! $stream->test(TwigToken::OPERATOR_TYPE, '=')
             ) {
                 $hasBody = true;
                 $current = $stream->next();
@@ -53,10 +54,12 @@ class MailPartialTokenParser extends TwigTokenParser
                     $paramNames[] = $current->getValue();
                     $stream->expect(TwigToken::OPERATOR_TYPE, '=');
                     $nodes[] = $this->parser->getExpressionParser()->parseExpression();
+
                     break;
 
                 case TwigToken::BLOCK_END_TYPE:
                     $end = true;
+
                     break;
 
                 default:
@@ -65,6 +68,7 @@ class MailPartialTokenParser extends TwigTokenParser
                         $stream->getCurrent()->getLine(),
                         $stream->getSourceContext()
                     );
+
                     break;
             }
         }

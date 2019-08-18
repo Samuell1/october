@@ -1,17 +1,18 @@
-<?php namespace System\Controllers;
+<?php
+
+namespace System\Controllers;
 
 use Mail;
 use Flash;
+use Exception;
 use BackendMenu;
 use Backend\Classes\Controller;
 use System\Models\MailTemplate;
 use System\Classes\SettingsManager;
-use Exception;
 
 /**
- * Mail templates controller
+ * Mail templates controller.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class MailTemplates extends Controller
@@ -21,7 +22,7 @@ class MailTemplates extends Controller
      */
     public $implement = [
         \Backend\Behaviors\FormController::class,
-        \Backend\Behaviors\ListController::class
+        \Backend\Behaviors\ListController::class,
     ];
 
     /**
@@ -35,7 +36,7 @@ class MailTemplates extends Controller
     public $listConfig = [
         'templates' => 'config_templates_list.yaml',
         'layouts' => 'config_layouts_list.yaml',
-        'partials' => 'config_partials_list.yaml'
+        'partials' => 'config_partials_list.yaml',
     ];
 
     /**
@@ -77,8 +78,7 @@ class MailTemplates extends Controller
             Mail::sendTo([$user->email => $user->full_name], $model->code);
 
             Flash::success(trans('system::lang.mail_templates.test_success'));
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             Flash::error($ex->getMessage());
         }
     }

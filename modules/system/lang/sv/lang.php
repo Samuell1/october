@@ -6,10 +6,10 @@ return [
         'tagline' => 'Getting back to basics',
     ],
     'directory' => [
-        'create_fail' => "Kunde inte skapa mapp: :name",
+        'create_fail' => 'Kunde inte skapa mapp: :name',
     ],
     'file' => [
-        'create_fail' => "Kunde inte skapa fil: :name",
+        'create_fail' => 'Kunde inte skapa fil: :name',
     ],
     'combiner' => [
         'not_found' => "Kombinationsfilen ':name' kunde ej hittas",
@@ -29,15 +29,15 @@ return [
             'social' => 'Social',
             'events' => 'Händelser',
             'customers' => 'Kunder',
-            'my_settings' => 'Mina inställningar'
-        ]
+            'my_settings' => 'Mina inställningar',
+        ],
     ],
     'theme' => [
         'label' => 'Tema',
         'unnamed' => 'Namnlöst tema',
         'name' => [
             'label' => 'Temanamn',
-            'help' => 'Namnge temat med en unik kod. Till exempel, RainLab.Vanilla'
+            'help' => 'Namnge temat med en unik kod. Till exempel, RainLab.Vanilla',
         ],
     ],
     'themes' => [
@@ -46,7 +46,7 @@ return [
         'installed' => 'Installerade teman',
         'no_themes' => 'Det finns inga teman installerade från marknadsplatsen.',
         'recommended' => 'Rekommenderat',
-        'remove_confirm' => 'Är du säker på att du vill radera det här temat?'
+        'remove_confirm' => 'Är du säker på att du vill radera det här temat?',
     ],
     'plugin' => [
         'label' => 'Tillägg',
@@ -54,7 +54,7 @@ return [
         'name' => [
             'label' => 'Tilläggsnamn',
             'help' => 'Namnge tillägget efter dess unika kod. Exempelvis RainLab.Blog',
-        ]
+        ],
         ],
     'plugins' => [
         'manage' => 'Hantera tillägg',
@@ -80,7 +80,7 @@ return [
         'disable_confirm' => 'Är du säker?',
         'disable_success' => 'Tilläggen avaktiverades.',
         'enable_success' => 'Aktiverade tilläggen.',
-        'unknown_plugin' => 'Tillägget har raderats.'
+        'unknown_plugin' => 'Tillägget har raderats.',
     ],
     'project' => [
         'name' => 'Projekt',
@@ -102,7 +102,7 @@ return [
         'missing_model' => 'Inställningssidan saknar en modell-definition',
         'update_success' => 'Inställningar för :name har uppdaterats',
         'return' => 'Återgå till systeminställningar',
-        'search' => 'Sök'
+        'search' => 'Sök',
     ],
     'mail' => [
         'log_file' => 'Loggfiler',
@@ -137,7 +137,7 @@ return [
         'mandrill_secret' => 'Mandrill hemlighet',
         'mandrill_secret_comment' => 'Ange din API-nyckel.',
         'drivers_hint_header' => 'Drivrutiner är inte installerade',
-        'drivers_hint_content' => 'Den här e-postmetoden kräver att tillägget ":plugin" är installerat innan du kan skicka e-post.'
+        'drivers_hint_content' => 'Den här e-postmetoden kräver att tillägget ":plugin" är installerat innan du kan skicka e-post.',
     ],
     'mail_templates' => [
         'menu_label' => 'E-postmall',
@@ -213,11 +213,11 @@ return [
         'force_label' => 'Tvinga uppdatering',
         'found' => [
             'label' => 'Hittade nya uppdateringar!',
-            'help' => 'Klicka på Uppdatera systemet för att påbörja processen.'
+            'help' => 'Klicka på Uppdatera systemet för att påbörja processen.',
         ],
         'none' => [
             'label' => 'Inga uppdateringar',
-            'help' => 'Inga nya uppdateringar hittades.'
+            'help' => 'Inga nya uppdateringar hittades.',
     ],
         'important_action' => [
             'empty' => 'Välj åtgärd',
@@ -267,7 +267,7 @@ return [
         'id_label' => 'Händelse-ID',
         'created_at' => 'Datum och tid',
         'message' => 'Meddelande',
-        'level' => 'Nivå'
+        'level' => 'Nivå',
     ],
     'request_log' => [
         'hint' => 'Denna loggen visar en lista med förfrågningar från webbläsare som kan kräva uppmärksamhet. Till exempel, om en besökare öppnar en CMS sida som inte kan hittas, så skapas en post med statuskoden 404.',
@@ -282,7 +282,7 @@ return [
         'count' => 'Räknare',
         'referer' => 'Hänvisning',
         'url' => 'URL',
-        'status_code' => 'Status'
+        'status_code' => 'Status',
     ],
     'permissions' => [
         'name' => 'System',

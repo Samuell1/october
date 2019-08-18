@@ -1,4 +1,6 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use ArrayAccess;
 use October\Rain\Extension\Extendable;
@@ -6,7 +8,6 @@ use October\Rain\Extension\Extendable;
 /**
  * Parent class for PHP classes created for layout and page code sections.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class CodeBase extends Extendable implements ArrayAccess
@@ -66,7 +67,7 @@ class CodeBase extends Extendable implements ArrayAccess
     }
 
     /**
-     * ArrayAccess implementation
+     * ArrayAccess implementation.
      */
     public function offsetSet($offset, $value)
     {
@@ -74,7 +75,7 @@ class CodeBase extends Extendable implements ArrayAccess
     }
 
     /**
-     * ArrayAccess implementation
+     * ArrayAccess implementation.
      */
     public function offsetExists($offset)
     {
@@ -82,7 +83,7 @@ class CodeBase extends Extendable implements ArrayAccess
     }
 
     /**
-     * ArrayAccess implementation
+     * ArrayAccess implementation.
      */
     public function offsetUnset($offset)
     {
@@ -90,7 +91,7 @@ class CodeBase extends Extendable implements ArrayAccess
     }
 
     /**
-     * ArrayAccess implementation
+     * ArrayAccess implementation.
      */
     public function offsetGet($offset)
     {
@@ -116,7 +117,7 @@ class CodeBase extends Extendable implements ArrayAccess
      * This object is referenced as $this->page in Cms\Classes\ComponentBase,
      * so to avoid $this->page->page this method will proxy there. This is also
      * used as a helper for accessing controller variables/components easier
-     * in the page code, eg. $this->foo instead of $this['foo']
+     * in the page code, eg. $this->foo instead of $this['foo'].
      * @param  string  $name
      * @return void
      */
@@ -133,8 +134,6 @@ class CodeBase extends Extendable implements ArrayAccess
         if (array_key_exists($name, $this->controller->vars)) {
             return $this[$name];
         }
-
-        return null;
     }
 
     /**

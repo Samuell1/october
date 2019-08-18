@@ -1,4 +1,6 @@
-<?php namespace Cms\Twig;
+<?php
+
+namespace Cms\Twig;
 
 use Twig\Token as TwigToken;
 use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
@@ -8,7 +10,6 @@ use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
  *
  *     {% framework %}
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class FrameworkTokenParser extends TwigTokenParser
@@ -30,6 +31,7 @@ class FrameworkTokenParser extends TwigTokenParser
         }
 
         $stream->expect(TwigToken::BLOCK_END_TYPE);
+
         return new FrameworkNode($name, $lineno, $this->getTag());
     }
 

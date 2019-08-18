@@ -1,13 +1,14 @@
-<?php namespace Backend\Classes;
+<?php
+
+namespace Backend\Classes;
 
 use October\Rain\Database\Model;
 use October\Rain\Html\Helper as HtmlHelper;
 
 /**
  * List Columns definition
- * A translation of the list column configuration
+ * A translation of the list column configuration.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class ListColumn
@@ -120,13 +121,14 @@ class ListColumn
     /**
      * Specifies a list column rendering mode. Supported modes are:
      * - text - text column, aligned left
-     * - number - numeric column, aligned right
+     * - number - numeric column, aligned right.
      * @param string $type Specifies a render mode as described above
      */
     public function displayAs($type, $config)
     {
         $this->type = strtolower($type) ?: $this->type;
         $this->config = $this->evalConfig($config);
+
         return $this;
     }
 
@@ -216,7 +218,7 @@ class ListColumn
      */
     public function getAlignClass()
     {
-        return $this->align ? 'list-cell-align-' . $this->align : '';
+        return $this->align ? 'list-cell-align-'.$this->align : '';
     }
 
     /**
@@ -229,6 +231,7 @@ class ListColumn
     public function getValueFromData($data, $default = null)
     {
         $columnName = $this->valueFrom ?: $this->columnName;
+
         return $this->getColumnNameFromData($columnName, $data, $default);
     }
 
@@ -255,11 +258,10 @@ class ListColumn
         foreach ($keyParts as $key) {
             if ($result instanceof Model && $result->hasRelation($key)) {
                 $result = $result->{$key};
-            }
-            else {
+            } else {
                 if (is_array($result) && array_key_exists($key, $result)) {
                     $result = $result[$key];
-                } elseif (!isset($result->{$key})) {
+                } elseif (! isset($result->{$key})) {
                     return $default;
                 } else {
                     $result = $result->{$key};

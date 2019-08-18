@@ -1,19 +1,20 @@
-<?php namespace Backend\Models;
+<?php
+
+namespace Backend\Models;
 
 use App;
 use Lang;
 use Model;
 use Config;
 use Session;
-use BackendAuth;
-use DirectoryIterator;
 use DateTime;
+use BackendAuth;
 use DateTimeZone;
+use DirectoryIterator;
 
 /**
- * Backend preferences for the backend user
+ * Backend preferences for the backend user.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class Preference extends Model
@@ -26,7 +27,7 @@ class Preference extends Model
      * @var array Behaviors implemented by this model.
      */
     public $implement = [
-        \Backend\Behaviors\UserPreferencesModel::class
+        \Backend\Behaviors\UserPreferencesModel::class,
     ];
 
     /**
@@ -80,8 +81,7 @@ class Preference extends Model
     {
         if (Session::has('locale')) {
             App::setLocale(Session::get('locale'));
-        }
-        elseif (
+        } elseif (
             ($user = BackendAuth::getUser()) &&
             ($locale = static::get('locale'))
         ) {
@@ -98,8 +98,7 @@ class Preference extends Model
     {
         if (Session::has('fallback_locale')) {
             Lang::setFallback(Session::get('fallback_locale'));
-        }
-        elseif (
+        } elseif (
             ($user = BackendAuth::getUser()) &&
             ($locale = static::get('fallback_locale'))
         ) {
@@ -243,7 +242,7 @@ class Preference extends Model
 
             $tempTimezones[] = [
                 'offset' => (int) $currentTimezone->getOffset($utcTime),
-                'identifier' => $timezoneIdentifier
+                'identifier' => $timezoneIdentifier,
             ];
         }
 
@@ -258,7 +257,7 @@ class Preference extends Model
         foreach ($tempTimezones as $tz) {
             $sign = $tz['offset'] > 0 ? '+' : '-';
             $offset = gmdate('H:i', abs($tz['offset']));
-            $timezoneList[$tz['identifier']] = '(UTC ' . $sign . $offset . ') ' . $tz['identifier'];
+            $timezoneList[$tz['identifier']] = '(UTC '.$sign.$offset.') '.$tz['identifier'];
         }
 
         return $timezoneList;
@@ -270,28 +269,28 @@ class Preference extends Model
      */
     public function getEditorThemeOptions()
     {
-        $themeDir = new DirectoryIterator("modules/backend/formwidgets/codeeditor/assets/vendor/ace/");
+        $themeDir = new DirectoryIterator('modules/backend/formwidgets/codeeditor/assets/vendor/ace/');
         $themes = [];
 
         // Iterate through the themes
         foreach ($themeDir as $node) {
 
             // If this file is a theme (starting by "theme-")
-            if (!$node->isDir() && substr($node->getFileName(), 0, 6) == 'theme-') {
+            if (! $node->isDir() && substr($node->getFileName(), 0, 6) == 'theme-') {
                 // Remove the theme- prefix and the .js suffix, create an user friendly and capitalized name
                 $themeId = substr($node->getFileName(), 6, -3);
-                $themeName = ucwords(str_replace("_", " ", $themeId));
+                $themeName = ucwords(str_replace('_', ' ', $themeId));
 
                 // Add the values to the themes array
                 if ($themeId != static::DEFAULT_THEME) {
                     $themes[$themeId] = $themeName;
                 }
             }
-
         }
 
         // Sort the theme alphabetically, and push the default theme
         asort($themes);
+
         return [static::DEFAULT_THEME => ucwords(static::DEFAULT_THEME)] + $themes;
     }
 }

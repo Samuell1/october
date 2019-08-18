@@ -1,4 +1,6 @@
-<?php namespace Cms\Twig;
+<?php
+
+namespace Cms\Twig;
 
 use Twig\Token as TwigToken;
 use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
@@ -17,7 +19,6 @@ use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
  *         {% default %}
  *     {% endput %}
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class PutTokenParser extends TwigTokenParser

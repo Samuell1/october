@@ -1,14 +1,15 @@
-<?php namespace Backend\FormWidgets;
+<?php
 
-use BackendAuth;
+namespace Backend\FormWidgets;
+
 use Markdown;
+use BackendAuth;
 use Backend\Classes\FormWidgetBase;
 
 /**
  * Code Editor
  * Renders a code editor field.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class MarkdownEditor extends FormWidgetBase
@@ -32,12 +33,12 @@ class MarkdownEditor extends FormWidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'markdown';
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -48,16 +49,17 @@ class MarkdownEditor extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
         $this->prepareVars();
+
         return $this->makePartial('markdowneditor');
     }
 
     /**
-     * Prepares the widget data
+     * Prepares the widget data.
      */
     public function prepareVars()
     {
@@ -70,7 +72,7 @@ class MarkdownEditor extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function loadAssets()
     {
@@ -87,7 +89,7 @@ class MarkdownEditor extends FormWidgetBase
             : Markdown::parse($value);
 
         return [
-            'preview' => $previewHtml
+            'preview' => $previewHtml,
         ];
     }
 }

@@ -1,20 +1,20 @@
-<?php namespace Cms\Controllers;
+<?php
+
+namespace Cms\Controllers;
 
 use Backend;
+use Exception;
 use BackendMenu;
 use ApplicationException;
 use Cms\Models\ThemeData;
+use Backend\Classes\Controller;
 use Cms\Classes\Theme as CmsTheme;
 use System\Classes\SettingsManager;
-use Backend\Classes\Controller;
-use Exception;
 
 /**
- * Theme customization controller
+ * Theme customization controller.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
- *
  */
 class ThemeOptions extends Controller
 {
@@ -22,7 +22,7 @@ class ThemeOptions extends Controller
      * @var array Extensions implemented by this controller.
      */
     public $implement = [
-        \Backend\Behaviors\FormController::class
+        \Backend\Behaviors\FormController::class,
     ];
 
     /**
@@ -58,8 +58,7 @@ class ThemeOptions extends Controller
             $this->asExtension('FormController')->update($model->id);
 
             $this->vars['hasCustomData'] = $this->hasThemeData($dirName);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->handleError($ex);
         }
     }
@@ -71,7 +70,7 @@ class ThemeOptions extends Controller
 
         // Redirect close requests to the settings index when user doesn't have access
         // to go back to the theme selection page
-        if (!$this->user->hasAccess('cms.manage_themes') && input('close')) {
+        if (! $this->user->hasAccess('cms.manage_themes') && input('close')) {
             $result = Backend::redirect('system/settings');
         }
 
@@ -87,7 +86,7 @@ class ThemeOptions extends Controller
     }
 
     /**
-     * Add form fields defined in theme.yaml
+     * Add form fields defined in theme.yaml.
      */
     public function formExtendFields($form)
     {
@@ -113,14 +112,14 @@ class ThemeOptions extends Controller
     //
 
     /**
-     * Default to the active theme if user doesn't have access to manage all themes
+     * Default to the active theme if user doesn't have access to manage all themes.
      */
     protected function getDirName($dirName = null)
     {
         /*
          * Only the active theme can be managed without this permission
          */
-        if ($dirName && !$this->user->hasAccess('cms.manage_themes')) {
+        if ($dirName && ! $this->user->hasAccess('cms.manage_themes')) {
             $dirName = null;
         }
 
@@ -139,6 +138,7 @@ class ThemeOptions extends Controller
     protected function getThemeData($dirName)
     {
         $theme = $this->findThemeObject($dirName);
+
         return ThemeData::forTheme($theme);
     }
 
@@ -148,7 +148,7 @@ class ThemeOptions extends Controller
             $name = post('theme');
         }
 
-        if (!$name || (!$theme = CmsTheme::load($name))) {
+        if (! $name || (! $theme = CmsTheme::load($name))) {
             throw new ApplicationException(trans('cms::lang.theme.not_found_name', ['name' => $name]));
         }
 

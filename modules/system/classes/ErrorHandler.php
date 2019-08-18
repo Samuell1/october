@@ -1,4 +1,6 @@
-<?php namespace System\Classes;
+<?php
+
+namespace System\Classes;
 
 use Log;
 use View;
@@ -6,19 +8,18 @@ use Config;
 use Cms\Classes\Theme;
 use Cms\Classes\Router;
 use Cms\Classes\Controller as CmsController;
-use October\Rain\Exception\ErrorHandler as ErrorHandlerBase;
 use October\Rain\Exception\ApplicationException;
+use October\Rain\Exception\ErrorHandler as ErrorHandlerBase;
 
 /**
  * System Error Handler, this class handles application exception events.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class ErrorHandler extends ErrorHandlerBase
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     // public function handleException(Exception $proposedException)
     // {
@@ -54,7 +55,7 @@ class ErrorHandler extends ErrorHandlerBase
     public function handleCustomError()
     {
         if (Config::get('app.debug', false)) {
-            return null;
+            return;
         }
 
         if (class_exists(Theme::class) && in_array('Cms', Config::get('cms.loadModules', []))) {
@@ -62,7 +63,7 @@ class ErrorHandler extends ErrorHandlerBase
             $router = new Router($theme);
 
             // Use the default view if no "/error" URL is found.
-            if (!$router->findByUrl('/error')) {
+            if (! $router->findByUrl('/error')) {
                 return View::make('cms::error');
             }
 

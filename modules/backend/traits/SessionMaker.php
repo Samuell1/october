@@ -1,15 +1,16 @@
-<?php namespace Backend\Traits;
+<?php
+
+namespace Backend\Traits;
 
 use Str;
 use Session;
 
 /**
- * Session Maker Trait
+ * Session Maker Trait.
  *
  * Adds session management based methods to a controller class, or a class
  * that contains a `$controller` property referencing a controller.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 trait SessionMaker
@@ -73,7 +74,7 @@ trait SessionMaker
         $rootNamespace = Str::getClassId(Str::getClassNamespace(Str::getClassNamespace($controller)));
 
         // The controller action is intentionally omitted, session should be shared for all actions
-        return 'widget.' . $rootNamespace . '-' . class_basename($controller) . '-' . $uniqueId;
+        return 'widget.'.$rootNamespace.'-'.class_basename($controller).'-'.$uniqueId;
     }
 
     /**

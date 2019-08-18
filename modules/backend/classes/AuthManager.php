@@ -1,4 +1,6 @@
-<?php namespace Backend\Classes;
+<?php
+
+namespace Backend\Classes;
 
 use System\Classes\PluginManager;
 use October\Rain\Auth\Manager as RainAuthManager;
@@ -6,7 +8,6 @@ use October\Rain\Auth\Manager as RainAuthManager;
 /**
  * Back-end authentication manager.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class AuthManager extends RainAuthManager
@@ -32,7 +33,7 @@ class AuthManager extends RainAuthManager
         'label'   => null,
         'comment' => null,
         'roles'   => null,
-        'order'   => 500
+        'order'   => 500,
     ];
 
     /**
@@ -59,7 +60,7 @@ class AuthManager extends RainAuthManager
      * Registers a callback function that defines authentication permissions.
      * The callback function should register permissions by calling the manager's
      * registerPermissions() function. The manager instance is passed to the
-     * callback function as an argument. Usage:
+     * callback function as an argument. Usage:.
      *
      *     BackendAuth::registerCallback(function($manager){
      *         $manager->registerPermissions([...]);
@@ -87,9 +88,9 @@ class AuthManager extends RainAuthManager
     public function registerPermissions($owner, array $definitions)
     {
         foreach ($definitions as $code => $definition) {
-            $permission = (object)array_merge(self::$permissionDefaults, array_merge($definition, [
+            $permission = (object) array_merge(self::$permissionDefaults, array_merge($definition, [
                 'code' => $code,
-                'owner' => $owner
+                'owner' => $owner,
             ]));
 
             $this->permissions[] = $permission;
@@ -120,7 +121,7 @@ class AuthManager extends RainAuthManager
 
         foreach ($plugins as $id => $plugin) {
             $items = $plugin->registerPermissions();
-            if (!is_array($items)) {
+            if (! is_array($items)) {
                 continue;
             }
 
@@ -152,7 +153,7 @@ class AuthManager extends RainAuthManager
         foreach ($this->listPermissions() as $permission) {
             $tab = $permission->tab ?? 'backend::lang.form.undefined_tab';
 
-            if (!array_key_exists($tab, $tabs)) {
+            if (! array_key_exists($tab, $tabs)) {
                 $tabs[$tab] = [];
             }
 
@@ -170,13 +171,12 @@ class AuthManager extends RainAuthManager
         return parent::createUserModelQuery()->withTrashed();
     }
 
-
     /**
      * {@inheritdoc}
      */
     protected function validateUserModel($user)
     {
-        if ( ! $user instanceof $this->userModel) {
+        if (! $user instanceof $this->userModel) {
             return false;
         }
 
@@ -191,7 +191,7 @@ class AuthManager extends RainAuthManager
     }
 
     /**
-     * Returns an array of registered permissions belonging to a given role code
+     * Returns an array of registered permissions belonging to a given role code.
      * @param string $role
      * @param bool $includeOrphans
      * @return array
@@ -206,8 +206,7 @@ class AuthManager extends RainAuthManager
                     foreach ((array) $permission->roles as $_role) {
                         $this->permissionRoles[$_role][$permission->code] = 1;
                     }
-                }
-                else {
+                } else {
                     $this->permissionRoles['*'][$permission->code] = 1;
                 }
             }
@@ -224,6 +223,6 @@ class AuthManager extends RainAuthManager
 
     public function hasPermissionsForRole($role)
     {
-        return !!$this->listPermissionsForRole($role, false);
+        return (bool) $this->listPermissionsForRole($role, false);
     }
 }

@@ -1,14 +1,16 @@
-<?php namespace Cms\Traits;
+<?php
+
+namespace Cms\Traits;
 
 use File;
 use Cache;
 use Config;
 use Cms\Classes\Page;
-use Cms\Classes\Controller;
 use ApplicationException;
+use Cms\Classes\Controller;
 
 /**
- * URL Maker Trait
+ * URL Maker Trait.
  *
  * Useful in models for generating a "url" attribute, automatically linked
  * to a primary component used in the active theme. For example:
@@ -34,7 +36,6 @@ use ApplicationException;
  *        ];
  *    }
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 trait UrlMaker
@@ -150,7 +151,7 @@ trait UrlMaker
         if ($cached !== false && ($cached = @unserialize($cached)) !== false) {
             $filePath = array_get($cached, 'path');
             $mtime = array_get($cached, 'mtime');
-            if (!File::isFile($filePath) || ($mtime != File::lastModified($filePath))) {
+            if (! File::isFile($filePath) || ($mtime != File::lastModified($filePath))) {
                 $cached = false;
             }
         }
@@ -169,11 +170,11 @@ trait UrlMaker
             $page = Page::whereComponent($this->urlComponentName, $this->urlComponentProperty, '1')->first();
         }
 
-        if (!$useProperty || !$page) {
+        if (! $useProperty || ! $page) {
             $page = Page::withComponent($this->urlComponentName)->first();
         }
 
-        if (!$page) {
+        if (! $page) {
             throw new ApplicationException(sprintf(
                 'Unable to a find a primary component "%s" for generating a URL in %s.',
                 $this->urlComponentName,
@@ -187,7 +188,7 @@ trait UrlMaker
         $cached = [
             'path'     => $filePath,
             'fileName' => $baseFileName,
-            'mtime'    => @File::lastModified($filePath)
+            'mtime'    => @File::lastModified($filePath),
         ];
 
         Cache::put($key, serialize($cached), Config::get('cms.parsedPageCacheTTL', 1440));

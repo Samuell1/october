@@ -1,12 +1,13 @@
-<?php namespace Cms\Helpers;
+<?php
+
+namespace Cms\Helpers;
 
 use Url;
 use Route;
 
 /**
- * CMS Helper
+ * CMS Helper.
  *
- * @package october\cms
  * @see \Cms\Facades\Cms
  * @author Alexey Bobkov, Samuel Georges
  */
@@ -15,7 +16,7 @@ class Cms
     protected static $actionExists;
 
     /**
-     * Returns a URL in context of the Frontend
+     * Returns a URL in context of the Frontend.
      */
     public function url($path = null)
     {

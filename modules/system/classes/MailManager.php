@@ -1,4 +1,6 @@
-<?php namespace System\Classes;
+<?php
+
+namespace System\Classes;
 
 use Twig;
 use Markdown;
@@ -10,9 +12,8 @@ use System\Twig\MailPartialTokenParser;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 /**
- * This class manages Mail sending functions
+ * This class manages Mail sending functions.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class MailManager
@@ -84,12 +85,11 @@ class MailManager
     {
         if (isset($this->templateCache[$code])) {
             $template = $this->templateCache[$code];
-        }
-        else {
+        } else {
             $this->templateCache[$code] = $template = MailTemplate::findOrMakeTemplate($code);
         }
 
-        if (!$template) {
+        if (! $template) {
             return false;
         }
 
@@ -99,7 +99,7 @@ class MailManager
     }
 
     /**
-     * Internal method used to share logic between `addRawContentToMailer` and `addContentToMailer`
+     * Internal method used to share logic between `addRawContentToMailer` and `addContentToMailer`.
      *
      * @param \Illuminate\Mail\Message $message
      * @param string $template
@@ -118,7 +118,7 @@ class MailManager
          * Inject global view variables
          */
         $globalVars = ViewHelper::getGlobalVars();
-        if (!empty($globalVars)) {
+        if (! empty($globalVars)) {
             $data = (array) $data + $globalVars;
         }
 
@@ -132,10 +132,10 @@ class MailManager
         }
 
         $data += [
-            'subject' => $swiftMessage->getSubject()
+            'subject' => $swiftMessage->getSubject(),
         ];
 
-        if (!$plainOnly) {
+        if (! $plainOnly) {
             /*
              * HTML contents
              */
@@ -170,7 +170,7 @@ class MailManager
      */
     public function render($content, $data = [])
     {
-        if (!$content) {
+        if (! $content) {
             return '';
         }
 
@@ -192,19 +192,18 @@ class MailManager
         $disableAutoInlineCss = false;
 
         if ($template->layout) {
-
             $disableAutoInlineCss = array_get($template->layout->options, 'disable_auto_inline_css', $disableAutoInlineCss);
 
             $html = $this->renderTwig($template->layout->content_html, [
                 'content' => $html,
                 'css' => $template->layout->content_css,
-                'brandCss' => $css
+                'brandCss' => $css,
             ] + (array) $data);
 
-            $css .= PHP_EOL . $template->layout->content_css;
+            $css .= PHP_EOL.$template->layout->content_css;
         }
 
-        if (!$disableAutoInlineCss) {
+        if (! $disableAutoInlineCss) {
             $html = (new CssToInlineStyles)->convert($html, $css);
         }
 
@@ -219,7 +218,7 @@ class MailManager
      */
     public function renderText($content, $data = [])
     {
-        if (!$content) {
+        if (! $content) {
             return '';
         }
 
@@ -236,7 +235,7 @@ class MailManager
 
         $templateText = $template->content_text;
 
-        if (!strlen($template->content_text)) {
+        if (! strlen($template->content_text)) {
             $templateText = $template->content_html;
         }
 
@@ -244,7 +243,7 @@ class MailManager
 
         if ($template->layout) {
             $text = $this->renderTwig($template->layout->content_text, [
-                'content' => $text
+                'content' => $text,
             ] + (array) $data);
         }
 
@@ -253,18 +252,17 @@ class MailManager
 
     public function renderPartial($code, array $params = [])
     {
-        if (!$partial = MailPartial::findOrMakePartial($code)) {
+        if (! $partial = MailPartial::findOrMakePartial($code)) {
             return '<!-- Missing partial: '.$code.' -->';
         }
 
         if ($this->isHtmlRenderMode) {
             $content = $partial->content_html;
-        }
-        else {
+        } else {
             $content = $partial->content_text ?: $partial->content_html;
         }
 
-        if (!strlen(trim($content))) {
+        if (! strlen(trim($content))) {
             return '';
         }
 
@@ -272,7 +270,7 @@ class MailManager
     }
 
     /**
-     * Internal helper for rendering Twig
+     * Internal helper for rendering Twig.
      */
     protected function renderTwig($content, $data = [])
     {
@@ -304,7 +302,7 @@ class MailManager
         $markupManager = MarkupManager::instance();
         $markupManager->beginTransaction();
         $markupManager->registerTokenParsers([
-            new MailPartialTokenParser
+            new MailPartialTokenParser,
         ]);
     }
 
@@ -314,7 +312,7 @@ class MailManager
      */
     protected function stopTwig()
     {
-        if (!$this->isTwigStarted) {
+        if (! $this->isTwigStarted) {
             return;
         }
 
@@ -329,7 +327,7 @@ class MailManager
     //
 
     /**
-     * Loads registered mail templates from modules and plugins
+     * Loads registered mail templates from modules and plugins.
      * @return void
      */
     public function loadRegisteredTemplates()
@@ -400,7 +398,7 @@ class MailManager
      * Registers a callback function that defines mail templates.
      * The callback function should register templates by calling the manager's
      * registerMailTemplates() function. Thi instance is passed to the
-     * callback function as an argument. Usage:
+     * callback function as an argument. Usage:.
      *
      *     MailManager::registerCallback(function($manager) {
      *         $manager->registerMailTemplates([...]);
@@ -418,12 +416,12 @@ class MailManager
      */
     public function registerMailTemplates(array $definitions)
     {
-        if (!$this->registeredTemplates) {
+        if (! $this->registeredTemplates) {
             $this->registeredTemplates = [];
         }
 
         // Prior sytax where (key) code => (value) description
-        if (!isset($definitions[0])) {
+        if (! isset($definitions[0])) {
             $definitions = array_keys($definitions);
         }
 
@@ -437,7 +435,7 @@ class MailManager
      */
     public function registerMailPartials(array $definitions)
     {
-        if (!$this->registeredPartials) {
+        if (! $this->registeredPartials) {
             $this->registeredPartials = [];
         }
 
@@ -449,7 +447,7 @@ class MailManager
      */
     public function registerMailLayouts(array $definitions)
     {
-        if (!$this->registeredLayouts) {
+        if (! $this->registeredLayouts) {
             $this->registeredLayouts = [];
         }
 

@@ -1,12 +1,13 @@
-<?php namespace Cms\Twig;
+<?php
+
+namespace Cms\Twig;
 
 use Twig\Node\Node as TwigNode;
 use Twig\Compiler as TwigCompiler;
 
 /**
- * Represents a placeholder node
+ * Represents a placeholder node.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class PlaceholderNode extends TwigNode
@@ -36,48 +37,46 @@ class PlaceholderNode extends TwigNode
         $varId = '__placeholder_'.$this->getAttribute('name').'_default_contents';
         $compiler
             ->addDebugInfo($this)
-            ->write("\$context[")
+            ->write('$context[')
             ->raw("'".$varId."'")
-            ->raw("] = null;");
+            ->raw('] = null;');
 
         if ($hasBody) {
             $compiler
                 ->addDebugInfo($this)
                 ->write('ob_start();')
                 ->subcompile($this->getNode('default'))
-                ->write("\$context[")
+                ->write('$context[')
                 ->raw("'".$varId."'")
-                ->raw("] = ob_get_clean();");
+                ->raw('] = ob_get_clean();');
         }
 
         $isText = $this->hasAttribute('type') && $this->getAttribute('type') == 'text';
 
         $compiler->addDebugInfo($this);
-        if (!$isText) {
+        if (! $isText) {
             $compiler->write("echo \$this->env->getExtension('Cms\Twig\Extension')->displayBlock(");
-        }
-        else {
+        } else {
             $compiler->write("echo twig_escape_filter(\$this->env, \$this->env->getExtension('Cms\Twig\Extension')->displayBlock(");
         }
 
         $compiler
             ->raw("'".$this->getAttribute('name')."', ")
-            ->raw("\$context[")
+            ->raw('$context[')
             ->raw("'".$varId."'")
-            ->raw("]")
-            ->raw(")");
+            ->raw(']')
+            ->raw(')');
 
-        if (!$isText) {
+        if (! $isText) {
             $compiler->raw(";\n");
-        }
-        else {
+        } else {
             $compiler->raw(");\n");
         }
 
         $compiler
             ->addDebugInfo($this)
-            ->write("unset(\$context[")
+            ->write('unset($context[')
             ->raw("'".$varId."'")
-            ->raw("]);");
+            ->raw(']);');
     }
 }

@@ -30,14 +30,14 @@ return [
             'events' => 'Eventos',
             'customers' => 'Clientes',
             'my_settings' => 'Configurações',
-        ]
+        ],
     ],
     'theme' => [
         'label' => 'Tema',
         'unnamed' => 'Tema sem nome',
         'name' => [
             'label' => 'Nome do Tema',
-            'help' => 'Nome do tema deve ser único. Por exemplo, RainLab.Vanilla'
+            'help' => 'Nome do tema deve ser único. Por exemplo, RainLab.Vanilla',
         ],
     ],
     'themes' => [
@@ -46,7 +46,7 @@ return [
         'installed' => 'Temas instalados',
         'no_themes' => 'Não há temas instalados.',
         'recommended' => 'Recomendado',
-        'remove_confirm' => 'Você tem certeza que deseja remover este tema?'
+        'remove_confirm' => 'Você tem certeza que deseja remover este tema?',
     ],
     'plugin' => [
         'label' => 'Plugin',
@@ -144,7 +144,7 @@ return [
         'ses_region' => 'Região SES',
         'ses_region_comment' => 'Entre com sua região SES (exemplo: us-east-1)',
         'drivers_hint_header' => 'Drivers não instalados',
-        'drivers_hint_content' => 'Este método requer que o plugin ":plugin" esteja instalado.'
+        'drivers_hint_content' => 'Este método requer que o plugin ":plugin" esteja instalado.',
     ],
     'mail_templates' => [
         'menu_label' => 'Modelos de E-mail',
@@ -179,7 +179,7 @@ return [
         'deleting' => 'Excluindo modelo...',
         'deleting_layout' => 'Excluindo esboço...',
         'sending' => 'Enviando mensagem de teste...',
-        'return' => 'Retornar à lista de modelos'
+        'return' => 'Retornar à lista de modelos',
     ],
     'install' => [
         'project_label' => 'Anexar ao projeto',
@@ -282,7 +282,7 @@ return [
         'created_at' => 'Data & Hora',
         'message' => 'Mensagem',
         'level' => 'Nível',
-        'preview_title' => 'Evento'
+        'preview_title' => 'Evento',
     ],
     'request_log' => [
         'hint' => 'Este registro mostra uma lista de requisições que requerem atenção. Por exemplo, se um usuário solicitar uma página não encontrada, será registrado com o status 404.',
@@ -298,7 +298,7 @@ return [
         'referer' => 'Referências',
         'url' => 'URL',
         'status_code' => 'Status',
-        'preview_title' => 'Requisição'
+        'preview_title' => 'Requisição',
     ],
     'permissions' => [
         'name' => 'Sistema',
@@ -311,7 +311,7 @@ return [
         'manage_preferences' => 'Gerenciar preferências da área administrativa',
         'manage_editor' => 'Gerenciar preferências do editor de código',
         'view_the_dashboard' => 'Visualizar o painel',
-        'manage_branding' => 'Personalizar o painel'
+        'manage_branding' => 'Personalizar o painel',
     ],
     'media' => [
         'invalid_path' => "Caminho especificado inválido: ':path'.",

@@ -1,4 +1,6 @@
-<?php namespace Backend\FormWidgets;
+<?php
+
+namespace Backend\FormWidgets;
 
 use Db;
 use Backend\Classes\FormField;
@@ -9,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\Relation as RelationBase;
  * Form Relationship
  * Renders a field prepopulated with a belongsTo and belongsToHasMany relation.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class Relation extends FormWidgetBase
@@ -45,7 +46,7 @@ class Relation extends FormWidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'relation';
 
@@ -55,7 +56,7 @@ class Relation extends FormWidgetBase
     public $renderFormField;
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -71,16 +72,17 @@ class Relation extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
         $this->prepareVars();
+
         return $this->makePartial('relation');
     }
 
     /**
-     * Prepares the view data
+     * Prepares the view data.
      */
     public function prepareVars()
     {
@@ -88,12 +90,11 @@ class Relation extends FormWidgetBase
     }
 
     /**
-     * Makes the form object used for rendering a simple field type
+     * Makes the form object used for rendering a simple field type.
      */
     protected function makeRenderFormField()
     {
         return $this->renderFormField = RelationBase::noConstraints(function () {
-
             $field = clone $this->formField;
             $relationObject = $this->getRelationObject();
             $query = $relationObject->newQuery();
@@ -104,8 +105,7 @@ class Relation extends FormWidgetBase
 
             if (in_array($relationType, ['belongsToMany', 'morphToMany', 'morphedByMany', 'hasMany'])) {
                 $field->type = 'checkboxlist';
-            }
-            elseif (in_array($relationType, ['belongsTo', 'hasOne'])) {
+            } elseif (in_array($relationType, ['belongsTo', 'hasOne'])) {
                 $field->type = 'dropdown';
             }
 
@@ -133,9 +133,8 @@ class Relation extends FormWidgetBase
             if ($this->sqlSelect) {
                 $nameFrom = 'selection';
                 $selectColumn = $usesTree ? '*' : $relationModel->getKeyName();
-                $result = $query->select($selectColumn, Db::raw($this->sqlSelect . ' AS ' . $nameFrom));
-            }
-            else {
+                $result = $query->select($selectColumn, Db::raw($this->sqlSelect.' AS '.$nameFrom));
+            } else {
                 $nameFrom = $this->nameFrom;
                 $result = $query->getQuery()->get();
             }
@@ -155,7 +154,7 @@ class Relation extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getSaveValue($value)
     {
@@ -163,12 +162,12 @@ class Relation extends FormWidgetBase
             return FormField::NO_SAVE_DATA;
         }
 
-        if (is_string($value) && !strlen($value)) {
-            return null;
+        if (is_string($value) && ! strlen($value)) {
+            return;
         }
 
-        if (is_array($value) && !count($value)) {
-            return null;
+        if (is_array($value) && ! count($value)) {
+            return;
         }
 
         return $value;

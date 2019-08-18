@@ -1,7 +1,7 @@
 <?php
 
-use System\Classes\UpdateManager;
 use System\Classes\PluginManager;
+use System\Classes\UpdateManager;
 use October\Rain\Database\Model as ActiveRecord;
 
 abstract class PluginTestCase extends Illuminate\Foundation\Testing\TestCase
@@ -33,17 +33,17 @@ abstract class PluginTestCase extends Illuminate\Foundation\Testing\TestCase
         $dbConnections['sqlite'] = [
             'driver'   => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => ''
+            'prefix'   => '',
         ];
 
         if (env('APP_ENV') === 'testing' && Config::get('database.useConfigForTesting', false)) {
             $dbConnection = Config::get('database.default', 'sqlite');
 
-            $dbConnections[$dbConnection] = Config::get('database.connections' . $dbConnection, $dbConnections['sqlite']);
+            $dbConnections[$dbConnection] = Config::get('database.connections'.$dbConnection, $dbConnections['sqlite']);
         }
 
         $app['config']->set('database.default', $dbConnection);
-        $app['config']->set('database.connections.' . $dbConnection, $dbConnections[$dbConnection]);
+        $app['config']->set('database.connections.'.$dbConnection, $dbConnections[$dbConnection]);
 
         /*
          * Modify the plugin path away from the test context
@@ -119,10 +119,11 @@ abstract class PluginTestCase extends Illuminate\Foundation\Testing\TestCase
      */
     protected function runPluginRefreshCommand($code, $throwException = true)
     {
-        if (!preg_match('/^[\w+]*\.[\w+]*$/', $code)) {
-            if (!$throwException) {
+        if (! preg_match('/^[\w+]*\.[\w+]*$/', $code)) {
+            if (! $throwException) {
                 return;
             }
+
             throw new Exception(sprintf('Invalid plugin code: "%s"', $code));
         }
 
@@ -132,14 +133,15 @@ abstract class PluginTestCase extends Illuminate\Foundation\Testing\TestCase
         /*
          * First time seeing this plugin, load it up
          */
-        if (!$plugin) {
+        if (! $plugin) {
             $namespace = '\\'.str_replace('.', '\\', strtolower($code));
             $path = array_get($manager->getPluginNamespaces(), $namespace);
 
-            if (!$path) {
-                if (!$throwException) {
+            if (! $path) {
+                if (! $throwException) {
                     return;
                 }
+
                 throw new Exception(sprintf('Unable to find plugin with code: "%s"', $code));
             }
 
@@ -151,7 +153,7 @@ abstract class PluginTestCase extends Illuminate\Foundation\Testing\TestCase
          */
         $this->pluginTestCaseLoadedPlugins[$code] = $plugin;
 
-        if (!empty($plugin->require)) {
+        if (! empty($plugin->require)) {
             foreach ((array) $plugin->require as $dependency) {
                 if (isset($this->pluginTestCaseLoadedPlugins[$dependency])) {
                     continue;
@@ -197,8 +199,8 @@ abstract class PluginTestCase extends Illuminate\Foundation\Testing\TestCase
 
             $reflectClass = new ReflectionClass($class);
             if (
-                !$reflectClass->isInstantiable() ||
-                !$reflectClass->isSubclassOf('October\Rain\Database\Model') ||
+                ! $reflectClass->isInstantiable() ||
+                ! $reflectClass->isSubclassOf('October\Rain\Database\Model') ||
                 $reflectClass->isSubclassOf('October\Rain\Database\Pivot')
             ) {
                 continue;

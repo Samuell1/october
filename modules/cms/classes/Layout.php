@@ -1,9 +1,10 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 /**
  * The CMS layout class.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class Layout extends CmsCompoundObject
@@ -28,12 +29,13 @@ class Layout extends CmsCompoundObject
         $obj = self::inTheme($theme);
         $obj->markup = '{% page %}';
         $obj->fileName = self::FALLBACK_FILE_NAME;
+
         return $obj;
     }
 
     /**
-     * Returns true if the layout is a fallback layout
-     * @return boolean
+     * Returns true if the layout is a fallback layout.
+     * @return bool
      */
     public function isFallBack()
     {

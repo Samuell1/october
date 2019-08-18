@@ -46,7 +46,7 @@ return [
         'array'   => 'A(z) :attribute tömbnek nem lehet több, mint :max eleme.',
     ],
     'mimes'            => 'A(z) :attribute fájltípus kell, hogy legyen: :values.',
-    "extensions"       => 'A(z) :attribute kiterjesztés kell, hogy legyen: :values.',
+    'extensions'       => 'A(z) :attribute kiterjesztés kell, hogy legyen: :values.',
     'min'              => [
         'numeric' => 'A(z) :attribute legalább :min kell, hogy legyen.',
         'file'    => 'A(z) :attribute legalább :min kilobájt kell, hogy legyen.',

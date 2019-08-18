@@ -1,22 +1,22 @@
-<?php namespace System\Traits;
+<?php
+
+namespace System\Traits;
 
 use Url;
-use Html;
 use File;
+use Html;
 use System\Models\Parameter;
 use System\Models\PluginVersion;
 use System\Classes\CombineAssets;
 
 /**
  * Asset Maker Trait
- * Adds asset based methods to a class
+ * Adds asset based methods to a class.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 trait AssetMaker
 {
-
     /**
      * @var array Collection of assets to display in the layout.
      */
@@ -39,7 +39,7 @@ trait AssetMaker
     }
 
     /**
-     * Outputs `<link>` and `<script>` tags to load assets previously added with addJs and addCss method calls
+     * Outputs `<link>` and `<script>` tags to load assets previously added with addJs and addCss method calls.
      * @param string $type Return an asset collection of a given type (css, rss, js) or null for all.
      * @return string
      */
@@ -62,12 +62,12 @@ trait AssetMaker
                 $attributes = Html::attributes(array_merge(
                     [
                         'rel'  => 'stylesheet',
-                        'href' => $this->getAssetEntryBuildPath($asset)
+                        'href' => $this->getAssetEntryBuildPath($asset),
                     ],
                     array_except($asset['attributes'], $reserved)
                 ));
 
-                $result .= '<link' . $attributes . '>' . PHP_EOL;
+                $result .= '<link'.$attributes.'>'.PHP_EOL;
             }
         }
 
@@ -78,12 +78,12 @@ trait AssetMaker
                         'rel'   => 'alternate',
                         'href'  => $this->getAssetEntryBuildPath($asset),
                         'title' => 'RSS',
-                        'type'  => 'application/rss+xml'
+                        'type'  => 'application/rss+xml',
                     ],
                     array_except($asset['attributes'], $reserved)
                 ));
 
-                $result .= '<link' . $attributes . '>' . PHP_EOL;
+                $result .= '<link'.$attributes.'>'.PHP_EOL;
             }
         }
 
@@ -91,12 +91,12 @@ trait AssetMaker
             foreach ($this->assets['js'] as $asset) {
                 $attributes = Html::attributes(array_merge(
                     [
-                        'src' => $this->getAssetEntryBuildPath($asset)
+                        'src' => $this->getAssetEntryBuildPath($asset),
                     ],
                     array_except($asset['attributes'], $reserved)
                 ));
 
-                $result .= '<script' . $attributes . '></script>' . PHP_EOL;
+                $result .= '<script'.$attributes.'></script>'.PHP_EOL;
             }
         }
 
@@ -135,7 +135,7 @@ trait AssetMaker
             unset($attributes['cache']);
         }
 
-        if (!in_array($jsPath, $this->assets['js'])) {
+        if (! in_array($jsPath, $this->assets['js'])) {
             $this->assets['js'][] = ['path' => $jsPath, 'attributes' => $attributes];
         }
     }
@@ -165,7 +165,7 @@ trait AssetMaker
 
         $cssPath = $this->getAssetScheme($cssPath);
 
-        if (!in_array($cssPath, $this->assets['css'])) {
+        if (! in_array($cssPath, $this->assets['css'])) {
             $this->assets['css'][] = ['path' => $cssPath, 'attributes' => $attributes];
         }
     }
@@ -191,13 +191,13 @@ trait AssetMaker
 
         $rssPath = $this->getAssetScheme($rssPath);
 
-        if (!in_array($rssPath, $this->assets['rss'])) {
+        if (! in_array($rssPath, $this->assets['rss'])) {
             $this->assets['rss'][] = ['path' => $rssPath, 'attributes' => $attributes];
         }
     }
 
     /**
-     * Run the provided assets through the Asset Combiner
+     * Run the provided assets through the Asset Combiner.
      * @param array $assets Collection of assets
      * @param string $localPath Prefix all assets with this path (optional)
      * @return string
@@ -208,7 +208,8 @@ trait AssetMaker
         if (empty($assets)) {
             return '';
         }
-        $assetPath = !empty($localPath) ? $localPath : $this->assetPath;
+        $assetPath = ! empty($localPath) ? $localPath : $this->assetPath;
+
         return Url::to(CombineAssets::combine($assets, $assetPath));
     }
 
@@ -245,7 +246,7 @@ trait AssetMaker
             return $fileName;
         }
 
-        if (!$assetPath) {
+        if (! $assetPath) {
             $assetPath = $this->assetPath;
         }
 
@@ -253,7 +254,7 @@ trait AssetMaker
             return $fileName;
         }
 
-        return $assetPath . '/' . $fileName;
+        return $assetPath.'/'.$fileName;
     }
 
     /**
@@ -266,7 +267,7 @@ trait AssetMaker
     }
 
     /**
-     * Internal helper, attaches a build code to an asset path
+     * Internal helper, attaches a build code to an asset path.
      * @param  array $asset Stored asset array
      * @return string
      */
@@ -277,20 +278,19 @@ trait AssetMaker
             $build = $asset['attributes']['build'];
 
             if ($build == 'core') {
-                $build = 'v' . Parameter::get('system::core.build', 1);
-            }
-            elseif ($pluginVersion = PluginVersion::getVersion($build)) {
-                $build = 'v' . $pluginVersion;
+                $build = 'v'.Parameter::get('system::core.build', 1);
+            } elseif ($pluginVersion = PluginVersion::getVersion($build)) {
+                $build = 'v'.$pluginVersion;
             }
 
-            $path .= '?' . $build;
+            $path .= '?'.$build;
         }
 
         return $path;
     }
 
     /**
-     * Internal helper, get asset scheme
+     * Internal helper, get asset scheme.
      * @param string $asset Specifies a path (URL) to the asset.
      * @return string
      */
@@ -314,31 +314,30 @@ trait AssetMaker
     protected function removeDuplicates()
     {
         foreach ($this->assets as $type => &$collection) {
-
             $pathCache = [];
             foreach ($collection as $key => $asset) {
-
-                if (!$path = array_get($asset, 'path')) {
+                if (! $path = array_get($asset, 'path')) {
                     continue;
                 }
 
                 if (isset($pathCache[$path])) {
                     array_forget($collection, $key);
+
                     continue;
                 }
 
                 $pathCache[$path] = true;
             }
-
         }
     }
 
     protected function getLocalPath(string $relativePath)
     {
         $relativePath = File::symbolizePath($relativePath);
-        if (!starts_with($relativePath, [base_path()])) {
+        if (! starts_with($relativePath, [base_path()])) {
             $relativePath = base_path($relativePath);
         }
+
         return $relativePath;
     }
 }

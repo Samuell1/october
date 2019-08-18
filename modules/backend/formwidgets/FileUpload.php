@@ -1,18 +1,20 @@
-<?php namespace Backend\FormWidgets;
+<?php
+
+namespace Backend\FormWidgets;
 
 use Db;
 use Input;
 use Request;
 use Response;
+use Exception;
 use Validator;
+use ValidationException;
+use ApplicationException;
 use Backend\Widgets\Form;
 use Backend\Classes\FormField;
 use Backend\Classes\FormWidgetBase;
 use Backend\Controllers\Files as FilesController;
 use October\Rain\Filesystem\Definitions as FileDefinitions;
-use ApplicationException;
-use ValidationException;
-use Exception;
 
 /**
  * File upload field
@@ -23,7 +25,6 @@ use Exception;
  * - upload-label: Add file
  * - empty-label: No file uploaded
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class FileUpload extends FormWidgetBase
@@ -65,16 +66,16 @@ class FileUpload extends FormWidgetBase
      */
     public $thumbOptions = [
         'mode'      => 'crop',
-        'extension' => 'auto'
+        'extension' => 'auto',
     ];
 
     /**
-     * @var boolean Allow the user to set a caption.
+     * @var bool Allow the user to set a caption.
      */
     public $useCaption = true;
 
     /**
-     * @var boolean Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
+     * @var bool Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
      */
     public $attachOnUpload = false;
 
@@ -83,7 +84,7 @@ class FileUpload extends FormWidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'fileupload';
 
@@ -93,7 +94,7 @@ class FileUpload extends FormWidgetBase
     protected $configFormWidget;
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -116,16 +117,17 @@ class FileUpload extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
         $this->prepareVars();
+
         return $this->makePartial('fileupload');
     }
 
     /**
-     * Prepares the view data
+     * Prepares the view data.
      */
     protected function prepareVars()
     {
@@ -151,7 +153,7 @@ class FileUpload extends FormWidgetBase
     }
 
     /**
-     * Get the file record for this request, returns false if none available
+     * Get the file record for this request, returns false if none available.
      *
      * @return System\Models\File|false
      */
@@ -159,7 +161,7 @@ class FileUpload extends FormWidgetBase
     {
         $record = false;
 
-        if (!empty(post('file_id'))) {
+        if (! empty(post('file_id'))) {
             $record = $this->getRelationModel()::find(post('file_id')) ?: false;
         }
 
@@ -167,7 +169,7 @@ class FileUpload extends FormWidgetBase
     }
 
     /**
-     * Get the instantiated config Form widget
+     * Get the instantiated config Form widget.
      *
      * @return void
      */
@@ -179,7 +181,7 @@ class FileUpload extends FormWidgetBase
 
         $config = $this->makeConfig('~/modules/system/models/file/fields.yaml');
         $config->model = $this->getFileRecord() ?: $this->getRelationModel();
-        $config->alias = $this->alias . $this->defaultAlias;
+        $config->alias = $this->alias.$this->defaultAlias;
         $config->arrayName = $this->getFieldName();
 
         $widget = $this->makeWidget(Form::class, $config);
@@ -194,8 +196,7 @@ class FileUpload extends FormWidgetBase
             ->getRelationObject()
             ->withDeferred($this->sessionKey)
             ->orderBy('sort_order')
-            ->get()
-        ;
+            ->get();
 
         /*
          * Decorate each file with thumb and custom download path
@@ -249,7 +250,7 @@ class FileUpload extends FormWidgetBase
      */
     protected function getCssDimensions($mode = null)
     {
-        if (!$this->imageWidth && !$this->imageHeight) {
+        if (! $this->imageWidth && ! $this->imageHeight) {
             return '';
         }
 
@@ -263,8 +264,7 @@ class FileUpload extends FormWidgetBase
             $cssDimensions .= ($this->imageHeight)
                 ? 'max-height: '.$this->imageHeight.'px;'
                 : 'height: auto;';
-        }
-        else {
+        } else {
             $cssDimensions .= $this->imageWidth
                 ? 'width: '.$this->imageWidth.'px;'
                 : 'width: auto;';
@@ -280,7 +280,7 @@ class FileUpload extends FormWidgetBase
     /**
      * Returns the specified accepted file types, or the default
      * based on the mode. Image mode will return:
-     * - jpg,jpeg,bmp,png,gif,svg
+     * - jpg,jpeg,bmp,png,gif,svg.
      * @return string
      */
     public function getAcceptedFileTypes($includeDot = false)
@@ -292,11 +292,11 @@ class FileUpload extends FormWidgetBase
             $types = implode(',', FileDefinitions::get($isImage ? 'imageExtensions' : 'defaultExtensions'));
         }
 
-        if (!$types || $types == '*') {
-            return null;
+        if (! $types || $types == '*') {
+            return;
         }
 
-        if (!is_array($types)) {
+        if (! is_array($types)) {
             $types = explode(',', $types);
         }
 
@@ -382,26 +382,25 @@ class FileUpload extends FormWidgetBase
             }
 
             throw new ApplicationException('Unable to find file, it may no longer exist');
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             return json_encode(['error' => $ex->getMessage()]);
         }
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function loadAssets()
     {
         $this->addCss('css/fileupload.css', 'core');
         $this->addJs('js/fileupload.js', [
             'build' => 'core',
-            'cache'  => 'false'
+            'cache'  => 'false',
         ]);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getSaveValue($value)
     {
@@ -409,12 +408,12 @@ class FileUpload extends FormWidgetBase
     }
 
     /**
-     * Upload handler for the server-side processing of uploaded files
+     * Upload handler for the server-side processing of uploaded files.
      */
     public function onUpload()
     {
         try {
-            if (!Input::hasFile('file_data')) {
+            if (! Input::hasFile('file_data')) {
                 throw new ApplicationException('File missing from request');
             }
 
@@ -439,7 +438,7 @@ class FileUpload extends FormWidgetBase
                 throw new ValidationException($validation);
             }
 
-            if (!$uploadedFile->isValid()) {
+            if (! $uploadedFile->isValid()) {
                 throw new ApplicationException('File is not valid');
             }
 
@@ -452,13 +451,12 @@ class FileUpload extends FormWidgetBase
 
             /**
              * Attach directly to the parent model if it exists and attachOnUpload has been set to true
-             * else attach via deferred binding
+             * else attach via deferred binding.
              */
             $parent = $fileRelation->getParent();
             if ($this->attachOnUpload && $parent && $parent->exists) {
                 $fileRelation->add($file);
-            }
-            else {
+            } else {
                 $fileRelation->add($file, $this->sessionKey);
             }
 
@@ -467,12 +465,11 @@ class FileUpload extends FormWidgetBase
             $result = [
                 'id' => $file->id,
                 'thumb' => $file->thumbUrl,
-                'path' => $file->pathUrl
+                'path' => $file->pathUrl,
             ];
 
             $response = Response::make($result, 200);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $response = Response::make($ex->getMessage(), 400);
         }
 
@@ -482,7 +479,7 @@ class FileUpload extends FormWidgetBase
     /**
      * Adds the bespoke attributes used internally by this widget.
      * - thumbUrl
-     * - pathUrl
+     * - pathUrl.
      * @return System\Models\File
      */
     protected function decorateFileAttributes($file)
@@ -490,7 +487,7 @@ class FileUpload extends FormWidgetBase
         /*
          * File is protected, create a secure public path
          */
-        if (!$file->isPublic()) {
+        if (! $file->isPublic()) {
             $path = $thumb = FilesController::getDownloadUrl($file);
 
             if ($this->imageWidth || $this->imageHeight) {

@@ -1,22 +1,27 @@
-<?php namespace Cms\Twig;
+<?php
 
-use Twig\Template as TwigTemplate;
-use Twig\Extension\AbstractExtension as TwigExtension;
-use Twig\Environment as TwigEnvironment;
-use Twig\TwigFunction as TwigSimpleFunction;
+namespace Cms\Twig;
+
 use Cms\Classes\Controller;
 use Cms\Classes\ComponentBase;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Debug\HtmlDumper;
-use Symfony\Component\VarDumper\Cloner\VarCloner;
 use October\Rain\Database\Model;
+use Illuminate\Support\Collection;
+use Twig\Template as TwigTemplate;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Debug\HtmlDumper;
+use Twig\Environment as TwigEnvironment;
+use Twig\TwigFunction as TwigSimpleFunction;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Twig\Extension\AbstractExtension as TwigExtension;
 
 class DebugExtension extends TwigExtension
 {
     const PAGE_CAPTION = 'Page variables';
+
     const ARRAY_CAPTION = 'Array variables';
+
     const OBJECT_CAPTION = 'Object variables';
+
     const COMPONENT_CAPTION = 'Component variables';
 
     /**
@@ -25,12 +30,12 @@ class DebugExtension extends TwigExtension
     protected $controller;
 
     /**
-     * @var integer Helper for rendering table row styles.
+     * @var int Helper for rendering table row styles.
      */
     protected $zebra = 1;
 
     /**
-     * @var boolean If no variable is passed, true.
+     * @var bool If no variable is passed, true.
      */
     protected $variablePrefix = false;
 
@@ -49,7 +54,7 @@ class DebugExtension extends TwigExtension
         'offsetExists',
         'offsetGet',
         'offsetSet',
-        'offsetUnset'
+        'offsetUnset',
     ];
 
     /**
@@ -71,21 +76,21 @@ class DebugExtension extends TwigExtension
             new TwigSimpleFunction('dump', [$this, 'runDump'], [
                 'is_safe' => ['html'],
                 'needs_context' => true,
-                'needs_environment' => true
+                'needs_environment' => true,
             ]),
         ];
     }
 
     /**
      * Processes the dump variables, if none is supplied, all the twig
-     * template variables are used
+     * template variables are used.
      * @param  TwigEnvironment $env
      * @param  array            $context
      * @return string
      */
     public function runDump(TwigEnvironment $env, $context)
     {
-        if (!$env->isDebug()) {
+        if (! $env->isDebug()) {
             return;
         }
 
@@ -93,48 +98,39 @@ class DebugExtension extends TwigExtension
 
         $count = func_num_args();
         if ($count == 2) {
-
             $this->variablePrefix = true;
             $vars = [];
             foreach ($context as $key => $value) {
-                if (!$value instanceof TwigTemplate) {
+                if (! $value instanceof TwigTemplate) {
                     $vars[$key] = $value;
                 }
             }
 
             $result .= $this->dump($vars, static::PAGE_CAPTION);
-
-        }
-        else {
-
+        } else {
             $this->variablePrefix = false;
             for ($i = 2; $i < $count; $i++) {
-
                 $var = func_get_arg($i);
 
                 if ($var instanceof ComponentBase) {
                     $caption = [static::COMPONENT_CAPTION, get_class($var)];
-                }
-                elseif (is_array($var)) {
+                } elseif (is_array($var)) {
                     $caption = static::ARRAY_CAPTION;
-                }
-                elseif (is_object($var)) {
+                } elseif (is_object($var)) {
                     $caption = [static::OBJECT_CAPTION, get_class($var)];
-                }
-                else {
+                } else {
                     $caption = [static::OBJECT_CAPTION, gettype($var)];
                 }
 
                 $result .= $this->dump($var, $caption);
             }
-
         }
 
         return $result;
     }
 
     /**
-     * Dump information about a variable
+     * Dump information about a variable.
      * @param mixed $variables Variable to dump
      * @param mixed $caption Caption [and subcaption] of the dump
      * @return void
@@ -145,14 +141,12 @@ class DebugExtension extends TwigExtension
         $this->zebra = 1;
         $info = [];
 
-        if (!is_array($variables)) {
+        if (! is_array($variables)) {
             if ($variables instanceof Paginator) {
                 $variables = $this->paginatorToArray($variables);
-            }
-            elseif (is_object($variables)) {
+            } elseif (is_object($variables)) {
                 $variables = $this->objectToArray($variables);
-            }
-            else {
+            } else {
                 $variables = [$variables];
             }
         }
@@ -171,7 +165,7 @@ class DebugExtension extends TwigExtension
 
         $html = implode(PHP_EOL, $output);
 
-        return '<pre style="' . $this->getContainerCss() . '">' . $html . '</pre>';
+        return '<pre style="'.$this->getContainerCss().'">'.$html.'</pre>';
     }
 
     /**
@@ -196,6 +190,7 @@ class DebugExtension extends TwigExtension
 
         $output[] = '</td>';
         $output[] = '</tr>';
+
         return implode(PHP_EOL, $output);
     }
 
@@ -218,17 +213,19 @@ class DebugExtension extends TwigExtension
         $output[] = '<tr>';
         $output[] = '<td colspan="3">'.$this->evalVarDump($variable).'</td>';
         $output[] = '</tr>';
+
         return implode(PHP_EOL, $output);
     }
 
     /**
-     * Builds JavaScript for toggling the dump container
+     * Builds JavaScript for toggling the dump container.
      * @return string
      */
     protected function evalToggleDumpOnClick()
     {
         $output = "var d=this.parentElement.nextElementSibling.getElementsByTagName('div')[0];";
         $output .= "d.style.display=='none'?d.style.display='block':d.style.display='none'";
+
         return $output;
     }
 
@@ -258,15 +255,12 @@ class DebugExtension extends TwigExtension
     {
         if ($this->variablePrefix === true) {
             $output = '{{ <span>%s</span> }}';
-        }
-        elseif (is_array($this->variablePrefix)) {
+        } elseif (is_array($this->variablePrefix)) {
             $prefix = implode('.', $this->variablePrefix);
             $output = '{{ <span>'.$prefix.'.%s</span> }}';
-        }
-        elseif ($this->variablePrefix) {
+        } elseif ($this->variablePrefix) {
             $output = '{{ <span>'.$this->variablePrefix.'.%s</span> }}';
-        }
-        else {
+        } else {
             $output = '%s';
         }
 
@@ -274,7 +268,7 @@ class DebugExtension extends TwigExtension
     }
 
     /**
-     * Evaluate the variable description
+     * Evaluate the variable description.
      * @param  mixed $variable
      * @return string
      */
@@ -286,7 +280,7 @@ class DebugExtension extends TwigExtension
                 return $this->evalObjLabel($variable);
 
             case 'array':
-                return $type . '('.count($variable).')';
+                return $type.'('.count($variable).')';
 
             default:
                 return $type;
@@ -294,7 +288,7 @@ class DebugExtension extends TwigExtension
     }
 
     /**
-     * Evaluate an object type for label
+     * Evaluate an object type for label.
      * @param  object $variable
      * @return string
      */
@@ -309,7 +303,7 @@ class DebugExtension extends TwigExtension
     }
 
     /**
-     * Evaluate an object type for label
+     * Evaluate an object type for label.
      * @param  object $variable
      * @return string
      */
@@ -320,14 +314,11 @@ class DebugExtension extends TwigExtension
 
         if ($variable instanceof ComponentBase) {
             $label = '<strong>Component</strong>';
-        }
-        elseif ($variable instanceof Collection) {
+        } elseif ($variable instanceof Collection) {
             $label = 'Collection('.$variable->count().')';
-        }
-        elseif ($variable instanceof Paginator) {
+        } elseif ($variable instanceof Paginator) {
             $label = 'Paged Collection('.$variable->count().')';
-        }
-        elseif ($variable instanceof Model) {
+        } elseif ($variable instanceof Model) {
             $label = 'Model';
         }
 
@@ -335,7 +326,7 @@ class DebugExtension extends TwigExtension
     }
 
     /**
-     * Evaluate the variable description
+     * Evaluate the variable description.
      * @param  mixed $variable
      * @return string
      */
@@ -363,7 +354,7 @@ class DebugExtension extends TwigExtension
     }
 
     /**
-     * Evaluate an method type for description
+     * Evaluate an method type for description.
      * @param  object $variable
      * @return string
      */
@@ -371,15 +362,16 @@ class DebugExtension extends TwigExtension
     {
         $parts = explode('|', $variable);
         if (count($parts) < 2) {
-            return null;
+            return;
         }
 
         $method = $parts[1];
+
         return $this->commentMap[$method] ?? null;
     }
 
     /**
-     * Evaluate an array type for description
+     * Evaluate an array type for description.
      * @param  array $variable
      * @return string
      */
@@ -394,7 +386,7 @@ class DebugExtension extends TwigExtension
     }
 
     /**
-     * Evaluate an object type for description
+     * Evaluate an object type for description.
      * @param  array $variable
      * @return string
      */
@@ -459,7 +451,7 @@ class DebugExtension extends TwigExtension
 
         $methods = [];
         foreach ($info->getMethods() as $method) {
-            if (!$method->isPublic()) {
+            if (! $method->isPublic()) {
                 continue; // Only public
             }
             if ($method->class != $class) {
@@ -488,7 +480,7 @@ class DebugExtension extends TwigExtension
             if ($property->isStatic()) {
                 continue; // Only non-static
             }
-            if (!$property->isPublic()) {
+            if (! $property->isPublic()) {
                 continue; // Only public
             }
             if ($property->class != $class) {
@@ -503,7 +495,7 @@ class DebugExtension extends TwigExtension
     }
 
     /**
-     * Extracts the comment from a DocBlock
+     * Extracts the comment from a DocBlock.
      * @param  ReflectionClass $reflectionObj
      * @return string
      */
@@ -525,7 +517,7 @@ class DebugExtension extends TwigExtension
     //
 
     /**
-     * Get the CSS string for the output data
+     * Get the CSS string for the output data.
      * @param  mixed $variable
      * @return string
      */
@@ -546,7 +538,7 @@ class DebugExtension extends TwigExtension
     }
 
     /**
-     * Get the CSS string for the output container
+     * Get the CSS string for the output container.
      * @return string
      */
     protected function getContainerCss()
@@ -564,7 +556,7 @@ class DebugExtension extends TwigExtension
     }
 
     /**
-     * Get the CSS string for the output header
+     * Get the CSS string for the output header.
      * @return string
      */
     protected function getHeaderCss()
@@ -580,7 +572,7 @@ class DebugExtension extends TwigExtension
     }
 
     /**
-     * Get the CSS string for the output subheader
+     * Get the CSS string for the output subheader.
      * @return string
      */
     protected function getSubheaderCss()
@@ -597,7 +589,7 @@ class DebugExtension extends TwigExtension
     }
 
     /**
-     * Convert a key/value pair array into a CSS string
+     * Convert a key/value pair array into a CSS string.
      * @param array $rules List of rules to process
      * @return string
      */
@@ -606,7 +598,7 @@ class DebugExtension extends TwigExtension
         $strings = [];
 
         foreach ($rules as $key => $value) {
-            $strings[] = $key . ': ' . $value;
+            $strings[] = $key.': '.$value;
         }
 
         return implode('; ', $strings);

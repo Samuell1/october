@@ -1,10 +1,12 @@
-<?php namespace Cms\Classes;
+<?php
 
-use Lang;
+namespace Cms\Classes;
+
 use File;
+use Lang;
 use Cache;
-use Config;
 use Event;
+use Config;
 use October\Rain\Router\Router as RainRouter;
 use October\Rain\Router\Helper as RouterHelper;
 
@@ -30,7 +32,6 @@ use October\Rain\Router\Helper as RouterHelper;
  * /blog/:post_id|^[0-9]+$ - this will match /blog/post/3
  * /blog/:post_name?|^[a-z0-9\-]+$ - this will match /blog/my-blog-post</pre>
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class Router
@@ -88,7 +89,6 @@ class Router
          *     Event::listen('cms.router.beforeRoute', function ((string) $url, (\Cms\Classes\Router) $thisRouterInstance) {
          *         return \Cms\Classes\Page::loadCached('trick-theme-code', 'page-file-name');
          *     });
-         *
          */
         $apiResult = Event::fire('cms.router.beforeRoute', [$url, $this], true);
         if ($apiResult !== null) {
@@ -110,7 +110,7 @@ class Router
             /*
              * Find the page by URL and cache the route
              */
-            if (!$fileName) {
+            if (! $fileName) {
                 $router = $this->getRouterObject();
                 if ($router->match($url)) {
                     $this->parameters = $router->getParameters();
@@ -118,11 +118,11 @@ class Router
                     $fileName = $router->matchedRoute();
 
                     if ($cacheable) {
-                        if (!$urlList || !is_array($urlList)) {
+                        if (! $urlList || ! is_array($urlList)) {
                             $urlList = [];
                         }
 
-                        $urlList[$url] = !empty($this->parameters)
+                        $urlList[$url] = ! empty($this->parameters)
                             ? [$fileName, $this->parameters]
                             : $fileName;
 
@@ -147,16 +147,17 @@ class Router
                      */
                     if ($pass == 1) {
                         $this->clearCache();
+
                         continue;
                     }
 
-                    return null;
+                    return;
                 }
 
                 return $page;
             }
 
-            return null;
+            return;
         }
     }
 
@@ -169,11 +170,12 @@ class Router
      */
     public function findByFile($fileName, $parameters = [])
     {
-        if (!strlen(File::extension($fileName))) {
+        if (! strlen(File::extension($fileName))) {
             $fileName .= '.htm';
         }
 
         $router = $this->getRouterObject();
+
         return $router->url($fileName, $parameters);
     }
 
@@ -209,7 +211,7 @@ class Router
      */
     protected function getUrlMap()
     {
-        if (!count($this->urlMap)) {
+        if (! count($this->urlMap)) {
             $this->loadUrlMap();
         }
 
@@ -221,7 +223,7 @@ class Router
      * The URL map can is cached. The clearUrlMap() method resets the cache. By default
      * the map is updated every time when a page is saved in the back-end, or
      * when the interval defined with the cms.urlCacheTtl expires.
-     * @return boolean Returns true if the URL map was loaded from the cache. Otherwise returns false.
+     * @return bool Returns true if the URL map was loaded from the cache. Otherwise returns false.
      */
     protected function loadUrlMap()
     {
@@ -230,19 +232,18 @@ class Router
         $cacheable = Config::get('cms.enableRoutesCache');
         if ($cacheable) {
             $cached = Cache::get($key, false);
-        }
-        else {
+        } else {
             $cached = false;
         }
 
-        if (!$cached || ($unserialized = @unserialize(@base64_decode($cached))) === false) {
+        if (! $cached || ($unserialized = @unserialize(@base64_decode($cached))) === false) {
             /*
              * The item doesn't exist in the cache, create the map
              */
             $pages = $this->theme->listPages();
             $map = [];
             foreach ($pages as $page) {
-                if (!$page->url) {
+                if (! $page->url) {
                     continue;
                 }
 
@@ -258,6 +259,7 @@ class Router
         }
 
         $this->urlMap = $unserialized;
+
         return true;
     }
 
@@ -304,7 +306,7 @@ class Router
      */
     public function getParameter($name, $default = null)
     {
-        if (isset($this->parameters[$name]) && !empty($this->parameters[$name])) {
+        if (isset($this->parameters[$name]) && ! empty($this->parameters[$name])) {
             return $this->parameters[$name];
         }
 
@@ -348,7 +350,5 @@ class Router
         ) {
             return $urlList[$url];
         }
-
-        return null;
     }
 }

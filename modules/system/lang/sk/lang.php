@@ -1,8 +1,9 @@
 <?php
+
 return [
     'app' => [
         'name' => 'OctoberCMS',
-        'tagline' => 'Návrat k základom'
+        'tagline' => 'Návrat k základom',
     ],
     'locale' => [
         'ar' => 'العربية',
@@ -43,16 +44,16 @@ return [
         'uk' => 'Українська мова',
         'zh-cn' => '简体中文',
         'zh-tw' => '繁體中文',
-        'vn' => 'Tiếng việt'
+        'vn' => 'Tiếng việt',
     ],
     'directory' => [
-        'create_fail' => 'Nie je možné vytvoriť priečinok: :name'
+        'create_fail' => 'Nie je možné vytvoriť priečinok: :name',
     ],
     'file' => [
-        'create_fail' => 'Nie je možné vytvoriť súbor: :name'
+        'create_fail' => 'Nie je možné vytvoriť súbor: :name',
     ],
     'combiner' => [
-        'not_found' => "Zlučujúci súbor ':name' nebol nájdený."
+        'not_found' => "Zlučujúci súbor ':name' nebol nájdený.",
     ],
     'system' => [
         'name' => 'Systém',
@@ -71,15 +72,15 @@ return [
             'events' => 'Udalosti',
             'customers' => 'Zákazníci',
             'my_settings' => 'Moje nastavenia',
-            'notifications' => 'Oznámenia'
-        ]
+            'notifications' => 'Oznámenia',
+        ],
     ],
     'theme' => [
         'label' => 'Téma',
         'unnamed' => 'Téma bez názvu',
         'name' => [
             'label' => 'Názov témy',
-            'help' => 'Názov témy podľa jej unikátneho kódu. Napríklad, RainLab.Vanilla'
+            'help' => 'Názov témy podľa jej unikátneho kódu. Napríklad, RainLab.Vanilla',
         ],
     ],
     'themes' => [
@@ -88,15 +89,15 @@ return [
         'installed' => 'Nainštalované témy',
         'no_themes' => 'Žiadne témy inštalované z trhu.',
         'recommended' => 'Odporúčané',
-        'remove_confirm' => 'Skutočne chcete odstrániť túto tému?'
+        'remove_confirm' => 'Skutočne chcete odstrániť túto tému?',
     ],
     'plugin' => [
         'label' => 'Plugin',
         'unnamed' => 'Plugin bez názvu',
         'name' => [
             'label' => 'Názov pluginu',
-            'help' => 'Názov pluginu podľa jeho unikátneho kódu. Napríklad, RainLab.Blog'
-        ]
+            'help' => 'Názov pluginu podľa jeho unikátneho kódu. Napríklad, RainLab.Blog',
+        ],
     ],
     'plugins' => [
         'manage' => 'Správa pluginov',
@@ -143,10 +144,10 @@ return [
         'id' => [
             'label' => 'Project ID',
             'help' => 'Ako nájsť vaše Project ID',
-            'missing' => 'Prosím zadajta vaše Project ID.'
+            'missing' => 'Prosím zadajta vaše Project ID.',
         ],
         'detach_confirm' => 'Skutočne chcete odpojiť tento projekt?',
-        'unbind_success' => 'Projekt bol odpojený.'
+        'unbind_success' => 'Projekt bol odpojený.',
     ],
     'settings' => [
         'menu_label' => 'Nastavenia',
@@ -154,7 +155,7 @@ return [
         'missing_model' => 'Stránka s nastaveniami vyžaduje definíciu Modelu.',
         'update_success' => 'nastavenia pre :name úspešne uložené',
         'return' => 'Návrat do systémových nastavení',
-        'search' => 'Hľadať'
+        'search' => 'Hľadať',
     ],
     'mail' => [
         'log_file' => 'Súbor záznamov',
@@ -196,7 +197,7 @@ return [
         'ses_region' => 'SES región',
         'ses_region_comment' => 'Zadajta váš SES región (napríiklad us-east-1)',
         'drivers_hint_header' => 'Ovládače nie sú nainštalované',
-        'drivers_hint_content' => 'Táto metóda posielania e-mailov vyžaduje nainštalovaný plugin ":plugin" predtým ako môžete posielať e-maily.'
+        'drivers_hint_content' => 'Táto metóda posielania e-mailov vyžaduje nainštalovaný plugin ":plugin" predtým ako môžete posielať e-maily.',
     ],
     'mail_templates' => [
         'menu_label' => 'E-mailové šablóny',
@@ -235,7 +236,7 @@ return [
         'deleting' => 'Mazanie šablóny...',
         'deleting_layout' => 'Mazanie layoutu...',
         'sending' => 'Posielanie testovacej správy...',
-        'return' => 'Späť na zoznam šablón'
+        'return' => 'Späť na zoznam šablón',
     ],
     'mail_brand' => [
         'menu_label' => 'Personalizácia e-mailov',
@@ -249,7 +250,7 @@ return [
                 'description' => 'Popis',
                 'price' => 'Cena',
                 'centered' => 'Na stred',
-                'right_aligned' => 'Zarovnané vpravo'
+                'right_aligned' => 'Zarovnané vpravo',
             ],
             'buttons' => [
                 'primary' => 'Primárne tlačítko',
@@ -260,7 +261,7 @@ return [
             'more' => 'Nejaký ďalší text',
             'promotion' => 'Kód kupónu: OCTOBER',
             'subcopy' => 'Toto je subkópia e-mailu',
-            'thanks' => 'Ďakujeme'
+            'thanks' => 'Ďakujeme',
         ],
         'fields' => [
             '_section_background' => 'Pozadie',
@@ -286,7 +287,7 @@ return [
             'panel_bg' => 'Pozadie panelu',
             'promotion_bg' => 'Pozadie reklamy',
             'promotion_border_color' => 'Farba okrajov reklamy',
-        ]
+        ],
     ],
     'install' => [
         'project_label' => 'Pridať k projetku',
@@ -295,7 +296,7 @@ return [
         'missing_plugin_name' => 'Prosím zadajte názov pluginu na nainštalovanie.',
         'missing_theme_name' => 'Prosím zadajte názov témy na nainštalovanie.',
         'install_completing' => 'Dokončovanie inštalačného procesu',
-        'install_success' => 'Plugin bol úspešne nainštalovaný'
+        'install_success' => 'Plugin bol úspešne nainštalovaný',
     ],
     'updates' => [
         'title' => 'Správa aktualizácií',
@@ -335,17 +336,17 @@ return [
         'force_label' => 'Vynútiť aktualizácie',
         'found' => [
             'label' => 'Nájdené nové aktualizácie!',
-            'help' => 'Kliknite na Aktualizovať pre začatie aktualizácie.'
+            'help' => 'Kliknite na Aktualizovať pre začatie aktualizácie.',
         ],
         'none' => [
             'label' => 'Žiadne aktualizácie',
-            'help' => 'Žiadne nové aktualizácie neboli nájdené.'
+            'help' => 'Žiadne nové aktualizácie neboli nájdené.',
         ],
         'important_action' => [
             'empty' => 'Vybrať akciu',
             'confirm' => 'Potvrdiť aktualizácie',
             'skip' => 'Preskočiť túto aktualizáciu (iba raz)',
-            'ignore' => 'Preskočiť tento update (vždy)'
+            'ignore' => 'Preskočiť tento update (vždy)',
         ],
         'important_action_required' => 'Je vyťadovaná akcia',
         'important_view_guide' => 'Zobraziť návod pre aktualizáciu',
@@ -362,7 +363,7 @@ return [
         'details_licence' => 'Licencia',
         'details_licence_missing' => 'Nie je poskytnutá žiadna licencia.',
         'details_current_version' => 'Aktuálna verzia',
-        'details_author' => 'Autor'
+        'details_author' => 'Autor',
     ],
     'server' => [
         'connect_error' => 'Chyba pripojenia na server.',
@@ -370,17 +371,17 @@ return [
         'response_invalid' => 'Neplatná odpoveď servra.',
         'response_empty' => 'Prázdna odpoveď servra.',
         'file_error' => 'Chyba sťahovania balíčku zo servra.',
-        'file_corrupt' => 'Súbor zo servra je poškodený.'
+        'file_corrupt' => 'Súbor zo servra je poškodený.',
     ],
     'behavior' => [
-        'missing_property' => 'Trieda :class musí definovať vlastnosť $:property použitú správaním :behavior.'
+        'missing_property' => 'Trieda :class musí definovať vlastnosť $:property použitú správaním :behavior.',
     ],
     'config' => [
         'not_found' => 'Nebolo možné nájsť konfiguračný súbor :file definovaný pre :location.',
-        'required' => "Konfigurácia použitá v :location musí podporovať hodnotu ':property'."
+        'required' => "Konfigurácia použitá v :location musí podporovať hodnotu ':property'.",
     ],
     'zip' => [
-        'extract_failed' => "Nepodarilo sa rozbaliť súbor ':file'."
+        'extract_failed' => "Nepodarilo sa rozbaliť súbor ':file'.",
     ],
     'event_log' => [
         'hint' => 'Tento záznam zobrazuje zoznam potencionálnch chýb v aplikácií, ako napríklad výnimky a ladiace informácie.',
@@ -395,7 +396,7 @@ return [
         'created_at' => 'D8tum a čas',
         'message' => 'Správa',
         'level' => 'Úroveň',
-        'preview_title' => 'Udalosť'
+        'preview_title' => 'Udalosť',
     ],
     'request_log' => [
         'hint' => 'Tento záznam zobrazuje zoznam požiadaviek prehliadača, ktoré môžu vyžadovať vašu pozornosť. Napríklad, ak návštevník otvorí CMS stránku, ktorú sa nepodarilo nájsť, vytvorí sa záznam so status kódom 404.',
@@ -411,7 +412,7 @@ return [
         'referer' => 'Odkazy',
         'url' => 'URL',
         'status_code' => 'Status',
-        'preview_title' => 'Požiadavka'
+        'preview_title' => 'Požiadavka',
     ],
     'permissions' => [
         'name' => 'Systém',
@@ -424,7 +425,7 @@ return [
         'manage_preferences' => 'Správa nastavení administrácie',
         'manage_editor' => 'Správa nastavení editora kódu',
         'view_the_dashboard' => 'Zobrazenie hlavného panelu',
-        'manage_branding' => 'Prispôsobenie administrácie'
+        'manage_branding' => 'Prispôsobenie administrácie',
     ],
     'log' => [
         'menu_label' => 'Nastavenia záznamov',

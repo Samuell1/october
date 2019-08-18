@@ -7,7 +7,7 @@ return [
     'field' => [
         'invalid_type' => 'Invalid field type used :type.',
         'options_method_invalid_model' => "O atributo ':field' não é resolvido para um modelo válidol. Tente especificar o método de opções para a classe de modelo :model explicitamente.",
-        'options_method_not_exists' => "A classe de modelo :model deve definir um método :method() retornando opções para o campo de formulário ':field'."
+        'options_method_not_exists' => "A classe de modelo :model deve definir um método :method() retornando opções para o campo de formulário ':field'.",
     ],
     'widget' => [
         'not_registered' => 'Uma classe de widget com o nome ":name" não foi registada',
@@ -22,12 +22,12 @@ return [
         ],
         'no_database' => [
             'label' => 'Base de dados não existente',
-            'help' => "Uma base de dados é necessária para acesso ao back-end. Verifique se a base dados se encontra configurada e migrada antes de tentar novamente.",
-            'cms_link' => 'Regressar á página inicial'
+            'help' => 'Uma base de dados é necessária para acesso ao back-end. Verifique se a base dados se encontra configurada e migrada antes de tentar novamente.',
+            'cms_link' => 'Regressar á página inicial',
         ],
         'invalid_token' => [
-            'label' => 'Token de segurança inválido'
-        ]
+            'label' => 'Token de segurança inválido',
+        ],
     ],
     'partial' => [
         'not_found_name' => 'O bloco ":name" não foi encontrado.',
@@ -102,7 +102,7 @@ return [
             'last_sign_in' => 'O último acesso foi em',
             'view_access_logs' => 'Visualizar registos de acesso',
             'nice_message' => 'Tenha um excelente dia!',
-        ]
+        ],
     ],
     'user' => [
         'name' => 'Administrator',
@@ -149,7 +149,7 @@ return [
             'new' => 'Novo grupo administrador',
             'delete_confirm' => 'Você realmente deseja apagar este grupo?',
             'return' => 'Voltar para a lista de grupos',
-            'users_count' => 'Utilizadores'
+            'users_count' => 'Utilizadores',
         ],
         'preferences' => [
             'not_authenticated' => 'Nenhum utilizador autenticado para carregar as preferências.',
@@ -184,7 +184,7 @@ return [
         'delete_selected_confirm' => 'Apagar os registos selecionados?',
         'delete_selected_success' => 'Registos seleccionados apagados com sucesso.',
         'column_switch_true' => 'Sim',
-        'column_switch_false' => 'Não'
+        'column_switch_false' => 'Não',
     ],
     'fileupload' => [
         'attachment' => 'Anexo',
@@ -196,7 +196,7 @@ return [
         'upload_file' => 'Enviar ficheiro',
         'upload_error' => 'Erro ao enviar',
         'remove_confirm' => 'Tem a certeza?',
-        'remove_file' => 'Remover ficheiro'
+        'remove_file' => 'Remover ficheiro',
     ],
     'form' => [
         'create_title' => 'Novo :name',
@@ -261,7 +261,7 @@ return [
     ],
     'pagelist' => [
         'page_link' => 'Ligação de página',
-        'select_page' => 'Escolha uma página...'
+        'select_page' => 'Escolha uma página...',
     ],
     'relation' => [
         'missing_config' => 'Comportamento da relação não tem uma configuração para ":config".',
@@ -363,7 +363,7 @@ return [
         'remove_tags_comment' => 'Lista de etiquetas que serão excluídas incluíndo o conteúdo.',
     ],
     'tooltips' => [
-        'preview_website' => 'Prévisualizar a página'
+        'preview_website' => 'Prévisualizar a página',
     ],
     'mysettings' => [
         'menu_label' => 'As minhas configurações',
@@ -372,7 +372,7 @@ return [
     'myaccount' => [
         'menu_label' => 'Minha Conta',
         'menu_description' => 'Actualizar detalhes da sua conta, como nome, e-mail e senha.',
-        'menu_keywords' => 'login de segurança'
+        'menu_keywords' => 'login de segurança',
     ],
     'branding' => [
         'menu_label' => 'Personalização',
@@ -394,7 +394,7 @@ return [
         'menu_mode' => 'Estilo de menu',
         'menu_mode_inline' => 'Em linha',
         'menu_mode_tile' => 'Blocos',
-        'menu_mode_collapsed' => 'Colapsados'
+        'menu_mode_collapsed' => 'Colapsados',
     ],
     'backend_preferences' => [
         'menu_label' => 'Preferências da Administração',
@@ -420,7 +420,7 @@ return [
     'filter' => [
         'all' => 'todos',
         'options_method_not_exists' => "A classe modelo :model deve definir um método :method() retornando opções para o filtro ':filter'.",
-        'date_all' => 'todo o período'
+        'date_all' => 'todo o período',
     ],
     'import_export' => [
         'upload_csv_file' => '1. Enviar ficheiro CSV',
@@ -491,15 +491,15 @@ return [
             'iso_8859_14' => 'ISO-8859-14 (Latin-8, Celtic)',
             'iso_8859_15' => 'ISO-8859-15 (Latin-9, Western European revision with euro sign)',
             'windows_1251' => 'Windows-1251 (CP1251)',
-            'windows_1252' => 'Windows-1252 (CP1252)'
-        ]
+            'windows_1252' => 'Windows-1252 (CP1252)',
+        ],
     ],
     'permissions' => [
-        'manage_media' => 'Gerir conteúdo multimédia'
+        'manage_media' => 'Gerir conteúdo multimédia',
     ],
     'mediafinder' => [
         'label' => 'Localizador de multimédia',
-        'default_prompt' => 'Clique no botão %s para localizar um ficheiro multimédia'
+        'default_prompt' => 'Clique no botão %s para localizar um ficheiro multimédia',
     ],
     'media' => [
         'menu_label' => 'Conteúdos',
@@ -559,6 +559,6 @@ return [
         'selection_mode' => 'Modo de seleção',
         'resize_image' => 'Redimensionar imagem',
         'image_size' => 'Tamanho da imagem:',
-        'selected_size' => 'Selecionado:'
+        'selected_size' => 'Selecionado:',
     ],
 ];

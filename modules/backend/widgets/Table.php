@@ -1,24 +1,25 @@
-<?php namespace Backend\Widgets;
+<?php
+
+namespace Backend\Widgets;
 
 use Lang;
 use Input;
 use Request;
+use SystemException;
 use Backend\Classes\WidgetBase;
 use October\Rain\Html\Helper as HtmlHelper;
-use SystemException;
 
 /**
  * Table Widget.
  *
  * Represents an editable tabular control.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class Table extends WidgetBase
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'table';
 
@@ -28,7 +29,7 @@ class Table extends WidgetBase
     protected $columns = [];
 
     /**
-     * @var boolean Show data table header
+     * @var bool Show data table header
      */
     protected $showHeader = true;
 
@@ -49,7 +50,7 @@ class Table extends WidgetBase
 
     protected $dataSourceAliases = [
         'client' => '\Backend\Widgets\Table\ClientMemoryDataSource',
-        'server' => '\Backend\Widgets\Table\ServerEventDataSource'
+        'server' => '\Backend\Widgets\Table\ServerEventDataSource',
     ];
 
     /**
@@ -64,7 +65,7 @@ class Table extends WidgetBase
         $this->recordsKeyFrom = $this->getConfig('keyFrom', 'id');
 
         $dataSourceClass = $this->getConfig('dataSource');
-        if (!strlen($dataSourceClass)) {
+        if (! strlen($dataSourceClass)) {
             throw new SystemException('The Table widget data source is not specified in the configuration.');
         }
 
@@ -72,7 +73,7 @@ class Table extends WidgetBase
             $dataSourceClass = $this->dataSourceAliases[$dataSourceClass];
         }
 
-        if (!class_exists($dataSourceClass)) {
+        if (! class_exists($dataSourceClass)) {
             throw new SystemException(sprintf('The Table widget data source class "%s" is could not be found.', $dataSourceClass));
         }
 
@@ -80,9 +81,9 @@ class Table extends WidgetBase
 
         if (Request::method() == 'POST' && $this->isClientDataSource()) {
             if (strpos($this->fieldName, '[') === false) {
-                $requestDataField = $this->fieldName . 'TableData';
+                $requestDataField = $this->fieldName.'TableData';
             } else {
-                $requestDataField = $this->fieldName . '[TableData]';
+                $requestDataField = $this->fieldName.'[TableData]';
             }
 
             // Use dot notation for request data field
@@ -111,11 +112,12 @@ class Table extends WidgetBase
     public function render()
     {
         $this->prepareVars();
+
         return $this->makePartial('table');
     }
 
     /**
-     * Prepares the view data
+     * Prepares the view data.
      */
     public function prepareVars()
     {
@@ -149,7 +151,7 @@ class Table extends WidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function loadAssets()
     {
@@ -162,7 +164,7 @@ class Table extends WidgetBase
      * Working with regular arrays is much faster in JavaScript.
      * References:
      * - http://www.smashingmagazine.com/2012/11/05/writing-fast-memory-efficient-javascript/
-     * - http://jsperf.com/performance-of-array-vs-object/3
+     * - http://jsperf.com/performance-of-array-vs-object/3.
      */
     protected function prepareColumnsArray()
     {
@@ -171,12 +173,14 @@ class Table extends WidgetBase
         foreach ($this->columns as $key=>$data) {
             $data['key'] = $key;
 
-            if (isset($data['title']))
+            if (isset($data['title'])) {
                 $data['title'] = trans($data['title']);
+            }
 
             if (isset($data['options'])) {
-                foreach ($data['options'] as &$option)
+                foreach ($data['options'] as &$option) {
                     $option = trans($option);
+                }
             }
 
             if (isset($data['validation'])) {
@@ -220,7 +224,7 @@ class Table extends WidgetBase
 
         return [
             'records' => $this->dataSource->getRecords(post('offset'), $count),
-            'count' => $this->dataSource->getCount()
+            'count' => $this->dataSource->getCount(),
         ];
     }
 
@@ -242,7 +246,7 @@ class Table extends WidgetBase
 
         return [
             'records' => $this->dataSource->searchRecords(post('query'), post('offset'), $count),
-            'count' => $this->dataSource->getCount()
+            'count' => $this->dataSource->getCount(),
         ];
     }
 
@@ -294,7 +298,7 @@ class Table extends WidgetBase
         }
 
         return [
-            'options' => $options
+            'options' => $options,
         ];
     }
 
@@ -311,7 +315,7 @@ class Table extends WidgetBase
         }
 
         return [
-            'options' => $options
+            'options' => $options,
         ];
     }
 }

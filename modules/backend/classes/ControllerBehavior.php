@@ -1,15 +1,16 @@
-<?php namespace Backend\Classes;
+<?php
+
+namespace Backend\Classes;
 
 use Lang;
 use ApplicationException;
-use October\Rain\Extension\ExtensionBase;
 use System\Traits\ViewMaker;
+use October\Rain\Extension\ExtensionBase;
 use October\Rain\Html\Helper as HtmlHelper;
 
 /**
- * Controller Behavior base class
+ * Controller Behavior base class.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class ControllerBehavior extends ExtensionBase
@@ -55,11 +56,11 @@ class ControllerBehavior extends ExtensionBase
          * Validate controller properties
          */
         foreach ($this->requiredProperties as $property) {
-            if (!isset($controller->{$property})) {
+            if (! isset($controller->{$property})) {
                 throw new ApplicationException(Lang::get('system::lang.behavior.missing_property', [
                     'class' => get_class($controller),
                     'property' => $property,
-                    'behavior' => get_called_class()
+                    'behavior' => get_called_class(),
                 ]));
             }
         }
@@ -71,7 +72,7 @@ class ControllerBehavior extends ExtensionBase
     }
 
     /**
-     * Sets the configuration values
+     * Sets the configuration values.
      * @param mixed $config   Config object or array
      * @param array $required Required config items
      */
@@ -104,7 +105,7 @@ class ControllerBehavior extends ExtensionBase
          * First part will be the field name, pop it off
          */
         $fieldName = array_shift($keyParts);
-        if (!isset($this->config->{$fieldName})) {
+        if (! isset($this->config->{$fieldName})) {
             return $default;
         }
 
@@ -114,7 +115,7 @@ class ControllerBehavior extends ExtensionBase
          * Loop the remaining key parts and build a result
          */
         foreach ($keyParts as $key) {
-            if (!is_array($result) || !array_key_exists($key, $result)) {
+            if (! is_array($result) || ! array_key_exists($key, $result)) {
                 return $default;
             }
 
@@ -134,7 +135,7 @@ class ControllerBehavior extends ExtensionBase
      */
     protected function hideAction($methodName)
     {
-        if (!is_array($methodName)) {
+        if (! is_array($methodName)) {
             $methodName = [$methodName];
         }
 
@@ -150,6 +151,7 @@ class ControllerBehavior extends ExtensionBase
     public function makeFileContents($filePath, $extraParams = [])
     {
         $this->controller->vars = array_merge($this->controller->vars, $this->vars);
+
         return $this->controller->makeFileContents($filePath, $extraParams);
     }
 

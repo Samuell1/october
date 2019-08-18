@@ -1,31 +1,38 @@
-<?php namespace System\Models;
+<?php
+
+namespace System\Models;
 
 use App;
 use Model;
 
 /**
- * Mail settings
+ * Mail settings.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class MailSetting extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
-    const MODE_LOG      = 'log';
-    const MODE_MAIL     = 'mail';
+    const MODE_LOG = 'log';
+
+    const MODE_MAIL = 'mail';
+
     const MODE_SENDMAIL = 'sendmail';
-    const MODE_SMTP     = 'smtp';
-    const MODE_MAILGUN  = 'mailgun';
+
+    const MODE_SMTP = 'smtp';
+
+    const MODE_MAILGUN = 'mailgun';
+
     const MODE_MANDRILL = 'mandrill';
-    const MODE_SES      = 'ses';
+
+    const MODE_SES = 'ses';
 
     /**
      * @var array Behaviors implemented by this model.
      */
     public $implement = [
-        \System\Behaviors\SettingsModel::class
+        \System\Behaviors\SettingsModel::class,
     ];
 
     /**
@@ -43,7 +50,7 @@ class MailSetting extends Model
      */
     public $rules = [
         'sender_name'  => 'required',
-        'sender_email' => 'required|email'
+        'sender_email' => 'required|email',
     ];
 
     /**
@@ -62,7 +69,7 @@ class MailSetting extends Model
         $this->smtp_port = $config->get('mail.port', 587);
         $this->smtp_user = $config->get('mail.username');
         $this->smtp_password = $config->get('mail.password');
-        $this->smtp_authorization = !!strlen($this->smtp_user);
+        $this->smtp_authorization = (bool) strlen($this->smtp_user);
         $this->smtp_encryption = $config->get('mail.encryption');
     }
 
@@ -95,41 +102,42 @@ class MailSetting extends Model
                 if ($settings->smtp_authorization) {
                     $config->set('mail.username', $settings->smtp_user);
                     $config->set('mail.password', $settings->smtp_password);
-                }
-                else {
+                } else {
                     $config->set('mail.username', null);
                     $config->set('mail.password', null);
                 }
                 if ($settings->smtp_encryption) {
                     $config->set('mail.encryption', $settings->smtp_encryption);
-                }
-                else {
+                } else {
                     $config->set('mail.encryption', null);
                 }
+
                 break;
 
             case self::MODE_SENDMAIL:
                 $config->set('mail.sendmail', $settings->sendmail_path);
+
                 break;
 
             case self::MODE_MAILGUN:
                 $config->set('services.mailgun.domain', $settings->mailgun_domain);
                 $config->set('services.mailgun.secret', $settings->mailgun_secret);
+
                 break;
 
             case self::MODE_MANDRILL:
                 $config->set('services.mandrill.secret', $settings->mandrill_secret);
+
                 break;
 
             case self::MODE_SES:
                 $config->set('services.ses.key', $settings->ses_key);
                 $config->set('services.ses.secret', $settings->ses_secret);
                 $config->set('services.ses.region', $settings->ses_region);
+
                 break;
         }
-
     }
-
 
     /**
      * @return array smtp_encryption options values

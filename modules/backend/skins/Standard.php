@@ -1,4 +1,6 @@
-<?php namespace Backend\Skins;
+<?php
+
+namespace Backend\Skins;
 
 use File;
 use Backend\Classes\Skin;
@@ -9,46 +11,43 @@ use October\Rain\Router\Helper as RouterHelper;
  *
  * This skin uses the default paths always, there is no lookup required.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
-
 class Standard extends Skin
 {
-
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function __construct()
     {
-        $this->skinPath = $this->defaultSkinPath = base_path() . '/modules/backend';
+        $this->skinPath = $this->defaultSkinPath = base_path().'/modules/backend';
         $this->publicSkinPath = $this->defaultPublicSkinPath = File::localToPublic($this->skinPath);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function skinDetails()
     {
         return [
-            'name' => 'Default Skin'
+            'name' => 'Default Skin',
         ];
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getPath($path = null, $isPublic = false)
     {
         $path = RouterHelper::normalizeUrl($path);
 
         return $isPublic
-            ? $this->defaultPublicSkinPath . $path
-            : $this->defaultSkinPath . $path;
+            ? $this->defaultPublicSkinPath.$path
+            : $this->defaultSkinPath.$path;
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getLayoutPaths()
     {

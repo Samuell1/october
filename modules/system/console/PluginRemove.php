@@ -1,9 +1,11 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use File;
 use Illuminate\Console\Command;
-use System\Classes\UpdateManager;
 use System\Classes\PluginManager;
+use System\Classes\UpdateManager;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -13,12 +15,10 @@ use Symfony\Component\Console\Input\InputArgument;
  * This completely deletes an existing plugin, including database tables, files
  * and directories.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class PluginRemove extends Command
 {
-
     use \Illuminate\Console\ConfirmableTrait;
 
     /**
@@ -43,11 +43,11 @@ class PluginRemove extends Command
         $pluginName = $this->argument('name');
         $pluginName = $pluginManager->normalizeIdentifier($pluginName);
 
-        if (!$pluginManager->hasPlugin($pluginName)) {
+        if (! $pluginManager->hasPlugin($pluginName)) {
             return $this->error(sprintf('Unable to find a registered plugin called "%s"', $pluginName));
         }
 
-        if (!$this->confirmToProceed(sprintf('This will DELETE plugin "%s" from the filesystem and database.', $pluginName))) {
+        if (! $this->confirmToProceed(sprintf('This will DELETE plugin "%s" from the filesystem and database.', $pluginName))) {
             return;
         }
 

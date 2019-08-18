@@ -1,4 +1,6 @@
-<?php namespace Backend\Controllers;
+<?php
+
+namespace Backend\Controllers;
 
 use Backend;
 use BackendMenu;
@@ -6,9 +8,8 @@ use Backend\Classes\Controller;
 use System\Classes\SettingsManager;
 
 /**
- * Access Logs controller
+ * Access Logs controller.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class AccessLogs extends Controller
@@ -17,7 +18,7 @@ class AccessLogs extends Controller
      * @var array Extensions implemented by this controller.
      */
     public $implement = [
-        \Backend\Behaviors\ListController::class
+        \Backend\Behaviors\ListController::class,
     ];
 
     /**

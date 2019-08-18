@@ -1,12 +1,13 @@
-<?php namespace Backend\Models;
+<?php
+
+namespace Backend\Models;
 
 use Model;
 use Request;
 
 /**
- * Model for logging access to the back-end
+ * Model for logging access to the back-end.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class AccessLog extends Model
@@ -20,11 +21,11 @@ class AccessLog extends Model
      * @var array Relations
      */
     public $belongsTo = [
-        'user' => User::class
+        'user' => User::class,
     ];
 
     /**
-     * Creates a log record
+     * Creates a log record.
      * @param Backend\Models\User $user Admin user
      * @return self
      */
@@ -48,15 +49,14 @@ class AccessLog extends Model
         $records = static::where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->limit(2)
-            ->get()
-        ;
+            ->get();
 
-        if (!count($records)) {
-            return null;
+        if (! count($records)) {
+            return;
         }
 
         $first = $records->first();
 
-        return !$first->created_at->isToday() ? $first : $records->pop();
+        return ! $first->created_at->isToday() ? $first : $records->pop();
     }
 }

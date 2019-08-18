@@ -1,4 +1,6 @@
-<?php namespace Backend\Controllers;
+<?php
+
+namespace Backend\Controllers;
 
 use View;
 use Response;
@@ -7,11 +9,9 @@ use Backend\Classes\Controller;
 use System\Classes\SettingsManager;
 
 /**
- * Backend user groups controller
+ * Backend user groups controller.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
- *
  */
 class UserRoles extends Controller
 {
@@ -20,7 +20,7 @@ class UserRoles extends Controller
      */
     public $implement = [
         \Backend\Behaviors\FormController::class,
-        \Backend\Behaviors\ListController::class
+        \Backend\Behaviors\ListController::class,
     ];
 
     /**
@@ -51,8 +51,8 @@ class UserRoles extends Controller
         /*
          * Only super users can access
          */
-        $this->bindEvent('page.beforeDisplay', function() {
-            if (!$this->user->isSuperUser()) {
+        $this->bindEvent('page.beforeDisplay', function () {
+            if (! $this->user->isSuperUser()) {
                 return Response::make(View::make('backend::access_denied'), 403);
             }
         });
@@ -79,8 +79,8 @@ class UserRoles extends Controller
             'permissions' => [
                 'tab' => 'backend::lang.user.permissions',
                 'type' => 'Backend\FormWidgets\PermissionEditor',
-                'mode' => 'checkbox'
-            ]
+                'mode' => 'checkbox',
+            ],
         ];
     }
 }

@@ -2,11 +2,11 @@
 
 return [
     'auth' => [
-        'title' => 'Area di Amministrazione'
+        'title' => 'Area di Amministrazione',
     ],
     'field' => [
         'invalid_type' => 'Il tipo di campo :type non è valido.',
-        'options_method_not_exists' => 'La classe :model deve definire un metodo :method() che ritorni le opzioni per il campo ":field".'
+        'options_method_not_exists' => 'La classe :model deve definire un metodo :method() che ritorni le opzioni per il campo ":field".',
     ],
     'widget' => [
         'not_registered' => "Nessun widget ':name' è stato registrato",
@@ -16,15 +16,15 @@ return [
         'untitled' => 'Senza titolo',
         'access_denied' => [
             'label' => 'Accesso negato',
-            'help' => "Non hai le autorizzazioni necessarie per accedere a questa pagina.",
-            'cms_link' => 'Ritorna al pannello di controllo'
+            'help' => 'Non hai le autorizzazioni necessarie per accedere a questa pagina.',
+            'cms_link' => 'Ritorna al pannello di controllo',
         ],
         'invalid_token' => [
-            'label' => 'Token di protezione non valido'
-        ]
+            'label' => 'Token di protezione non valido',
+        ],
     ],
     'partial' => [
-        'not_found_name' => "La vista parziale ':name' non è stata trovata."
+        'not_found_name' => "La vista parziale ':name' non è stata trovata.",
     ],
     'account' => [
         'sign_out' => 'Esci',
@@ -47,7 +47,7 @@ return [
         'apply' => 'Applica',
         'cancel' => 'Annulla',
         'delete' => 'Elimina',
-        'ok' => 'OK'
+        'ok' => 'OK',
     ],
     'dashboard' => [
         'menu_label' => 'Dashboard',
@@ -94,7 +94,7 @@ return [
             'last_sign_in' => 'Il tuo ultimo accesso è stato ',
             'view_access_logs' => 'Visualizza log accessi',
             'nice_message' => 'Buona giornata!',
-        ]
+        ],
     ],
     'user' => [
         'name' => 'Amministratore',
@@ -137,11 +137,11 @@ return [
             'new' => 'Nuovo gruppo',
             'delete_confirm' => 'Vuoi davvero eliminare questo gruppo amministratore?',
             'return' => 'Ritorna alla lista dei gruppi',
-            'users_count' => 'Utenti'
+            'users_count' => 'Utenti',
         ],
         'preferences' => [
-            'not_authenticated' => 'Non c\'è nessun utente autenticato per cui caricare o salvare le preferenze.'
-        ]
+            'not_authenticated' => 'Non c\'è nessun utente autenticato per cui caricare o salvare le preferenze.',
+        ],
     ],
     'list' => [
         'default_title' => 'Elenco',
@@ -170,7 +170,7 @@ return [
         'delete_selected_confirm' => 'Elimina i record selezionati?',
         'delete_selected_success' => 'I record selezionati sono stati eliminati con successo.',
         'column_switch_true' => 'Sì',
-        'column_switch_false' => 'No'
+        'column_switch_false' => 'No',
     ],
     'fileupload' => [
         'attachment' => 'Allegato',
@@ -182,7 +182,7 @@ return [
         'upload_file' => 'Carica file',
         'upload_error' => 'Errore nel caricamento',
         'remove_confirm' => 'Sei sicuro?',
-        'remove_file' => 'Rimuovi file'
+        'remove_file' => 'Rimuovi file',
     ],
     'form' => [
         'create_title' => 'Crea :name',
@@ -237,11 +237,11 @@ return [
         'insert_row_below' => 'Inserisci riga sotto',
         'delete_row' => 'Elimina riga',
         'concurrency_file_changed_title' => 'Il file è stato cambiato',
-        'concurrency_file_changed_description' => "Il file che stavi modificando è stato cambiato da un altro utente. Puoi ricaricare il file e perdere le tue modifiche oppure sovrascrivere il file sul disco.",
-        'return_to_list' => 'Ritorna all\'elenco'
+        'concurrency_file_changed_description' => 'Il file che stavi modificando è stato cambiato da un altro utente. Puoi ricaricare il file e perdere le tue modifiche oppure sovrascrivere il file sul disco.',
+        'return_to_list' => 'Ritorna all\'elenco',
     ],
     'recordfinder' => [
-        'find_record' => 'Trova record'
+        'find_record' => 'Trova record',
     ],
     'relation' => [
         'missing_config' => "La relazione non ha nessuna configurazione per ':config'.",
@@ -274,11 +274,11 @@ return [
         'link_name' => 'Collega :name',
         'unlink' => 'Scollega',
         'unlink_name' => 'Scollega :name',
-        'unlink_confirm' => 'Sei sicuro?'
+        'unlink_confirm' => 'Sei sicuro?',
     ],
     'reorder' => [
         'default_title' => 'Riordina record',
-        'no_records' => 'Non ci sono record disponibili per ordinare.'
+        'no_records' => 'Non ci sono record disponibili per ordinare.',
     ],
     'model' => [
         'name' => 'Modello',
@@ -293,7 +293,7 @@ return [
         'tips' => 'Suggerimenti per la configurazione del sistema',
         'tips_description' => 'Ci sono elementi a cui è necessario prestare attenzione al fine di configurare il sistema in maniera corretta.',
         'permissions'  => 'La cartella :name o le sue sottocartelle non sono scrivibili da PHP. Imposta le corrette autorizzazioni per il server web su questa cartella.',
-        'extension' => 'L\'estensione di PHP :name non è installata. Installa questa libreria ed attiva l\'estensione.'
+        'extension' => 'L\'estensione di PHP :name non è installata. Installa questa libreria ed attiva l\'estensione.',
     ],
     'editor' => [
         'menu_label' => 'Preferenze editor di codice',
@@ -339,19 +339,19 @@ return [
         'no_wrap' => 'Tag da non includere in blocchi',
         'no_wrap_comment' => 'L\'elenco dei tag che non devono essere contenuti all\'interno di blocchi di tag.',
         'remove_tags' => 'Tag da rimuovere',
-        'remove_tags_comment' => 'L\'elenco dei tag che sono rimossi insieme al loro contenuto.'
+        'remove_tags_comment' => 'L\'elenco dei tag che sono rimossi insieme al loro contenuto.',
     ],
     'tooltips' => [
-        'preview_website' => 'Anteprima del sito web'
+        'preview_website' => 'Anteprima del sito web',
     ],
     'mysettings' => [
         'menu_label' => 'Impostazioni personali',
-        'menu_description' => 'Impostazioni legate al tuo account amministratore'
+        'menu_description' => 'Impostazioni legate al tuo account amministratore',
     ],
     'myaccount' => [
         'menu_label' => 'Il mio account',
         'menu_description' => 'Aggiorna i dettagli del tuo account, come il nome, l\'indirizzo e-mail e la password.',
-        'menu_keywords' => 'sicurezza login'
+        'menu_keywords' => 'sicurezza login',
     ],
     'branding' => [
         'menu_label' => 'Personalizza pannello di controllo',
@@ -373,7 +373,7 @@ return [
         'menu_mode' => 'Stile menu',
         'menu_mode_inline' => 'In linea',
         'menu_mode_tile' => 'Piastrelle',
-        'menu_mode_collapsed' => 'Compresso'
+        'menu_mode_collapsed' => 'Compresso',
     ],
     'backend_preferences' => [
         'menu_label' => 'Preferenze pannello di controllo',
@@ -399,7 +399,7 @@ return [
     'filter' => [
         'all' => 'tutto',
         'options_method_not_exists' => "Il modello :model deve definire un metodo :method() che ritorni le opzioni per il filtro ':filter'.",
-        'date_all' => 'tutte'
+        'date_all' => 'tutte',
     ],
     'import_export' => [
         'upload_csv_file' => '1. Carica un file CSV',
@@ -470,15 +470,15 @@ return [
             'iso_8859_14' => 'ISO-8859-14 (Latin-8, Celtico)',
             'iso_8859_15' => 'ISO-8859-15 (Latin-9, Revisione di Europa Occidentale con il simbolo dell\'euro)',
             'windows_1251' => 'Windows-1251 (CP1251)',
-            'windows_1252' => 'Windows-1252 (CP1252)'
-        ]
+            'windows_1252' => 'Windows-1252 (CP1252)',
+        ],
     ],
     'permissions' => [
-        'manage_media' => 'Gestisci elementi multimediali'
+        'manage_media' => 'Gestisci elementi multimediali',
     ],
     'mediafinder' => [
         'label' => 'Media Finder',
-        'default_prompt' => 'Fai clic sul pulsante %s per trovare un elemento multimediale'
+        'default_prompt' => 'Fai clic sul pulsante %s per trovare un elemento multimediale',
     ],
     'media' => [
         'menu_label' => 'Elementi multimediali',
@@ -538,6 +538,6 @@ return [
         'selection_mode' => 'Metodo di selezione',
         'resize_image' => 'Ridimensiona immagine',
         'image_size' => 'Dimensione immagine:',
-        'selected_size' => 'Selezionati:'
-    ]
+        'selected_size' => 'Selezionati:',
+    ],
 ];

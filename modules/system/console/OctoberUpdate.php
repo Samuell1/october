@@ -1,4 +1,6 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use Str;
 use Illuminate\Console\Command;
@@ -12,12 +14,10 @@ use Symfony\Component\Console\Input\InputOption;
  * October gateway to receive the files via a package manager, then saves
  * the latest build number to the system.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class OctoberUpdate extends Command
 {
-
     /**
      * The console command name.
      */
@@ -60,6 +60,7 @@ class OctoberUpdate extends Command
 
         if ($updates == 0) {
             $this->output->writeln('<info>No new updates found</info>');
+
             return;
         }
 

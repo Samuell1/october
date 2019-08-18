@@ -1,9 +1,10 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 /**
  * The CMS partial class.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class Partial extends CmsCompoundObject

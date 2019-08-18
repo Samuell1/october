@@ -1,12 +1,14 @@
-<?php namespace Backend;
+<?php
+
+namespace Backend;
 
 use App;
 use Backend;
-use BackendMenu;
 use BackendAuth;
-use Backend\Classes\WidgetManager;
+use BackendMenu;
 use System\Classes\MailManager;
 use System\Classes\CombineAssets;
+use Backend\Classes\WidgetManager;
 use System\Classes\SettingsManager;
 use October\Rain\Support\ModuleServiceProvider;
 
@@ -47,7 +49,7 @@ class ServiceProvider extends ModuleServiceProvider
     }
 
     /**
-     * Register mail templates
+     * Register mail templates.
      */
     protected function registerMailer()
     {
@@ -60,7 +62,7 @@ class ServiceProvider extends ModuleServiceProvider
     }
 
     /**
-     * Register asset bundles
+     * Register asset bundles.
      */
     protected function registerAssetBundles()
     {
@@ -100,7 +102,7 @@ class ServiceProvider extends ModuleServiceProvider
                     'iconSvg'     => 'modules/backend/assets/images/dashboard-icon.svg',
                     'url'         => Backend::url('backend'),
                     'permissions' => ['backend.access_dashboard'],
-                    'order'       => 10
+                    'order'       => 10,
                 ],
                 'media' => [
                     'label'       => 'backend::lang.media.menu_label',
@@ -108,8 +110,8 @@ class ServiceProvider extends ModuleServiceProvider
                     'iconSvg'     => 'modules/backend/assets/images/media-icon.svg',
                     'url'         => Backend::url('backend/media'),
                     'permissions' => ['media.*'],
-                    'order'       => 200
-                ]
+                    'order'       => 200,
+                ],
             ]);
         });
     }
@@ -122,7 +124,7 @@ class ServiceProvider extends ModuleServiceProvider
         WidgetManager::instance()->registerReportWidgets(function ($manager) {
             $manager->registerReportWidget(\Backend\ReportWidgets\Welcome::class, [
                 'label'   => 'backend::lang.dashboard.welcome.widget_title_default',
-                'context' => 'dashboard'
+                'context' => 'dashboard',
             ]);
         });
     }
@@ -136,7 +138,7 @@ class ServiceProvider extends ModuleServiceProvider
             $manager->registerPermissions('October.Backend', [
                 'backend.access_dashboard' => [
                     'label' => 'system::lang.permissions.view_the_dashboard',
-                    'tab'   => 'system::lang.permissions.name'
+                    'tab'   => 'system::lang.permissions.name',
                 ],
                 'backend.manage_default_dashboard' => [
                     'label' => 'system::lang.permissions.manage_default_dashboard',
@@ -144,7 +146,7 @@ class ServiceProvider extends ModuleServiceProvider
                 ],
                 'backend.manage_users' => [
                     'label' => 'system::lang.permissions.manage_other_administrators',
-                    'tab'   => 'system::lang.permissions.name'
+                    'tab'   => 'system::lang.permissions.name',
                 ],
                 'backend.impersonate_users' => [
                     'label' => 'system::lang.permissions.impersonate_users',
@@ -152,20 +154,20 @@ class ServiceProvider extends ModuleServiceProvider
                 ],
                 'backend.manage_preferences' => [
                     'label' => 'system::lang.permissions.manage_preferences',
-                    'tab'   => 'system::lang.permissions.name'
+                    'tab'   => 'system::lang.permissions.name',
                 ],
                 'backend.manage_editor' => [
                     'label' => 'system::lang.permissions.manage_editor',
-                    'tab'   => 'system::lang.permissions.name'
+                    'tab'   => 'system::lang.permissions.name',
                 ],
                 'backend.manage_branding' => [
                     'label' => 'system::lang.permissions.manage_branding',
-                    'tab'   => 'system::lang.permissions.name'
+                    'tab'   => 'system::lang.permissions.name',
                 ],
                 'media.manage_media' => [
                     'label' => 'backend::lang.permissions.manage_media',
                     'tab' => 'system::lang.permissions.name',
-                ]
+                ],
             ]);
         });
     }
@@ -208,7 +210,7 @@ class ServiceProvider extends ModuleServiceProvider
                     'class'       => 'Backend\Models\BrandSetting',
                     'permissions' => ['backend.manage_branding'],
                     'order'       => 500,
-                    'keywords'    => 'brand style'
+                    'keywords'    => 'brand style',
                 ],
                 'editor' => [
                     'label'       => 'backend::lang.editor.menu_label',
@@ -218,7 +220,7 @@ class ServiceProvider extends ModuleServiceProvider
                     'class'       => 'Backend\Models\EditorSetting',
                     'permissions' => ['backend.manage_editor'],
                     'order'       => 500,
-                    'keywords'    => 'html code class style'
+                    'keywords'    => 'html code class style',
                 ],
                 'myaccount' => [
                     'label'       => 'backend::lang.myaccount.menu_label',
@@ -228,7 +230,7 @@ class ServiceProvider extends ModuleServiceProvider
                     'url'         => Backend::url('backend/users/myaccount'),
                     'order'       => 500,
                     'context'     => 'mysettings',
-                    'keywords'    => 'backend::lang.myaccount.menu_keywords'
+                    'keywords'    => 'backend::lang.myaccount.menu_keywords',
                 ],
                 'preferences' => [
                     'label'       => 'backend::lang.backend_preferences.menu_label',
@@ -238,7 +240,7 @@ class ServiceProvider extends ModuleServiceProvider
                     'url'         => Backend::url('backend/preferences'),
                     'permissions' => ['backend.manage_preferences'],
                     'order'       => 510,
-                    'context'     => 'mysettings'
+                    'context'     => 'mysettings',
                 ],
                 'access_logs' => [
                     'label'       => 'backend::lang.access_log.menu_label',
@@ -247,8 +249,8 @@ class ServiceProvider extends ModuleServiceProvider
                     'icon'        => 'icon-lock',
                     'url'         => Backend::url('backend/accesslogs'),
                     'permissions' => ['system.access_logs'],
-                    'order'       => 920
-                ]
+                    'order'       => 920,
+                ],
             ]);
         });
     }

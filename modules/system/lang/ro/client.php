@@ -35,15 +35,15 @@ return [
     ],
 
     'mediamanager' => [
-        'insert_link' => "Introdu link",
-        'insert_image' => "Introdu image",
-        'insert_video' => "Introdu video",
-        'insert_audio' => "Introdu audio",
-        'invalid_file_empty_insert' => "Selectează un fișier către care să se facă legătura.",
-        'invalid_file_single_insert' => "Selectează un singur fișier.",
-        'invalid_image_empty_insert' => "Alege imaginile pentru a fi introduse.",
-        'invalid_video_empty_insert' => "Alege un fișier video pentru a fi introdus.",
-        'invalid_audio_empty_insert' => "Alege un fișier video pentru a fi introdus.",
+        'insert_link' => 'Introdu link',
+        'insert_image' => 'Introdu image',
+        'insert_video' => 'Introdu video',
+        'insert_audio' => 'Introdu audio',
+        'invalid_file_empty_insert' => 'Selectează un fișier către care să se facă legătura.',
+        'invalid_file_single_insert' => 'Selectează un singur fișier.',
+        'invalid_image_empty_insert' => 'Alege imaginile pentru a fi introduse.',
+        'invalid_video_empty_insert' => 'Alege un fișier video pentru a fi introdus.',
+        'invalid_audio_empty_insert' => 'Alege un fișier video pentru a fi introdus.',
     ],
 
     'alert' => [

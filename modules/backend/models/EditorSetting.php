@@ -1,15 +1,16 @@
-<?php namespace Backend\Models;
+<?php
+
+namespace Backend\Models;
 
 use File;
 use Cache;
 use Model;
-use Less_Parser;
 use Exception;
+use Less_Parser;
 
 /**
- * Editor settings that affect all users
+ * Editor settings that affect all users.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class EditorSetting extends Model
@@ -21,7 +22,7 @@ class EditorSetting extends Model
      * @var array Behaviors implemented by this model.
      */
     public $implement = [
-        \System\Behaviors\SettingsModel::class
+        \System\Behaviors\SettingsModel::class,
     ];
 
     /**
@@ -33,7 +34,7 @@ class EditorSetting extends Model
      * @var mixed Settings form field defitions
      */
     public $settingsFields = 'fields.yaml';
-    
+
     /**
      * @var string The key to store rendered CSS in the cache under
      */
@@ -77,7 +78,7 @@ class EditorSetting extends Model
     ];
 
     /**
-     * Validation rules
+     * Validation rules.
      */
     public $rules = [];
 
@@ -168,9 +169,8 @@ class EditorSetting extends Model
         try {
             $customCss = self::compileCss();
             Cache::forever($cacheKey, $customCss);
-        }
-        catch (Exception $ex) {
-            $customCss = '/* ' . $ex->getMessage() . ' */';
+        } catch (Exception $ex) {
+            $customCss = '/* '.$ex->getMessage().' */';
         }
 
         return $customCss;

@@ -1,15 +1,16 @@
-<?php namespace System\Twig;
+<?php
+
+namespace System\Twig;
 
 use App;
 use File;
-use Twig\Source as TwigSource;;
-use Twig\Loader\LoaderInterface as TwigLoaderInterface;
 use Exception;
+use Twig\Source as TwigSource;
+use Twig\Loader\LoaderInterface as TwigLoaderInterface;
 
 /**
  * This class implements a Twig template loader for the core system and backend.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class Loader implements TwigLoaderInterface
@@ -25,7 +26,7 @@ class Loader implements TwigLoaderInterface
     protected $cache = [];
 
     /**
-     * Gets the path of a view file
+     * Gets the path of a view file.
      * @param  string $name
      * @return string
      */
@@ -47,6 +48,7 @@ class Loader implements TwigLoaderInterface
         }
 
         $path = $finder->find($view);
+
         return $this->cache[$name] = $path;
     }
 
@@ -74,9 +76,9 @@ class Loader implements TwigLoaderInterface
     {
         try {
             $this->findTemplate($name);
+
             return true;
-        }
-        catch (Exception $exception) {
+        } catch (Exception $exception) {
             return false;
         }
     }

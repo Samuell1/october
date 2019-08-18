@@ -1,4 +1,5 @@
 <?php
+
 /* Greek Language Updated on 2016-07-16 v1.06 */
 return [
     'auth' => [
@@ -16,7 +17,7 @@ return [
         'untitled' => 'Χωρίς Τίτλο',
         'access_denied' => [
             'label' => 'Απαγορεύεται η πρόσβαση',
-            'help' => "Δεν έχεις τα απαραίτητα δικαιώματα για να δεις αυτήν την σελίδα.",
+            'help' => 'Δεν έχεις τα απαραίτητα δικαιώματα για να δεις αυτήν την σελίδα.',
             'cms_link' => 'Επιστροφή στό back-end.',
         ],
         'invalid_token' => [
@@ -24,7 +25,7 @@ return [
         ],
         'no_database' => [
             'label' => 'Δεν βρέθηκε η βάση δεδομένων',
-            'help' => "Η βάση δεδομένων είναι απαραίτητη για να έχετε πρόσβαση στο back-end. Ελέγξτε εάν η βάση δεδομένων είναι ρυθμισμένη και συνδεδεμένη πριν προσπαθήσετε ξανά.",
+            'help' => 'Η βάση δεδομένων είναι απαραίτητη για να έχετε πρόσβαση στο back-end. Ελέγξτε εάν η βάση δεδομένων είναι ρυθμισμένη και συνδεδεμένη πριν προσπαθήσετε ξανά.',
             'cms_link' => 'Επιστροφή στην αρχική',
         ],
     ],
@@ -99,7 +100,7 @@ return [
             'last_sign_in' => 'Η τελευταία σύνδεση σας ήταν',
             'view_access_logs' => 'Προβολή του αρχείου καταγραφής προσβάσεων',
             'nice_message' => 'Να έχετε μια υπέροχη ημέρα!',
-        ]
+        ],
     ],
     'user' => [
         'name' => 'Διαχειριστής',
@@ -145,8 +146,8 @@ return [
             'users_count' => 'Χρήστες',
         ],
         'preferences' => [
-            'not_authenticated' => 'Δεν υπάρχει κανένας πιστοποιημένος χρήστης για να φορτωθούν ή να σωθούν οι ρυθμίσεις του.' ,
-        ]
+            'not_authenticated' => 'Δεν υπάρχει κανένας πιστοποιημένος χρήστης για να φορτωθούν ή να σωθούν οι ρυθμίσεις του.',
+        ],
     ],
     'list' => [
         'default_title' => 'Λίστα',
@@ -175,7 +176,7 @@ return [
         'delete_selected_confirm' => 'Να διαγραφούν οι επιλεγμένες εγγραφές;',
         'delete_selected_success' => 'Διαγραφή επιλεγμένων εγγραφών.',
         'column_switch_true' => 'Ναι',
-        'column_switch_false' => 'Όχι'
+        'column_switch_false' => 'Όχι',
     ],
     'fileupload' => [
         'attachment' => 'Επισύναψη',
@@ -242,7 +243,7 @@ return [
         'insert_row_below' => 'Προσθήκη Σειράς από Κάτω',
         'delete_row' => 'Διαγραφή Σειράς',
         'concurrency_file_changed_title' => 'Το αρχείο έχει αλλάξει',
-        'concurrency_file_changed_description' => "Το αρχείο το οποίο επεξεργάζεστε έχει αλλάξει στον δίσκο από έναν άλλο χρήστη. Μπορείτε είτε να επαναφορτώσετε το αρχείο και να χάσετε τις αλλαγές σας είτε να παρακάμψετε το αρχείο στον δίσκο.",
+        'concurrency_file_changed_description' => 'Το αρχείο το οποίο επεξεργάζεστε έχει αλλάξει στον δίσκο από έναν άλλο χρήστη. Μπορείτε είτε να επαναφορτώσετε το αρχείο και να χάσετε τις αλλαγές σας είτε να παρακάμψετε το αρχείο στον δίσκο.',
         'return_to_list' => 'Επιστροφή στην λίστα',
     ],
     'recordfinder' => [
@@ -255,7 +256,7 @@ return [
         'invalid_action_single' => 'Αυτή η ενεργεία δεν μπορεί να εκτελεστεί σε μια μοναδική σχέση.',
         'invalid_action_multi' => 'Αυτή η ενέργεια δεν μπορεί να εκτελεστεί σε μια πολλαπλή σχέση.',
         'help' => 'Κάντε κλικ πάνω σε ένα αντικείμενο για να προσθέσετε',
-        'related_data' => 'Σχετικά :name δεδομένα' ,
+        'related_data' => 'Σχετικά :name δεδομένα',
         'add' => 'Προσθήκη',
         'add_selected' => 'Προσθήκη επιλεγμένου',
         'add_a_new' => 'Προσθήκη νέου :name',
@@ -302,9 +303,6 @@ return [
     ],
     'editor' => [
 
-
-
-
         'menu_label' => 'Editor settings',
         'menu_description' => 'Customize the global editor preferences, such as font size and color scheme.',
         'font_size' => 'Font size',
@@ -348,8 +346,7 @@ return [
         'no_wrap' => 'Do not wrap tags',
         'no_wrap_comment' => 'The list of tags that should not be wrapped inside block tags.',
         'remove_tags' => 'Remove tags',
-        'remove_tags_comment' => 'The list of tags that are removed together with their content.'
-
+        'remove_tags_comment' => 'The list of tags that are removed together with their content.',
 
     ],
     'tooltips' => [
@@ -481,15 +478,15 @@ return [
             'iso_8859_14' => 'ISO-8859-14 (Latin-8, Celtic)',
             'iso_8859_15' => 'ISO-8859-15 (Latin-9, Western European revision with euro sign)',
             'windows_1251' => 'Windows-1251 (CP1251)',
-            'windows_1252' => 'Windows-1252 (CP1252)'
-        ]
+            'windows_1252' => 'Windows-1252 (CP1252)',
+        ],
     ],
     'permissions' => [
-        'manage_media' => 'Ανέβασμα και διαχείριση περιεχομένου μέσων - εικόνων, βίντεο, ήχων, εγγράφων,//Upload and manage media contents - images, videos, sounds, documents'
+        'manage_media' => 'Ανέβασμα και διαχείριση περιεχομένου μέσων - εικόνων, βίντεο, ήχων, εγγράφων,//Upload and manage media contents - images, videos, sounds, documents',
     ],
     'mediafinder' => [
         'label' => 'Media Finder',
-        'default_prompt' => 'Click the %s button to find a media item'
+        'default_prompt' => 'Click the %s button to find a media item',
     ],
     'media' => [
         'menu_label' => 'Μέσα',
@@ -550,5 +547,5 @@ return [
         'resize_image' => 'Αλλαγή μεγέθους εικόνας',
         'image_size' => 'Μέγεθος εικόνας:',
         'selected_size' => 'Επιλεγμένο:',
-    ]
+    ],
 ];

@@ -1,15 +1,15 @@
-<?php namespace Backend\Controllers;
+<?php
+
+namespace Backend\Controllers;
 
 use BackendMenu;
 use Backend\Classes\Controller;
 use System\Classes\SettingsManager;
 
 /**
- * Backend user groups controller
+ * Backend user groups controller.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
- *
  */
 class UserGroups extends Controller
 {
@@ -18,7 +18,7 @@ class UserGroups extends Controller
      */
     public $implement = [
         \Backend\Behaviors\FormController::class,
-        \Backend\Behaviors\ListController::class
+        \Backend\Behaviors\ListController::class,
     ];
 
     /**

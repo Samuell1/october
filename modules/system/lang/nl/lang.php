@@ -3,7 +3,7 @@
 return [
     'app' => [
         'name' => 'OctoberCMS',
-        'tagline' => 'Terug naar de basis'
+        'tagline' => 'Terug naar de basis',
     ],
     'locale' => [
         'ar' => 'العربية',
@@ -45,7 +45,7 @@ return [
         'uk' => 'Українська мова',
         'zh-cn' => '简体中文',
         'zh-tw' => '繁體中文',
-        'vn' => 'Tiếng việt'
+        'vn' => 'Tiếng việt',
     ],
     'directory' => [
         'create_fail' => 'Map aanmaken mislukt: :name',
@@ -240,7 +240,7 @@ return [
         'sending' => 'Versturen testbericht...',
         'return' => 'Terug naar templatelijst',
         'options' => 'Opties',
-        'disable_auto_inline_css' => 'Automatische inline CSS uitschakelen'
+        'disable_auto_inline_css' => 'Automatische inline CSS uitschakelen',
     ],
     'mail_brand' => [
         'menu_label' => 'E-mail branding',
@@ -254,7 +254,7 @@ return [
                 'description' => 'Omschrijving',
                 'price' => 'Prijs',
                 'centered' => 'Gecentreerd',
-                'right_aligned' => 'Rechts-uitgelijnd'
+                'right_aligned' => 'Rechts-uitgelijnd',
             ],
             'buttons' => [
                 'primary' => 'Primaire knop',
@@ -265,7 +265,7 @@ return [
             'more' => 'Wat meer tekst',
             'promotion' => 'Coupon code: OCTOBER',
             'subcopy' => 'Voettekst',
-            'thanks' => 'Bedankt'
+            'thanks' => 'Bedankt',
         ],
         'fields' => [
             '_section_background' => 'Achtergrond',
@@ -291,7 +291,7 @@ return [
             'panel_bg' => 'Paneel achtergrond',
             'promotion_bg' => 'Promotie achtergrond',
             'promotion_border_color' => 'Promotie randkleur',
-        ]
+        ],
     ],
     'install' => [
         'project_label' => 'Koppel aan project',

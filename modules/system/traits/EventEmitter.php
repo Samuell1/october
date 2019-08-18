@@ -1,14 +1,14 @@
-<?php namespace System\Traits;
+<?php
+
+namespace System\Traits;
 
 use Event;
 
 /**
  * Adds system event related features to any class.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
-
 trait EventEmitter
 {
     use \October\Rain\Support\Traits\Emitter;
@@ -30,7 +30,7 @@ trait EventEmitter
      *
      * @param string $event Event name
      * @param array $params Event parameters
-     * @param boolean $halt Halt after first non-null result
+     * @param bool $halt Halt after first non-null result
      * @return mixed
      */
     public function fireSystemEvent($event, $params = [], $halt = true)

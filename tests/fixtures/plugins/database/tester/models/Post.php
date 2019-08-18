@@ -1,4 +1,6 @@
-<?php namespace Database\Tester\Models;
+<?php
+
+namespace Database\Tester\Models;
 
 use Model;
 
@@ -66,9 +68,8 @@ class SluggablePost extends Post
      */
     protected $slugs = [
         'slug' => 'title',
-        'long_slug' => ['title', 'description']
+        'long_slug' => ['title', 'description'],
     ];
-
 }
 
 class RevisionablePost extends Post
@@ -95,7 +96,7 @@ class RevisionablePost extends Post
         'description',
         'is_published',
         'published_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     /**
@@ -107,7 +108,7 @@ class RevisionablePost extends Post
      * @var array Relations
      */
     public $morphMany = [
-        'revision_history' => ['System\Models\Revision', 'name' => 'revisionable']
+        'revision_history' => ['System\Models\Revision', 'name' => 'revisionable'],
     ];
 
     /**
@@ -117,7 +118,6 @@ class RevisionablePost extends Post
     {
         return 7;
     }
-
 }
 
 class ValidationPost extends Post

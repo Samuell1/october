@@ -1,17 +1,18 @@
-<?php namespace System\Models;
+<?php
+
+namespace System\Models;
 
 use App;
 use Str;
-use Model;
 use Cache;
-use Less_Parser;
+use Model;
 use Exception;
+use Less_Parser;
 use File as FileHelper;
 
 /**
- * Mail brand settings
+ * Mail brand settings.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class MailBrandSetting extends Model
@@ -23,7 +24,7 @@ class MailBrandSetting extends Model
      * @var array Behaviors implemented by this model.
      */
     public $implement = [
-        \System\Behaviors\SettingsModel::class
+        \System\Behaviors\SettingsModel::class,
     ];
 
     /**
@@ -35,27 +36,38 @@ class MailBrandSetting extends Model
      * @var mixed Settings form field defitions
      */
     public $settingsFields = 'fields.yaml';
-    
+
     /**
      * @var string The key to store rendered CSS in the cache under
      */
     public $cacheKey = 'system::mailbrand.custom_css';
 
     const WHITE_COLOR = '#fff';
+
     const BODY_BG = '#f5f8fa';
+
     const PRIMARY_BG = '#3498db';
+
     const POSITIVE_BG = '#31ac5f';
+
     const NEGATIVE_BG = '#ab2a1c';
+
     const HEADER_COLOR = '#bbbfc3';
+
     const HEADING_COLOR = '#2f3133';
+
     const TEXT_COLOR = '#74787e';
+
     const LINK_COLOR = '#0181b9';
+
     const FOOTER_COLOR = '#aeaeae';
+
     const BORDER_COLOR = '#edeff2';
+
     const PROMOTION_BORDER_COLOR = '#9ba2ab';
 
     /**
-     * Validation rules
+     * Validation rules.
      */
     public $rules = [
     ];
@@ -96,9 +108,8 @@ class MailBrandSetting extends Model
         try {
             $customCss = self::compileCss();
             Cache::forever($cacheKey, $customCss);
-        }
-        catch (Exception $ex) {
-            $customCss = '/* ' . $ex->getMessage() . ' */';
+        } catch (Exception $ex) {
+            $customCss = '/* '.$ex->getMessage().' */';
         }
 
         return $customCss;
@@ -153,7 +164,7 @@ class MailBrandSetting extends Model
 
         $parser->ModifyVars(static::makeCssVars());
 
-        $parser->parse(FileHelper::get($basePath . '/custom.less'));
+        $parser->parse(FileHelper::get($basePath.'/custom.less'));
 
         return $parser->getCss();
     }

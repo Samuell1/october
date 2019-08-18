@@ -1,17 +1,18 @@
-<?php namespace Cms\ReportWidgets;
+<?php
+
+namespace Cms\ReportWidgets;
 
 use Lang;
+use Exception;
 use BackendAuth;
 use Cms\Classes\Theme;
+use ApplicationException;
 use Cms\Models\MaintenanceSetting;
 use Backend\Classes\ReportWidgetBase;
-use ApplicationException;
-use Exception;
 
 /**
  * Active theme report widget.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class ActiveTheme extends ReportWidgetBase
@@ -28,8 +29,7 @@ class ActiveTheme extends ReportWidgetBase
     {
         try {
             $this->loadData();
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
         }
 
@@ -45,12 +45,12 @@ class ActiveTheme extends ReportWidgetBase
                 'type'              => 'string',
                 'validationPattern' => '^.+$',
                 'validationMessage' => 'backend::lang.dashboard.widget_title_error',
-            ]
+            ],
         ];
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function loadAssets()
     {
@@ -59,7 +59,7 @@ class ActiveTheme extends ReportWidgetBase
 
     protected function loadData()
     {
-        if (!$theme = Theme::getActiveTheme()) {
+        if (! $theme = Theme::getActiveTheme()) {
             throw new ApplicationException(Lang::get('cms::lang.theme.not_found_name', ['name'=>Theme::getActiveThemeCode()]));
         }
 

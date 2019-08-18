@@ -1,8 +1,10 @@
-<?php namespace Backend\Behaviors\ImportExportController;
+<?php
+
+namespace Backend\Behaviors\ImportExportController;
 
 use php_user_filter;
 
-stream_filter_register(TranscodeFilter::FILTER_NAME . "*", TranscodeFilter::class);
+stream_filter_register(TranscodeFilter::FILTER_NAME.'*', TranscodeFilter::class);
 
 /**
  * Transcode stream filter.
@@ -41,7 +43,7 @@ class TranscodeFilter extends php_user_filter
         }
 
         $params = substr($this->filtername, strlen(self::FILTER_NAME));
-        if (!preg_match('/^([-\w]+)(:([-\w]+))?$/', $params, $matches)) {
+        if (! preg_match('/^([-\w]+)(:([-\w]+))?$/', $params, $matches)) {
             return false;
         }
 

@@ -1,18 +1,19 @@
-<?php namespace Backend\Helpers;
+<?php
+
+namespace Backend\Helpers;
 
 use Url;
 use Html;
 use Config;
 use Request;
 use Redirect;
-use October\Rain\Router\Helper as RouterHelper;
-use System\Helpers\DateTime as DateTimeHelper;
 use Backend\Classes\Skin;
+use System\Helpers\DateTime as DateTimeHelper;
+use October\Rain\Router\Helper as RouterHelper;
 
 /**
- * Backend Helper
+ * Backend Helper.
  *
- * @package october\backend
  * @see \Backend\Facades\Backend
  * @author Alexey Bobkov, Samuel Georges
  */
@@ -27,15 +28,15 @@ class Backend
     }
 
     /**
-     * Returns a URL in context of the Backend
+     * Returns a URL in context of the Backend.
      */
     public function url($path = null, $parameters = [], $secure = null)
     {
-        return Url::to($this->uri() . '/' . $path, $parameters, $secure);
+        return Url::to($this->uri().'/'.$path, $parameters, $secure);
     }
 
     /**
-     * Returns the base backend URL
+     * Returns the base backend URL.
      */
     public function baseUrl($path = null)
     {
@@ -43,19 +44,21 @@ class Backend
         $baseUrl = Request::getBaseUrl();
 
         if ($path === null) {
-            return $baseUrl . '/' . $backendUri;
+            return $baseUrl.'/'.$backendUri;
         }
 
         $path = RouterHelper::normalizeUrl($path);
-        return $baseUrl . '/' . $backendUri . $path;
+
+        return $baseUrl.'/'.$backendUri.$path;
     }
 
     /**
-     * Returns a URL in context of the active Backend skin
+     * Returns a URL in context of the active Backend skin.
      */
     public function skinAsset($path = null)
     {
         $skinPath = Skin::getActive()->getPath($path, true);
+
         return Url::asset($skinPath);
     }
 
@@ -64,7 +67,7 @@ class Backend
      */
     public function redirect($path, $status = 302, $headers = [], $secure = null)
     {
-        return Redirect::to($this->uri() . '/' . $path, $status, $headers, $secure);
+        return Redirect::to($this->uri().'/'.$path, $status, $headers, $secure);
     }
 
     /**
@@ -72,7 +75,7 @@ class Backend
      */
     public function redirectGuest($path, $status = 302, $headers = [], $secure = null)
     {
-        return Redirect::guest($this->uri() . '/' . $path, $status, $headers, $secure);
+        return Redirect::guest($this->uri().'/'.$path, $status, $headers, $secure);
     }
 
     /**
@@ -80,7 +83,7 @@ class Backend
      */
     public function redirectIntended($path, $status = 302, $headers = [], $secure = null)
     {
-        return Redirect::intended($this->uri() . '/' . $path, $status, $headers, $secure);
+        return Redirect::intended($this->uri().'/'.$path, $status, $headers, $secure);
     }
 
     /**
@@ -104,7 +107,7 @@ class Backend
      *   dateTime         -> April 23, 2016 6:28 AM
      *   dateTimeMin      -> Apr 23, 2016 6:28 AM
      *   dateTimeLong     -> Saturday, April 23, 2016 6:28 AM
-     *   dateTimeLongMin  -> Sat, Apr 23, 2016 6:29 AM
+     *   dateTimeLongMin  -> Sat, Apr 23, 2016 6:29 AM.
      * @return string
      */
     public function dateTime($dateTime, $options = [])
@@ -118,8 +121,8 @@ class Backend
             'timeSince' => false,
             'ignoreTimezone' => false,
         ], $options));
-        
-        if(!$dateTime) {
+
+        if (! $dateTime) {
             return '';
         }
 
@@ -127,8 +130,7 @@ class Backend
 
         if ($jsFormat !== null) {
             $format = $jsFormat;
-        }
-        else {
+        } else {
             $format = DateTimeHelper::momentFormat($format);
         }
 
@@ -143,18 +145,14 @@ class Backend
 
         if ($timeTense) {
             $attributes['data-time-tense'] = 1;
-        }
-        elseif ($timeSince) {
+        } elseif ($timeSince) {
             $attributes['data-time-since'] = 1;
-        }
-        elseif ($format) {
+        } elseif ($format) {
             $attributes['data-format'] = $format;
-        }
-        elseif ($formatAlias) {
+        } elseif ($formatAlias) {
             $attributes['data-format-alias'] = $formatAlias;
         }
 
         return '<time'.Html::attributes($attributes).'>'.e($defaultValue).'</time>'.PHP_EOL;
     }
-
 }

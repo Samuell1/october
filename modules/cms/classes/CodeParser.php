@@ -1,4 +1,6 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use File;
 use Lang;
@@ -9,7 +11,6 @@ use SystemException;
 /**
  * Parses the PHP code section of CMS objects.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class CodeParser
@@ -35,7 +36,7 @@ class CodeParser
     protected $dataCacheKey = '';
 
     /**
-     * Creates the class instance
+     * Creates the class instance.
      * @param \Cms\Classes\CmsCompoundObject A reference to a CMS object to parse.
      */
     public function __construct(CmsCompoundObject $object)
@@ -50,7 +51,7 @@ class CodeParser
      * - className
      * - filePath (path to the parsed PHP file)
      * - offset (PHP section offset in the template file)
-     * - source ('parser', 'request-cache', or 'cache')
+     * - source ('parser', 'request-cache', or 'cache').
      * @return array
      */
     public function parse()
@@ -60,6 +61,7 @@ class CodeParser
          */
         if (array_key_exists($this->filePath, self::$cache)) {
             self::$cache[$this->filePath]['source'] = 'request-cache';
+
             return self::$cache[$this->filePath];
         }
 
@@ -72,7 +74,7 @@ class CodeParser
             'filePath' => $path,
             'className' => null,
             'source' => null,
-            'offset' => 0
+            'offset' => 0,
         ];
 
         /*
@@ -97,13 +99,14 @@ class CodeParser
             /*
              * Cache expired, cache file not stale, refresh cache and return result
              */
-            if (!$hasCache && filemtime($path) >= $this->object->mtime) {
+            if (! $hasCache && filemtime($path) >= $this->object->mtime) {
                 $className = $this->extractClassFromFile($path);
                 if ($className) {
                     $result['className'] = $className;
                     $result['source'] = 'file-cache';
 
                     $this->storeCachedInfo($result);
+
                     return $result;
                 }
             }
@@ -113,13 +116,14 @@ class CodeParser
         $result['source'] = 'parser';
 
         $this->storeCachedInfo($result);
+
         return $result;
     }
 
-   /**
-    * Rebuilds the current file cache.
-    * @param string The path in which the cached file should be stored
-    */
+    /**
+     * Rebuilds the current file cache.
+     * @param string The path in which the cached file should be stored
+     */
     protected function rebuild($path)
     {
         $uniqueName = str_replace('.', '', uniqid('', true)).'_'.md5(mt_rand());
@@ -170,11 +174,11 @@ class CodeParser
         $data = $this->parse();
         $className = $data['className'];
 
-        if (!class_exists($className)) {
+        if (! class_exists($className)) {
             require_once $data['filePath'];
         }
 
-        if (!class_exists($className) && ($data = $this->handleCorruptCache($data))) {
+        if (! class_exists($className) && ($data = $this->handleCorruptCache($data))) {
             $className = $data['className'];
         }
 
@@ -194,6 +198,7 @@ class CodeParser
         if (is_file($path)) {
             if (($className = $this->extractClassFromFile($path)) && class_exists($className)) {
                 $data['className'] = $className;
+
                 return $data;
             }
 
@@ -228,7 +233,7 @@ class CodeParser
     }
 
     /**
-     * Returns path to the cached parsed file
+     * Returns path to the cached parsed file.
      * @return string
      */
     protected function getCacheFilePath()
@@ -257,13 +262,11 @@ class CodeParser
         ) {
             return $cached;
         }
-
-        return null;
     }
 
     /**
-     * Returns information about a cached file
-     * @return integer
+     * Returns information about a cached file.
+     * @return int
      */
     protected function getCachedFileInfo()
     {
@@ -272,8 +275,6 @@ class CodeParser
         if ($cached !== null && array_key_exists($this->filePath, $cached)) {
             return $cached[$this->filePath];
         }
-
-        return null;
     }
 
     //
@@ -290,7 +291,7 @@ class CodeParser
     }
 
     /**
-     * Extracts the class name from a cache file
+     * Extracts the class name from a cache file.
      * @return string
      */
     protected function extractClassFromFile($path)
@@ -300,16 +301,14 @@ class CodeParser
         $pattern = '/Cms\S+_\S+Class/';
         preg_match($pattern, $fileContent, $matches);
 
-        if (!empty($matches[0])) {
+        if (! empty($matches[0])) {
             return $matches[0];
         }
-
-        return null;
     }
 
     /**
      * Writes content with concurrency support and cache busting
-     * This work is based on the Twig\Cache\FilesystemCache class
+     * This work is based on the Twig\Cache\FilesystemCache class.
      */
     protected function writeContentSafe($path, $content)
     {
@@ -320,7 +319,7 @@ class CodeParser
             throw new SystemException(Lang::get('system::lang.file.create_fail', ['name'=>$tmpFile]));
         }
 
-        while (!@rename($tmpFile, $path)) {
+        while (! @rename($tmpFile, $path)) {
             usleep(rand(50000, 200000));
 
             if ($count++ > 10) {
@@ -336,29 +335,28 @@ class CodeParser
         if (Config::get('cms.forceBytecodeInvalidation', false)) {
             if (function_exists('opcache_invalidate') && ini_get('opcache.enable')) {
                 opcache_invalidate($path, true);
-            }
-            elseif (function_exists('apc_compile_file')) {
+            } elseif (function_exists('apc_compile_file')) {
                 apc_compile_file($path);
             }
         }
     }
 
     /**
-     * Make directory with concurrency support
+     * Make directory with concurrency support.
      */
     protected function makeDirectorySafe($dir)
     {
         $count = 0;
 
         if (is_dir($dir)) {
-            if (!is_writable($dir)) {
+            if (! is_writable($dir)) {
                 throw new SystemException(Lang::get('system::lang.directory.create_fail', ['name'=>$dir]));
             }
 
             return;
         }
 
-        while (!is_dir($dir) && !@mkdir($dir, 0777, true)) {
+        while (! is_dir($dir) && ! @mkdir($dir, 0777, true)) {
             usleep(rand(50000, 200000));
 
             if ($count++ > 10) {

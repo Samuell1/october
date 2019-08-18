@@ -1,4 +1,6 @@
-<?php namespace Cms\Twig;
+<?php
+
+namespace Cms\Twig;
 
 use Twig\Token as TwigToken;
 use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
@@ -8,7 +10,6 @@ use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
  *
  *     {% scripts %}
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class ScriptsTokenParser extends TwigTokenParser
@@ -23,6 +24,7 @@ class ScriptsTokenParser extends TwigTokenParser
     {
         $stream = $this->parser->getStream();
         $stream->expect(TwigToken::BLOCK_END_TYPE);
+
         return new ScriptsNode($token->getLine(), $this->getTag());
     }
 

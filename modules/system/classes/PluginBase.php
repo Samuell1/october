@@ -1,21 +1,22 @@
-<?php namespace System\Classes;
+<?php
 
-use Illuminate\Support\ServiceProvider as ServiceProviderBase;
-use ReflectionClass;
-use SystemException;
+namespace System\Classes;
+
 use Yaml;
 use Backend;
+use ReflectionClass;
+use SystemException;
+use Illuminate\Support\ServiceProvider as ServiceProviderBase;
 
 /**
- * Plugin base class
+ * Plugin base class.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class PluginBase extends ServiceProviderBase
 {
     /**
-     * @var boolean
+     * @var bool
      */
     protected $loadedYamlConfiguration = false;
 
@@ -25,12 +26,12 @@ class PluginBase extends ServiceProviderBase
     public $require = [];
 
     /**
-     * @var boolean Determine if this plugin should have elevated privileges.
+     * @var bool Determine if this plugin should have elevated privileges.
      */
     public $elevated = false;
 
     /**
-     * @var boolean Determine if this plugin should be loaded (false) or not (true).
+     * @var bool Determine if this plugin should be loaded (false) or not (true).
      */
     public $disabled = false;
 
@@ -48,7 +49,7 @@ class PluginBase extends ServiceProviderBase
             'found for the plugin class %s. Create the file or override pluginDetails() '.
             'method in the plugin class.', $thisClass));
 
-        if (!array_key_exists('plugin', $configuration)) {
+        if (! array_key_exists('plugin', $configuration)) {
             throw new SystemException(sprintf(
                 'The plugin configuration file plugin.yaml should contain the "plugin" section: %s.', $thisClass)
             );
@@ -156,7 +157,7 @@ class PluginBase extends ServiceProviderBase
 
     /**
      * Registers any report widgets provided by this plugin.
-     * The widgets must be returned in the following format:
+     * The widgets must be returned in the following format:.
      *
      *     return [
      *         'className1'=>[
@@ -178,7 +179,7 @@ class PluginBase extends ServiceProviderBase
 
     /**
      * Registers any form widgets implemented in this plugin.
-     * The widgets must be returned in the following format:
+     * The widgets must be returned in the following format:.
      *
      *     return [
      *         ['className1' => 'alias'],
@@ -204,7 +205,7 @@ class PluginBase extends ServiceProviderBase
 
     /**
      * Registers any mail layouts implemented by this plugin.
-     * The layouts must be returned in the following format:
+     * The layouts must be returned in the following format:.
      *
      *     return [
      *         'marketing'    => 'acme.blog::layouts.marketing',
@@ -220,7 +221,7 @@ class PluginBase extends ServiceProviderBase
 
     /**
      * Registers any mail templates implemented by this plugin.
-     * The templates must be returned in the following format:
+     * The templates must be returned in the following format:.
      *
      *     return [
      *         'acme.blog::mail.welcome',
@@ -236,7 +237,7 @@ class PluginBase extends ServiceProviderBase
 
     /**
      * Registers any mail partials implemented by this plugin.
-     * The partials must be returned in the following format:
+     * The partials must be returned in the following format:.
      *
      *     return [
      *         'tracking'  => 'acme.blog::partials.tracking',
@@ -251,7 +252,7 @@ class PluginBase extends ServiceProviderBase
     }
 
     /**
-     * Registers a new console (artisan) command
+     * Registers a new console (artisan) command.
      *
      * @param string $key The command name
      * @param string $class The command class
@@ -269,7 +270,7 @@ class PluginBase extends ServiceProviderBase
     }
 
     /**
-     * Read configuration from YAML file
+     * Read configuration from YAML file.
      *
      * @param string|null $exceptionMessage
      * @return array|bool
@@ -284,16 +285,15 @@ class PluginBase extends ServiceProviderBase
         $reflection = new ReflectionClass(get_class($this));
         $yamlFilePath = dirname($reflection->getFileName()).'/plugin.yaml';
 
-        if (!file_exists($yamlFilePath)) {
+        if (! file_exists($yamlFilePath)) {
             if ($exceptionMessage) {
                 throw new SystemException($exceptionMessage);
             }
 
             $this->loadedYamlConfiguration = [];
-        }
-        else {
+        } else {
             $this->loadedYamlConfiguration = Yaml::parse(file_get_contents($yamlFilePath));
-            if (!is_array($this->loadedYamlConfiguration)) {
+            if (! is_array($this->loadedYamlConfiguration)) {
                 throw new SystemException(sprintf('Invalid format of the plugin configuration file: %s. The file should define an array.', $yamlFilePath));
             }
         }

@@ -3,16 +3,16 @@
 return [
     'app' => [
         'name' => 'October CMS',
-        'tagline' => 'Atgriežamies pie pamatiem'
+        'tagline' => 'Atgriežamies pie pamatiem',
     ],
     'directory' => [
-        'create_fail' => 'Nevar izveidot mapi: :name'
+        'create_fail' => 'Nevar izveidot mapi: :name',
     ],
     'file' => [
-        'create_fail' => 'Nevar izveidot failu: :name'
+        'create_fail' => 'Nevar izveidot failu: :name',
     ],
     'combiner' => [
-        'not_found' => "Kombināciju fails ':name' netika atrasts."
+        'not_found' => "Kombināciju fails ':name' netika atrasts.",
     ],
     'system' => [
         'name' => 'Sistēma',
@@ -29,15 +29,15 @@ return [
             'social' => 'Sociāli',
             'events' => 'Notikumi',
             'customers' => 'Klienti',
-            'my_settings' => 'Mani iestatījumi'
-        ]
+            'my_settings' => 'Mani iestatījumi',
+        ],
     ],
     'theme' => [
         'label' => 'Tēma',
         'unnamed' => 'Nenosaukta tēma',
         'name' => [
             'label' => 'Tēmas Nosaukums',
-            'help' => 'Norādiet tēmas unikālo kodu. Piemēram, RainLab.Vanilla'
+            'help' => 'Norādiet tēmas unikālo kodu. Piemēram, RainLab.Vanilla',
         ],
     ],
     'themes' => [
@@ -46,15 +46,15 @@ return [
         'installed' => 'Instalētās tēmas',
         'no_themes' => 'Nav tēmas, kuras būtu instalētas no tirgus plača.',
         'recommended' => 'Ieteiktās',
-        'remove_confirm' => 'Vai esat pārliecināts, ka vēlaties noņemt šo tēmu?'
+        'remove_confirm' => 'Vai esat pārliecināts, ka vēlaties noņemt šo tēmu?',
     ],
     'plugin' => [
         'label' => 'Spraudnis',
         'unnamed' => 'Nenosaukts spraudnis',
         'name' => [
             'label' => 'Spraudņa nosaukums',
-            'help' => 'Norādiet spraudņa unikālo kodu. Piemēram, RainLab.Blog'
-        ]
+            'help' => 'Norādiet spraudņa unikālo kodu. Piemēram, RainLab.Blog',
+        ],
     ],
     'plugins' => [
         'manage' => 'Pārvaldīt spraudņus',
@@ -80,7 +80,7 @@ return [
         'disable_confirm' => 'Vai esat pārliecināts?',
         'disable_success' => 'Šie spraudņi tika veiksmīgi atspējoti.',
         'enable_success' => 'Šie spraudņi tika veiksmīgi iespējoti.',
-        'unknown_plugin' => 'Spraudņi tika noņemti no failu sistēmas.'
+        'unknown_plugin' => 'Spraudņi tika noņemti no failu sistēmas.',
     ],
     'project' => [
         'name' => 'Projekts',
@@ -91,10 +91,10 @@ return [
         'id' => [
             'label' => 'Projekta ID',
             'help' => 'Kā atrast Projekta ID',
-            'missing' => 'Lūdzu norādiet Projekta ID, kuru lietot.'
+            'missing' => 'Lūdzu norādiet Projekta ID, kuru lietot.',
         ],
         'detach_confirm' => 'Vai esat pārliecināts, ka vēlaties atvienot šo projektu?',
-        'unbind_success' => 'Projekts tika veiksmīgi atvienots.'
+        'unbind_success' => 'Projekts tika veiksmīgi atvienots.',
     ],
     'settings' => [
         'menu_label' => 'Iestatījumi',
@@ -102,7 +102,7 @@ return [
         'missing_model' => 'Iestatījumu lapa nav norādīta Moduļa definīcijā.',
         'update_success' => 'Iestatījumi priekš :name tika veiksmīgi atjaunināti.',
         'return' => 'Atgriezties sistēmas iestatījumos',
-        'search' => 'Meklēt'
+        'search' => 'Meklēt',
     ],
     'mail' => [
         'log_file' => 'Žurnāla fails',
@@ -133,7 +133,7 @@ return [
         'mandrill_secret' => 'Mandrill Secret',
         'mandrill_secret_comment' => 'Ievadiet savu Mandrill API kodu.',
         'drivers_hint_header' => 'Dziņi nav instalēti',
-        'drivers_hint_content' => 'Šai pasta metodei nepieciešams spraudnis ":plugin" instalējiet to pirms pasta sūtīšanas.'
+        'drivers_hint_content' => 'Šai pasta metodei nepieciešams spraudnis ":plugin" instalējiet to pirms pasta sūtīšanas.',
     ],
     'mail_templates' => [
         'menu_label' => 'Epasta veidnes',
@@ -157,7 +157,7 @@ return [
         'content_text' => 'Tikai teksts',
         'test_send' => 'Sūtīt testa vēstuli',
         'test_success' => 'Testa vēstule tika veiksmīgi nosūtīta.',
-        'return' => 'Atgriezties veidņu sarakstā'
+        'return' => 'Atgriezties veidņu sarakstā',
     ],
     'install' => [
         'project_label' => 'Pievienot projektam',
@@ -166,7 +166,7 @@ return [
         'missing_plugin_name' => 'Lūdzu norādiet Spraudņa nosaukumu, kuru instalēt.',
         'missing_theme_name' => 'Lūdzu norādiet Tēmas nosaukumu, kuru instalēt.',
         'install_completing' => 'Pabeidzam instalācijas procesu',
-        'install_success' => 'Spraudnis tika veiksmīgi instalēts.'
+        'install_success' => 'Spraudnis tika veiksmīgi instalēts.',
     ],
     'updates' => [
         'title' => 'Pārvaldīt Atjauninājumus',
@@ -205,11 +205,11 @@ return [
         'force_label' => 'Forsēt atjaunināšanu',
         'found' => [
             'label' => 'Atrasti jauni atjauninājumi!',
-            'help' => 'Spiediet Atjaunināt programmatūru, lai sāktu atjaunināšanas procesu.'
+            'help' => 'Spiediet Atjaunināt programmatūru, lai sāktu atjaunināšanas procesu.',
         ],
         'none' => [
             'label' => 'Nav atjauninājumu',
-            'help' => 'Netika atrasti jauni atjauninājumi.'
+            'help' => 'Netika atrasti jauni atjauninājumi.',
         ],
         'important_action' => [
             'empty' => 'Izvēlēties darbību',
@@ -235,17 +235,17 @@ return [
         'response_invalid' => 'Nederīga atbilde no autjauninājumu servera.',
         'response_empty' => 'Tukša atbilde no autjauninājumu servera.',
         'file_error' => 'Neizdevās saņemt failus no servera.',
-        'file_corrupt' => 'Fails no servera ir bojāts.'
+        'file_corrupt' => 'Fails no servera ir bojāts.',
     ],
     'behavior' => [
-        'missing_property' => 'Klasei :class jābūt definētai īpašumam $:property tiek lietota :behavior rīcībai.'
+        'missing_property' => 'Klasei :class jābūt definētai īpašumam $:property tiek lietota :behavior rīcībai.',
     ],
     'config' => [
         'not_found' => 'Nebija iespējams atrast konfigurācijas failu :file definēt iekš :location.',
-        'required' => "Konfigurācijai, kura tiek lietotat :location ir jānorāda vērtība ':property'."
+        'required' => "Konfigurācijai, kura tiek lietotat :location ir jānorāda vērtība ':property'.",
     ],
     'zip' => [
-        'extract_failed' => "Nebija iespējams atarhivēt failu ':file'."
+        'extract_failed' => "Nebija iespējams atarhivēt failu ':file'.",
     ],
     'event_log' => [
         'hint' => 'Šis žurnāls attēlo sarakstu ar potenciālajām kļūdām, kuras notikušas, tai skaitā izņēmumus un atkļūdošanas informāciju.',
@@ -259,7 +259,7 @@ return [
         'id_label' => 'Notikuma ID',
         'created_at' => 'Datums & Laiks',
         'message' => 'Ziņojums',
-        'level' => 'Līmenis'
+        'level' => 'Līmenis',
     ],
     'request_log' => [
         'hint' => 'Šis žurnāls attēlo sarakstu ar pārlūkprogrammas pieprasījumiem, kuriem vajadzētu pievērst uzmanību. Piemēram, ja apmeklētājs pieprasa CMS lapu, kura nav pieejama, tiek veikts ieraksts ar kodu 404.',
@@ -274,7 +274,7 @@ return [
         'count' => 'Skaits',
         'referer' => 'Pārsūtītājs',
         'url' => 'URL',
-        'status_code' => 'Statuss'
+        'status_code' => 'Statuss',
     ],
     'permissions' => [
         'name' => 'Sistēma',
@@ -285,7 +285,7 @@ return [
         'manage_mail_settings' => 'Pārvaldīt epasta iestatījumus',
         'manage_other_administrators' => 'Pārvaldīt citus administrātorus',
         'view_the_dashboard' => 'Skatīt mērinstrumentu paneli',
-        'manage_branding' => 'Pielāgot back-end'
+        'manage_branding' => 'Pielāgot back-end',
     ],
     'media' => [
         'invalid_path' => "Norādīts nederīgs ceļš līdz failam: ':path'.",

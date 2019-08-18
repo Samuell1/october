@@ -1,20 +1,21 @@
-<?php namespace Backend\Models;
+<?php
+
+namespace Backend\Models;
 
 use App;
-use Backend;
 use Url;
 use File;
 use Lang;
-use Model;
 use Cache;
+use Model;
 use Config;
-use Less_Parser;
+use Backend;
 use Exception;
+use Less_Parser;
 
 /**
- * Brand settings that affect all users
+ * Brand settings that affect all users.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class BrandSetting extends Model
@@ -26,7 +27,7 @@ class BrandSetting extends Model
      * @var array Behaviors implemented by this model.
      */
     public $implement = [
-        \System\Behaviors\SettingsModel::class
+        \System\Behaviors\SettingsModel::class,
     ];
 
     /**
@@ -41,24 +42,28 @@ class BrandSetting extends Model
 
     public $attachOne = [
         'favicon' => \System\Models\File::class,
-        'logo' => \System\Models\File::class
+        'logo' => \System\Models\File::class,
     ];
-    
+
     /**
      * @var string The key to store rendered CSS in the cache under
      */
     public $cacheKey = 'backend::brand.custom_css';
 
-    const PRIMARY_COLOR   = '#34495e'; // Wet Asphalt
-    const SECONDARY_COLOR = '#e67e22'; // Pumpkin
-    const ACCENT_COLOR    = '#3498db'; // Peter River
+    const PRIMARY_COLOR = '#34495e'; // Wet Asphalt
 
-    const INLINE_MENU   = 'inline';
-    const TILE_MENU     = 'tile';
+    const SECONDARY_COLOR = '#e67e22'; // Pumpkin
+
+    const ACCENT_COLOR = '#3498db'; // Peter River
+
+    const INLINE_MENU = 'inline';
+
+    const TILE_MENU = 'tile';
+
     const COLLAPSE_MENU = 'collapse';
 
     /**
-     * Validation rules
+     * Validation rules.
      */
     public $rules = [
         'app_name'     => 'required',
@@ -119,9 +124,8 @@ class BrandSetting extends Model
         try {
             $customCss = self::compileCss();
             Cache::forever($cacheKey, $customCss);
-        }
-        catch (Exception $ex) {
-            $customCss = '/* ' . $ex->getMessage() . ' */';
+        } catch (Exception $ex) {
+            $customCss = '/* '.$ex->getMessage().' */';
         }
 
         return $customCss;
@@ -144,7 +148,7 @@ class BrandSetting extends Model
         ]);
 
         $parser->parse(
-            File::get($basePath . '/custom.less') .
+            File::get($basePath.'/custom.less').
             self::get('custom_css')
         );
 
@@ -157,7 +161,7 @@ class BrandSetting extends Model
 
     public static function isBaseConfigured()
     {
-        return !!Config::get('brand');
+        return (bool) Config::get('brand');
     }
 
     public static function getDefaultFavicon()
@@ -178,8 +182,5 @@ class BrandSetting extends Model
         if ($logoPath && File::exists($logoPath)) {
             return Url::asset(File::localToPublic($logoPath));
         }
-
-        return null;
     }
-
 }

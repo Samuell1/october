@@ -1,17 +1,19 @@
-<?php namespace Backend\Behaviors;
+<?php
+
+namespace Backend\Behaviors;
 
 use Db;
 use Str;
 use Lang;
-use Flash;
 use Event;
-use Redirect;
+use Flash;
 use Backend;
+use Redirect;
+use Exception;
+use ApplicationException;
 use Backend\Classes\ControllerBehavior;
 use October\Rain\Html\Helper as HtmlHelper;
 use October\Rain\Router\Helper as RouterHelper;
-use ApplicationException;
-use Exception;
 
 /**
  * Adds features for working with backend forms. This behavior
@@ -35,7 +37,6 @@ use Exception;
  * or directly as a PHP array.
  *
  * @see http://octobercms.com/docs/backend/forms Back-end form documentation
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class FormController extends ControllerBehavior
@@ -68,7 +69,7 @@ class FormController extends ControllerBehavior
     protected $formWidget;
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $requiredProperties = ['formConfig'];
 
@@ -95,7 +96,7 @@ class FormController extends ControllerBehavior
     protected $model;
 
     /**
-     * Behavior constructor
+     * Behavior constructor.
      * @param Backend\Classes\Controller $controller
      */
     public function __construct($controller)
@@ -159,7 +160,9 @@ class FormController extends ControllerBehavior
 
         $this->formWidget->bindEvent('form.beforeRefresh', function ($holder) {
             $result = $this->controller->formExtendRefreshData($this->formWidget, $holder->data);
-            if (is_array($result)) $holder->data = $result;
+            if (is_array($result)) {
+                $holder->data = $result;
+            }
         });
 
         $this->formWidget->bindEvent('form.refreshFields', function ($fields) {
@@ -217,8 +220,7 @@ class FormController extends ControllerBehavior
             $model = $this->controller->formExtendModel($model) ?: $model;
 
             $this->initForm($model);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->controller->handleError($ex);
         }
     }
@@ -286,8 +288,7 @@ class FormController extends ControllerBehavior
 
             $model = $this->controller->formFindModelObject($recordId);
             $this->initForm($model);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->controller->handleError($ex);
         }
     }
@@ -380,8 +381,7 @@ class FormController extends ControllerBehavior
 
             $model = $this->controller->formFindModelObject($recordId);
             $this->initForm($model);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->controller->handleError($ex);
         }
     }
@@ -407,7 +407,7 @@ class FormController extends ControllerBehavior
      */
     public function formRender($options = [])
     {
-        if (!$this->formWidget) {
+        if (! $this->formWidget) {
             throw new ApplicationException(Lang::get('backend::lang.form.behavior_not_ready'));
         }
 
@@ -446,6 +446,7 @@ class FormController extends ControllerBehavior
     protected function createModel()
     {
         $class = $this->config->modelClass;
+
         return new $class;
     }
 
@@ -460,7 +461,7 @@ class FormController extends ControllerBehavior
     public function makeRedirect($context = null, $model = null)
     {
         $redirectUrl = null;
-        if (post('close') && !ends_with($context, '-close')) {
+        if (post('close') && ! ends_with($context, '-close')) {
             $context .= '-close';
         }
 
@@ -525,9 +526,10 @@ class FormController extends ControllerBehavior
     {
         $name = $this->getConfig($name, $default);
         $vars = [
-            'name' => Lang::get($this->getConfig('name', 'backend::lang.model.name'))
+            'name' => Lang::get($this->getConfig('name', 'backend::lang.model.name')),
         ];
         $vars = array_merge($vars, $extras);
+
         return Lang::get($name, $vars);
     }
 
@@ -752,7 +754,7 @@ class FormController extends ControllerBehavior
      */
     public function formFindModelObject($recordId)
     {
-        if (!strlen($recordId)) {
+        if (! strlen($recordId)) {
             throw new ApplicationException($this->getLang('not-found-message', 'backend::lang.form.missing_id'));
         }
 
@@ -765,9 +767,9 @@ class FormController extends ControllerBehavior
         $this->controller->formExtendQuery($query);
         $result = $query->find($recordId);
 
-        if (!$result) {
+        if (! $result) {
             throw new ApplicationException($this->getLang('not-found-message', 'backend::lang.form.not_found', [
-                'class' => get_class($model), 'id' => $recordId
+                'class' => get_class($model), 'id' => $recordId,
             ]));
         }
 
@@ -847,7 +849,7 @@ class FormController extends ControllerBehavior
 
     /**
      * Extend the query used for finding the form model. Extra conditions
-     * can be applied to the query, for example, $query->withTrashed();
+     * can be applied to the query, for example, $query->withTrashed();.
      * @param October\Rain\Database\Builder $query
      * @return void
      */
@@ -864,7 +866,7 @@ class FormController extends ControllerBehavior
     {
         $calledClass = self::getCalledExtensionClass();
         Event::listen('backend.form.extendFields', function ($widget) use ($calledClass, $callback) {
-            if (!is_a($widget->getController(), $calledClass)) {
+            if (! is_a($widget->getController(), $calledClass)) {
                 return;
             }
             call_user_func_array($callback, [$widget, $widget->model, $widget->getContext()]);

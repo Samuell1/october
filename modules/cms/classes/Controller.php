@@ -1,37 +1,38 @@
-<?php namespace Cms\Classes;
+<?php
 
+namespace Cms\Classes;
+
+use App;
 use Cms;
 use Url;
-use App;
-use View;
 use Lang;
+use View;
 use Flash;
 use Config;
-use Session;
 use Request;
+use Session;
 use Response;
 use Exception;
 use BackendAuth;
-use Twig\Environment as TwigEnvironment;
-use Twig\Cache\FilesystemCache as TwigCacheFilesystem;
-use Cms\Twig\Loader as TwigLoader;
 use Cms\Twig\DebugExtension;
-use Cms\Twig\Extension as CmsTwigExtension;
-use Cms\Models\MaintenanceSetting;
 use System\Models\RequestLog;
-use System\Helpers\View as ViewHelper;
 use System\Classes\CombineAssets;
-use System\Twig\Extension as SystemTwigExtension;
-use October\Rain\Exception\AjaxException;
-use October\Rain\Exception\ValidationException;
-use October\Rain\Parse\Bracket as TextParser;
+use Cms\Models\MaintenanceSetting;
+use Cms\Twig\Loader as TwigLoader;
 use Illuminate\Http\RedirectResponse;
+use System\Helpers\View as ViewHelper;
+use Twig\Environment as TwigEnvironment;
+use October\Rain\Exception\AjaxException;
+use Cms\Twig\Extension as CmsTwigExtension;
+use October\Rain\Parse\Bracket as TextParser;
+use October\Rain\Exception\ValidationException;
+use System\Twig\Extension as SystemTwigExtension;
+use Twig\Cache\FilesystemCache as TwigCacheFilesystem;
 
 /**
  * The CMS controller class.
  * The controller finds and serves requested pages.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class Controller
@@ -117,7 +118,7 @@ class Controller
     public function __construct($theme = null)
     {
         $this->theme = $theme ?: Theme::getActiveTheme();
-        if (!$this->theme) {
+        if (! $this->theme) {
             throw new CmsException(Lang::get('cms::lang.theme.active.not_found'));
         }
 
@@ -151,7 +152,7 @@ class Controller
          * Hidden page
          */
         $page = $this->router->findByUrl($url);
-        if ($page && $page->is_hidden && !BackendAuth::getUser()) {
+        if ($page && $page->is_hidden && ! BackendAuth::getUser()) {
             $page = null;
         }
 
@@ -161,9 +162,9 @@ class Controller
         if (
             MaintenanceSetting::isConfigured() &&
             MaintenanceSetting::get('is_enabled', false) &&
-            !BackendAuth::getUser()
+            ! BackendAuth::getUser()
         ) {
-            if (!Request::ajax()) {
+            if (! Request::ajax()) {
                 $this->setStatusCode(503);
             }
 
@@ -189,13 +190,11 @@ class Controller
          *             return \Cms\Classes\Page::loadCached('trick-theme-code', 'page-file-name');
          *         }
          *     });
-         *
          */
         if ($event = $this->fireSystemEvent('cms.page.beforeDisplay', [$url, $page])) {
             if ($event instanceof Page) {
                 $page = $event;
-            }
-            else {
+            } else {
                 return $event;
             }
         }
@@ -203,17 +202,17 @@ class Controller
         /*
          * If the page was not found, render the 404 page - either provided by the theme or the built-in one.
          */
-        if (!$page || $url === '404' || ($url === 'error' && !Config::get('app.debug', false))) {
-            if (!Request::ajax()) {
+        if (! $page || $url === '404' || ($url === 'error' && ! Config::get('app.debug', false))) {
+            if (! Request::ajax()) {
                 $this->setStatusCode(404);
             }
 
             // Log the 404 request
-            if (!App::runningUnitTests()) {
+            if (! App::runningUnitTests()) {
                 RequestLog::add();
             }
 
-            if (!$page = $this->router->findByUrl('/404')) {
+            if (! $page = $this->router->findByUrl('/404')) {
                 return Response::make(View::make('cms::404'), $this->statusCode);
             }
         }
@@ -247,13 +246,12 @@ class Controller
          *             return Response::make('Boo!', 200);
          *         }
          *     });
-         *
          */
         if ($event = $this->fireSystemEvent('cms.page.display', [$url, $page, $result])) {
             return $event;
         }
 
-        if (!is_string($result)) {
+        if (! is_string($result)) {
             return $result;
         }
 
@@ -269,7 +267,7 @@ class Controller
      */
     public static function render($pageFile, $parameters = [], $theme = null)
     {
-        if (!$theme && (!$theme = Theme::getActiveTheme())) {
+        if (! $theme && (! $theme = Theme::getActiveTheme())) {
             throw new CmsException(Lang::get('cms::lang.theme.active.not_found'));
         }
 
@@ -296,10 +294,9 @@ class Controller
          * If the page doesn't refer any layout, create the fallback layout.
          * Otherwise load the layout specified in the page.
          */
-        if (!$page->layout) {
+        if (! $page->layout) {
             $layout = Layout::initFallback($this->theme);
-        }
-        elseif (($layout = Layout::loadCached($this->theme, $page->layout)) === null) {
+        } elseif (($layout = Layout::loadCached($this->theme, $page->layout)) === null) {
             throw new CmsException(Lang::get('cms::lang.layout.not_found_name', ['name'=>$page->layout]));
         }
 
@@ -361,7 +358,6 @@ class Controller
          *     $CmsController->bindEvent('page.init', function ((\Cms\Classes\Page) $page) {
          *         return \Cms\Classes\Page::loadCached('trick-theme-code', 'page-file-name');
          *     });
-         *
          */
         if ($event = $this->fireSystemEvent('cms.page.init', [$page])) {
             return $event;
@@ -409,12 +405,10 @@ class Controller
          *     $CmsController->bindEvent('page.beforeRenderPage', function ((\Cms\Classes\Page) $page) {
          *         return 'Custom page contents';
          *     });
-         *
          */
         if ($event = $this->fireSystemEvent('cms.page.beforeRenderPage', [$page])) {
             $this->pageContents = $event;
-        }
-        else {
+        } else {
             /*
              * Render the page
              */
@@ -453,7 +447,7 @@ class Controller
      */
     protected function execPageCycle()
     {
-        /**
+        /*
          * @event cms.page.start
          * Fires before all of the page & layout lifecycle handlers are run
          *
@@ -515,7 +509,7 @@ class Controller
             CmsException::unmask();
         }
 
-        /**
+        /*
          * @event cms.page.end
          * Fires after all of the page & layout lifecycle handlers are run
          *
@@ -566,7 +560,6 @@ class Controller
          *     $CmsController->bindEvent('page.postprocess', function ((string) $url, (\Cms\Classes\Page) $page, (object) $dataHolder) {
          *         return 'My custom content';
          *     });
-         *
          */
         $dataHolder = (object) ['content' => $content];
         $this->fireSystemEvent('cms.page.postprocess', [$url, $page, $dataHolder]);
@@ -587,7 +580,7 @@ class Controller
     {
         $this->loader = new TwigLoader;
 
-        $useCache = !Config::get('cms.twigNoCache');
+        $useCache = ! Config::get('cms.twigNoCache');
         $isDebugMode = Config::get('app.debug', false);
         $strictVariables = Config::get('cms.enableTwigStrictVariables', false);
         $strictVariables = $strictVariables ?? $isDebugMode;
@@ -623,7 +616,7 @@ class Controller
     {
         $this->layoutObj = null;
 
-        if (!$this->layout->isFallBack()) {
+        if (! $this->layout->isFallBack()) {
             CmsException::mask($this->layout, 300);
             $parser = new CodeParser($this->layout);
             $this->layoutObj = $parser->source($this->page, $this->layout, $this);
@@ -642,7 +635,7 @@ class Controller
      */
     protected function initComponents()
     {
-        if (!$this->layout->isFallBack()) {
+        if (! $this->layout->isFallBack()) {
             foreach ($this->layout->settings['components'] as $component => $properties) {
                 list($name, $alias) = strpos($component, ' ')
                     ? explode(' ', $component)
@@ -660,7 +653,7 @@ class Controller
             $this->addComponent($name, $alias, $properties);
         }
 
-        /**
+        /*
          * @event cms.page.initComponents
          * Fires after the components for the given page have been initialized
          *
@@ -690,15 +683,13 @@ class Controller
      */
     public function getAjaxHandler()
     {
-        if (!Request::ajax() || Request::method() != 'POST') {
-            return null;
+        if (! Request::ajax() || Request::method() != 'POST') {
+            return;
         }
 
         if ($handler = Request::header('X_OCTOBER_REQUEST_HANDLER')) {
             return trim($handler);
         }
-
-        return null;
     }
 
     /**
@@ -712,7 +703,7 @@ class Controller
                 /*
                  * Validate the handler name
                  */
-                if (!preg_match('/^(?:\w+\:{2})?on[A-Z]{1}[\w+]*$/', $handler)) {
+                if (! preg_match('/^(?:\w+\:{2})?on[A-Z]{1}[\w+]*$/', $handler)) {
                     throw new CmsException(Lang::get('cms::lang.ajax_handler.invalid_name', ['name'=>$handler]));
                 }
 
@@ -723,12 +714,11 @@ class Controller
                     $partialList = explode('&', $partialList);
 
                     foreach ($partialList as $partial) {
-                        if (!preg_match('/^(?:\w+\:{2}|@)?[a-z0-9\_\-\.\/]+$/i', $partial)) {
+                        if (! preg_match('/^(?:\w+\:{2}|@)?[a-z0-9\_\-\.\/]+$/i', $partial)) {
                             throw new CmsException(Lang::get('cms::lang.partial.invalid_name', ['name'=>$partial]));
                         }
                     }
-                }
-                else {
+                } else {
                     $partialList = [];
                 }
 
@@ -737,7 +727,7 @@ class Controller
                 /*
                  * Execute the handler
                  */
-                if (!$result = $this->runAjaxHandler($handler)) {
+                if (! $result = $this->runAjaxHandler($handler)) {
                     throw new CmsException(Lang::get('cms::lang.ajax_handler.not_found', ['name'=>$handler]));
                 }
 
@@ -770,37 +760,32 @@ class Controller
                  */
                 if (is_array($result)) {
                     $responseContents = array_merge($responseContents, $result);
-                }
-                elseif (is_string($result)) {
+                } elseif (is_string($result)) {
                     $responseContents['result'] = $result;
-                }
-                elseif (is_object($result)) {
+                } elseif (is_object($result)) {
                     return $result;
                 }
 
                 return Response::make($responseContents, $this->statusCode);
-            }
-            catch (ValidationException $ex) {
+            } catch (ValidationException $ex) {
                 /*
                  * Handle validation errors
                  */
                 $responseContents['X_OCTOBER_ERROR_FIELDS'] = $ex->getFields();
                 $responseContents['X_OCTOBER_ERROR_MESSAGE'] = $ex->getMessage();
+
                 throw new AjaxException($responseContents);
-            }
-            catch (Exception $ex) {
+            } catch (Exception $ex) {
                 throw $ex;
             }
         }
-
-        return null;
     }
 
     /**
      * Tries to find and run an AJAX handler in the page, layout, components and plugins.
      * The method stops as soon as the handler is found.
      * @param string $handler name of the ajax handler
-     * @return boolean Returns true if the handler was found. Returns false otherwise.
+     * @return bool Returns true if the handler was found. Returns false otherwise.
      */
     protected function runAjaxHandler($handler)
     {
@@ -831,7 +816,6 @@ class Controller
          *             }
          *         }
          *     });
-         *
          */
         if ($event = $this->fireSystemEvent('cms.ajax.beforeRunHandler', [$handler])) {
             return $event;
@@ -841,13 +825,13 @@ class Controller
          * Process Component handler
          */
         if (strpos($handler, '::')) {
-
             list($componentName, $handlerName) = explode('::', $handler);
             $componentObj = $this->findComponentByName($componentName);
 
             if ($componentObj && $componentObj->methodExists($handlerName)) {
                 $this->componentContext = $componentObj;
                 $result = $componentObj->runAjaxHandler($handlerName);
+
                 return $result ?: true;
             }
         }
@@ -857,11 +841,13 @@ class Controller
         else {
             if (method_exists($this->pageObj, $handler)) {
                 $result = $this->pageObj->$handler();
+
                 return $result ?: true;
             }
 
-            if (!$this->layout->isFallBack() && method_exists($this->layoutObj, $handler)) {
+            if (! $this->layout->isFallBack() && method_exists($this->layoutObj, $handler)) {
                 $result = $this->layoutObj->$handler();
+
                 return $result ?: true;
             }
 
@@ -871,6 +857,7 @@ class Controller
             if (($componentObj = $this->findComponentByHandler($handler)) !== null) {
                 $this->componentContext = $componentObj;
                 $result = $componentObj->runAjaxHandler($handler);
+
                 return $result ?: true;
             }
         }
@@ -897,7 +884,7 @@ class Controller
     {
         $contents = $this->pageContents;
 
-        /**
+        /*
          * @event cms.page.render
          * Provides an oportunity to manipulate the page's rendered contents
          *
@@ -938,10 +925,10 @@ class Controller
          * Alias @ symbol for ::
          */
         if (substr($name, 0, 1) == '@') {
-            $name = '::' . substr($name, 1);
+            $name = '::'.substr($name, 1);
         }
 
-        /**
+        /*
          * @event cms.page.beforeRenderPartial
          * Provides an oportunity to manipulate the name of the partial being rendered before it renders
          *
@@ -965,17 +952,15 @@ class Controller
          * Process Component partial
          */
         elseif (strpos($name, '::') !== false) {
-
             list($componentAlias, $partialName) = explode('::', $name);
 
             /*
              * Component alias not supplied
              */
-            if (!strlen($componentAlias)) {
+            if (! strlen($componentAlias)) {
                 if ($this->componentContext !== null) {
                     $componentObj = $this->componentContext;
-                }
-                elseif (($componentObj = $this->findComponentByPartial($partialName)) === null) {
+                } elseif (($componentObj = $this->findComponentByPartial($partialName)) === null) {
                     if ($throwException) {
                         throw new CmsException(Lang::get('cms::lang.partial.not_found_name', ['name'=>$partialName]));
                     }
@@ -1056,7 +1041,7 @@ class Controller
                     ? explode(' ', $component)
                     : [$component, $component];
 
-                if (!$componentObj = $manager->makeComponent($name, $this->pageObj, $properties)) {
+                if (! $componentObj = $manager->makeComponent($name, $this->pageObj, $properties)) {
                     throw new CmsException(Lang::get('cms::lang.component.not_found', ['name'=>$name]));
                 }
 
@@ -1111,7 +1096,6 @@ class Controller
          *     $CmsController->bindEvent('page.renderPartial', function ((string) $partialName, (string) &$partialContent) {
          *         return "Overriding content";
          *     });
-         *
          */
         if ($event = $this->fireSystemEvent('cms.page.renderPartial', [$name, &$partialContent])) {
             return $event;
@@ -1129,7 +1113,7 @@ class Controller
      */
     public function renderContent($name, $parameters = [])
     {
-        /**
+        /*
          * @event cms.page.beforeRenderContent
          * Provides an oportunity to manipulate the name of the content file being rendered before it renders
          *
@@ -1162,14 +1146,14 @@ class Controller
          * Inject global view variables
          */
         $globalVars = ViewHelper::getGlobalVars();
-        if (!empty($globalVars)) {
+        if (! empty($globalVars)) {
             $parameters = (array) $parameters + $globalVars;
         }
 
         /*
          * Parse basic template variables
          */
-        if (!empty($parameters)) {
+        if (! empty($parameters)) {
             $fileContent = TextParser::parse($fileContent, $parameters);
         }
 
@@ -1188,7 +1172,6 @@ class Controller
          *     $CmsController->bindEvent('page.renderContent', function ((string) $contentName, (string) &$fileContent) {
          *         return "Overriding content";
          *     });
-         *
          */
         if ($event = $this->fireSystemEvent('cms.page.renderContent', [$name, &$fileContent])) {
             return $event;
@@ -1215,11 +1198,12 @@ class Controller
             $result = $componentObj->onRender();
         }
 
-        if (!$result) {
+        if (! $result) {
             $result = $this->renderPartial($name.'::default', [], false);
         }
 
         $this->componentContext = $previousContext;
+
         return $result;
     }
 
@@ -1235,6 +1219,7 @@ class Controller
     public function setStatusCode($code)
     {
         $this->statusCode = (int) $code;
+
         return $this;
     }
 
@@ -1242,7 +1227,7 @@ class Controller
     // Getters
     //
 
-     /**
+    /**
      * Returns the status code for the current web response.
      * @return int Status code
      */
@@ -1351,7 +1336,7 @@ class Controller
      */
     public function pageUrl($name, $parameters = [], $routePersistence = true)
     {
-        if (!$name) {
+        if (! $name) {
             return $this->currentPageUrl($parameters, $routePersistence);
         }
 
@@ -1362,7 +1347,7 @@ class Controller
             $routePersistence = $parameters;
         }
 
-        if (!is_array($parameters)) {
+        if (! is_array($parameters)) {
             $parameters = [];
         }
 
@@ -1370,8 +1355,8 @@ class Controller
             $parameters = array_merge($this->router->getParameters(), $parameters);
         }
 
-        if (!$url = $this->router->findByFile($name, $parameters)) {
-            return null;
+        if (! $url = $this->router->findByFile($name, $parameters)) {
+            return;
         }
 
         return Cms::url($url);
@@ -1385,8 +1370,8 @@ class Controller
      */
     public function currentPageUrl($parameters = [], $routePersistence = true)
     {
-        if (!$currentFile = $this->page->getFileName()) {
-            return null;
+        if (! $currentFile = $this->page->getFileName()) {
+            return;
         }
 
         return $this->pageUrl($currentFile, $parameters, $routePersistence);
@@ -1404,8 +1389,7 @@ class Controller
 
         if (is_array($url)) {
             $_url = Url::to(CombineAssets::combine($url, themes_path().'/'.$themeDir));
-        }
-        else {
+        } else {
             $_url = Config::get('cms.themesPath', '/themes').'/'.$themeDir;
             if ($url !== null) {
                 $_url .= '/'.$url;
@@ -1432,7 +1416,7 @@ class Controller
     //
 
     /**
-     * Adds a component to the page object
+     * Adds a component to the page object.
      * @param mixed  $name        Component class name or short name
      * @param string $alias       Alias to give the component
      * @param array  $properties  Component properties
@@ -1444,15 +1428,14 @@ class Controller
         $manager = ComponentManager::instance();
 
         if ($addToLayout) {
-            if (!$componentObj = $manager->makeComponent($name, $this->layoutObj, $properties)) {
+            if (! $componentObj = $manager->makeComponent($name, $this->layoutObj, $properties)) {
                 throw new CmsException(Lang::get('cms::lang.component.not_found', ['name'=>$name]));
             }
 
             $componentObj->alias = $alias;
             $this->vars[$alias] = $this->layout->components[$alias] = $componentObj;
-        }
-        else {
-            if (!$componentObj = $manager->makeComponent($name, $this->pageObj, $properties)) {
+        } else {
+            if (! $componentObj = $manager->makeComponent($name, $this->pageObj, $properties)) {
                 throw new CmsException(Lang::get('cms::lang.component.not_found', ['name'=>$name]));
             }
 
@@ -1462,11 +1445,12 @@ class Controller
 
         $this->setComponentPropertiesFromParams($componentObj);
         $componentObj->init();
+
         return $componentObj;
     }
 
     /**
-     * Searches the layout and page components by an alias
+     * Searches the layout and page components by an alias.
      * @param $name
      * @return ComponentBase The component object, if found
      */
@@ -1484,12 +1468,10 @@ class Controller
         if ($partialComponent !== null) {
             return $partialComponent;
         }
-
-        return null;
     }
 
     /**
-     * Searches the layout and page components by an AJAX handler
+     * Searches the layout and page components by an AJAX handler.
      * @param string $handler
      * @return ComponentBase The component object, if found
      */
@@ -1506,12 +1488,10 @@ class Controller
                 return $component;
             }
         }
-
-        return null;
     }
 
     /**
-     * Searches the layout and page components by a partial file
+     * Searches the layout and page components by a partial file.
      * @param string $partial
      * @return ComponentBase The component object, if found
      */
@@ -1528,8 +1508,6 @@ class Controller
                 return $component;
             }
         }
-
-        return null;
     }
 
     /**
@@ -1565,8 +1543,7 @@ class Controller
                 if (substr($paramName, 0, 1) == ':') {
                     $routeParamName = substr($paramName, 1);
                     $newPropertyValue = $routerParameters[$routeParamName] ?? null;
-                }
-                else {
+                } else {
                     $newPropertyValue = $parameters[$paramName] ?? null;
                 }
 
@@ -1588,7 +1565,7 @@ class Controller
      */
     protected function verifyCsrfToken()
     {
-        if (!Config::get('cms.enableCsrfProtection')) {
+        if (! Config::get('cms.enableCsrfProtection')) {
             return true;
         }
 
@@ -1598,7 +1575,7 @@ class Controller
 
         $token = Request::input('_token') ?: Request::header('X-CSRF-TOKEN');
 
-        if (!strlen($token)) {
+        if (! strlen($token)) {
             return false;
         }
 

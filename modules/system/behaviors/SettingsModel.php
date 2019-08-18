@@ -1,28 +1,31 @@
-<?php namespace System\Behaviors;
+<?php
+
+namespace System\Behaviors;
 
 use App;
-use Artisan;
-use Cache;
 use Log;
+use Cache;
+use Artisan;
 use Exception;
 use System\Classes\ModelBehavior;
 
 /**
- * Settings model extension
+ * Settings model extension.
  *
  * Add this the model class definition:
  *
  *     public $implement = ['System.Behaviors.SettingsModel'];
  *     public $settingsCode = 'author_plugin_code';
  *     public $settingsFields = 'fields.yaml';
- *
  */
 class SettingsModel extends ModelBehavior
 {
     use \System\Traits\ConfigMaker;
 
     protected $recordCode;
+
     protected $fieldConfig;
+
     protected $fieldValues = [];
 
     /**
@@ -31,12 +34,12 @@ class SettingsModel extends ModelBehavior
     private static $instances = [];
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $requiredProperties = ['settingsFields', 'settingsCode'];
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct($model)
     {
@@ -65,7 +68,7 @@ class SettingsModel extends ModelBehavior
     }
 
     /**
-     * Create an instance of the settings model, intended as a static method
+     * Create an instance of the settings model, intended as a static method.
      */
     public function instance()
     {
@@ -73,7 +76,7 @@ class SettingsModel extends ModelBehavior
             return self::$instances[$this->recordCode];
         }
 
-        if (!$item = $this->getSettingsRecord()) {
+        if (! $item = $this->getSettingsRecord()) {
             $this->model->initSettingsData();
             $item = $this->model;
         }
@@ -82,7 +85,7 @@ class SettingsModel extends ModelBehavior
     }
 
     /**
-     * Reset the settings to their defaults, this will delete the record model
+     * Reset the settings to their defaults, this will delete the record model.
      */
     public function resetDefault()
     {
@@ -94,7 +97,7 @@ class SettingsModel extends ModelBehavior
     }
 
     /**
-     * Checks if the model has been set up previously, intended as a static method
+     * Checks if the model has been set up previously, intended as a static method.
      * @return bool
      */
     public function isConfigured()
@@ -117,18 +120,19 @@ class SettingsModel extends ModelBehavior
     }
 
     /**
-     * Set a single or array key pair of values, intended as a static method
+     * Set a single or array key pair of values, intended as a static method.
      */
     public function set($key, $value = null)
     {
         $data = is_array($key) ? $key : [$key => $value];
         $obj = self::instance();
         $obj->fill($data);
+
         return $obj->save();
     }
 
     /**
-     * Helper for getSettingsValue, intended as a static method
+     * Helper for getSettingsValue, intended as a static method.
      */
     public function get($key, $default = null)
     {
@@ -136,7 +140,7 @@ class SettingsModel extends ModelBehavior
     }
 
     /**
-     * Get a single setting value, or return a default value
+     * Get a single setting value, or return a default value.
      */
     public function getSettingsValue($key, $default = null)
     {
@@ -160,7 +164,7 @@ class SettingsModel extends ModelBehavior
     }
 
     /**
-     * Default values to set for this model, override
+     * Default values to set for this model, override.
      */
     public function initSettingsData()
     {
@@ -176,7 +180,7 @@ class SettingsModel extends ModelBehavior
     }
 
     /**
-     * Internal save method for the model
+     * Internal save method for the model.
      * @return void
      */
     public function saveModelInternal()
@@ -187,7 +191,7 @@ class SettingsModel extends ModelBehavior
 
     /**
      * Before the model is saved, ensure the record code is set
-     * and the jsonable field values
+     * and the jsonable field values.
      */
     public function beforeModelSave()
     {
@@ -199,7 +203,7 @@ class SettingsModel extends ModelBehavior
 
     /**
      * After the model is saved, clear the cached query entry
-     * and restart queue workers so they have the latest settings
+     * and restart queue workers so they have the latest settings.
      * @return void
      */
     public function afterModelSave()
@@ -215,7 +219,7 @@ class SettingsModel extends ModelBehavior
 
     /**
      * Checks if a key is legitimate or should be added to
-     * the field value collection
+     * the field value collection.
      */
     protected function isKeyAllowed($key)
     {

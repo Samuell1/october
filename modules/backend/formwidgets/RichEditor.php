@@ -1,19 +1,20 @@
-<?php namespace Backend\FormWidgets;
+<?php
+
+namespace Backend\FormWidgets;
 
 use App;
 use File;
-use Event;
 use Lang;
+use Event;
 use Request;
 use BackendAuth;
-use Backend\Classes\FormWidgetBase;
 use Backend\Models\EditorSetting;
+use Backend\Classes\FormWidgetBase;
 
 /**
  * Rich Editor
  * Renders a rich content editor field.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class RichEditor extends FormWidgetBase
@@ -23,17 +24,17 @@ class RichEditor extends FormWidgetBase
     //
 
     /**
-     * @var boolean Determines whether content has HEAD and HTML tags.
+     * @var bool Determines whether content has HEAD and HTML tags.
      */
     public $fullPage = false;
 
     /**
-     * @var boolean Determines whether content has HEAD and HTML tags.
+     * @var bool Determines whether content has HEAD and HTML tags.
      */
     public $toolbarButtons;
 
     /**
-     * @var boolean If true, the editor is set to read-only mode
+     * @var bool If true, the editor is set to read-only mode
      */
     public $readOnly = false;
 
@@ -42,12 +43,12 @@ class RichEditor extends FormWidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'richeditor';
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -63,16 +64,17 @@ class RichEditor extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
         $this->prepareVars();
+
         return $this->makePartial('richeditor');
     }
 
     /**
-     * Prepares the list data
+     * Prepares the list data.
      */
     public function prepareVars()
     {
@@ -121,11 +123,12 @@ class RichEditor extends FormWidgetBase
     public function onLoadPageLinksForm()
     {
         $this->vars['links'] = $this->getPageLinksArray();
+
         return $this->makePartial('page_links_form');
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function loadAssets()
     {
@@ -149,7 +152,7 @@ class RichEditor extends FormWidgetBase
 
         // English is baked in
         if ($locale == 'en') {
-            return null;
+            return;
         }
 
         $locale = str_replace('-', '_', strtolower($locale));
@@ -170,7 +173,7 @@ class RichEditor extends FormWidgetBase
         $apiResult = Event::fire('backend.richeditor.listTypes');
         if (is_array($apiResult)) {
             foreach ($apiResult as $typeList) {
-                if (!is_array($typeList)) {
+                if (! is_array($typeList)) {
                     continue;
                 }
 
@@ -189,7 +192,7 @@ class RichEditor extends FormWidgetBase
         $apiResult = Event::fire('backend.richeditor.getTypeInfo', [$type]);
         if (is_array($apiResult)) {
             foreach ($apiResult as $typeInfo) {
-                if (!is_array($typeInfo)) {
+                if (! is_array($typeInfo)) {
                     continue;
                 }
 

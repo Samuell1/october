@@ -1,4 +1,6 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use Illuminate\Console\Command;
 use System\Classes\UpdateManager;
@@ -8,7 +10,6 @@ use System\Classes\UpdateManager;
  *
  * This builds up all database tables that are registered for October and all plugins.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class OctoberUp extends Command
@@ -32,7 +33,6 @@ class OctoberUp extends Command
 
         UpdateManager::instance()
             ->setNotesOutput($this->output)
-            ->update()
-        ;
+            ->update();
     }
 }

@@ -1,8 +1,10 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use Illuminate\Console\Command;
-use System\Classes\UpdateManager;
 use System\Classes\PluginManager;
+use System\Classes\UpdateManager;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
@@ -11,12 +13,10 @@ use Symfony\Component\Console\Input\InputArgument;
  * This destroys all database tables for a specific plugin, then builds them up again.
  * It is a great way for developers to debug and develop new plugins.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class PluginRefresh extends Command
 {
-
     /**
      * The console command name.
      * @var string
@@ -40,7 +40,7 @@ class PluginRefresh extends Command
          */
         $pluginName = $this->argument('name');
         $pluginName = PluginManager::instance()->normalizeIdentifier($pluginName);
-        if (!PluginManager::instance()->exists($pluginName)) {
+        if (! PluginManager::instance()->exists($pluginName)) {
             throw new \InvalidArgumentException(sprintf('Plugin "%s" not found.', $pluginName));
         }
 

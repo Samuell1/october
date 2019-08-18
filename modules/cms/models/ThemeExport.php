@@ -1,17 +1,18 @@
-<?php namespace Cms\Models;
+<?php
+
+namespace Cms\Models;
 
 use File;
 use Model;
 use Response;
+use Exception;
 use ApplicationException;
 use October\Rain\Filesystem\Zip;
 use Cms\Classes\Theme as CmsTheme;
-use Exception;
 
 /**
- * Theme export model
+ * Theme export model.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class ThemeExport extends Model
@@ -51,7 +52,7 @@ class ThemeExport extends Model
             'layouts'  => true,
             'partials' => true,
             'content'  => true,
-        ]
+        ],
     ];
 
     public function getFoldersOptions()
@@ -67,7 +68,7 @@ class ThemeExport extends Model
 
     public function setThemeAttribute($theme)
     {
-        if (!$theme instanceof CmsTheme) {
+        if (! $theme instanceof CmsTheme) {
             return;
         }
 
@@ -83,15 +84,15 @@ class ThemeExport extends Model
 
         try {
             $themePath = $this->theme->getPath();
-            $tempPath = temp_path() . '/'.uniqid('oc');
+            $tempPath = temp_path().'/'.uniqid('oc');
             $zipName = uniqid('oc');
             $zipPath = temp_path().'/'.$zipName;
 
-            if (!File::makeDirectory($tempPath)) {
+            if (! File::makeDirectory($tempPath)) {
                 throw new ApplicationException('Unable to create directory '.$tempPath);
             }
 
-            if (!File::makeDirectory($metaPath = $tempPath . '/meta')) {
+            if (! File::makeDirectory($metaPath = $tempPath.'/meta')) {
                 throw new ApplicationException('Unable to create directory '.$metaPath);
             }
 
@@ -99,7 +100,7 @@ class ThemeExport extends Model
             File::copyDirectory($themePath.'/meta', $metaPath);
 
             foreach ($this->folders as $folder) {
-                if (!array_key_exists($folder, $this->getFoldersOptions())) {
+                if (! array_key_exists($folder, $this->getFoldersOptions())) {
                     continue;
                 }
 
@@ -108,9 +109,7 @@ class ThemeExport extends Model
 
             Zip::make($zipPath, $tempPath);
             File::deleteDirectory($tempPath);
-        }
-        catch (Exception $ex) {
-
+        } catch (Exception $ex) {
             if (strlen($tempPath) && File::isDirectory($tempPath)) {
                 File::deleteDirectory($tempPath);
             }
@@ -127,12 +126,12 @@ class ThemeExport extends Model
 
     public static function download($name, $outputName = null)
     {
-        if (!preg_match('/^oc[0-9a-z]*$/i', $name)) {
+        if (! preg_match('/^oc[0-9a-z]*$/i', $name)) {
             throw new ApplicationException('File not found');
         }
 
-        $zipPath = temp_path() . '/' . $name;
-        if (!file_exists($zipPath)) {
+        $zipPath = temp_path().'/'.$name;
+        if (! file_exists($zipPath)) {
             throw new ApplicationException('File not found');
         }
 

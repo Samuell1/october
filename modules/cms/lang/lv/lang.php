@@ -10,24 +10,24 @@ return [
         'invalid_file_extension'=>'Nederīgs faila tips: :invalid. Atļautie tipi: :allowed.',
         'error_deleting' => "Kūda dzēšot veidnes failu ':name'. Lūdzu pārbaudiet rakstīšanas tiesības.",
         'delete_success' => 'Tika veiksmīgi izdzēstas veidnes: :count.',
-        'file_name_required' => 'Faila nosaukuma lauks ir obligāts.'
+        'file_name_required' => 'Faila nosaukuma lauks ir obligāts.',
     ],
     'dashboard' => [
         'active_theme' => [
             'online' => 'online',
             'maintenance' => 'atkopšana',
-        ]
+        ],
     ],
     'theme' => [
         'not_found_name' => "Tēma ':name' netika atrasta.",
         'active' => [
             'not_set' => 'Aktīvā tēma netika iestatīta.',
-            'not_found' => 'Aktīvā tēma netika atrasta.'
+            'not_found' => 'Aktīvā tēma netika atrasta.',
         ],
         'edit' => [
             'not_set' => 'Labotā tēma netika iestatīta.',
             'not_found' => 'Labotā tēma netika atrasta.',
-            'not_match' => "Objekts, kuru mēģinat labot nepieder tēmai, kuru šobrīd labojat. Lūdzu pārlādējiet lapu."
+            'not_match' => 'Objekts, kuru mēģinat labot nepieder tēmai, kuru šobrīd labojat. Lūdzu pārlādējiet lapu.',
         ],
         'settings_menu' => 'Front-end tēma',
         'settings_menu_description' => 'Priekšskatiet instalētās tēmas un izvēlieties aktīvo tēmu.',
@@ -91,17 +91,17 @@ return [
         'settings_menu' => 'Apkopes režīms',
         'settings_menu_description' => 'Konfigurējiet apkopes režīma lapu un pielāgojiet iestatījumus.',
         'is_enabled' => 'Iespējot apkopes režīmu',
-        'is_enabled_comment' => 'Kad aktivizēts mājaslapas apmeklētāji redzēs zemāk izvēlēto lapu.'
+        'is_enabled_comment' => 'Kad aktivizēts mājaslapas apmeklētāji redzēs zemāk izvēlēto lapu.',
     ],
     'page' => [
         'not_found_name' => "Lapa ':name' netika atrasta",
         'not_found' => [
             'label' => 'Lapa nav atrasta',
-            'help' => 'Pieprasītā lapa nav atrasta.'
+            'help' => 'Pieprasītā lapa nav atrasta.',
         ],
         'custom_error' => [
             'label' => 'Lapas kļūda',
-            'help' => "Mums žēl, bet kaut kas nogāja greizi un lapa nevar tikt attēlota."
+            'help' => 'Mums žēl, bet kaut kas nogāja greizi un lapa nevar tikt attēlota.',
         ],
         'menu_label' => 'Lapas',
         'unsaved_label' => 'Nesaglabāta lapa(s)',
@@ -110,7 +110,7 @@ return [
         'invalid_url' => 'Nederīgs URL formāts. URL vajadzētu sākties ar šķērssvītras simbolu un tā var saturēt skaitļus, Latīņu burtus un sekojošos simbolus: ._-[]:?|/+*^$',
         'delete_confirm_multiple' => 'Vai tiešām vēlaties idzēst izvēlētās lapas?',
         'delete_confirm_single' => 'Vai tiešām vēlaties dzēst šo lapu?',
-        'no_layout' => '-- bez izkārtojuma --'
+        'no_layout' => '-- bez izkārtojuma --',
     ],
     'layout' => [
         'not_found_name' => "Izkārtojums ':name' netika atrasts",
@@ -119,7 +119,7 @@ return [
         'no_list_records' => 'Nav izkārtojumu',
         'new' => 'Jauns izkārtojums',
         'delete_confirm_multiple' => 'Vai tiešām vēlaties izdzēst izvēlētos izkārtojumus?',
-        'delete_confirm_single' => 'Vai tiešām vēlaties dzēst šo izkārtojumu?'
+        'delete_confirm_single' => 'Vai tiešām vēlaties dzēst šo izkārtojumu?',
     ],
     'partial' => [
         'not_found_name' => "Daļa ':name' netika atrasta.",
@@ -129,7 +129,7 @@ return [
         'no_list_records' => 'Daļas nav atrastas',
         'delete_confirm_multiple' => 'Vai tiešām vēlaties izdzēst izvēlētās daļas?',
         'delete_confirm_single' => 'Vai tiešām vēlaties dzēst šo daļu?',
-        'new' => 'Jauna daļa'
+        'new' => 'Jauna daļa',
     ],
     'content' => [
         'not_found_name' => "Satura fails ':name' netika atrasts.",
@@ -138,18 +138,18 @@ return [
         'no_list_records' => 'Nav satura failu',
         'delete_confirm_multiple' => 'Vai tiešām vēlaties izdzēst izbēlētos satura failus vai mapes?',
         'delete_confirm_single' => 'Vai tiešām vēlaties dzēst šo satura failu?',
-        'new' => 'Jauns satura fails'
+        'new' => 'Jauns satura fails',
     ],
     'ajax_handler' => [
         'invalid_name' => 'Nederīgs AJAX handler nosaukums: :name.',
-        'not_found' => "AJAX handler ':name' netika atrasts."
+        'not_found' => "AJAX handler ':name' netika atrasts.",
     ],
     'cms' => [
-        'menu_label' => 'CMS'
+        'menu_label' => 'CMS',
     ],
     'sidebar' => [
         'add' => 'Pievienot',
-        'search' => 'Meklēt...'
+        'search' => 'Meklēt...',
     ],
     'editor' => [
         'settings' => 'Iestatījumi',
@@ -169,7 +169,7 @@ return [
         'hidden' => 'Paslēpt',
         'hidden_comment' => 'Paslēptās lapas ir pieejamas tikai autorizētiem back-end lietotājiem.',
         'enter_fullscreen' => 'Pilnkekrāna režīms',
-        'exit_fullscreen' => 'Iziet no pilnekrāna režīma'
+        'exit_fullscreen' => 'Iziet no pilnekrāna režīma',
     ],
     'asset' => [
         'menu_label' => 'Papildinājumi',
@@ -211,7 +211,7 @@ return [
         'error_moving_file' => 'Kļūda pārvietojot failu :file',
         'error_moving_directory' => 'Kļūda pārvietojot mapi :dir',
         'error_deleting_directory' => 'Kļūda dzēšot oriģinālo mapi :dir',
-        'path' => 'Ceļš'
+        'path' => 'Ceļš',
     ],
     'component' => [
         'menu_label' => 'Komponenti',
@@ -223,12 +223,12 @@ return [
         'invalid_request' => 'The template cannot be saved because of invalid component data.',
         'no_records' => 'Nav komponentu',
         'not_found' => "Komponents ':name' netika atrasts.",
-        'method_not_found' => "Komponents ':name' nesatur metodi ':method'."
+        'method_not_found' => "Komponents ':name' nesatur metodi ':method'.",
     ],
     'template' => [
         'invalid_type' => 'Nezināms veidnes tips.',
         'not_found' => 'Pieprasītā veidne nav atrasta.',
-        'saved'=> 'Fails tika veiksmīgi saglabāts.'
+        'saved'=> 'Fails tika veiksmīgi saglabāts.',
     ],
     'permissions' => [
         'name' => 'Cms',

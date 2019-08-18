@@ -6,10 +6,10 @@ return [
         'tagline' => 'Intoarcerea la elementele de baza',
     ],
     'directory' => [
-        'create_fail' => "Nu se poate crea directorul: :name",
+        'create_fail' => 'Nu se poate crea directorul: :name',
     ],
     'file' => [
-        'create_fail' => "Nu se poate crea fisierul: :name",
+        'create_fail' => 'Nu se poate crea fisierul: :name',
     ],
     'combiner' => [
         'not_found' => "Fisierul compus ':name' nu a fost gasit.",
@@ -48,11 +48,11 @@ return [
         'disabled_label' => 'Dezactivat',
         'disabled_help' => 'Plugin-urile care sunt dezactivate sunt ignorate de catre aplicatie.',
         'selected_amount' => 'Plugin-uri selectate: :amount',
-        'remove_success' => "Plugin-urile respective au fost inlaturate cu succes din sistem.",
-        'refresh_success' => "Plugin-urile respective au fost actualizate cu succes.",
-        'disable_success' => "Plugin-urile respective au fost dezactivate cu succes.",
-        'enable_success' => "Plugin-urile respective au fost activate cu succes.",
-        'unknown_plugin' => "Plugin-ul a fost inlaturat din sistemul de fisiere.",
+        'remove_success' => 'Plugin-urile respective au fost inlaturate cu succes din sistem.',
+        'refresh_success' => 'Plugin-urile respective au fost actualizate cu succes.',
+        'disable_success' => 'Plugin-urile respective au fost dezactivate cu succes.',
+        'enable_success' => 'Plugin-urile respective au fost activate cu succes.',
+        'unknown_plugin' => 'Plugin-ul a fost inlaturat din sistemul de fisiere.',
     ],
     'project' => [
         'name' => 'Proiect',
@@ -73,7 +73,7 @@ return [
         'missing_model' => 'Paginii de setari ii lipseste o definitie de Model.',
         'update_success' => 'Setarile pentru :name au fost actualizate cu succes.',
         'return' => 'Intoarcere la setarile sistemului.',
-        'search' => 'Cautare'
+        'search' => 'Cautare',
     ],
     'mail' => [
         'menu_label' => 'Configuratie Email',
@@ -116,7 +116,7 @@ return [
         'content_text' => 'Text simplu',
         'test_send' => 'Trimitere mesaj de test',
         'test_success' => 'Mesajul de test a fost trimis cu succes.',
-        'return' => 'Intoarcere la lista de sabloane'
+        'return' => 'Intoarcere la lista de sabloane',
     ],
     'install' => [
         'project_label' => 'Atasare la Proiect',
@@ -215,6 +215,6 @@ return [
         'manage_software_updates' => 'Gestioneaza actualizarile software',
         'manage_mail_templates' => 'Gestioneaza sabloanele de email',
         'manage_other_administrators' => 'Gestioneaza alti administratori',
-        'view_the_dashboard' => 'Vizualizare panou de control'
-    ]
+        'view_the_dashboard' => 'Vizualizare panou de control',
+    ],
 ];

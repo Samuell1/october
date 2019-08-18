@@ -1,16 +1,17 @@
-<?php namespace Cms\Twig;
+<?php
+
+namespace Cms\Twig;
 
 use Block;
 use Event;
-use Twig\Extension\AbstractExtension as TwigExtension;
+use Cms\Classes\Controller;
 use Twig\TwigFilter as TwigSimpleFilter;
 use Twig\TwigFunction as TwigSimpleFunction;
-use Cms\Classes\Controller;
+use Twig\Extension\AbstractExtension as TwigExtension;
 
 /**
  * The CMS Twig extension class implements the basic CMS Twig functions and filters.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class Extension extends TwigExtension
@@ -125,7 +126,7 @@ class Extension extends TwigExtension
     }
 
     /**
-     * Renders registered assets of a given type
+     * Renders registered assets of a given type.
      * @return string Returns the component default contents.
      */
     public function assetsFunction($type = null)
@@ -135,16 +136,17 @@ class Extension extends TwigExtension
 
     /**
      * Renders a placeholder content, without removing the block,
-     * must be called before the placeholder tag itself
+     * must be called before the placeholder tag itself.
      * @return string Returns the placeholder contents.
      */
     public function placeholderFunction($name, $default = null)
     {
         if (($result = Block::get($name)) === null) {
-            return null;
+            return;
         }
 
         $result = str_replace('<!-- X_OCTOBER_DEFAULT_BLOCK_CONTENT -->', trim($default), $result);
+
         return $result;
     }
 
@@ -193,10 +195,12 @@ class Extension extends TwigExtension
             return $default;
         }
 
-        if ($event = Event::fire('cms.block.render', [$name, $result], true))
+        if ($event = Event::fire('cms.block.render', [$name, $result], true)) {
             $result = $event;
+        }
 
         $result = str_replace('<!-- X_OCTOBER_DEFAULT_BLOCK_CONTENT -->', trim($default), $result);
+
         return $result;
     }
 

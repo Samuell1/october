@@ -2,35 +2,35 @@
 
 return [
     'auth' => [
-        'title' => 'Administrace'
+        'title' => 'Administrace',
     ],
     'field' => [
         'invalid_type' => 'Byl použitý špatný typ :type.',
         'options_method_invalid_model' => "Vlastnost ':field' neodpovídá platnému modelu. Zkuste specifikovat metodu voleb pro modelovou třídu :model explicitně.",
-        'options_method_not_exists' => "Modelová třída :model musí implementovat metodu :method(), která vrací volby pro formulářové pole ':field'"
+        'options_method_not_exists' => "Modelová třída :model musí implementovat metodu :method(), která vrací volby pro formulářové pole ':field'",
     ],
     'widget' => [
         'not_registered' => "Třída widgetu se jménem ':name' není zaregistrovaná.",
-        'not_bound' => "Widget s názvem třídy ':name' není navázaná na kontroler."
+        'not_bound' => "Widget s názvem třídy ':name' není navázaná na kontroler.",
     ],
     'page' => [
         'untitled' => 'Bez názvu',
         'access_denied' => [
             'label' => 'Přístup odmítnut',
             'help' => 'Nemáte potřebná oprávnění k prohlížení této stránky.',
-            'cms_link' => 'Zpět do administrace'
+            'cms_link' => 'Zpět do administrace',
         ],
         'no_database' => [
             'label' => 'Chybí databáze',
-            'help' => "K přístupu do administrace je zapotřebí databáze. Zkontrolujte, zda je databáze nakonfigurována a migrována a zkuste to znovu.",
-            'cms_link' => 'Zpět na úvodní stránku'
+            'help' => 'K přístupu do administrace je zapotřebí databáze. Zkontrolujte, zda je databáze nakonfigurována a migrována a zkuste to znovu.',
+            'cms_link' => 'Zpět na úvodní stránku',
         ],
         'invalid_token' => [
             'label' => 'Neplatný bezpečnostní token',
-        ]
+        ],
     ],
     'partial' => [
-        'not_found_name' => "Dílčí šablona ':name' nebyla nalezena."
+        'not_found_name' => "Dílčí šablona ':name' nebyla nalezena.",
     ],
     'account' => [
         'sign_out' => 'Odhlásit',
@@ -54,7 +54,7 @@ return [
         'apply' => 'Použít',
         'cancel' => 'Zrušit',
         'delete' => 'Smazat',
-        'ok' => 'OK'
+        'ok' => 'OK',
     ],
     'dashboard' => [
         'menu_label' => 'Plocha',
@@ -103,7 +103,7 @@ return [
             'last_sign_in' => 'Vaše poslední přihlášení bylo',
             'view_access_logs' => 'Zobrazit protokol přihlášení',
             'nice_message' => 'Hezký den!',
-        ]
+        ],
     ],
     'user' => [
         'name' => 'Administrátor',
@@ -152,7 +152,7 @@ return [
             'new' => 'Nová skupina',
             'delete_confirm' => 'Opravdu chcete smazat tuto skupinu administrátorů?',
             'return' => 'Zpět na seznam skupin',
-            'users_count' => 'Uživatelů'
+            'users_count' => 'Uživatelů',
         ],
         'role' => [
             'name' => 'Role',
@@ -166,11 +166,11 @@ return [
             'new' => 'Nová role',
             'delete_confirm' => 'Opravdu chcete smazat tuto roli?',
             'return' => 'Zpět na seznam rolí',
-            'users_count' => 'Uživatelů'
+            'users_count' => 'Uživatelů',
         ],
         'preferences' => [
-            'not_authenticated' => 'Nebyl nalezen žádný přihlášený uživatel pro načtení, nebo uložení nastavení.'
-        ]
+            'not_authenticated' => 'Nebyl nalezen žádný přihlášený uživatel pro načtení, nebo uložení nastavení.',
+        ],
     ],
     'list' => [
         'default_title' => 'Seznam',
@@ -201,7 +201,7 @@ return [
         'delete_selected_confirm' => 'Opravdu chcete smazat vybrané záznamy?',
         'delete_selected_success' => 'Vybrané záznamy byly smazány.',
         'column_switch_true' => 'Ano',
-        'column_switch_false' => 'Ne'
+        'column_switch_false' => 'Ne',
     ],
     'fileupload' => [
         'attachment' => 'Příloha',
@@ -213,7 +213,7 @@ return [
         'upload_file' => 'Nahrát soubor',
         'upload_error' => 'Chyba nahrávání',
         'remove_confirm' => 'Jste si jistí?',
-        'remove_file' => 'Odstranit soubor'
+        'remove_file' => 'Odstranit soubor',
     ],
     'form' => [
         'create_title' => 'Nový :name',
@@ -269,8 +269,8 @@ return [
         'insert_row_below' => 'Vložit řádek pod',
         'delete_row' => 'Smazat řádek',
         'concurrency_file_changed_title' => 'Soubor byl změněn',
-        'concurrency_file_changed_description' => "Soubor, který upravujete, byl na disku změněn jiným uživatelem. Můžete buď znovu načíst soubor a ztratit změny, nebo přepsat soubor na disku.",
-        'return_to_list' => 'Zpět na seznam'
+        'concurrency_file_changed_description' => 'Soubor, který upravujete, byl na disku změněn jiným uživatelem. Můžete buď znovu načíst soubor a ztratit změny, nebo přepsat soubor na disku.',
+        'return_to_list' => 'Zpět na seznam',
     ],
     'recordfinder' => [
         'find_record' => 'Najít záznam',
@@ -278,7 +278,7 @@ return [
     ],
     'pagelist' => [
         'page_link' => 'Odkaz na stránku',
-        'select_page' => 'vyberte stránku...'
+        'select_page' => 'vyberte stránku...',
     ],
     'relation' => [
         'missing_config' => "Chování relace nemá žádné nastavení pro ':config'.",
@@ -311,7 +311,7 @@ return [
         'link_name' => 'Vazba :name',
         'unlink' => 'Zrušit vazbu',
         'unlink_name' => 'Zrušit vazbu :name',
-        'unlink_confirm' => 'Jste si jistí?'
+        'unlink_confirm' => 'Jste si jistí?',
     ],
     'reorder' => [
         'default_title' => 'Seřadit záznamy',
@@ -323,8 +323,8 @@ return [
         'missing_id' => 'Není specifikované ID pro hledání záznamu v modelu.',
         'missing_relation' => "Model ':class' neobsahuje definici pro ':relation'.",
         'missing_method' => "Model ':class' nemá implementovanou metodu ':method'.",
-        'invalid_class' => "Model :model použitý ve třídě :class není validní, musí dědit ze třídy Model.",
-        'mass_assignment_failed' => "Hromadné přiřazení selhalo pro vlastnost ':attribute'."
+        'invalid_class' => 'Model :model použitý ve třídě :class není validní, musí dědit ze třídy Model.',
+        'mass_assignment_failed' => "Hromadné přiřazení selhalo pro vlastnost ':attribute'.",
     ],
     'warnings' => [
         'tips' => 'Tipy pro konfiguraci systému',
@@ -382,16 +382,16 @@ return [
         'toolbar_buttons_comment' => 'Seznam výchozích tlačítek na panelů nástrojů textového editoru. [fullscreen, bold, italic, underline, strikeThrough, subscript, superscript, fontFamily, fontSize, |, color, emoticons, inlineStyle, paragraphStyle, |, paragraphFormat, align, formatOL, formatUL, outdent, indent, quote, insertHR, -, insertLink, insertImage, insertVideo, insertAudio, insertFile, insertTable, undo, redo, clearFormatting, selectAll, html]',
     ],
     'tooltips' => [
-        'preview_website' => 'Náhled stránek'
+        'preview_website' => 'Náhled stránek',
     ],
     'mysettings' => [
         'menu_label' => 'Moje nastavení',
-        'menu_description' => 'Nastavení vašeho administrátorského účtu'
+        'menu_description' => 'Nastavení vašeho administrátorského účtu',
     ],
     'myaccount' => [
         'menu_label' => 'Můj účet',
         'menu_description' => 'Nastavte si svoje jméno, e-mailovou adresu a heslo.',
-        'menu_keywords' => 'bezpečnost login'
+        'menu_keywords' => 'bezpečnost login',
     ],
     'branding' => [
         'menu_label' => 'Nastavení administrace',
@@ -423,7 +423,7 @@ return [
         'timezone' => 'Časová zóna',
         'timezone_comment' => 'Upraví zobrazení času a data podle této časové zóny.',
         'locale' => 'Jazyk',
-        'locale_comment' => 'Vyberte jazyk administrace.'
+        'locale_comment' => 'Vyberte jazyk administrace.',
     ],
     'access_log' => [
         'hint' => 'Tento záznam zobrazuje seznam úspěšných přihlášení do administrace. Záznamy jsou uchovávány :days dní.',
@@ -434,12 +434,12 @@ return [
         'ip_address' => 'IP adresa',
         'first_name' => 'Jméno',
         'last_name' => 'Příjmení',
-        'email' => 'E-mail'
+        'email' => 'E-mail',
     ],
     'filter' => [
         'all' => 'Vše',
         'options_method_not_exists' => "Třída modelu :model musí definovat metodu :method(), která vrací položky filtru ':filter'.",
-        'date_all' => 'Všechna období'
+        'date_all' => 'Všechna období',
     ],
     'import_export' => [
         'upload_csv_file' => '1. Nahrajte CSV soubor',
@@ -494,11 +494,11 @@ return [
         'encoding_format' => 'Kódování souboru',
     ],
     'permissions' => [
-        'manage_media' => 'Správa médií'
+        'manage_media' => 'Správa médií',
     ],
     'mediafinder' => [
         'label' => 'Vyhledávač médií',
-        'default_prompt' => 'Klikněte na tlačítko %s pro hledání souboru'
+        'default_prompt' => 'Klikněte na tlačítko %s pro hledání souboru',
     ],
     'media' => [
         'menu_label' => 'Média',
@@ -558,6 +558,6 @@ return [
         'selection_mode' => 'Způsob označování (selection mode)',
         'resize_image' => 'Změnit velikost obrázku',
         'image_size' => 'Velikost obrázku:',
-        'selected_size' => 'Vybráno:'
+        'selected_size' => 'Vybráno:',
     ],
 ];

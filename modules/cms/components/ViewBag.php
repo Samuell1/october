@@ -1,4 +1,6 @@
-<?php namespace Cms\Components;
+<?php
+
+namespace Cms\Components;
 
 use Cms\Classes\ComponentBase;
 
@@ -6,13 +8,12 @@ use Cms\Classes\ComponentBase;
  * The view bag stores custom template properties.
  * This is a hidden component ignored by the back-end UI.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class ViewBag extends ComponentBase
 {
     /**
-     * @var boolean This component is hidden from the back-end UI.
+     * @var bool This component is hidden from the back-end UI.
      */
     public $isHidden = true;
 
@@ -23,7 +24,7 @@ class ViewBag extends ComponentBase
     {
         return [
             'name'        => 'viewBag',
-            'description' => 'Stores custom template properties.'
+            'description' => 'Stores custom template properties.',
         ];
     }
 
@@ -46,8 +47,6 @@ class ViewBag extends ComponentBase
         if (array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         }
-
-        return null;
     }
 
     /**
@@ -74,7 +73,7 @@ class ViewBag extends ComponentBase
         foreach ($this->properties as $name => $value) {
             $result[$name] = [
                 'title' => $name,
-                'type' => 'string'
+                'type' => 'string',
             ];
         }
 

@@ -1,15 +1,16 @@
-<?php namespace System\Twig;
+<?php
+
+namespace System\Twig;
 
 use Url;
-use Twig\Extension\AbstractExtension as TwigExtension;
-use Twig\TwigFilter as TwigSimpleFilter;
 use System\Classes\MediaLibrary;
 use System\Classes\MarkupManager;
+use Twig\TwigFilter as TwigSimpleFilter;
+use Twig\Extension\AbstractExtension as TwigExtension;
 
 /**
  * The System Twig extension class implements common Twig functions and filters.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class Extension extends TwigExtension

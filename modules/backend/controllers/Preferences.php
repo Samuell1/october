@@ -1,4 +1,6 @@
-<?php namespace Backend\Controllers;
+<?php
+
+namespace Backend\Controllers;
 
 use Lang;
 use Flash;
@@ -9,16 +11,14 @@ use System\Classes\SettingsManager;
 use Backend\Models\Preference as PreferenceModel;
 
 /**
- * Editor Settings controller
+ * Editor Settings controller.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
- *
  */
 class Preferences extends Controller
 {
     public $implement = [
-        \Backend\Behaviors\FormController::class
+        \Backend\Behaviors\FormController::class,
     ];
 
     /**
@@ -57,7 +57,7 @@ class Preferences extends Controller
      */
     public function formExtendFields($form)
     {
-        if (!$this->user->hasAccess('backend.manage_editor')) {
+        if (! $this->user->hasAccess('backend.manage_editor')) {
             $form->removeTab('backend::lang.backend_preferences.code_editor');
         }
     }

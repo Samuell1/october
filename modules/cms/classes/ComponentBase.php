@@ -1,15 +1,16 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use Str;
 use Lang;
 use Config;
-use October\Rain\Extension\Extendable;
 use BadMethodCallException;
+use October\Rain\Extension\Extendable;
 
 /**
- * Component base class
+ * Component base class.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 abstract class ComponentBase extends Extendable
@@ -34,7 +35,7 @@ abstract class ComponentBase extends Extendable
     public $name;
 
     /**
-     * @var boolean Determines whether the component is hidden from the back-end UI.
+     * @var bool Determines whether the component is hidden from the back-end UI.
      */
     public $isHidden = false;
 
@@ -51,7 +52,7 @@ abstract class ComponentBase extends Extendable
     public $componentCssClass;
 
     /**
-     * @var boolean Determines whether Inspector can be used with the component.
+     * @var bool Determines whether Inspector can be used with the component.
      * This field is used by the CMS internally.
      */
     public $inspectorEnabled = true;
@@ -108,7 +109,7 @@ abstract class ComponentBase extends Extendable
      */
     public function getPath()
     {
-        return plugins_path() . $this->dirName;
+        return plugins_path().$this->dirName;
     }
 
     /**
@@ -142,12 +143,13 @@ abstract class ComponentBase extends Extendable
         $this->controller->setComponentContext($this);
         $result = call_user_func_array([$this->controller, 'renderPartial'], func_get_args());
         $this->controller->setComponentContext(null);
+
         return $result;
     }
 
     /**
      * Executes the event cycle when running an AJAX handler.
-     * @return boolean Returns true if the handler was found. Returns false otherwise.
+     * @return bool Returns true if the handler was found. Returns false otherwise.
      */
     public function runAjaxHandler($handler)
     {
@@ -178,7 +180,6 @@ abstract class ComponentBase extends Extendable
          *             }
          *         }
          *     });
-         *
          */
         if ($event = $this->fireSystemEvent('cms.component.beforeRunAjaxHandler', [$handler])) {
             return $event;
@@ -207,7 +208,6 @@ abstract class ComponentBase extends Extendable
          *             return 'request has been intercepted, original response: ' . json_encode($result);
          *         }
          *     });
-         *
          */
         if ($event = $this->fireSystemEvent('cms.component.runAjaxHandler', [$handler, $result])) {
             return $event;
@@ -305,8 +305,8 @@ abstract class ComponentBase extends Extendable
     {
         try {
             return parent::__call($method, $parameters);
+        } catch (BadMethodCallException $ex) {
         }
-        catch (BadMethodCallException $ex) {}
 
         if (method_exists($this->controller, $method)) {
             return call_user_func_array([$this->controller, $method], $parameters);
@@ -314,12 +314,12 @@ abstract class ComponentBase extends Extendable
 
         throw new BadMethodCallException(Lang::get('cms::lang.component.method_not_found', [
             'name' => get_class($this),
-            'method' => $method
+            'method' => $method,
         ]));
     }
 
     /**
-     * Returns the component's alias, used by __SELF__
+     * Returns the component's alias, used by __SELF__.
      */
     public function __toString()
     {

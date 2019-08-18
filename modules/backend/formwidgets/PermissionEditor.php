@@ -1,13 +1,14 @@
-<?php namespace Backend\FormWidgets;
+<?php
 
-use Backend\Classes\FormWidgetBase;
+namespace Backend\FormWidgets;
+
 use BackendAuth;
+use Backend\Classes\FormWidgetBase;
 
 /**
  * User/group permission editor
  * This widget is used by the system internally on the System / Administrators pages.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class PermissionEditor extends FormWidgetBase
@@ -17,28 +18,29 @@ class PermissionEditor extends FormWidgetBase
     public $mode;
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function init()
     {
         $this->fillFromConfig([
-            'mode'
+            'mode',
         ]);
 
         $this->user = BackendAuth::getUser();
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
         $this->prepareVars();
+
         return $this->makePartial('permissioneditor');
     }
 
     /**
-     * Prepares the list data
+     * Prepares the list data.
      */
     public function prepareVars()
     {
@@ -47,7 +49,7 @@ class PermissionEditor extends FormWidgetBase
         }
 
         $permissionsData = $this->formField->getValueFromData($this->model);
-        if (!is_array($permissionsData)) {
+        if (! is_array($permissionsData)) {
             $permissionsData = [];
         }
 
@@ -59,7 +61,7 @@ class PermissionEditor extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getSaveValue($value)
     {
@@ -71,7 +73,7 @@ class PermissionEditor extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function loadAssets()
     {
@@ -95,7 +97,7 @@ class PermissionEditor extends FormWidgetBase
     {
         $newPermissions = is_array($value) ? array_map('intval', $value) : [];
 
-        if (!empty($newPermissions)) {
+        if (! empty($newPermissions)) {
             $existingPermissions = $this->model->permissions ?: [];
 
             $allowedPermissions = array_map(function ($permissionObject) {
@@ -115,7 +117,7 @@ class PermissionEditor extends FormWidgetBase
     }
 
     /**
-     * Returns the available permissions; removing those that the logged-in user does not have access to
+     * Returns the available permissions; removing those that the logged-in user does not have access to.
      *
      * @return array The permissions that the logged-in user does have access to
      */
@@ -129,15 +131,14 @@ class PermissionEditor extends FormWidgetBase
 
         foreach ($permissions as $tab => $permissionsArray) {
             foreach ($permissionsArray as $index => $permission) {
-                if (!$this->user->hasAccess($permission->code)) {
+                if (! $this->user->hasAccess($permission->code)) {
                     unset($permissionsArray[$index]);
                 }
             }
 
             if (empty($permissionsArray)) {
                 unset($permissions[$tab]);
-            }
-            else {
+            } else {
                 $permissions[$tab] = $permissionsArray;
             }
         }

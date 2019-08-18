@@ -35,7 +35,7 @@ class DbBackendUserRoles extends Migration
         // Role not found in the users table, perform a complete migration.
         // Merging group permissions with the user and assigning the user
         // with the first available role.
-        if (!Schema::hasColumn('backend_users', 'role_id')) {
+        if (! Schema::hasColumn('backend_users', 'role_id')) {
             Schema::table('backend_users', function (Blueprint $table) {
                 $table->integer('role_id')->unsigned()->nullable()->index('admin_role_index');
             });
@@ -77,7 +77,7 @@ class DbBackendUserRoles extends Migration
          * Carbon copy groups to roles
          */
         foreach ($groups as $group) {
-            if (!isset($group->name) || !$group->name) {
+            if (! isset($group->name) || ! $group->name) {
                 continue;
             }
 
@@ -85,10 +85,10 @@ class DbBackendUserRoles extends Migration
                 $roles[$group->id] = Db::table('backend_user_roles')->insertGetId([
                     'name' => $group->name,
                     'description' => $group->description,
-                    'permissions' => $group->permissions ?? null
+                    'permissions' => $group->permissions ?? null,
                 ]);
+            } catch (Exception $ex) {
             }
-            catch (Exception $ex) {}
 
             $permissions[$group->id] = $group->permissions ?? null;
         }
@@ -100,15 +100,15 @@ class DbBackendUserRoles extends Migration
         $joins = Db::table('backend_users_groups')->get();
 
         foreach ($joins as $join) {
-            if (!$roleId = array_get($roles, $join->user_group_id)) {
+            if (! $roleId = array_get($roles, $join->user_group_id)) {
                 continue;
             }
 
             $userId = $join->user_id;
 
-            if (!isset($found[$userId])) {
+            if (! isset($found[$userId])) {
                 Db::table('backend_users')->where('id', $userId)->update([
-                    'role_id' => $roleId
+                    'role_id' => $roleId,
                 ]);
             }
 
@@ -122,15 +122,15 @@ class DbBackendUserRoles extends Migration
             $userPerms = [];
 
             foreach ($groups as $groupId) {
-                if (!$permString = array_get($permissions, $groupId)) {
+                if (! $permString = array_get($permissions, $groupId)) {
                     continue;
                 }
 
                 try {
                     $perms = json_decode($permString, true);
                     $userPerms = array_merge($userPerms, $perms);
+                } catch (Exception $ex) {
                 }
-                catch (Exception $ex) {}
             }
 
             if (count($userPerms) > 0) {
@@ -145,7 +145,7 @@ class DbBackendUserRoles extends Migration
          * Look up user and splice the provided permissions in
          */
         $user = Db::table('backend_users')->where('id', $userId)->first();
-        if (!$user) {
+        if (! $user) {
             return;
         }
 
@@ -154,9 +154,9 @@ class DbBackendUserRoles extends Migration
             $newPerms = array_merge($permissions, $currentPerms);
 
             Db::table('backend_users')->where('id', $userId)->update([
-                'permissions' => json_encode($newPerms)
+                'permissions' => json_encode($newPerms),
             ]);
+        } catch (Exception $ex) {
         }
-        catch (Exception $ex) {}
     }
 }

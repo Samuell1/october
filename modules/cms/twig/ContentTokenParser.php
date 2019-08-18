@@ -1,9 +1,11 @@
-<?php namespace Cms\Twig;
+<?php
 
-use Twig\Node\Node as TwigNode;
+namespace Cms\Twig;
+
 use Twig\Token as TwigToken;
-use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
+use Twig\Node\Node as TwigNode;
 use Twig\Error\SyntaxError as TwigErrorSyntax;
+use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
 
 /**
  * Parser for the `{% content %}` Twig tag.
@@ -14,7 +16,6 @@ use Twig\Error\SyntaxError as TwigErrorSyntax;
  *
  *     {% content "intro/txt" name='John', year=2013 %}
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class ContentTokenParser extends TwigTokenParser
@@ -35,7 +36,7 @@ class ContentTokenParser extends TwigTokenParser
         $nodes = [$name];
 
         $end = false;
-        while (!$end) {
+        while (! $end) {
             $current = $stream->next();
 
             switch ($current->getType()) {
@@ -43,10 +44,12 @@ class ContentTokenParser extends TwigTokenParser
                     $paramNames[] = $current->getValue();
                     $stream->expect(TwigToken::OPERATOR_TYPE, '=');
                     $nodes[] = $this->parser->getExpressionParser()->parseExpression();
+
                     break;
 
                 case TwigToken::BLOCK_END_TYPE:
                     $end = true;
+
                     break;
 
                 default:
@@ -55,6 +58,7 @@ class ContentTokenParser extends TwigTokenParser
                         $stream->getCurrent()->getLine(),
                         $stream->getSourceContext()
                     );
+
                     break;
             }
         }

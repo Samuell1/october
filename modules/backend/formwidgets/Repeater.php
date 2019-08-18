@@ -1,4 +1,6 @@
-<?php namespace Backend\FormWidgets;
+<?php
+
+namespace Backend\FormWidgets;
 
 use Lang;
 use ApplicationException;
@@ -6,7 +8,7 @@ use Backend\Classes\FormWidgetBase;
 use October\Rain\Html\Helper as HtmlHelper;
 
 /**
- * Repeater Form Widget
+ * Repeater Form Widget.
  */
 class Repeater extends FormWidgetBase
 {
@@ -49,7 +51,7 @@ class Repeater extends FormWidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'repeater';
 
@@ -78,14 +80,14 @@ class Repeater extends FormWidgetBase
     protected $groupDefinitions = [];
 
     /**
-     * Determines if repeater has been initialised previously
+     * Determines if repeater has been initialised previously.
      *
-     * @var boolean
+     * @var bool
      */
     protected $loaded = false;
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -103,7 +105,7 @@ class Repeater extends FormWidgetBase
         }
 
         // Check for loaded flag in POST
-        if ((bool) post($this->alias . '_loaded') === true) {
+        if ((bool) post($this->alias.'_loaded') === true) {
             $this->loaded = true;
         }
 
@@ -111,28 +113,29 @@ class Repeater extends FormWidgetBase
 
         $this->processGroupMode();
 
-        if (!self::$onAddItemCalled) {
+        if (! self::$onAddItemCalled) {
             $this->processItems();
         }
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
         $this->prepareVars();
+
         return $this->makePartial('repeater');
     }
 
     /**
-     * Prepares the form widget view data
+     * Prepares the form widget view data.
      */
     public function prepareVars()
     {
         // Refresh the loaded data to support being modified by filterFields
         // @see https://github.com/octobercms/october/issues/2613
-        if (!self::$onAddItemCalled) {
+        if (! self::$onAddItemCalled) {
             $this->processItems();
         }
 
@@ -153,7 +156,7 @@ class Repeater extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function loadAssets()
     {
@@ -162,7 +165,7 @@ class Repeater extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getSaveValue($value)
     {
@@ -176,7 +179,7 @@ class Repeater extends FormWidgetBase
      */
     protected function processSaveValue($value)
     {
-        if (!is_array($value) || !$value) {
+        if (! is_array($value) || ! $value) {
             return $value;
         }
 
@@ -216,13 +219,14 @@ class Repeater extends FormWidgetBase
         if ($currentValue === null) {
             $this->indexCount = 0;
             $this->formWidgets = [];
+
             return;
-        }       
+        }
 
         // Ensure that the minimum number of items are preinitialized
         // ONLY DONE WHEN NOT IN GROUP MODE
-        if (!$this->useGroups && $this->minItems > 0) {
-            if (!is_array($currentValue)) {
+        if (! $this->useGroups && $this->minItems > 0) {
+            if (! is_array($currentValue)) {
                 $currentValue = [];
                 for ($i = 0; $i < $this->minItems; $i++) {
                     $currentValue[$i] = [];
@@ -233,15 +237,15 @@ class Repeater extends FormWidgetBase
                 }
             }
         }
-        
-        if (!is_array($currentValue)) {
+
+        if (! is_array($currentValue)) {
             return;
         }
-       
+
         collect($currentValue)->each(function ($value, $index) {
             $this->makeItemFormWidget($index, array_get($value, '_group', null));
         });
-        
+
         $this->indexCount = max(count($currentValue), $this->indexCount);
     }
 
@@ -260,7 +264,7 @@ class Repeater extends FormWidgetBase
         $config = $this->makeConfig($configDefinition);
         $config->model = $this->model;
         $config->data = $this->getValueFromIndex($index);
-        $config->alias = $this->alias . 'Form'.$index;
+        $config->alias = $this->alias.'Form'.$index;
         $config->arrayName = $this->getFieldName().'['.$index.']';
         $config->isNested = true;
         if (self::$onAddItemCalled || $this->minItems > 0) {
@@ -271,7 +275,7 @@ class Repeater extends FormWidgetBase
         $widget->bindToController();
 
         $this->indexMeta[$index] = [
-            'groupCode' => $groupCode
+            'groupCode' => $groupCode,
         ];
 
         return $this->formWidgets[$index] = $widget;
@@ -287,7 +291,7 @@ class Repeater extends FormWidgetBase
             ? post($this->formField->getName())
             : $this->getLoadValue();
 
-        if (!is_array($value)) {
+        if (! is_array($value)) {
             $value = [];
         }
 
@@ -308,13 +312,13 @@ class Repeater extends FormWidgetBase
         $this->vars['widget'] = $this->makeItemFormWidget($this->indexCount, $groupCode);
         $this->vars['indexValue'] = $this->indexCount;
 
-        $itemContainer = '@#' . $this->getId('items');
+        $itemContainer = '@#'.$this->getId('items');
 
         // Increase index count after item is created
-        ++$this->indexCount;
+        $this->indexCount++;
 
         return [
-            $itemContainer => $this->makePartial('repeater_item')
+            $itemContainer => $this->makePartial('repeater_item'),
         ];
     }
 
@@ -344,14 +348,14 @@ class Repeater extends FormWidgetBase
      */
     protected function getGroupFormFieldConfig($code)
     {
-        if (!$code) {
-            return null;
+        if (! $code) {
+            return;
         }
 
         $fields = array_get($this->groupDefinitions, $code.'.fields');
 
-        if (!$fields) {
-            return null;
+        if (! $fields) {
+            return;
         }
 
         return ['fields' => $fields, 'enableDefaults' => object_get($this->config, 'enableDefaults')];
@@ -365,8 +369,9 @@ class Repeater extends FormWidgetBase
     {
         $palette = [];
 
-        if (!$group = $this->getConfig('groups', [])) {
+        if (! $group = $this->getConfig('groups', [])) {
             $this->useGroups = false;
+
             return;
         }
 
@@ -380,7 +385,7 @@ class Repeater extends FormWidgetBase
                 'name' => array_get($config, 'name'),
                 'icon' => array_get($config, 'icon', 'icon-square-o'),
                 'description' => array_get($config, 'description'),
-                'fields' => array_get($config, 'fields')
+                'fields' => array_get($config, 'fields'),
             ];
         }
 

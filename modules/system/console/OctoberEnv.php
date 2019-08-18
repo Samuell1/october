@@ -1,4 +1,6 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use Illuminate\Console\Command;
 
@@ -8,12 +10,10 @@ use Illuminate\Console\Command;
  * This creates an .env file with some default configuration values, it also converts
  * the existing PHP-based configuration files to use the `env` function for values.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class OctoberEnv extends Command
 {
-
     /**
      * The console command name.
      */
@@ -61,7 +61,7 @@ class OctoberEnv extends Command
     }
 
     /**
-     * Overwrite config file
+     * Overwrite config file.
      */
     private function overwriteConfig()
     {
@@ -73,7 +73,7 @@ class OctoberEnv extends Command
     }
 
     /**
-     * Replace config values with env() syntax
+     * Replace config values with env() syntax.
      */
     private function configToEnv()
     {
@@ -83,7 +83,7 @@ class OctoberEnv extends Command
     }
 
     /**
-     * Parse config file line by line
+     * Parse config file line by line.
      *
      * @return string
      */
@@ -161,7 +161,7 @@ class OctoberEnv extends Command
      */
     private function setCurrentConnection($line, $connection)
     {
-        if (preg_match("/['\"]" . $connection . "['\"]" . "\s*=>/", $line)) {
+        if (preg_match("/['\"]".$connection."['\"]"."\s*=>/", $line)) {
             $this->connection = $connection;
         }
     }
@@ -172,7 +172,7 @@ class OctoberEnv extends Command
      */
     private function buildPattern($configKey)
     {
-        return "/['\"]" . $configKey . "['\"]" . "\s*=>\s*[^,\[]+,/";
+        return "/['\"]".$configKey."['\"]"."\s*=>\s*[^,\[]+,/";
     }
 
     /**
@@ -188,7 +188,7 @@ class OctoberEnv extends Command
             $this->saveEnvSettings($envKey, $value);
 
             // Remove protected values from the config files
-            if (in_array($envKey, $this->protectedKeys) && !empty($value)) {
+            if (in_array($envKey, $this->protectedKeys) && ! empty($value)) {
                 $value = "''";
             }
 
@@ -315,7 +315,7 @@ class OctoberEnv extends Command
      */
     private function writeToConfigFile($content)
     {
-        file_put_contents(config_path($this->config . '.php'), $content);
+        file_put_contents(config_path($this->config.'.php'), $content);
     }
 
     /**
@@ -323,7 +323,7 @@ class OctoberEnv extends Command
      */
     private function lines()
     {
-        return file(config_path($this->config . '.php'));
+        return file(config_path($this->config.'.php'));
     }
 
     /**

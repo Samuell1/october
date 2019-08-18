@@ -14,11 +14,10 @@ App::before(function ($request) {
      */
     Route::group([
             'middleware' => ['web'],
-            'prefix' => Config::get('cms.backendUri', 'backend')
+            'prefix' => Config::get('cms.backendUri', 'backend'),
         ], function () {
             Route::any('{slug}', 'Backend\Classes\BackendController@run')->where('slug', '(.*)?');
-        })
-    ;
+        });
 
     /*
      * Entry point

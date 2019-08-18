@@ -1,15 +1,16 @@
-<?php namespace System\Models;
+<?php
+
+namespace System\Models;
 
 use View;
 use Model;
+use File as FileHelper;
 use System\Classes\MailManager;
 use October\Rain\Mail\MailParser;
-use File as FileHelper;
 
 /**
- * Mail template
+ * Mail template.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class MailTemplate extends Model
@@ -42,7 +43,7 @@ class MailTemplate extends Model
     ];
 
     public $belongsTo = [
-        'layout' => MailLayout::class
+        'layout' => MailLayout::class,
     ];
 
     /**
@@ -55,6 +56,7 @@ class MailTemplate extends Model
         $dbTemplates = (array) self::lists('code', 'code');
         $templates = $fileTemplates + $dbTemplates;
         ksort($templates);
+
         return $templates;
     }
 
@@ -95,7 +97,7 @@ class MailTemplate extends Model
                 continue;
             }
 
-            if (!array_key_exists($code, $templates)) {
+            if (! array_key_exists($code, $templates)) {
                 self::whereCode($code)->delete();
             }
         }
@@ -119,7 +121,7 @@ class MailTemplate extends Model
 
     public function afterFetch()
     {
-        if (!$this->is_custom) {
+        if (! $this->is_custom) {
             $this->fillFromView($this->code);
         }
     }
@@ -153,7 +155,7 @@ class MailTemplate extends Model
     {
         $template = self::whereCode($code)->first();
 
-        if (!$template && View::exists($code)) {
+        if (! $template && View::exists($code)) {
             $template = new self;
             $template->code = $code;
             $template->fillFromView($code);
@@ -168,7 +170,7 @@ class MailTemplate extends Model
      */
     public static function registerCallback(callable $callback)
     {
-        traceLog('MailTemplate::registerCallback is deprecated, use ' . MailManager::class . '::registerCallback instead');
+        traceLog('MailTemplate::registerCallback is deprecated, use '.MailManager::class.'::registerCallback instead');
         MailManager::instance()->registerCallback($callback);
     }
 }

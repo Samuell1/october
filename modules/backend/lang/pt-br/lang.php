@@ -3,7 +3,7 @@
 return [
     'auth' => [
         'title' => 'Área Administrativa',
-        'invalid_login' => 'Os dados digitados não correspondem aos nossos registros. Por favor, verifique e tente novamente.'
+        'invalid_login' => 'Os dados digitados não correspondem aos nossos registros. Por favor, verifique e tente novamente.',
     ],
     'field' => [
         'invalid_type' => 'Tipo de campo inválido :type.',
@@ -21,8 +21,8 @@ return [
             'cms_link' => 'Retornar à área administrativa',
         ],
         'invalid_token' => [
-            'label' => 'Token de segurança inválido'
-        ]
+            'label' => 'Token de segurança inválido',
+        ],
     ],
     'partial' => [
         'not_found_name' => 'O bloco ":name" não foi encontrado.',
@@ -95,7 +95,7 @@ return [
             'last_sign_in' => 'Seu último acesso foi em',
             'view_access_logs' => 'Visualizar registros de acesso',
             'nice_message' => 'Tenha um excelente dia!',
-        ]
+        ],
     ],
     'user' => [
         'name' => 'Administrador',
@@ -138,7 +138,7 @@ return [
             'new' => 'Novo grupo administrador',
             'delete_confirm' => 'Você realmente deseja excluir este grupo?',
             'return' => 'Voltar para a lista de grupos',
-            'users_count' => 'Usuários'
+            'users_count' => 'Usuários',
         ],
         'preferences' => [
             'not_authenticated' => 'Nenhum usuário autenticado para carregar as preferências.',
@@ -171,7 +171,7 @@ return [
         'delete_selected_confirm' => 'Excluir os registros selecionados?',
         'delete_selected_success' => 'Registros selecionados excluídos com sucesso.',
         'column_switch_true' => 'Sim',
-        'column_switch_false' => 'Não'
+        'column_switch_false' => 'Não',
     ],
     'fileupload' => [
         'attachment' => 'Anexo',
@@ -183,7 +183,7 @@ return [
         'upload_file' => 'Enviar arquivo',
         'upload_error' => 'Erro ao enviar',
         'remove_confirm' => 'Você tem certeza?',
-        'remove_file' => 'Remover arquivo'
+        'remove_file' => 'Remover arquivo',
     ],
     'form' => [
         'create_title' => 'Novo :name',
@@ -242,7 +242,7 @@ return [
         'return_to_list' => 'Retornar à lista',
     ],
     'recordfinder' => [
-        'find_record' => 'Localizar Registro'
+        'find_record' => 'Localizar Registro',
     ],
     'relation' => [
         'missing_config' => 'Comportamento relation não tem uma configuração para ":config".',
@@ -343,7 +343,7 @@ return [
         'theme' => 'Esquema de cores',
     ],
     'tooltips' => [
-        'preview_website' => 'Visualizar a página'
+        'preview_website' => 'Visualizar a página',
     ],
     'mysettings' => [
         'menu_label' => 'Minhas Configurações',
@@ -352,7 +352,7 @@ return [
     'myaccount' => [
         'menu_label' => 'Minha Conta',
         'menu_description' => 'Atualizar detalhes da sua conta, como nome, e-mail e senha.',
-        'menu_keywords' => 'login de segurança'
+        'menu_keywords' => 'login de segurança',
     ],
     'branding' => [
         'menu_label' => 'Personalização',
@@ -374,7 +374,7 @@ return [
         'menu_mode' => 'Estilo de menu',
         'menu_mode_inline' => 'Em linha',
         'menu_mode_tile' => 'Blocos',
-        'menu_mode_collapsed' => 'Colapsados'
+        'menu_mode_collapsed' => 'Colapsados',
     ],
     'backend_preferences' => [
         'menu_label' => 'Preferências da Administração',
@@ -400,7 +400,7 @@ return [
     'filter' => [
         'all' => 'todos',
         'options_method_not_exists' => "A classe modelo :model deve definir um método :method() retornando opções para o filtro ':filter'.",
-        'date_all' => 'todo o período'
+        'date_all' => 'todo o período',
     ],
     'import_export' => [
         'upload_csv_file' => '1. Enviar arquivo CSV',
@@ -471,14 +471,14 @@ return [
             'iso_8859_14' => 'ISO-8859-14 (Latin-8, Celtic)',
             'iso_8859_15' => 'ISO-8859-15 (Latin-9, Western European revision with euro sign)',
             'windows_1251' => 'Windows-1251 (CP1251)',
-            'windows_1252' => 'Windows-1252 (CP1252)'
-        ]
+            'windows_1252' => 'Windows-1252 (CP1252)',
+        ],
     ],
     'permissions' => [
-        'manage_media' => 'Gerenciar mídias'
+        'manage_media' => 'Gerenciar mídias',
     ],
     'mediafinder' => [
-        'default_prompt' => 'Clique no botão %s para localizar um arquivo de mídia'
+        'default_prompt' => 'Clique no botão %s para localizar um arquivo de mídia',
     ],
     'media' => [
         'menu_label' => 'Mídias',
@@ -538,6 +538,6 @@ return [
         'selection_mode' => 'Modo de seleção',
         'resize_image' => 'Redimensionar imagem',
         'image_size' => 'Tamanho da imagem:',
-        'selected_size' => 'Selecionado:'
-    ]
+        'selected_size' => 'Selecionado:',
+    ],
 ];

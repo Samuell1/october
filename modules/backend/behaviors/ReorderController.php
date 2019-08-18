@@ -1,4 +1,6 @@
-<?php namespace Backend\Behaviors;
+<?php
+
+namespace Backend\Behaviors;
 
 use Lang;
 use Backend;
@@ -20,13 +22,12 @@ use Backend\Classes\ControllerBehavior;
  * values as either a YAML file, located in the controller view directory,
  * or directly as a PHP array.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class ReorderController extends ControllerBehavior
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $requiredProperties = ['reorderConfig'];
 
@@ -68,7 +69,7 @@ class ReorderController extends ControllerBehavior
     protected $toolbarWidget;
 
     /**
-     * Behavior constructor
+     * Behavior constructor.
      * @param Backend\Classes\Controller $controller
      */
     public function __construct($controller)
@@ -121,8 +122,8 @@ class ReorderController extends ControllerBehavior
          */
         if ($this->sortMode == 'simple') {
             if (
-                (!$ids = post('record_ids')) ||
-                (!$orders = post('sort_orders'))
+                (! $ids = post('record_ids')) ||
+                (! $orders = post('sort_orders'))
             ) {
                 return;
             }
@@ -143,18 +144,22 @@ class ReorderController extends ControllerBehavior
             switch (post('position')) {
                 case 'before':
                     $sourceNode->moveBefore($targetNode);
+
                     break;
 
                 case 'after':
                     $sourceNode->moveAfter($targetNode);
+
                     break;
 
                 case 'child':
                     $sourceNode->makeChildOf($targetNode);
+
                     break;
 
                 default:
                     $sourceNode->makeRoot();
+
                     break;
             }
         }
@@ -165,7 +170,7 @@ class ReorderController extends ControllerBehavior
     //
 
     /**
-     * Prepares common form data
+     * Prepares common form data.
      */
     protected function prepareVars()
     {
@@ -189,7 +194,7 @@ class ReorderController extends ControllerBehavior
 
         $modelClass = $this->getConfig('modelClass');
 
-        if (!$modelClass) {
+        if (! $modelClass) {
             throw new ApplicationException('Please specify the modelClass property for reordering');
         }
 
@@ -216,12 +221,10 @@ class ReorderController extends ControllerBehavior
 
         if (isset($modelTraits[\October\Rain\Database\Traits\Sortable::class])) {
             $this->sortMode = 'simple';
-        }
-        elseif (isset($modelTraits[\October\Rain\Database\Traits\NestedTree::class])) {
+        } elseif (isset($modelTraits[\October\Rain\Database\Traits\NestedTree::class])) {
             $this->sortMode = 'nested';
             $this->showTree = true;
-        }
-        else {
+        } else {
             throw new ApplicationException('The model must implement the NestedTree or Sortable traits.');
         }
 
@@ -243,10 +246,8 @@ class ReorderController extends ControllerBehavior
         if ($this->sortMode == 'simple') {
             $records = $query
                 ->orderBy($model->getSortOrderColumn())
-                ->get()
-            ;
-        }
-        elseif ($this->sortMode == 'nested') {
+                ->get();
+        } elseif ($this->sortMode == 'nested') {
             $records = $query->getNested();
         }
 
@@ -255,7 +256,7 @@ class ReorderController extends ControllerBehavior
 
     /**
      * Extend the query used for finding reorder records. Extra conditions
-     * can be applied to the query, for example, $query->withTrashed();
+     * can be applied to the query, for example, $query->withTrashed();.
      * @param October\Rain\Database\Builder $query
      * @return void
      */
@@ -272,8 +273,7 @@ class ReorderController extends ControllerBehavior
         if ($toolbarConfig = $this->getConfig('toolbar')) {
             $toolbarConfig = $this->makeConfig($toolbarConfig);
             $toolbarWidget = $this->makeWidget('Backend\Widgets\Toolbar', $toolbarConfig);
-        }
-        else {
+        } else {
             $toolbarWidget = null;
         }
 
@@ -293,12 +293,12 @@ class ReorderController extends ControllerBehavior
     public function reorderMakePartial($partial, $params = [])
     {
         $contents = $this->controller->makePartial(
-            'reorder_' . $partial,
+            'reorder_'.$partial,
             $params + $this->vars,
             false
         );
 
-        if (!$contents) {
+        if (! $contents) {
             $contents = $this->makePartial($partial, $params);
         }
 

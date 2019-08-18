@@ -7,8 +7,8 @@ return [
             'online' => 'أونلاين',
             'maintenance' => 'تحت الصيانة',
             'manage_themes' => 'إدارة القوالب',
-            'customize_theme' => 'تخصيص القالب'
-        ]
+            'customize_theme' => 'تخصيص القالب',
+        ],
     ],
     'page' => [
         'menu_label' => 'الصفحات',
@@ -23,11 +23,11 @@ return [
         'menu_label' => 'المحتوى',
     ],
     'cms' => [
-        'menu_label' => 'المحتوى'
+        'menu_label' => 'المحتوى',
     ],
     'editor' => [
         'settings' => 'الإعدادات',
-		],
+        ],
     'asset' => [
         'menu_label' => 'الأصول',
     ],

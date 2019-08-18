@@ -1,8 +1,9 @@
-<?php namespace Cms\Contracts;
+<?php
+
+namespace Cms\Contracts;
 
 interface CmsObject
 {
-
     /**
      * Loads the template.
      *
@@ -59,5 +60,4 @@ interface CmsObject
      * @return string
      */
     public function getTwigCacheKey();
-
 }

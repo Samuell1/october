@@ -1,11 +1,12 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use ApplicationException;
 
 /**
  * Helper class for processing video and audio tags inserted by the Media Manager.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class MediaViewHelper
@@ -21,7 +22,7 @@ class MediaViewHelper
      */
     public function processHtml($html)
     {
-        if (!is_string($html)) {
+        if (! is_string($html)) {
             return $html;
         }
 
@@ -42,7 +43,7 @@ class MediaViewHelper
 
         $tagDefinitions = [
             'audio' => '/data\-audio\s*=\s*"([^"]+)"/',
-            'video' => '/data\-video\s*=\s*"([^"]+)"/'
+            'video' => '/data\-video\s*=\s*"([^"]+)"/',
         ];
 
         if (preg_match_all('/\<figure\s+[^\>]+\>[^\<]*\<\/figure\>/i', $html, $matches)) {
@@ -53,7 +54,7 @@ class MediaViewHelper
                         $result[] = [
                             'declaration' => $mediaDeclaration,
                             'type' => $type,
-                            'src' => $nameMatch[1]
+                            'src' => $nameMatch[1],
                         ];
                     }
                 }
@@ -81,13 +82,13 @@ class MediaViewHelper
         }
 
         $controller = Controller::getController();
-        if (!$controller) {
+        if (! $controller) {
             throw new ApplicationException('Media tags can only be processed for front-end requests.');
         }
 
         $partial = Partial::loadCached($controller->getTheme(), $name);
 
-        return $this->playerPartialFlags[$name] = !!$partial;
+        return $this->playerPartialFlags[$name] = (bool) $partial;
     }
 
     protected function getDefaultPlayerMarkup($type, $src)
@@ -95,12 +96,13 @@ class MediaViewHelper
         switch ($type) {
             case 'video':
                 return '<video src="'.e($src).'" controls preload="metadata"></video>';
+
             break;
 
             case 'audio':
                 return '<audio src="'.e($src).'" controls preload="metadata"></audio>';
+
             break;
         }
     }
-
 }

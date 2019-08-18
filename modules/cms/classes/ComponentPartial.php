@@ -1,16 +1,17 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use File;
 use Lang;
-use Cms\Contracts\CmsObject as CmsObjectContract;
+use ApplicationException;
 use Cms\Helpers\File as FileHelper;
 use October\Rain\Extension\Extendable;
-use ApplicationException;
+use Cms\Contracts\CmsObject as CmsObjectContract;
 
 /**
  * The CMS component partial class. These objects are read-only.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class ComponentPartial extends Extendable implements CmsObjectContract
@@ -101,10 +102,10 @@ class ComponentPartial extends Extendable implements CmsObjectContract
      */
     public static function loadOverrideCached($theme, $component, $fileName)
     {
-        $partial = Partial::loadCached($theme, strtolower($component->alias) . '/' . $fileName);
+        $partial = Partial::loadCached($theme, strtolower($component->alias).'/'.$fileName);
 
         if ($partial === null) {
-            $partial = Partial::loadCached($theme, $component->alias . '/' . $fileName);
+            $partial = Partial::loadCached($theme, $component->alias.'/'.$fileName);
         }
 
         return $partial;
@@ -122,17 +123,18 @@ class ComponentPartial extends Extendable implements CmsObjectContract
 
         $filePath = $this->getFilePath($fileName);
 
-        if (!File::isFile($filePath)) {
-            return null;
+        if (! File::isFile($filePath)) {
+            return;
         }
 
         if (($content = @File::get($filePath)) === false) {
-            return null;
+            return;
         }
 
         $this->fileName = $fileName;
         $this->mtime = File::lastModified($filePath);
         $this->content = $content;
+
         return $this;
     }
 
@@ -146,7 +148,7 @@ class ComponentPartial extends Extendable implements CmsObjectContract
     {
         $partial = new static($component);
         $filePath = $partial->getFilePath($fileName);
-        if (!strlen(File::extension($filePath))) {
+        if (! strlen(File::extension($filePath))) {
             $filePath .= '.'.$partial->getDefaultExtension();
         }
 
@@ -160,13 +162,13 @@ class ComponentPartial extends Extendable implements CmsObjectContract
      */
     protected function validateFileName($fileName)
     {
-        if (!FileHelper::validatePath($fileName, $this->maxNesting)) {
+        if (! FileHelper::validatePath($fileName, $this->maxNesting)) {
             throw new ApplicationException(Lang::get('cms::lang.cms_object.invalid_file', [
-                'name' => $fileName
+                'name' => $fileName,
             ]));
         }
 
-        if (!strlen(File::extension($fileName))) {
+        if (! strlen(File::extension($fileName))) {
             $fileName .= '.'.$this->defaultExtension;
         }
 
@@ -249,7 +251,7 @@ class ComponentPartial extends Extendable implements CmsObjectContract
         /*
          * Check the shared "/partials" directory for the partial
          */
-        if (!File::isFile($path)) {
+        if (! File::isFile($path)) {
             $sharedDir = dirname($component->getPath()).'/partials';
             $sharedPath = $sharedDir.'/'.$fileName;
             if (File::isFile($sharedPath)) {

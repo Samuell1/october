@@ -1,20 +1,23 @@
-<?php namespace Backend\Classes;
+<?php
 
-use IteratorAggregate;
-use ArrayIterator;
+namespace Backend\Classes;
+
 use ArrayAccess;
+use ArrayIterator;
+use IteratorAggregate;
 
 /**
  * Form Tabs definition
- * A translation of the form field tab configuration
+ * A translation of the form field tab configuration.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class FormTabs implements IteratorAggregate, ArrayAccess
 {
     const SECTION_OUTSIDE = 'outside';
+
     const SECTION_PRIMARY = 'primary';
+
     const SECTION_SECONDARY = 'secondary';
 
     /**
@@ -31,19 +34,19 @@ class FormTabs implements IteratorAggregate, ArrayAccess
      * @var string Default tab label to use when none is specified.
      */
     public $defaultTab = 'backend::lang.form.undefined_tab';
-    
+
     /**
      * @var array List of icons for their corresponding tabs.
      */
     public $icons = [];
-    
+
     /**
      * @var bool Should these tabs stretch to the bottom of the page layout.
      */
     public $stretch;
 
     /**
-     * @var boolean If set to TRUE, fields will not be displayed in tabs.
+     * @var bool If set to TRUE, fields will not be displayed in tabs.
      */
     public $suppressTabs = false;
 
@@ -86,11 +89,11 @@ class FormTabs implements IteratorAggregate, ArrayAccess
         if (array_key_exists('defaultTab', $config)) {
             $this->defaultTab = $config['defaultTab'];
         }
-        
+
         if (array_key_exists('icons', $config)) {
             $this->icons = $config['icons'];
         }
-        
+
         if (array_key_exists('stretch', $config)) {
             $this->stretch = $config['stretch'];
         }
@@ -116,7 +119,7 @@ class FormTabs implements IteratorAggregate, ArrayAccess
      */
     public function addField($name, FormField $field, $tab = null)
     {
-        if (!$tab) {
+        if (! $tab) {
             $tab = $this->defaultTab;
         }
 
@@ -126,7 +129,7 @@ class FormTabs implements IteratorAggregate, ArrayAccess
     /**
      * Remove a field from all tabs by name.
      * @param string    $name
-     * @return boolean
+     * @return bool
      */
     public function removeField($name)
     {
@@ -138,7 +141,7 @@ class FormTabs implements IteratorAggregate, ArrayAccess
                     /*
                      * Remove empty tabs from collection
                      */
-                    if (!count($this->fields[$tab])) {
+                    if (! count($this->fields[$tab])) {
                         unset($this->fields[$tab]);
                     }
 
@@ -151,8 +154,8 @@ class FormTabs implements IteratorAggregate, ArrayAccess
     }
 
     /**
-     * Returns true if any fields have been registered for these tabs
-     * @return boolean
+     * Returns true if any fields have been registered for these tabs.
+     * @return bool
      */
     public function hasFields()
     {
@@ -182,7 +185,7 @@ class FormTabs implements IteratorAggregate, ArrayAccess
 
         return $tablessFields;
     }
-    
+
     /**
      * Returns an icon for the tab based on the tab's name.
      * @param string $name
@@ -190,11 +193,11 @@ class FormTabs implements IteratorAggregate, ArrayAccess
      */
     public function getIcon($name)
     {
-        if (!empty($this->icons[$name])) {
+        if (! empty($this->icons[$name])) {
             return $this->icons[$name];
         }
     }
-    
+
     /**
      * Returns a tab pane CSS class.
      * @param string $index
@@ -229,7 +232,7 @@ class FormTabs implements IteratorAggregate, ArrayAccess
     }
 
     /**
-     * ArrayAccess implementation
+     * ArrayAccess implementation.
      */
     public function offsetSet($offset, $value)
     {
@@ -237,7 +240,7 @@ class FormTabs implements IteratorAggregate, ArrayAccess
     }
 
     /**
-     * ArrayAccess implementation
+     * ArrayAccess implementation.
      */
     public function offsetExists($offset)
     {
@@ -245,7 +248,7 @@ class FormTabs implements IteratorAggregate, ArrayAccess
     }
 
     /**
-     * ArrayAccess implementation
+     * ArrayAccess implementation.
      */
     public function offsetUnset($offset)
     {
@@ -253,7 +256,7 @@ class FormTabs implements IteratorAggregate, ArrayAccess
     }
 
     /**
-     * ArrayAccess implementation
+     * ArrayAccess implementation.
      */
     public function offsetGet($offset)
     {

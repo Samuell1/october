@@ -1,13 +1,14 @@
-<?php namespace System\Models;
+<?php
+
+namespace System\Models;
 
 use App;
 use Model;
 use Request;
 
 /**
- * Model for logging 404 errors
+ * Model for logging 404 errors.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class RequestLog extends Model
@@ -28,16 +29,16 @@ class RequestLog extends Model
     protected $jsonable = ['referer'];
 
     /**
-     * Creates a log record
+     * Creates a log record.
      * @return self
      */
     public static function add($statusCode = 404)
     {
-        if (!App::hasDatabase()) {
+        if (! App::hasDatabase()) {
             return;
         }
 
-        if (!LogSetting::get('log_requests')) {
+        if (! LogSetting::get('log_requests')) {
             return;
         }
 
@@ -52,11 +53,10 @@ class RequestLog extends Model
             $record->referer = $referers;
         }
 
-        if (!$record->exists) {
+        if (! $record->exists) {
             $record->count = 1;
             $record->save();
-        }
-        else {
+        } else {
             $record->increment('count');
         }
 

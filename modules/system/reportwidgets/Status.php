@@ -1,22 +1,23 @@
-<?php namespace System\ReportWidgets;
+<?php
+
+namespace System\ReportWidgets;
 
 use Lang;
 use Config;
+use Exception;
 use BackendAuth;
+use System\Models\EventLog;
 use System\Models\Parameter;
 use System\Models\LogSetting;
-use System\Classes\UpdateManager;
-use System\Classes\PluginManager;
-use Backend\Classes\ReportWidgetBase;
-use System\Models\EventLog;
 use System\Models\RequestLog;
 use System\Models\PluginVersion;
-use Exception;
+use System\Classes\PluginManager;
+use System\Classes\UpdateManager;
+use Backend\Classes\ReportWidgetBase;
 
 /**
  * System status report widget.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class Status extends ReportWidgetBase
@@ -33,8 +34,7 @@ class Status extends ReportWidgetBase
     {
         try {
             $this->loadData();
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
         }
 
@@ -50,7 +50,7 @@ class Status extends ReportWidgetBase
                 'type'              => 'string',
                 'validationPattern' => '^.+$',
                 'validationMessage' => 'backend::lang.dashboard.widget_title_error',
-            ]
+            ],
         ];
     }
 
@@ -59,13 +59,13 @@ class Status extends ReportWidgetBase
         $manager = UpdateManager::instance();
 
         $this->vars['canUpdate'] = BackendAuth::getUser()->hasAccess('system.manage_updates');
-        $this->vars['updates']   = $manager->check();
-        $this->vars['warnings']  = $this->getSystemWarnings();
+        $this->vars['updates'] = $manager->check();
+        $this->vars['warnings'] = $this->getSystemWarnings();
         $this->vars['coreBuild'] = Parameter::get('system::core.build');
 
-        $this->vars['eventLog']      = EventLog::count();
-        $this->vars['eventLogMsg']   = LogSetting::get('log_events', false) ? false : true;
-        $this->vars['requestLog']    = RequestLog::count();
+        $this->vars['eventLog'] = EventLog::count();
+        $this->vars['eventLogMsg'] = LogSetting::get('log_events', false) ? false : true;
+        $this->vars['requestLog'] = RequestLog::count();
         $this->vars['requestLogMsg'] = LogSetting::get('log_requests', false) ? false : true;
 
         $this->vars['appBirthday'] = PluginVersion::orderBy('created_at')->value('created_at');
@@ -74,6 +74,7 @@ class Status extends ReportWidgetBase
     public function onLoadWarningsForm()
     {
         $this->vars['warnings'] = $this->getSystemWarnings();
+
         return $this->makePartial('warnings_form');
     }
 
@@ -108,13 +109,13 @@ class Status extends ReportWidgetBase
         ];
 
         foreach ($writablePaths as $path) {
-            if (!is_writable($path)) {
+            if (! is_writable($path)) {
                 $warnings[] = Lang::get('backend::lang.warnings.permissions', ['name' => '<strong>'.$path.'</strong>']);
             }
         }
 
         foreach ($requiredExtensions as $extension => $installed) {
-            if (!$installed) {
+            if (! $installed) {
                 $warnings[] = Lang::get('backend::lang.warnings.extension', ['name' => '<strong>'.$extension.'</strong>']);
             }
         }

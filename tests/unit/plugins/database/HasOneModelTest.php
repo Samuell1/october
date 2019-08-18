@@ -1,7 +1,7 @@
 <?php
 
-use Database\Tester\Models\Author;
 use Database\Tester\Models\Phone;
+use Database\Tester\Models\Author;
 
 class HasOneModelTest extends PluginTestCase
 {

@@ -3,7 +3,7 @@
 return [
     'app' => [
         'name' => 'OctoberCMS',
-        'tagline' => 'Getting back to basics'
+        'tagline' => 'Getting back to basics',
     ],
     'locale' => [
         'be' => 'Беларуская',
@@ -43,16 +43,16 @@ return [
         'uk' => 'Українська мова',
         'zh-cn' => '简体中文',
         'zh-tw' => '繁體中文',
-        'vn' => 'Tiếng việt'
+        'vn' => 'Tiếng việt',
     ],
     'directory' => [
-        'create_fail' => 'Không thể tạo danh mục: :name'
+        'create_fail' => 'Không thể tạo danh mục: :name',
     ],
     'file' => [
-        'create_fail' => 'Không thể tạo file: :name'
+        'create_fail' => 'Không thể tạo file: :name',
     ],
     'combiner' => [
-        'not_found' => "Không tìm thấy combiner file ':name'."
+        'not_found' => "Không tìm thấy combiner file ':name'.",
     ],
     'system' => [
         'name' => 'Hệ thống',
@@ -71,15 +71,15 @@ return [
             'events' => 'Sự kiện',
             'customers' => 'Khách hàng',
             'my_settings' => 'Cài đặt của tôi',
-            'notifications' => 'Thông báo'
-        ]
+            'notifications' => 'Thông báo',
+        ],
     ],
     'theme' => [
         'label' => 'Theme',
         'unnamed' => 'Theme chưa được đặt tên',
         'name' => [
             'label' => 'Tên theme',
-            'help' => 'Tên của theme không được trùng lặp. Ví dụ RainLab.Vanilla'
+            'help' => 'Tên của theme không được trùng lặp. Ví dụ RainLab.Vanilla',
         ],
     ],
     'themes' => [
@@ -88,15 +88,15 @@ return [
         'installed' => 'Các theme đã cài đặt',
         'no_themes' => 'Không có theme nào được cài đặt từ chợ theme.',
         'recommended' => 'Được khuyến khích cài đặt',
-        'remove_confirm' => 'Bạn có chắc chắn muốn xóa theme này?'
+        'remove_confirm' => 'Bạn có chắc chắn muốn xóa theme này?',
     ],
     'plugin' => [
         'label' => 'Plugin',
         'unnamed' => 'Plugin chưa được đặt tên',
         'name' => [
             'label' => 'Tên plugin',
-            'help' => 'Tên của plugin không được trùng lặp. For example, RainLab.Blog'
-        ]
+            'help' => 'Tên của plugin không được trùng lặp. For example, RainLab.Blog',
+        ],
     ],
     'plugins' => [
         'manage' => 'Quản lý các plugin',
@@ -122,7 +122,7 @@ return [
         'disable_confirm' => 'Xác nhận tắt?',
         'disable_success' => 'Đã tắt các plugin.',
         'enable_success' => 'Đã bật các plugin.',
-        'unknown_plugin' => 'Đã xóa các file của plugin ra khỏi hệ thống.'
+        'unknown_plugin' => 'Đã xóa các file của plugin ra khỏi hệ thống.',
     ],
     'project' => [
         'name' => 'Dự án',
@@ -133,10 +133,10 @@ return [
         'id' => [
             'label' => 'ID Dự án',
             'help' => 'Cách để xem ID Dự án',
-            'missing' => 'Điền vào ID Dự án để sử dụng.'
+            'missing' => 'Điền vào ID Dự án để sử dụng.',
         ],
         'detach_confirm' => 'Xác nhận gỡ Dự án?',
-        'unbind_success' => 'Dự án đã được gỡ ra.'
+        'unbind_success' => 'Dự án đã được gỡ ra.',
     ],
     'settings' => [
         'menu_label' => 'Cài đặt',
@@ -144,7 +144,7 @@ return [
         'missing_model' => 'Không có  Model cho trang cài đặt.',
         'update_success' => 'Cấu hình cho :name thành công',
         'return' => 'Trở lại trang cài đặt',
-        'search' => 'Tìm kiếm'
+        'search' => 'Tìm kiếm',
     ],
     'mail' => [
         'log_file' => 'Log file',
@@ -186,7 +186,7 @@ return [
         'ses_region' => 'Ku vực SES',
         'ses_region_comment' => 'Điền vào khu vực SES (ví dụ us-east-1)',
         'drivers_hint_header' => 'Trình điều khiển chưa được cài đặt',
-        'drivers_hint_content' => 'Phương thức gửi mail này cần phải cài ":plugin" plugin, bạn cần phải cài đặt nó trước mới gửi được mail'
+        'drivers_hint_content' => 'Phương thức gửi mail này cần phải cài ":plugin" plugin, bạn cần phải cài đặt nó trước mới gửi được mail',
     ],
     'mail_templates' => [
         'menu_label' => 'Các mẫu mail',
@@ -225,7 +225,7 @@ return [
         'deleting' => 'Đang xóa mẫu...',
         'deleting_layout' => 'Đang xóa Layout...',
         'sending' => 'Đang gửi mail test...',
-        'return' => 'Quay lại trang danh sách mail mẫu'
+        'return' => 'Quay lại trang danh sách mail mẫu',
     ],
     'mail_brand' => [
         'menu_label' => 'Giao diện Mail',
@@ -239,7 +239,7 @@ return [
                 'description' => 'Mô tả',
                 'price' => 'Giá',
                 'centered' => 'Căn giữa',
-                'right_aligned' => 'Căn phải'
+                'right_aligned' => 'Căn phải',
             ],
             'buttons' => [
                 'primary' => 'Nút bấm chính',
@@ -250,7 +250,7 @@ return [
             'more' => 'Mô tả thêm',
             'promotion' => 'Mã ưu đãi: OCTOBER',
             'subcopy' => 'Thông tin thêm',
-            'thanks' => 'Lời cám ơn'
+            'thanks' => 'Lời cám ơn',
         ],
         'fields' => [
             '_section_background' => 'Màu nền',
@@ -276,7 +276,7 @@ return [
             'panel_bg' => 'Nền của bảng điều khiển',
             'promotion_bg' => 'Nền mục khuyến mãi',
             'promotion_border_color' => 'Viền của mục khuyến mãi',
-        ]
+        ],
     ],
     'install' => [
         'project_label' => 'Chèn Project',
@@ -285,7 +285,7 @@ return [
         'missing_plugin_name' => 'Điền vào tên Plugin để cài đặt.',
         'missing_theme_name' => 'Điền vào tên Theme để cài đặt.',
         'install_completing' => 'Hoàn tất cài đặt',
-        'install_success' => 'Plugin đã được cài thành công'
+        'install_success' => 'Plugin đã được cài thành công',
     ],
     'updates' => [
         'title' => 'Quản lý các cập nhật',
@@ -325,17 +325,17 @@ return [
         'force_label' => 'Bắt buộc cập nhật',
         'found' => [
             'label' => 'Có cập nhật mới!',
-            'help' => 'Bấm cập nhật hệ thống để bắt đầu cập nhật.'
+            'help' => 'Bấm cập nhật hệ thống để bắt đầu cập nhật.',
         ],
         'none' => [
             'label' => 'Không có cập nhật',
-            'help' => 'Không tìm thấy bản cập nhật nào.'
+            'help' => 'Không tìm thấy bản cập nhật nào.',
         ],
         'important_action' => [
             'empty' => 'Chọn hành động',
             'confirm' => 'Xác nhận cập nhật',
             'skip' => 'Bỏ qua bản cập nhật này (Chỉ lần này)',
-            'ignore' => 'Bỏ qua bản cập nhật này (luôn luôn bỏ qua)'
+            'ignore' => 'Bỏ qua bản cập nhật này (luôn luôn bỏ qua)',
         ],
         'important_action_required' => 'Hành động này là bắt buộc',
         'important_view_guide' => 'Xem hướng dẫn nâng cấp',
@@ -352,7 +352,7 @@ return [
         'details_licence' => 'Giấy phép',
         'details_licence_missing' => 'Không có giấy phép nào được cung cấp.',
         'details_current_version' => 'Phiên bản hiện tại',
-        'details_author' => 'Tác giả'
+        'details_author' => 'Tác giả',
     ],
     'server' => [
         'connect_error' => 'Lỗi kết nối đến máy chủ.',
@@ -360,17 +360,17 @@ return [
         'response_invalid' => 'Phản hồi không hợp lệ từ máy chủ.',
         'response_empty' => 'Phản hồi trống từ máy chủ.',
         'file_error' => 'Lỗi máy chủ không thể gửi về các package.',
-        'file_corrupt' => 'File trên máy chủ bị hỏng.'
+        'file_corrupt' => 'File trên máy chủ bị hỏng.',
     ],
     'behavior' => [
-        'missing_property' => 'Class :class cần phải khai báo thuộc tính $:property được sử dụng bởi :behavior behavior.'
+        'missing_property' => 'Class :class cần phải khai báo thuộc tính $:property được sử dụng bởi :behavior behavior.',
     ],
     'config' => [
         'not_found' => 'Không tìm thấy tệp tin cấu hình :file được khai báo cho :location.',
-        'required' => "Cấu hình được sử dụng cho :location cần phải có giá trị ':property'."
+        'required' => "Cấu hình được sử dụng cho :location cần phải có giá trị ':property'.",
     ],
     'zip' => [
-        'extract_failed' => "Không thể giải nén tệp tin ':file'."
+        'extract_failed' => "Không thể giải nén tệp tin ':file'.",
     ],
     'event_log' => [
         'hint' => 'Bản ghi các lỗi có thể sảy ra trong ứng dụng, ví dụ exceptions và thông tin debug.',
@@ -385,7 +385,7 @@ return [
         'created_at' => 'Ngày giờ',
         'message' => 'Nội dung',
         'level' => 'Cấp độ',
-        'preview_title' => 'Event'
+        'preview_title' => 'Event',
     ],
     'request_log' => [
         'hint' => 'Bản ghi các request lỗi của trình duyệt. Ví dụ, nếu có khách truy cập vào một trang nội dung mà hệ thống không tìm thấy trang đó, một bản ghi sẽ được tạo ra với mã trạng thái 404.',
@@ -401,7 +401,7 @@ return [
         'referer' => 'Người giới thiệu',
         'url' => 'URL',
         'status_code' => 'Trạng thái',
-        'preview_title' => 'Request'
+        'preview_title' => 'Request',
     ],
     'permissions' => [
         'name' => 'Hệ thống',
@@ -414,7 +414,7 @@ return [
         'manage_preferences' => 'Cá nhân hóa trang quản trị',
         'manage_editor' => 'Cá nhân hóa trình biên tập(code editor)',
         'view_the_dashboard' => 'Xem bảng điều khiển',
-        'manage_branding' => 'Tùy chỉnh trang quản trị'
+        'manage_branding' => 'Tùy chỉnh trang quản trị',
     ],
     'log' => [
         'menu_label' => 'Cài đặt log',

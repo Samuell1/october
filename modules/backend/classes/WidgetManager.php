@@ -1,14 +1,15 @@
-<?php namespace Backend\Classes;
+<?php
+
+namespace Backend\Classes;
 
 use Str;
+use Event;
 use BackendAuth;
 use System\Classes\PluginManager;
-use Event;
 
 /**
- * Widget manager
+ * Widget manager.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class WidgetManager
@@ -16,7 +17,7 @@ class WidgetManager
     use \October\Rain\Support\Traits\Singleton;
 
     /**
-     * @var array An array of form widgets. Stored in the form of ['FormWidgetClass' => $formWidgetInfo].
+     * @var array An array of form widgets. Stored in the form of ['FormWidgetClass' =>].
      */
     protected $formWidgets;
 
@@ -79,7 +80,7 @@ class WidgetManager
             $plugins = $this->pluginManager->getPlugins();
 
             foreach ($plugins as $plugin) {
-                if (!is_array($widgets = $plugin->registerFormWidgets())) {
+                if (! is_array($widgets = $plugin->registerFormWidgets())) {
                     continue;
                 }
 
@@ -100,13 +101,13 @@ class WidgetManager
      */
     public function registerFormWidget($className, $widgetInfo = null)
     {
-        if (!is_array($widgetInfo)) {
+        if (! is_array($widgetInfo)) {
             $widgetInfo = ['code' => $widgetInfo];
         }
 
         $widgetCode = $widgetInfo['code'] ?? null;
 
-        if (!$widgetCode) {
+        if (! $widgetCode) {
             $widgetCode = Str::getClassId($className);
         }
 
@@ -116,12 +117,11 @@ class WidgetManager
 
     /**
      * Manually registers form widget for consideration.
-     * Usage:
+     * Usage:.
      *
      *     WidgetManager::registerFormWidgets(function($manager){
      *         $manager->registerFormWidget('Backend\FormWidgets\CodeEditor', 'codeeditor');
      *     });
-     *
      */
     public function registerFormWidgets(callable $definitions)
     {
@@ -180,7 +180,7 @@ class WidgetManager
             $plugins = $this->pluginManager->getPlugins();
 
             foreach ($plugins as $plugin) {
-                if (!is_array($widgets = $plugin->registerReportWidgets())) {
+                if (! is_array($widgets = $plugin->registerReportWidgets())) {
                     continue;
                 }
 
@@ -190,7 +190,7 @@ class WidgetManager
             }
         }
 
-        /**
+        /*
          * @event system.reportwidgets.extendItems
          * Enables adding or removing report widgets.
          *
@@ -209,8 +209,8 @@ class WidgetManager
 
         $user = BackendAuth::getUser();
         foreach ($this->reportWidgets as $widget => $config) {
-            if (!empty($config['permissions'])) {
-                if (!$user->hasAccess($config['permissions'], false)) {
+            if (! empty($config['permissions'])) {
+                if (! $user->hasAccess($config['permissions'], false)) {
                     unset($this->reportWidgets[$widget]);
                 }
             }
@@ -229,7 +229,7 @@ class WidgetManager
 
     /**
      * Manually registers report widget for consideration.
-     * Usage:
+     * Usage:.
      *
      *     WidgetManager::registerReportWidgets(function($manager){
      *         $manager->registerReportWidget('RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview', [
@@ -237,7 +237,6 @@ class WidgetManager
      *             'context' => 'dashboard'
      *         ]);
      *     });
-     *
      */
     public function registerReportWidgets(callable $definitions)
     {
@@ -251,7 +250,7 @@ class WidgetManager
      */
     public function removeReportWidget($className)
     {
-        if (!$this->reportWidgets) {
+        if (! $this->reportWidgets) {
             throw new SystemException('Unable to remove a widget before widgets are loaded.');
         }
 

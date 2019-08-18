@@ -1,27 +1,28 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use App;
 use Url;
 use File;
-use Yaml;
 use Lang;
+use Yaml;
 use Cache;
 use Event;
 use Config;
+use Exception;
+use SystemException;
+use DirectoryIterator;
+use ApplicationException;
 use Cms\Models\ThemeData;
 use System\Models\Parameter;
 use October\Rain\Halcyon\Datasource\FileDatasource;
-use ApplicationException;
-use SystemException;
-use DirectoryIterator;
-use Exception;
 
 /**
  * This class represents the CMS theme.
  * CMS theme is a directory that contains all CMS objects - pages, layouts, partials and asset files..
  * The theme parameters are specified in the theme.ini file in the theme root directory.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class Theme
@@ -47,7 +48,9 @@ class Theme
     protected static $editThemeCache = false;
 
     const ACTIVE_KEY = 'cms::theme.active';
+
     const EDIT_KEY = 'cms::theme.edit';
+
     const CONFIG_KEY = 'cms::theme.config';
 
     /**
@@ -70,7 +73,7 @@ class Theme
      */
     public function getPath($dirName = null)
     {
-        if (!$dirName) {
+        if (! $dirName) {
             $dirName = $this->getDirName();
         }
 
@@ -106,7 +109,7 @@ class Theme
     }
 
     /**
-     * Determines if a theme with given directory name exists
+     * Determines if a theme with given directory name exists.
      * @param string $dirName The theme directory
      * @return bool
      */
@@ -121,7 +124,7 @@ class Theme
     /**
      * Returns a list of pages in the theme.
      * This method is used internally in the routing process and in the back-end UI.
-     * @param boolean $skipCache Indicates if the pages should be reloaded from the disk bypassing the cache.
+     * @param bool $skipCache Indicates if the pages should be reloaded from the disk bypassing the cache.
      * @return array Returns an array of \Cms\Classes\Page objects.
      */
     public function listPages($skipCache = false)
@@ -156,13 +159,11 @@ class Theme
                     $dbResult = Cache::remember(self::ACTIVE_KEY, 1440, function () {
                         return Parameter::applyKey(self::ACTIVE_KEY)->value('value');
                     });
-                }
-                catch (Exception $ex) {
+                } catch (Exception $ex) {
                     // Cache failed
                     $dbResult = Parameter::applyKey(self::ACTIVE_KEY)->value('value');
                 }
-            }
-            catch (Exception $ex) {
+            } catch (Exception $ex) {
                 // Database failed
                 $dbResult = null;
             }
@@ -180,20 +181,18 @@ class Theme
          * theme code. Example usage:
          *
          *     Event::listen('cms.theme.getActiveTheme', function() { return 'mytheme'; });
-         *
          */
         $apiResult = Event::fire('cms.theme.getActiveTheme', [], true);
         if ($apiResult !== null) {
             $activeTheme = $apiResult;
         }
 
-        if (!strlen($activeTheme)) {
+        if (! strlen($activeTheme)) {
             throw new SystemException(Lang::get('cms::lang.theme.active.not_set'));
         }
 
         return $activeTheme;
     }
-
 
     /**
      * Returns the active theme object.
@@ -208,7 +207,7 @@ class Theme
 
         $theme = static::load(static::getActiveThemeCode());
 
-        if (!File::isDirectory($theme->getPath())) {
+        if (! File::isDirectory($theme->getPath())) {
             return self::$activeThemeCache = null;
         }
 
@@ -226,7 +225,7 @@ class Theme
 
         Parameter::set(self::ACTIVE_KEY, $code);
 
-        /**
+        /*
          * @event cms.theme.setActiveTheme
          * Fires when the active theme has been changed.
          *
@@ -252,7 +251,7 @@ class Theme
     public static function getEditThemeCode()
     {
         $editTheme = Config::get('cms.editTheme');
-        if (!$editTheme) {
+        if (! $editTheme) {
             $editTheme = static::getActiveThemeCode();
         }
 
@@ -266,14 +265,13 @@ class Theme
          *     Event::listen('cms.theme.getEditTheme', function() {
          *         return "the-edit-theme-code";
          *     });
-         *
          */
         $apiResult = Event::fire('cms.theme.getEditTheme', [], true);
         if ($apiResult !== null) {
             $editTheme = $apiResult;
         }
 
-        if (!strlen($editTheme)) {
+        if (! strlen($editTheme)) {
             throw new SystemException(Lang::get('cms::lang.theme.edit.not_set'));
         }
 
@@ -292,7 +290,7 @@ class Theme
 
         $theme = static::load(static::getEditThemeCode());
 
-        if (!File::isDirectory($theme->getPath())) {
+        if (! File::isDirectory($theme->getPath())) {
             return self::$editThemeCache = null;
         }
 
@@ -310,7 +308,7 @@ class Theme
 
         $result = [];
         foreach ($it as $fileinfo) {
-            if (!$fileinfo->isDir() || $fileinfo->isDot()) {
+            if (! $fileinfo->isDir() || $fileinfo->isDot()) {
                 continue;
             }
 
@@ -333,23 +331,21 @@ class Theme
         }
 
         $path = $this->getPath().'/theme.yaml';
-        if (!File::exists($path)) {
+        if (! File::exists($path)) {
             return $this->configCache = [];
         }
 
         try {
             $cacheKey = self::CONFIG_KEY.'::'.$this->getDirName();
-            $config = Cache::rememberForever($cacheKey, function() use ($path) {
+            $config = Cache::rememberForever($cacheKey, function () use ($path) {
                 return Yaml::parseFile($path);
             });
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             // Cache failed
             $config = Yaml::parseFile($path);
         }
 
-
-        /**
+        /*
          * @event cms.theme.extendConfig
          * Extend basic theme configuration supplied by the theme by returning an array.
          *
@@ -379,7 +375,7 @@ class Theme
     {
         $config = $this->getConfigArray('form');
 
-        /**
+        /*
          * @event cms.theme.extendFormConfig
          * Extend form field configuration supplied by the theme by returning an array.
          *
@@ -431,12 +427,11 @@ class Theme
 
             if (File::isLocalPath($fileName)) {
                 $path = $fileName;
-            }
-            else {
+            } else {
                 $path = $this->getPath().'/'.$result;
             }
 
-            if (!File::exists($path)) {
+            if (! File::exists($path)) {
                 throw new ApplicationException('Path does not exist: '.$path);
             }
 
@@ -454,12 +449,12 @@ class Theme
      */
     public function writeConfig($values = [], $overwrite = false)
     {
-        if (!$overwrite) {
+        if (! $overwrite) {
             $values = $values + (array) $this->getConfig();
         }
 
         $path = $this->getPath().'/theme.yaml';
-        if (!File::exists($path)) {
+        if (! File::exists($path)) {
             throw new ApplicationException('Path does not exist: '.$path);
         }
 
@@ -510,7 +505,7 @@ class Theme
     }
 
     /**
-     * Returns data specific to this theme
+     * Returns data specific to this theme.
      * @return Cms\Models\ThemeData
      */
     public function getCustomData()
@@ -526,7 +521,7 @@ class Theme
     {
         $resolver = App::make('halcyon');
 
-        if (!$resolver->hasDatasource($this->dirName)) {
+        if (! $resolver->hasDatasource($this->dirName)) {
             $datasource = new FileDatasource($this->getPath(), App::make('files'));
             $resolver->addDatasource($this->dirName, $datasource);
         }
@@ -542,8 +537,6 @@ class Theme
         if ($this->hasCustomData()) {
             return $this->getCustomData()->{$name};
         }
-
-        return null;
     }
 
     /**
@@ -555,6 +548,7 @@ class Theme
     {
         if ($this->hasCustomData()) {
             $theme = $this->getCustomData();
+
             return $theme->offsetExists($key);
         }
 

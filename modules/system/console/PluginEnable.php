@@ -1,19 +1,19 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use Illuminate\Console\Command;
-use System\Classes\PluginManager;
 use System\Models\PluginVersion;
+use System\Classes\PluginManager;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * Console command to enable a plugin.
  *
- * @package october\system
  * @author Lucas Zamora
  */
 class PluginEnable extends Command
 {
-
     /**
      * The console command name.
      * @var string
@@ -36,7 +36,7 @@ class PluginEnable extends Command
         $pluginName = $this->argument('name');
         $pluginName = $pluginManager->normalizeIdentifier($pluginName);
 
-        if (!$pluginManager->hasPlugin($pluginName)) {
+        if (! $pluginManager->hasPlugin($pluginName)) {
             return $this->error(sprintf('Unable to find a registered plugin called "%s"', $pluginName));
         }
 
@@ -46,7 +46,6 @@ class PluginEnable extends Command
         $plugin = PluginVersion::where('code', $pluginName)->first();
         $plugin->is_disabled = false;
         $plugin->save();
-
 
         $this->output->writeln(sprintf('<info>%s:</info> enabled.', $pluginName));
     }

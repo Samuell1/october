@@ -23,8 +23,8 @@ class DeferredBindingTest extends PluginTestCase
 
         Model::unguard();
         $author = Author::make(['name' => 'Stevie']);
-        $post = Post::create(['title' => "First post"]);
-        $post2 = Post::create(['title' => "Second post"]);
+        $post = Post::create(['title' => 'First post']);
+        $post2 = Post::create(['title' => 'Second post']);
         Model::reguard();
 
         $author->posts()->add($post, $sessionKey);
@@ -79,7 +79,7 @@ class DeferredBindingTest extends PluginTestCase
 
         Model::unguard();
         $author = Author::make(['name' => 'Stevie']);
-        $post = Post::create(['title' => "First post"]);
+        $post = Post::create(['title' => 'First post']);
         Model::reguard();
 
         $author->posts()->add($post, $sessionKey);
@@ -96,7 +96,7 @@ class DeferredBindingTest extends PluginTestCase
 
         Model::unguard();
         $author = Author::make(['name' => 'Stevie']);
-        $post = Post::create(['title' => "First post"]);
+        $post = Post::create(['title' => 'First post']);
         Model::reguard();
 
         $author->posts()->add($post, $sessionKey);
@@ -105,5 +105,4 @@ class DeferredBindingTest extends PluginTestCase
         $author->commitDeferred($sessionKey);
         $this->assertEquals(0, DeferredBinding::count());
     }
-
 }

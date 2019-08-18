@@ -1,4 +1,5 @@
 <?php
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -31,15 +32,15 @@ return [
         'preview' => 'Предварителен преглед',
     ],
     'mediamanager' => [
-        'insert_link' => "Вмъкване на линк",
-        'insert_image' => "Вмъкване на изображение",
-        'insert_video' => "Вмъкване на видео файл",
-        'insert_audio' => "Вмъкване на звуков файл",
-        'invalid_file_empty_insert' => "Моля, изберете файл за да го вмъкнете като линк.",
-        'invalid_file_single_insert' => "Моля, изберете един файл.",
-        'invalid_image_empty_insert' => "Моля, изберете изображение(я) за да вмъкнете.",
-        'invalid_video_empty_insert' => "Моля, изберете видео файл за вмъкване.",
-        'invalid_audio_empty_insert' => "Моля, изберете звуков файл за вмъкване.",
+        'insert_link' => 'Вмъкване на линк',
+        'insert_image' => 'Вмъкване на изображение',
+        'insert_video' => 'Вмъкване на видео файл',
+        'insert_audio' => 'Вмъкване на звуков файл',
+        'invalid_file_empty_insert' => 'Моля, изберете файл за да го вмъкнете като линк.',
+        'invalid_file_single_insert' => 'Моля, изберете един файл.',
+        'invalid_image_empty_insert' => 'Моля, изберете изображение(я) за да вмъкнете.',
+        'invalid_video_empty_insert' => 'Моля, изберете видео файл за вмъкване.',
+        'invalid_audio_empty_insert' => 'Моля, изберете звуков файл за вмъкване.',
     ],
     'alert' => [
         'confirm_button_text' => 'Потвърди',

@@ -1,14 +1,15 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use Str;
-use System\Classes\PluginManager;
 use SystemException;
+use System\Classes\PluginManager;
 use Illuminate\Support\Facades\App;
 
 /**
- * Component manager
+ * Component manager.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class ComponentManager
@@ -61,7 +62,7 @@ class ComponentManager
 
         foreach ($plugins as $plugin) {
             $components = $plugin->registerComponents();
-            if (!is_array($components)) {
+            if (! is_array($components)) {
                 continue;
             }
 
@@ -73,7 +74,7 @@ class ComponentManager
 
     /**
      * Manually registers a component for consideration.
-     * Usage:
+     * Usage:.
      *
      *     ComponentManager::registerComponents(function($manager){
      *         $manager->registerComponent('October\Demo\Components\Test', 'testComponent');
@@ -92,15 +93,15 @@ class ComponentManager
      */
     public function registerComponent($className, $code = null, $plugin = null)
     {
-        if (!$this->classMap) {
+        if (! $this->classMap) {
             $this->classMap = [];
         }
 
-        if (!$this->codeMap) {
+        if (! $this->codeMap) {
             $this->codeMap = [];
         }
 
-        if (!$code) {
+        if (! $code) {
             $code = Str::getClassId($className);
         }
 
@@ -167,8 +168,6 @@ class ComponentManager
         if (isset($this->classMap[$name])) {
             return $name;
         }
-
-        return null;
     }
 
     /**
@@ -179,7 +178,7 @@ class ComponentManager
     public function hasComponent($name)
     {
         $className = $this->resolve($name);
-        if (!$className) {
+        if (! $className) {
             return false;
         }
 
@@ -196,14 +195,14 @@ class ComponentManager
     public function makeComponent($name, $cmsObject = null, $properties = [])
     {
         $className = $this->resolve($name);
-        if (!$className) {
+        if (! $className) {
             throw new SystemException(sprintf(
                 'Class name is not registered for the component "%s". Check the component plugin.',
                 $name
             ));
         }
 
-        if (!class_exists($className)) {
+        if (! class_exists($className)) {
             throw new SystemException(sprintf(
                 'Component class not found "%s". Check the component plugin.',
                 $className
@@ -227,7 +226,5 @@ class ComponentManager
         if (isset($this->pluginMap[$className])) {
             return $this->pluginMap[$className];
         }
-
-        return null;
     }
 }

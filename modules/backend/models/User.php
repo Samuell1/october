@@ -1,4 +1,6 @@
-<?php namespace Backend\Models;
+<?php
+
+namespace Backend\Models;
 
 use Mail;
 use Event;
@@ -6,9 +8,8 @@ use Backend;
 use October\Rain\Auth\Models\User as UserBase;
 
 /**
- * Administrator user model
+ * Administrator user model.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class User extends UserBase
@@ -21,13 +22,13 @@ class User extends UserBase
     protected $table = 'backend_users';
 
     /**
-     * Validation rules
+     * Validation rules.
      */
     public $rules = [
         'email' => 'required|between:6,255|email|unique:backend_users',
         'login' => 'required|between:2,255|unique:backend_users',
         'password' => 'required:create|between:4,255|confirmed',
-        'password_confirmation' => 'required_with:password|between:4,255'
+        'password_confirmation' => 'required_with:password|between:4,255',
     ];
 
     /**
@@ -42,18 +43,18 @@ class User extends UserBase
     ];
 
     /**
-     * Relations
+     * Relations.
      */
     public $belongsToMany = [
-        'groups' => [UserGroup::class, 'table' => 'backend_users_groups']
+        'groups' => [UserGroup::class, 'table' => 'backend_users_groups'],
     ];
 
     public $belongsTo = [
-        'role' => UserRole::class
+        'role' => UserRole::class,
     ];
 
     public $attachOne = [
-        'avatar' => \System\Models\File::class
+        'avatar' => \System\Models\File::class,
     ];
 
     /**
@@ -71,7 +72,7 @@ class User extends UserBase
      */
     public function getFullNameAttribute()
     {
-        return trim($this->first_name . ' ' . $this->last_name);
+        return trim($this->first_name.' '.$this->last_name);
     }
 
     /**
@@ -84,7 +85,7 @@ class User extends UserBase
         // return parent::getPersistCode();
 
         // Option B:
-        if (!$this->persist_code) {
+        if (! $this->persist_code) {
             return parent::getPersistCode();
         }
 
@@ -98,8 +99,7 @@ class User extends UserBase
     {
         if (is_string($options)) {
             $options = ['default' => $options];
-        }
-        elseif (!is_array($options)) {
+        } elseif (! is_array($options)) {
             $options = [];
         }
 
@@ -110,14 +110,14 @@ class User extends UserBase
             return $this->avatar->getThumb($size, $size, $options);
         }
 
-        return '//www.gravatar.com/avatar/' .
-            md5(strtolower(trim($this->email))) .
-            '?s='. $size .
-            '&d='. urlencode($default);
+        return '//www.gravatar.com/avatar/'.
+            md5(strtolower(trim($this->email))).
+            '?s='.$size.
+            '&d='.urlencode($default);
     }
 
     /**
-     * After create event
+     * After create event.
      * @return void
      */
     public function afterCreate()
@@ -130,7 +130,7 @@ class User extends UserBase
     }
 
     /**
-     * After login event
+     * After login event.
      * @return void
      */
     public function afterLogin()

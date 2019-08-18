@@ -1,4 +1,6 @@
-<?php namespace Backend\Facades;
+<?php
+
+namespace Backend\Facades;
 
 use October\Rain\Support\Facade;
 

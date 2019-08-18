@@ -1,4 +1,6 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use Lang;
 use ApplicationException;
@@ -7,7 +9,6 @@ use October\Rain\Filesystem\Definitions as FileDefinitions;
 /**
  * The CMS page class.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class Page extends CmsCompoundObject
@@ -30,7 +31,7 @@ class Page extends CmsCompoundObject
         'meta_description',
         'markup',
         'settings',
-        'code'
+        'code',
     ];
 
     /**
@@ -44,7 +45,7 @@ class Page extends CmsCompoundObject
      */
     public $rules = [
         'title' => 'required',
-        'url'   => ['required', 'regex:/^\/[a-z0-9\/\:_\-\*\[\]\+\?\|\.\^\\\$]*$/i']
+        'url'   => ['required', 'regex:/^\/[a-z0-9\/\:_\-\*\[\]\+\?\|\.\^\\\$]*$/i'],
     ];
 
     /**
@@ -56,7 +57,7 @@ class Page extends CmsCompoundObject
         parent::__construct($attributes);
 
         $this->customMessages = [
-            'url.regex' => Lang::get('cms::lang.page.invalid_url')
+            'url.regex' => Lang::get('cms::lang.page.invalid_url'),
         ];
     }
 
@@ -76,7 +77,7 @@ class Page extends CmsCompoundObject
      */
     public function getLayoutOptions()
     {
-        if (!($theme = Theme::getEditTheme())) {
+        if (! ($theme = Theme::getEditTheme())) {
             throw new ApplicationException(Lang::get('cms::lang.theme.edit.not_found'));
         }
 
@@ -106,7 +107,7 @@ class Page extends CmsCompoundObject
         $result = [];
         $pages = self::sortBy('baseFileName')->all();
         foreach ($pages as $page) {
-            $result[$page->baseFileName] = $page->title . ' (' . $page->baseFileName . ')';
+            $result[$page->baseFileName] = $page->title.' ('.$page->baseFileName.')';
         }
 
         return $result;
@@ -157,13 +158,13 @@ class Page extends CmsCompoundObject
             $references = [];
 
             foreach ($pages as $page) {
-                $references[$page->getBaseFileName()] = $page->title . ' [' . $page->getBaseFileName() . ']';
+                $references[$page->getBaseFileName()] = $page->title.' ['.$page->getBaseFileName().']';
             }
 
             $result = [
                 'references'   => $references,
                 'nesting'      => false,
-                'dynamicItems' => false
+                'dynamicItems' => false,
             ];
         }
 
@@ -192,7 +193,7 @@ class Page extends CmsCompoundObject
         $result = null;
 
         if ($item->type === 'cms-page') {
-            if (!$item->reference) {
+            if (! $item->reference) {
                 return;
             }
 
@@ -211,7 +212,7 @@ class Page extends CmsCompoundObject
 
     /**
      * Handler for the backend.richeditor.getTypeInfo event.
-     * Returns a menu item type information. The type information is returned as array
+     * Returns a menu item type information. The type information is returned as array.
      * @param string $type Specifies the page link type
      * @return array
      */

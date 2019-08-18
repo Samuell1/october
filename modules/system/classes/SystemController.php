@@ -1,17 +1,18 @@
-<?php namespace System\Classes;
+<?php
+
+namespace System\Classes;
 
 use Lang;
+use Response;
+use Exception;
 use ApplicationException;
 use Illuminate\Routing\Controller as ControllerBase;
-use Exception;
-use Response;
 
 /**
  * The is the master controller for system related routing.
  * It is currently only responsible for serving up the asset combiner contents.
  *
  * @see System\Classes\CombineAssets Asset combiner class
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class SystemController extends ControllerBase
@@ -24,7 +25,7 @@ class SystemController extends ControllerBase
     public function combine($name)
     {
         try {
-            if (!strpos($name, '-')) {
+            if (! strpos($name, '-')) {
                 throw new ApplicationException(Lang::get('system::lang.combiner.not_found', ['name' => $name]));
             }
 
@@ -35,8 +36,7 @@ class SystemController extends ControllerBase
             $combiner = CombineAssets::instance();
 
             return $combiner->getContents($cacheId);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             return Response::make('/* '.e($ex->getMessage()).' */', 500);
         }
     }

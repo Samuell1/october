@@ -35,15 +35,15 @@ return [
     ],
 
     'mediamanager' => [
-        'insert_link' => "Link aus Medienbibliothek",
-        'insert_image' => "Bild aus Medienbibliothek",
-        'insert_video' => "Video aus Medienbibliothek",
-        'insert_audio' => "Audio aus Medienbibliothek",
-        'invalid_file_empty_insert' => "Bitte Datei auswählen.",
-        'invalid_file_single_insert' => "Bitte nur eine Datei wählen.",
-        'invalid_image_empty_insert' => "Bitte ein Bild auswählen.",
-        'invalid_video_empty_insert' => "Bitte ein Video auswählen.",
-        'invalid_audio_empty_insert' => "Bitte eine Audiodatei auswählen.",
+        'insert_link' => 'Link aus Medienbibliothek',
+        'insert_image' => 'Bild aus Medienbibliothek',
+        'insert_video' => 'Video aus Medienbibliothek',
+        'insert_audio' => 'Audio aus Medienbibliothek',
+        'invalid_file_empty_insert' => 'Bitte Datei auswählen.',
+        'invalid_file_single_insert' => 'Bitte nur eine Datei wählen.',
+        'invalid_image_empty_insert' => 'Bitte ein Bild auswählen.',
+        'invalid_video_empty_insert' => 'Bitte ein Video auswählen.',
+        'invalid_audio_empty_insert' => 'Bitte eine Audiodatei auswählen.',
     ],
 
     'alert' => [
@@ -56,12 +56,12 @@ return [
         'nextMonth' => 'Nächsten Monat',
         'months' => ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
         'weekdays' => ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
-        'weekdaysShort' => ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa']
+        'weekdaysShort' => ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
     ],
 
     'filter' => [
         'group' => [
-            'all' => 'all'
+            'all' => 'all',
         ],
         'dates' => [
             'all' => 'all',
@@ -69,8 +69,8 @@ return [
             'reset_button_text'  => 'Reset',
             'date_placeholder' => 'Date',
             'after_placeholder' => 'After',
-            'before_placeholder' => 'Before'
-        ]
+            'before_placeholder' => 'Before',
+        ],
     ],
 
     'eventlog' => [
@@ -86,7 +86,7 @@ return [
             'openWith' => 'Open with',
             'remember_choice' => 'Remember selected option for this session',
             'open' => 'Open',
-            'cancel' => 'Cancel'
-        ]
-    ]
+            'cancel' => 'Cancel',
+        ],
+    ],
 ];

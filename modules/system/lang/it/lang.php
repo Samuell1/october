@@ -30,14 +30,14 @@ return [
             'events' => 'Eventi',
             'customers' => 'Clienti',
             'my_settings' => 'Impostazioni personali',
-        ]
+        ],
     ],
     'theme' => [
         'label' => 'Tema',
         'unnamed' => 'Tema senza nome',
         'name' => [
             'label' => 'Nome tema',
-            'help' => 'Cerca il tema tramite il suo codice univoco. Ad esempio, RainLab.Vanilla'
+            'help' => 'Cerca il tema tramite il suo codice univoco. Ad esempio, RainLab.Vanilla',
         ],
     ],
     'themes' => [
@@ -46,15 +46,15 @@ return [
         'installed' => 'Temi installati',
         'no_themes' => 'Non ci sono temi installati dal marketplace.',
         'recommended' => 'Raccomandati',
-        'remove_confirm' => 'Sei sicuro di voler rimuovere questo tema?'
+        'remove_confirm' => 'Sei sicuro di voler rimuovere questo tema?',
     ],
     'plugin' => [
         'label' => 'Plugin',
         'unnamed' => 'Plugin senza nome',
         'name' => [
             'label' => 'Nome del plugin',
-            'help' => 'Cerca il plugin tramite il suo codice univoco. Ad esempio, RainLab.Blog'
-        ]
+            'help' => 'Cerca il plugin tramite il suo codice univoco. Ad esempio, RainLab.Blog',
+        ],
     ],
     'plugins' => [
         'manage' => 'Gestisci plugin',
@@ -102,7 +102,7 @@ return [
         'missing_model' => 'La pagine delle impostazioni non ha nessun modello associato.',
         'update_success' => 'Le impostazioni per :name sono state aggiornate con successo.',
         'return' => 'Ritorna alle impostazioni di sistema',
-        'search' => 'Cerca'
+        'search' => 'Cerca',
     ],
     'mail' => [
         'log_file' => 'File di log',
@@ -144,7 +144,7 @@ return [
         'ses_region' => 'Regione SES',
         'ses_region_comment' => 'Inserisci la tua regione SES (ad es. us-east-1)',
         'drivers_hint_header' => 'Driver non installati',
-        'drivers_hint_content' => 'Questa modalità di invio richiede che il plugin ":plugin" sia installato prima che tu possa inviare messaggi.'
+        'drivers_hint_content' => 'Questa modalità di invio richiede che il plugin ":plugin" sia installato prima che tu possa inviare messaggi.',
     ],
     'mail_templates' => [
         'menu_label' => 'Modelli di e-mail',
@@ -282,7 +282,7 @@ return [
         'created_at' => 'Data e ora',
         'message' => 'Messaggio',
         'level' => 'Livello',
-        'preview_title' => 'Evento'
+        'preview_title' => 'Evento',
     ],
     'request_log' => [
         'hint' => 'Questo registro visualizza un elenco delle richieste del browser che possono richiedere attenzione. Ad esempio, se un visitatore apre una pagina del CMS che non può essere trovata, viene creato un record con il codice di errore 404.',
@@ -298,7 +298,7 @@ return [
         'referer' => 'Provenienza',
         'url' => 'URL',
         'status_code' => 'Codice di stato',
-        'preview_title' => 'Richiesta'
+        'preview_title' => 'Richiesta',
     ],
     'permissions' => [
         'name' => 'Sistema',
@@ -311,7 +311,7 @@ return [
         'manage_preferences' => 'Gestisci preferenze pannello di controllo',
         'manage_editor' => 'Gestisci preferenze editor di codice',
         'view_the_dashboard' => 'Visualizza la dashboard',
-        'manage_branding' => 'Personalizza il pannello di controllo'
+        'manage_branding' => 'Personalizza il pannello di controllo',
     ],
     'media' => [
         'invalid_path' => "Percorso del file non valido: ':path'.",

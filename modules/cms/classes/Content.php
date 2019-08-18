@@ -1,4 +1,6 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use File;
 use Markdown;
@@ -6,7 +8,6 @@ use Markdown;
 /**
  * The CMS content file class.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class Content extends CmsCompoundObject
@@ -60,9 +61,11 @@ class Content extends CmsCompoundObject
         switch ($extension) {
             case 'txt':
                 $result = htmlspecialchars($this->markup);
+
                 break;
             case 'md':
                 $result = Markdown::parse($this->markup);
+
                 break;
             default:
                 $result = $this->markup;
@@ -70,5 +73,4 @@ class Content extends CmsCompoundObject
 
         return $result;
     }
-
 }

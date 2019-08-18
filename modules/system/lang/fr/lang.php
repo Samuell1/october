@@ -6,10 +6,10 @@ return [
         'tagline' => 'Retourner à l’essentiel',
     ],
     'directory' => [
-        'create_fail' => "Impossible de créer le répertoire : :name",
+        'create_fail' => 'Impossible de créer le répertoire : :name',
     ],
     'file' => [
-        'create_fail' => "Impossible de créer le fichier : :name",
+        'create_fail' => 'Impossible de créer le fichier : :name',
     ],
     'combiner' => [
         'not_found' => "Le fichier combiné ':name' est introuvable.",
@@ -30,14 +30,14 @@ return [
             'events' => 'Évènements',
             'customers' => 'Clients',
             'my_settings' => 'Mes réglages',
-        ]
+        ],
     ],
     'theme' => [
         'label' => 'Thème',
         'unnamed' => 'Thème sans nom',
         'name' => [
             'label' => 'Nom du thème',
-            'help' => 'Nommer le thème avec un nom de code unique. Par exemple, RainLab.Vanilla'
+            'help' => 'Nommer le thème avec un nom de code unique. Par exemple, RainLab.Vanilla',
         ],
     ],
     'themes' => [
@@ -46,7 +46,7 @@ return [
         'installed' => 'Thèmes installés',
         'no_themes' => 'Il n’y a aucun thème installé depuis le Marketplace.',
         'recommended' => 'Recommandé',
-        'remove_confirm' => 'Êtes-vous sûr(e) de vouloir supprimer ce thème ?'
+        'remove_confirm' => 'Êtes-vous sûr(e) de vouloir supprimer ce thème ?',
     ],
     'plugin' => [
         'label' => 'Plugin',
@@ -74,13 +74,13 @@ return [
         'frozen_help' => 'Les plugins bloqués seront ignorés par le processus de mise à jour.',
         'selected_amount' => 'Plugins sélectionnés : :amount',
         'remove_confirm' => 'Êtes-vous sûr(e) de vouloir supprimer ce plugin ?',
-        'remove_success' => "Les plugins ont été supprimés avec succès.",
+        'remove_success' => 'Les plugins ont été supprimés avec succès.',
         'refresh_confirm' => 'Êtes-vous sûr(e) ?',
-        'refresh_success' => "Les plugins ont été actualisés avec succès.",
+        'refresh_success' => 'Les plugins ont été actualisés avec succès.',
         'disable_confirm' => 'Êtes-vous sûr(e) ?',
-        'disable_success' => "Les plugins ont été désactivés avec succès.",
-        'enable_success' => "Les plugins ont été activés avec succès.",
-        'unknown_plugin' => 'Le plugin a été supprimé du système de fichiers.'
+        'disable_success' => 'Les plugins ont été désactivés avec succès.',
+        'enable_success' => 'Les plugins ont été activés avec succès.',
+        'unknown_plugin' => 'Le plugin a été supprimé du système de fichiers.',
     ],
     'project' => [
         'name' => 'Projet',
@@ -102,7 +102,7 @@ return [
         'missing_model' => 'La page de réglages nécessite la définition d’un Model.',
         'update_success' => 'Les réglages pour :name ont étés mis à jour avec succès.',
         'return' => 'Retourner à la page des réglages du système',
-        'search' => 'Rechercher'
+        'search' => 'Rechercher',
     ],
     'mail' => [
         'log_file' => 'Fichier journal',
@@ -144,7 +144,7 @@ return [
         'ses_region' => 'Région SES',
         'ses_region_comment' => 'Saisir votre région SES (e.g. us-east-1)',
         'drivers_hint_header' => 'Les drivers ne sont pas installés',
-        'drivers_hint_content' => 'Cette méthode d’envoi d’e-mails nécessite que le plugin ":plugin" soit installé avant de pouvoir envoyer des e-mails.'
+        'drivers_hint_content' => 'Cette méthode d’envoi d’e-mails nécessite que le plugin ":plugin" soit installé avant de pouvoir envoyer des e-mails.',
     ],
     'mail_templates' => [
         'menu_label' => 'Modèles des e-mails',
@@ -302,7 +302,7 @@ return [
         'referer' => 'Référents',
         'url' => 'Adresse URL',
         'status_code' => 'Statut',
-        'preview_title' => 'Requête'
+        'preview_title' => 'Requête',
     ],
     'permissions' => [
         'name' => 'Système',
@@ -315,7 +315,7 @@ return [
         'manage_preferences' => 'Gérer les préférences de l’interface d’administration',
         'manage_editor' => 'Gérer les préférences de l’éditeur de code',
         'view_the_dashboard' => 'Voir le tableau de bord',
-        'manage_branding' => 'Personnaliser l’interface d’administration'
+        'manage_branding' => 'Personnaliser l’interface d’administration',
     ],
     'media' => [
         'invalid_path' => "Le chemin du fichier indiqué est invalide : ':path'.",

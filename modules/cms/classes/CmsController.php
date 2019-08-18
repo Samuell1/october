@@ -1,8 +1,10 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use App;
-use Illuminate\Routing\Controller as ControllerBase;
 use Closure;
+use Illuminate\Routing\Controller as ControllerBase;
 
 /**
  * This is the master controller for all front-end pages.
@@ -10,7 +12,6 @@ use Closure;
  * then the URL is passed to the front-end controller for processing.
  *
  * @see Cms\Classes\Controller Front-end controller class
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class CmsController extends ControllerBase

@@ -2,34 +2,34 @@
 
 return [
     'auth' => [
-        'title' => 'Administrationsområde'
+        'title' => 'Administrationsområde',
     ],
     'field' => [
         'invalid_type' => 'Ugyldig felttype :type.',
-        'options_method_not_exists' => "Model klassen :model skal implementere :method() som returnerer valgmuligheder for feltet ':field'."
+        'options_method_not_exists' => "Model klassen :model skal implementere :method() som returnerer valgmuligheder for feltet ':field'.",
     ],
     'widget' => [
         'not_registered' => "En widget klasse med navnet ':name' er ikke registreret",
-        'not_bound' => "En widget klasse med navnet ':name' er ikke blevet bundet til controlleren"
+        'not_bound' => "En widget klasse med navnet ':name' er ikke blevet bundet til controlleren",
     ],
     'page' => [
         'untitled' => 'Unavngivet',
         'access_denied' => [
             'label' => 'Adgang nægtet',
-            'help' => "Du har ikke de fornødne rettigheder til at se denne side.",
-            'cms_link' => 'Tilbage til backenden'
+            'help' => 'Du har ikke de fornødne rettigheder til at se denne side.',
+            'cms_link' => 'Tilbage til backenden',
         ],
         'no_database' => [
             'label' => 'Databasen kan ikke findes',
-            'help' => "En database er påkrævet for at kunne tilgå backenden. Kontroller om databasen er konfigureret og migreret, inden du prøver igen.",
-            'cms_link' => 'Tilbage til hjemmesiden'
+            'help' => 'En database er påkrævet for at kunne tilgå backenden. Kontroller om databasen er konfigureret og migreret, inden du prøver igen.',
+            'cms_link' => 'Tilbage til hjemmesiden',
         ],
         'invalid_token' => [
-            'label' => 'Ugyldig sikkerhedstoken'
-        ]
+            'label' => 'Ugyldig sikkerhedstoken',
+        ],
     ],
     'partial' => [
-        'not_found_name' => "Partialen ':name' kunne ikke findes."
+        'not_found_name' => "Partialen ':name' kunne ikke findes.",
     ],
     'account' => [
         'sign_out' => 'Log ud',
@@ -52,7 +52,7 @@ return [
         'apply' => 'Accepter',
         'cancel' => 'Fortryd',
         'delete' => 'Slet',
-        'ok' => 'OK'
+        'ok' => 'OK',
     ],
     'dashboard' => [
         'menu_label' => 'Dashboard',
@@ -99,7 +99,7 @@ return [
             'last_sign_in' => 'Du var sidst logget ind',
             'view_access_logs' => 'Vis access logs',
             'nice_message' => 'Hav en god dag!',
-        ]
+        ],
     ],
     'user' => [
         'name' => 'Administrator',
@@ -142,11 +142,11 @@ return [
             'new' => 'Ny Gruppe',
             'delete_confirm' => 'Slet denne administratorgruppe??',
             'return' => 'Tilbage til gruppelisten',
-            'users_count' => 'Brugere'
+            'users_count' => 'Brugere',
         ],
         'preferences' => [
-            'not_authenticated' => 'Der er ingen bruger at loade eller save preferencer for.'
-        ]
+            'not_authenticated' => 'Der er ingen bruger at loade eller save preferencer for.',
+        ],
     ],
     'list' => [
         'default_title' => 'Liste',
@@ -175,7 +175,7 @@ return [
         'delete_selected_confirm' => 'Slet de valgte records?',
         'delete_selected_success' => 'Slet valgte records.',
         'column_switch_true' => 'Ja',
-        'column_switch_false' => 'Nej'
+        'column_switch_false' => 'Nej',
     ],
     'fileupload' => [
         'attachment' => 'Vedhæftning',
@@ -187,7 +187,7 @@ return [
         'upload_file' => 'Upload fil',
         'upload_error' => 'Upload fejl',
         'remove_confirm' => 'Er du sikker?',
-        'remove_file' => 'Fjern fil'
+        'remove_file' => 'Fjern fil',
     ],
     'form' => [
         'create_title' => 'Ny :name',
@@ -242,11 +242,11 @@ return [
         'insert_row_below' => 'Indsæt Række Nedeunder',
         'delete_row' => 'Slet Række',
         'concurrency_file_changed_title' => 'Fil er blevet ændret',
-        'concurrency_file_changed_description' => "Den fil du redigerer er blevet ændret på disken, af en anden bruger. Du kan enten reloade filen og miste ændringer eller overskrive filen på disken.",
-        'return_to_list' => 'Tilbage til listen'
+        'concurrency_file_changed_description' => 'Den fil du redigerer er blevet ændret på disken, af en anden bruger. Du kan enten reloade filen og miste ændringer eller overskrive filen på disken.',
+        'return_to_list' => 'Tilbage til listen',
     ],
     'recordfinder' => [
-        'find_record' => 'Find Record'
+        'find_record' => 'Find Record',
     ],
     'relation' => [
         'missing_config' => "Relation behavioren har ingen konfiguration for ':config'.",
@@ -279,11 +279,11 @@ return [
         'link_name' => 'Link :name',
         'unlink' => 'Fjern link',
         'unlink_name' => 'Fjern link til :name',
-        'unlink_confirm' => 'Er du sikker?'
+        'unlink_confirm' => 'Er du sikker?',
     ],
     'reorder' => [
         'default_title' => 'Sorter records',
-        'no_records' => 'Der er ikke nogle records at sortere.'
+        'no_records' => 'Der er ikke nogle records at sortere.',
     ],
     'model' => [
         'name' => 'Model',
@@ -291,14 +291,14 @@ return [
         'missing_id' => 'Der er ikke angivet noget ID til model recorden.',
         'missing_relation' => "Model ':class' har ingen definition af ':relation'.",
         'missing_method' => "Model ':class' har ikke metoden ':method'.",
-        'invalid_class' => "Model :model brugt i :class er ikke gyldig. Den skal nedarve fra \\Model Klassen.",
-        'mass_assignment_failed' => "Mass assignment fejlede for Model attributen ':attribute'."
+        'invalid_class' => 'Model :model brugt i :class er ikke gyldig. Den skal nedarve fra \\Model Klassen.',
+        'mass_assignment_failed' => "Mass assignment fejlede for Model attributen ':attribute'.",
     ],
     'warnings' => [
         'tips' => 'Systemkonfigurations-tips',
         'tips_description' => 'Der er problemer du skal være opmærksom på for at konfigurre systemet ordenligt.',
         'permissions'  => 'Mappe :name eller dens undermapper, er ikke skrivbare for PHP. Konfigurer venligst webserverens rettigheder for denne mappe.',
-        'extension' => 'PHP extensionen :name er ikke installeret. Installer og aktiver venligst denne extension.'
+        'extension' => 'PHP extensionen :name er ikke installeret. Installer og aktiver venligst denne extension.',
     ],
     'editor' => [
         'menu_label' => 'Indstillinger for redigeringsværktøj',
@@ -344,19 +344,19 @@ return [
         'no_wrap' => 'Omgiv ikke tags',
         'no_wrap_comment' => 'Liste af tags der ikke skal omgives af block tags.',
         'remove_tags' => 'Fjern tags',
-        'remove_tags_comment' => 'Liste af tags der bliver fjernet, inklusiv deres indhold.'
+        'remove_tags_comment' => 'Liste af tags der bliver fjernet, inklusiv deres indhold.',
     ],
     'tooltips' => [
-        'preview_website' => 'Forhåndsvis hjemmesiden'
+        'preview_website' => 'Forhåndsvis hjemmesiden',
     ],
     'mysettings' => [
         'menu_label' => 'Mine indstillinger',
-        'menu_description' => 'Indstilling til din administrationsbruger'
+        'menu_description' => 'Indstilling til din administrationsbruger',
     ],
     'myaccount' => [
         'menu_label' => 'Min konto',
         'menu_description' => 'Opdater dine kontodetaljer som eksempelvis navn, email-adresse og adgangskode.',
-        'menu_keywords' => 'Sikkerhedslogin'
+        'menu_keywords' => 'Sikkerhedslogin',
     ],
     'branding' => [
         'menu_label' => 'Tilpas back-end',
@@ -378,7 +378,7 @@ return [
         'menu_mode' => 'Menu style',
         'menu_mode_inline' => 'På linie',
         'menu_mode_tile' => 'Stablet',
-        'menu_mode_collapsed' => 'Kollapset'
+        'menu_mode_collapsed' => 'Kollapset',
     ],
     'backend_preferences' => [
         'menu_label' => 'Backend indstillinger',
@@ -388,7 +388,7 @@ return [
         'timezone' => 'Tidszone',
         'timezone_comment' => 'Juster viste datoer til denne tidszone.',
         'locale' => 'Locale',
-        'locale_comment' => 'Vælg din ønskede locale.'
+        'locale_comment' => 'Vælg din ønskede locale.',
     ],
     'access_log' => [
         'hint' => 'Denne log viser en liste af successfulde administratorlogins. Records bliver gemt i :days dage.',
@@ -399,12 +399,12 @@ return [
         'ip_address' => 'IP addresse',
         'first_name' => 'Fornavn',
         'last_name' => 'Efternavn',
-        'email' => 'Email'
+        'email' => 'Email',
     ],
     'filter' => [
         'all' => 'alle',
         'options_method_not_exists' => "Model klassen :model skal implementere metoden :method() som returnerer muligheder til ':filter' filteret.",
-        'date_all' => 'altid'
+        'date_all' => 'altid',
     ],
     'import_export' => [
         'upload_csv_file' => '1. Upload en CSV fil',
@@ -475,15 +475,15 @@ return [
             'iso_8859_14' => 'ISO-8859-14 (Latin-8, Keltisk)',
             'iso_8859_15' => 'ISO-8859-15 (Latin-9, Vesteuropæisk med eurotegn)',
             'windows_1251' => 'Windows-1251 (CP1251)',
-            'windows_1252' => 'Windows-1252 (CP1252)'
-        ]
+            'windows_1252' => 'Windows-1252 (CP1252)',
+        ],
     ],
     'permissions' => [
-        'manage_media' => 'Upload og administrer media indhold - billeder, video, lyd, dokumenter'
+        'manage_media' => 'Upload og administrer media indhold - billeder, video, lyd, dokumenter',
     ],
     'mediafinder' => [
         'label' => 'Media Finder',
-        'default_prompt' => 'Tryk på %s knappen for at finde et mediaobjekt'
+        'default_prompt' => 'Tryk på %s knappen for at finde et mediaobjekt',
     ],
     'media' => [
         'menu_label' => 'Media',
@@ -543,6 +543,6 @@ return [
         'selection_mode' => 'Udvælgelsesmetode',
         'resize_image' => 'Skaler billede',
         'image_size' => 'Billedstørrelse:',
-        'selected_size' => 'Valgt:'
-    ]
+        'selected_size' => 'Valgt:',
+    ],
 ];

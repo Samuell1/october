@@ -1,21 +1,21 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use Illuminate\Console\Command;
+use System\Classes\PluginManager;
 use System\Classes\UpdateManager;
 use Symfony\Component\Console\Input\InputArgument;
-use System\Classes\PluginManager;
 
 /**
  * Console command to install a new plugin.
  *
  * This adds a new plugin by requesting it from the October marketplace.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class PluginInstall extends Command
 {
-
     /**
      * The console command name.
      * @var string

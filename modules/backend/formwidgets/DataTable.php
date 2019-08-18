@@ -1,16 +1,17 @@
-<?php namespace Backend\FormWidgets;
+<?php
+
+namespace Backend\FormWidgets;
 
 use Lang;
+use ApplicationException;
 use Backend\Widgets\Table;
 use Backend\Classes\FormWidgetBase;
 use October\Rain\Html\Helper as HtmlHelper;
-use ApplicationException;
 
 /**
  * Data Table
  * Renders a table field.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class DataTable extends FormWidgetBase
@@ -35,7 +36,7 @@ class DataTable extends FormWidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'datatable';
 
@@ -45,7 +46,7 @@ class DataTable extends FormWidgetBase
     protected $table;
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -67,16 +68,17 @@ class DataTable extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
         $this->prepareVars();
+
         return $this->makePartial('datatable');
     }
 
     /**
-     * Prepares the list data
+     * Prepares the list data.
      */
     public function prepareVars()
     {
@@ -87,7 +89,7 @@ class DataTable extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getLoadValue()
     {
@@ -103,7 +105,7 @@ class DataTable extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getSaveValue($value)
     {
@@ -150,10 +152,10 @@ class DataTable extends FormWidgetBase
 
         $config->dataSource = 'client';
         if (isset($this->getParentForm()->arrayName)) {
-            $config->alias = studly_case(HtmlHelper::nameToId($this->getParentForm()->arrayName . '[' . $this->fieldName . ']')) . 'datatable';
-            $config->fieldName = $this->getParentForm()->arrayName . '[' . $this->fieldName . ']';
+            $config->alias = studly_case(HtmlHelper::nameToId($this->getParentForm()->arrayName.'['.$this->fieldName.']')).'datatable';
+            $config->fieldName = $this->getParentForm()->arrayName.'['.$this->fieldName.']';
         } else {
-            $config->alias = studly_case(HtmlHelper::nameToId($this->fieldName)) . 'datatable';
+            $config->alias = studly_case(HtmlHelper::nameToId($this->fieldName)).'datatable';
             $config->fieldName = $this->fieldName;
         }
 
@@ -175,22 +177,20 @@ class DataTable extends FormWidgetBase
     {
         $methodName = 'get'.studly_case($this->fieldName).'DataTableOptions';
 
-        if (!$this->model->methodExists($methodName) && !$this->model->methodExists('getDataTableOptions')) {
+        if (! $this->model->methodExists($methodName) && ! $this->model->methodExists('getDataTableOptions')) {
             throw new ApplicationException(Lang::get('backend::lang.model.missing_method', ['class' => get_class($this->model), 'method' => 'getDataTableOptions']));
         }
 
         if ($this->model->methodExists($methodName)) {
             $result = $this->model->$methodName($field, $data);
-        }
-        else {
+        } else {
             $result = $this->model->getDataTableOptions($this->fieldName, $field, $data);
         }
 
-        if (!is_array($result)) {
+        if (! is_array($result)) {
             $result = [];
         }
 
         return $result;
     }
-
 }

@@ -1,12 +1,13 @@
-<?php namespace Cms\Twig;
+<?php
+
+namespace Cms\Twig;
 
 use Twig\Node\Node as TwigNode;
 use Twig\Compiler as TwigCompiler;
 
 /**
- * Represents a "scripts" node
+ * Represents a "scripts" node.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class ScriptsNode extends TwigNode
@@ -26,7 +27,6 @@ class ScriptsNode extends TwigNode
         $compiler
             ->addDebugInfo($this)
             ->write("echo \$this->env->getExtension('Cms\Twig\Extension')->assetsFunction('js');\n")
-            ->write("echo \$this->env->getExtension('Cms\Twig\Extension')->displayBlock('scripts');\n")
-        ;
+            ->write("echo \$this->env->getExtension('Cms\Twig\Extension')->displayBlock('scripts');\n");
     }
 }

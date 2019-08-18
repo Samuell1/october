@@ -34,34 +34,34 @@ return [
         'preview' => 'پیش نمایش',
     ],
     'mediamanager' => [
-        'insert_link' => "درج آدرس رسانه",
-        'insert_image' => "درج تصویر",
-        'insert_video' => "درج ویدیو",
-        'insert_audio' => "درج صوت",
-        'invalid_file_empty_insert' => "لطفا فایلی را جهت درج لینک آن وارد نمایید",
-        'invalid_file_single_insert' => "لطفا یک فایل را وارد نمایید",
-        'invalid_image_empty_insert' => "لطفا تصویر(ها) را جهت درج انتخاب نمایید",
-        'invalid_video_empty_insert' => "لطفا ویدیو را جهت درج انتخاب نمایید.",
-        'invalid_audio_empty_insert' => "لطفا فایل صوتی را جهت درج انتخاب نمایید",
+        'insert_link' => 'درج آدرس رسانه',
+        'insert_image' => 'درج تصویر',
+        'insert_video' => 'درج ویدیو',
+        'insert_audio' => 'درج صوت',
+        'invalid_file_empty_insert' => 'لطفا فایلی را جهت درج لینک آن وارد نمایید',
+        'invalid_file_single_insert' => 'لطفا یک فایل را وارد نمایید',
+        'invalid_image_empty_insert' => 'لطفا تصویر(ها) را جهت درج انتخاب نمایید',
+        'invalid_video_empty_insert' => 'لطفا ویدیو را جهت درج انتخاب نمایید.',
+        'invalid_audio_empty_insert' => 'لطفا فایل صوتی را جهت درج انتخاب نمایید',
     ],
     'alert' => [
         'confirm_button_text' => 'تایید',
         'cancel_button_text' => 'انصراف',
-        'widget_remove_confirm' => 'این ابزارک حذف شود؟'
+        'widget_remove_confirm' => 'این ابزارک حذف شود؟',
     ],
 'datepicker' => [
         'previousMonth' => 'ماه قبل',
         'nextMonth' => 'ماه بعد',
         'months' => ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
         'weekdays' => ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنج شنبه', 'جمعه', 'شنبه'],
-        'weekdaysShort' => ['ی', 'د', 'س', 'چ', 'پ', 'ج', 'ش']
+        'weekdaysShort' => ['ی', 'د', 'س', 'چ', 'پ', 'ج', 'ش'],
     ],
     'colorpicker' => [
         'choose' => 'تایید',
     ],
     'filter' => [
         'group' => [
-            'all' => 'همه'
+            'all' => 'همه',
         ],
         'dates' => [
             'all' => 'همه',
@@ -69,15 +69,15 @@ return [
             'reset_button_text'  => 'بازنشانی',
             'date_placeholder' => 'تاریخ',
             'after_placeholder' => 'بعد از',
-            'before_placeholder' => 'قبل از'
+            'before_placeholder' => 'قبل از',
         ],
         'numbers' => [
             'all' => 'همه',
             'filter_button_text' => 'فیلتر',
             'reset_button_text'  => 'بازنشانی',
             'min_placeholder' => 'کم',
-            'max_placeholder' => 'زیاد'
-        ]
+            'max_placeholder' => 'زیاد',
+        ],
 
     ],
     'eventlog' => [
@@ -93,7 +93,7 @@ return [
             'openWith' => 'باز کردن توسط',
             'remember_choice' => 'گزینه انتخاب شده را به خاطر داشته باش',
             'open' => 'باز کردن',
-            'cancel' => 'انصراف'
-        ]
-    ]
+            'cancel' => 'انصراف',
+        ],
+    ],
 ];

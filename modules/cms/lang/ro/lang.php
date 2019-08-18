@@ -10,17 +10,17 @@ return [
         'invalid_file_extension'=>'Extensie de fisier invalida: :invalid. Extensiile permise sunt: :allowed.',
         'error_deleting' => 'Eroare la stergerea fisierului sablon ":name". Verificati permisiunile de scriere.',
         'delete_success' => 'Sabloanele au fost sterse cu succes, in total: :count.',
-        'file_name_required' => 'Campul nume fisier este necesar.'
+        'file_name_required' => 'Campul nume fisier este necesar.',
     ],
     'theme' => [
         'active' => [
-            'not_set' => "Tema activa nu este setata.",
-            'not_found' => "Tema activa nu a fost gasita.",
+            'not_set' => 'Tema activa nu este setata.',
+            'not_found' => 'Tema activa nu a fost gasita.',
         ],
         'edit' => [
-            'not_set' => "Tema de editare nu este setata.",
-            'not_found' => "Tema de editare nu a fost gasita.",
-            'not_match' => "Obiectul pe care incercati sa-l accesati nu apartine temei care este in curs de editare. Va rugam reincarcati pagina."
+            'not_set' => 'Tema de editare nu este setata.',
+            'not_found' => 'Tema de editare nu a fost gasita.',
+            'not_match' => 'Obiectul pe care incercati sa-l accesati nu apartine temei care este in curs de editare. Va rugam reincarcati pagina.',
         ],
         'settings_menu' => 'Tema Front-end',
         'settings_menu_description' => 'Previzualizati lista de teme instalate si selectati o tema activa.',
@@ -30,12 +30,12 @@ return [
     ],
     'page' => [
         'not_found' => [
-            'label' => "Pagina negasita",
-            'help' => "Pagina cautata nu a putut fi gasita.",
+            'label' => 'Pagina negasita',
+            'help' => 'Pagina cautata nu a putut fi gasita.',
         ],
         'custom_error' => [
-            'label' => "Eroare pagina",
-            'help' => "Ne cerem scuze, dar a aparut o problema si pagina nu poate fi afisata.",
+            'label' => 'Eroare pagina',
+            'help' => 'Ne cerem scuze, dar a aparut o problema si pagina nu poate fi afisata.',
         ],
         'menu_label' => 'Pagini',
         'no_list_records' => 'Nu au fost gasite pagini',
@@ -43,7 +43,7 @@ return [
         'invalid_url' => 'Format URL invalid. URL-ul ar trebui sa inceapa cu un slash ( / ) si poate sa contina cifre, caractere latine si urmatoarele simboluri: ._-[]:?|/+*^$',
         'delete_confirm_multiple' => 'Vreti sa stergeti paginile selectate?',
         'delete_confirm_single' => 'Vreti sa stergeti aceasta pagina?',
-        'no_layout' => '-- fara macheta --'
+        'no_layout' => '-- fara macheta --',
     ],
     'layout' => [
         'not_found_name' => "Macheta ':name' nu a fost gasita",
@@ -51,16 +51,16 @@ return [
         'no_list_records' => 'Nu au fost gasite machete',
         'new' => 'Macheta noua',
         'delete_confirm_multiple' => 'Vreti sa stergeti machetele selectate?',
-        'delete_confirm_single' => 'Vreti sa stergeti macheta selectata?'
+        'delete_confirm_single' => 'Vreti sa stergeti macheta selectata?',
     ],
     'partial' => [
         'not_found_name' => "Componenta partiala ':name' nu a fost gasita.",
-        'invalid_name' => "Nume invalid pentru componenta partiala: :name.",
+        'invalid_name' => 'Nume invalid pentru componenta partiala: :name.',
         'menu_label' => 'Componente partiale',
         'no_list_records' => 'Nu au fost gasite componente partiale',
         'delete_confirm_multiple' => 'Vreti sa stergeti componentele partiale selectate?',
         'delete_confirm_single' => 'Vreti sa stergeti aceasta componenta partiala?',
-        'new' => 'Componenta partiala noua'
+        'new' => 'Componenta partiala noua',
     ],
     'content' => [
         'not_found_name' => "Fisierul de continut ':name' nu a fost gasit.",
@@ -68,18 +68,18 @@ return [
         'no_list_records' => 'Nu au fost gasite fisiere de continut',
         'delete_confirm_multiple' => 'Vreti sa stergeti fisierele si directoarele cu continut?',
         'delete_confirm_single' => 'Vreti sa stergeti acest fisier cu continut?',
-        'new' => 'Fisier nou cu continut'
+        'new' => 'Fisier nou cu continut',
     ],
     'ajax_handler' => [
-        'invalid_name' => "Nume Functie AJAX invalid: :name.",
+        'invalid_name' => 'Nume Functie AJAX invalid: :name.',
         'not_found' => "Functia AJAX ':name' nu a fost gasita.",
     ],
     'cms' => [
-        'menu_label' => "CMS"
+        'menu_label' => 'CMS',
     ],
     'sidebar' => [
         'add' => 'Adaugare',
-        'search' => 'Cautare...'
+        'search' => 'Cautare...',
     ],
     'editor' => [
         'settings' => 'Setari',
@@ -99,10 +99,10 @@ return [
         'hidden' => 'Ascuns',
         'hidden_comment' => 'Fisierele ascunse sunt vizibile doar administratorilor logati in sistem',
         'enter_fullscreen' => 'Intrare in mod ecran complet',
-        'exit_fullscreen' => 'Iesire din mod ecran complet'
+        'exit_fullscreen' => 'Iesire din mod ecran complet',
     ],
     'asset' => [
-        'menu_label' => "Fisiere design",
+        'menu_label' => 'Fisiere design',
         'drop_down_add_title' => 'Adaure...',
         'drop_down_operation_title' => 'Actiune...',
         'upload_files' => 'Incarcare fisier(e)',
@@ -137,24 +137,24 @@ return [
         'error_moving_file' => 'Eroare la mutarea fisierului :file',
         'error_moving_directory' => 'Eroare la mutarea directorului :dir',
         'error_deleting_directory' => 'Eroare la stergerea directorului original :dir',
-        'path' => 'Cale'
+        'path' => 'Cale',
     ],
     'component' => [
-        'menu_label' => "Componente",
-        'unnamed' => "Fara nume",
-        'no_description' => "Nicio descriere furnizata",
-        'alias' => "Alias",
-        'alias_description' => "Numele unic dat acestei componente atunci cand este folosita intr-o pagina sau intr-o macheta.",
-        'validation_message' => "Aliasul componentei este necesar si poate sa contina doar caractere latine, cifre si caractere underscore. Denumirile are trebui sa inceapa cu un caracter latin.",
-        'invalid_request' => "Sablonul nu a putut fi salvat din cauza datelor invalide ale componentei.",
+        'menu_label' => 'Componente',
+        'unnamed' => 'Fara nume',
+        'no_description' => 'Nicio descriere furnizata',
+        'alias' => 'Alias',
+        'alias_description' => 'Numele unic dat acestei componente atunci cand este folosita intr-o pagina sau intr-o macheta.',
+        'validation_message' => 'Aliasul componentei este necesar si poate sa contina doar caractere latine, cifre si caractere underscore. Denumirile are trebui sa inceapa cu un caracter latin.',
+        'invalid_request' => 'Sablonul nu a putut fi salvat din cauza datelor invalide ale componentei.',
         'no_records' => 'Nicio componenta nu a fost gasita',
         'not_found' => "Componenta ':name' nu a fost gasita.",
         'method_not_found' => "Componenta ':name' nu contine nicio metoda ':method'.",
     ],
     'template' => [
-        'invalid_type' => "Tip de sablon necunoscut.",
-        'not_found' => "Sablonul solicitat nu a fost gasit.",
-        'saved'=> "Sablonul a fost salvat cu succes."
+        'invalid_type' => 'Tip de sablon necunoscut.',
+        'not_found' => 'Sablonul solicitat nu a fost gasit.',
+        'saved'=> 'Sablonul a fost salvat cu succes.',
     ],
     'permissions' => [
         'manage_content' => 'Gestioneaza continut',
@@ -162,6 +162,6 @@ return [
         'manage_pages' => 'Gestioneaza pagini',
         'manage_layouts' => 'Gestioneaza machete',
         'manage_partials' => 'Gestioneaza componente partiale',
-        'manage_themes' => 'Gestioneaza teme'
-    ]
+        'manage_themes' => 'Gestioneaza teme',
+    ],
 ];

@@ -35,35 +35,35 @@ return [
     ],
 
     'mediamanager' => [
-        'insert_link' => "Vložit odkaz",
-        'insert_image' => "Vložit obrázek",
-        'insert_video' => "Vložit video",
-        'insert_audio' => "Vložit zvuk",
-        'invalid_file_empty_insert' => "Prosím vyberte soubor, na který se vloží odkaz.",
-        'invalid_file_single_insert' => "Vyberte jeden soubor.",
-        'invalid_image_empty_insert' => "Vyberte soubor(y) pro vložení.",
-        'invalid_video_empty_insert' => "Vyberte video soubor pro vložení.",
-        'invalid_audio_empty_insert' => "Vyberte audio soubor pro vložení.",
+        'insert_link' => 'Vložit odkaz',
+        'insert_image' => 'Vložit obrázek',
+        'insert_video' => 'Vložit video',
+        'insert_audio' => 'Vložit zvuk',
+        'invalid_file_empty_insert' => 'Prosím vyberte soubor, na který se vloží odkaz.',
+        'invalid_file_single_insert' => 'Vyberte jeden soubor.',
+        'invalid_image_empty_insert' => 'Vyberte soubor(y) pro vložení.',
+        'invalid_video_empty_insert' => 'Vyberte video soubor pro vložení.',
+        'invalid_audio_empty_insert' => 'Vyberte audio soubor pro vložení.',
     ],
 
     'alert' => [
         'confirm_button_text' => 'OK',
         'cancel_button_text' => 'Zrušit',
-        'widget_remove_confirm' => 'Odstranit widget?'
+        'widget_remove_confirm' => 'Odstranit widget?',
     ],
     'datepicker' => [
         'previousMonth' => 'Předchozí měsíc',
         'nextMonth' => 'Následující měsíc',
         'months' => ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'],
         'weekdays' => ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'],
-        'weekdaysShort' => ['Ne', 'Po', 'Út', 'St', 'Čt', 'Pá', 'So']
+        'weekdaysShort' => ['Ne', 'Po', 'Út', 'St', 'Čt', 'Pá', 'So'],
     ],
     'colorpicker' => [
         'choose' => 'Ok',
     ],
     'filter' => [
         'group' => [
-            'all' => 'Vše'
+            'all' => 'Vše',
         ],
         'dates' => [
             'all' => 'Vše',
@@ -71,8 +71,8 @@ return [
             'reset_button_text'  => 'Zrušit',
             'date_placeholder' => 'Datum',
             'after_placeholder' => 'Po',
-            'before_placeholder' => 'Před'
-        ]
+            'before_placeholder' => 'Před',
+        ],
     ],
     'eventlog' => [
         'show_stacktrace' => 'Zobrazit stacktrace',
@@ -87,7 +87,7 @@ return [
             'openWith' => 'Otevřít v',
             'remember_choice' => 'Zapamatovat si vybranou volbu pro tuto relaci',
             'open' => 'Otevřít',
-            'cancel' => 'Zrušit'
-        ]
-    ]
+            'cancel' => 'Zrušit',
+        ],
+    ],
 ];

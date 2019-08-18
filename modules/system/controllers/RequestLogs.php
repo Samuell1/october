@@ -1,16 +1,17 @@
-<?php namespace System\Controllers;
+<?php
+
+namespace System\Controllers;
 
 use Lang;
 use Flash;
 use BackendMenu;
+use System\Models\RequestLog;
 use Backend\Classes\Controller;
 use System\Classes\SettingsManager;
-use System\Models\RequestLog;
 
 /**
- * Request Logs controller
+ * Request Logs controller.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class RequestLogs extends Controller
@@ -20,8 +21,9 @@ class RequestLogs extends Controller
      */
     public $implement = [
         \Backend\Behaviors\FormController::class,
-        \Backend\Behaviors\ListController::class
+        \Backend\Behaviors\ListController::class,
     ];
+
     /**
      * @var array `FormController` configuration.
      */
@@ -57,21 +59,22 @@ class RequestLogs extends Controller
     {
         RequestLog::truncate();
         Flash::success(Lang::get('system::lang.request_log.empty_success'));
+
         return $this->listRefresh();
     }
 
     public function index_onDelete()
     {
         if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
-
             foreach ($checkedIds as $recordId) {
-                if (!$record = RequestLog::find($recordId)) continue;
+                if (! $record = RequestLog::find($recordId)) {
+                    continue;
+                }
                 $record->delete();
             }
 
             Flash::success(Lang::get('backend::lang.list.delete_selected_success'));
-        }
-        else {
+        } else {
             Flash::error(Lang::get('backend::lang.list.delete_selected_empty'));
         }
 

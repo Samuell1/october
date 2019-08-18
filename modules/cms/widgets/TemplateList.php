@@ -1,4 +1,6 @@
-<?php namespace Cms\Widgets;
+<?php
+
+namespace Cms\Widgets;
 
 use Str;
 use File;
@@ -11,7 +13,6 @@ use Backend\Classes\WidgetBase;
  * Template list widget.
  * This widget displays templates of different types.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class TemplateList extends WidgetBase
@@ -70,7 +71,7 @@ class TemplateList extends WidgetBase
     public $ignoreDirectories = [];
 
     /**
-     * @var boolean Defines sorting properties.
+     * @var bool Defines sorting properties.
      * The sorting feature is disabled if there are no sorting properties defined.
      */
     public $sortingProperties = [];
@@ -89,11 +90,11 @@ class TemplateList extends WidgetBase
 
         parent::__construct($controller, []);
 
-        if (!Request::isXmlHttpRequest()) {
+        if (! Request::isXmlHttpRequest()) {
             $this->resetSelection();
         }
 
-        $configFile = 'config_' . snake_case($alias) .'.yaml';
+        $configFile = 'config_'.snake_case($alias).'.yaml';
         $config = $this->makeConfig($configFile);
 
         foreach ($config as $field => $value) {
@@ -116,7 +117,7 @@ class TemplateList extends WidgetBase
         $this->vars['toolbarClass'] = $toolbarClass;
 
         return $this->makePartial('body', [
-            'data' => $this->getData()
+            'data' => $this->getData(),
         ]);
     }
 
@@ -196,8 +197,7 @@ class TemplateList extends WidgetBase
                     $filteredItems[] = $item;
                 }
             }
-        }
-        else {
+        } else {
             $filteredItems = $items;
         }
 
@@ -211,18 +211,17 @@ class TemplateList extends WidgetBase
 
             if ($pos !== false) {
                 $group = substr($itemData->fileName, 0, $pos);
-                if (!array_key_exists($group, $foundGroups)) {
-                    $newGroup = (object)[
+                if (! array_key_exists($group, $foundGroups)) {
+                    $newGroup = (object) [
                         'title' => $group,
-                        'items' => []
+                        'items' => [],
                     ];
 
                     $foundGroups[$group] = $newGroup;
                 }
 
                 $foundGroups[$group]->items[] = $itemData;
-            }
-            else {
+            } else {
                 $result[] = $itemData;
             }
         }
@@ -249,7 +248,7 @@ class TemplateList extends WidgetBase
 
     protected function removeIgnoredDirectories($items)
     {
-        if (!$this->ignoreDirectories) {
+        if (! $this->ignoreDirectories) {
             return $items;
         }
 
@@ -266,6 +265,7 @@ class TemplateList extends WidgetBase
             foreach ($this->ignoreDirectories as $ignoreDir) {
                 if (File::fileNameMatch($dirName, $ignoreDir)) {
                     $ignoreCache[$dirName] = true;
+
                     return false;
                 }
             }
@@ -295,7 +295,7 @@ class TemplateList extends WidgetBase
             'fileName'     => $item->getFileName(),
             'description'  => $description,
             'descriptions' => $descriptions,
-            'dragValue'    => $this->getItemDragValue($item)
+            'dragValue'    => $this->getItemDragValue($item),
         ];
 
         foreach ($this->sortingProperties as $property => $name) {
@@ -347,7 +347,7 @@ class TemplateList extends WidgetBase
     protected function updateList()
     {
         return [
-            '#'.$this->getId('template-list') => $this->makePartial('items', ['items' => $this->getData()])
+            '#'.$this->getId('template-list') => $this->makePartial('items', ['items' => $this->getData()]),
         ];
     }
 
@@ -355,11 +355,11 @@ class TemplateList extends WidgetBase
     {
         foreach ($words as $word) {
             $word = trim($word);
-            if (!strlen($word)) {
+            if (! strlen($word)) {
                 continue;
             }
 
-            if (!$this->itemContainsWord($word, $item)) {
+            if (! $this->itemContainsWord($word, $item)) {
                 return false;
             }
         }
@@ -401,7 +401,7 @@ class TemplateList extends WidgetBase
     {
         $property = $this->getSession($this->getThemeSessionKey('sorting_property'), self::SORTING_FILENAME);
 
-        if (!array_key_exists($property, $this->sortingProperties)) {
+        if (! array_key_exists($property, $this->sortingProperties)) {
             return self::SORTING_FILENAME;
         }
 

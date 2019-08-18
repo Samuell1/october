@@ -1,4 +1,6 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use File;
 use ApplicationException;
@@ -6,9 +8,8 @@ use System\Models\Parameter;
 use Cms\Classes\Theme as CmsTheme;
 
 /**
- * Theme manager
+ * Theme manager.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class ThemeManager
@@ -20,7 +21,7 @@ class ThemeManager
     //
 
     /**
-     * Returns a collection of themes installed via the update gateway
+     * Returns a collection of themes installed via the update gateway.
      * @return array
      */
     public function getInstalled()
@@ -31,7 +32,7 @@ class ThemeManager
     /**
      * Checks if a theme has ever been installed before.
      * @param  string  $name Theme code
-     * @return boolean
+     * @return bool
      */
     public function isInstalled($name)
     {
@@ -45,7 +46,7 @@ class ThemeManager
      */
     public function setInstalled($code, $dirName = null)
     {
-        if (!$dirName) {
+        if (! $dirName) {
             $dirName = strtolower(str_replace('.', '-', $code));
         }
 
@@ -80,8 +81,6 @@ class ThemeManager
                 return $code;
             }
         }
-
-        return null;
     }
 
     //
@@ -95,7 +94,7 @@ class ThemeManager
      */
     public function deleteTheme($theme)
     {
-        if (!$theme) {
+        if (! $theme) {
             return false;
         }
 

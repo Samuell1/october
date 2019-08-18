@@ -1,16 +1,17 @@
-<?php namespace Backend\Traits;
+<?php
+
+namespace Backend\Traits;
 
 use Lang;
-use Backend\Classes\FormField;
 use SystemException;
+use Backend\Classes\FormField;
 
 /**
- * Widget Maker Trait
+ * Widget Maker Trait.
  *
  * Adds widget based methods to a controller class, or a class that
  * contains a `$controller` property referencing a controller.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 trait WidgetMaker
@@ -27,9 +28,9 @@ trait WidgetMaker
             ? $this->controller
             : $this;
 
-        if (!class_exists($class)) {
+        if (! class_exists($class)) {
             throw new SystemException(Lang::get('backend::lang.widget.not_registered', [
-                'name' => $class
+                'name' => $class,
             ]));
         }
 
@@ -49,9 +50,9 @@ trait WidgetMaker
             ? $this->controller
             : $this;
 
-        if (!class_exists($class)) {
+        if (! class_exists($class)) {
             throw new SystemException(Lang::get('backend::lang.widget.not_registered', [
-                'name' => $class
+                'name' => $class,
             ]));
         }
 
@@ -65,8 +66,7 @@ trait WidgetMaker
                 array_get($fieldConfig, 'label')
             );
             $formField->displayAs('widget', $fieldConfig);
-        }
-        else {
+        } else {
             $formField = $fieldConfig;
         }
 

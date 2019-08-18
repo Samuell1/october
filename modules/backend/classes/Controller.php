@@ -1,33 +1,34 @@
-<?php namespace Backend\Classes;
+<?php
+
+namespace Backend\Classes;
 
 use Lang;
 use View;
 use Flash;
 use Config;
+use Backend;
 use Closure;
 use Request;
-use Backend;
 use Session;
 use Redirect;
 use Response;
 use Exception;
 use BackendAuth;
-use Backend\Models\UserPreference;
-use Backend\Models\Preference as BackendPreference;
 use Backend\Widgets\MediaManager;
+use Backend\Models\UserPreference;
+use Illuminate\Http\RedirectResponse;
 use October\Rain\Exception\AjaxException;
 use October\Rain\Exception\SystemException;
 use October\Rain\Exception\ValidationException;
 use October\Rain\Exception\ApplicationException;
-use Illuminate\Database\Eloquent\MassAssignmentException;
-use Illuminate\Http\RedirectResponse;
+use Backend\Models\Preference as BackendPreference;
 use Illuminate\Routing\Controller as ControllerBase;
+use Illuminate\Database\Eloquent\MassAssignmentException;
 
 /**
  * The Backend base controller class, used by Backend controllers.
  * The base controller services back end pages.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class Controller extends ControllerBase
@@ -105,7 +106,7 @@ class Controller extends ControllerBase
         'getId',
         'setStatusCode',
         'handleError',
-        'makeHintPartial'
+        'makeHintPartial',
     ];
 
     /**
@@ -150,8 +151,8 @@ class Controller extends ControllerBase
          * Add layout paths from the plugin / module context
          */
         $relativePath = dirname(dirname(strtolower(str_replace('\\', '/', get_called_class()))));
-        $this->layoutPath[] = '~/modules/' . $relativePath . '/layouts';
-        $this->layoutPath[] = '~/plugins/' . $relativePath . '/layouts';
+        $this->layoutPath[] = '~/modules/'.$relativePath.'/layouts';
+        $this->layoutPath[] = '~/plugins/'.$relativePath.'/layouts';
 
         /*
          * Create a new instance of the admin user
@@ -211,14 +212,14 @@ class Controller extends ControllerBase
         /*
          * Check security token.
          */
-        if (!$this->verifyCsrfToken()) {
+        if (! $this->verifyCsrfToken()) {
             return Response::make(Lang::get('backend::lang.page.invalid_token.label'), 403);
         }
 
         /*
          * Check forced HTTPS protocol.
          */
-        if (!$this->verifyForceSecure()) {
+        if (! $this->verifyForceSecure()) {
             return Redirect::secure(Request::path());
         }
 
@@ -230,12 +231,12 @@ class Controller extends ControllerBase
         /*
          * Check that user is logged in and has permission to view this page
          */
-        if (!$isPublicAction) {
+        if (! $isPublicAction) {
 
             /*
              * Not logged in, redirect to login screen or show ajax error.
              */
-            if (!BackendAuth::check()) {
+            if (! BackendAuth::check()) {
                 return Request::ajax()
                     ? Response::make(Lang::get('backend::lang.page.access_denied.label'), 403)
                     : Backend::redirectGuest('backend/auth');
@@ -244,7 +245,7 @@ class Controller extends ControllerBase
             /*
              * Check access groups against the page definition
              */
-            if ($this->requiredPermissions && !$this->user->hasAnyAccess($this->requiredPermissions)) {
+            if ($this->requiredPermissions && ! $this->user->hasAnyAccess($this->requiredPermissions)) {
                 return Response::make(View::make('backend::access_denied'), 403);
             }
         }
@@ -289,7 +290,7 @@ class Controller extends ControllerBase
             $result = $this->responseOverride;
         }
 
-        if (!is_string($result)) {
+        if (! is_string($result)) {
             return $result;
         }
 
@@ -302,11 +303,11 @@ class Controller extends ControllerBase
      * Action must be a class public method. Action name can not be prefixed with the underscore character.
      * @param string $name Specifies the action name.
      * @param bool $internal Allow protected actions.
-     * @return boolean
+     * @return bool
      */
     public function actionExists($name, $internal = false)
     {
-        if (!strlen($name) || substr($name, 0, 1) == '_' || !$this->methodExists($name)) {
+        if (! strlen($name) || substr($name, 0, 1) == '_' || ! $this->methodExists($name)) {
             return false;
         }
 
@@ -326,11 +327,11 @@ class Controller extends ControllerBase
             }
         }
 
-        if ($internal && (($ownMethod && $methodInfo->isProtected()) || !$ownMethod)) {
+        if ($internal && (($ownMethod && $methodInfo->isProtected()) || ! $ownMethod)) {
             return true;
         }
 
-        if (!$ownMethod) {
+        if (! $ownMethod) {
             return true;
         }
 
@@ -364,7 +365,7 @@ class Controller extends ControllerBase
      */
     public function pageAction()
     {
-        if (!$this->action) {
+        if (! $this->action) {
             return;
         }
 
@@ -382,10 +383,10 @@ class Controller extends ControllerBase
     {
         $result = null;
 
-        if (!$this->actionExists($actionName)) {
+        if (! $this->actionExists($actionName)) {
             if (Config::get('app.debug', false)) {
                 throw new SystemException(sprintf(
-                    "Action %s is not found in the controller %s",
+                    'Action %s is not found in the controller %s',
                     $actionName,
                     get_class($this)
                 ));
@@ -403,12 +404,12 @@ class Controller extends ControllerBase
         }
 
         // No page title
-        if (!$this->pageTitle) {
+        if (! $this->pageTitle) {
             $this->pageTitle = 'backend::lang.page.untitled';
         }
 
         // Load the view
-        if (!$this->suppressView && $result === null) {
+        if (! $this->suppressView && $result === null) {
             return $this->makeView($actionName);
         }
 
@@ -421,15 +422,13 @@ class Controller extends ControllerBase
      */
     public function getAjaxHandler()
     {
-        if (!Request::ajax() || Request::method() != 'POST') {
-            return null;
+        if (! Request::ajax() || Request::method() != 'POST') {
+            return;
         }
 
         if ($handler = Request::header('X_OCTOBER_REQUEST_HANDLER')) {
             return trim($handler);
         }
-
-        return null;
     }
 
     /**
@@ -443,7 +442,7 @@ class Controller extends ControllerBase
                 /*
                  * Validate the handler name
                  */
-                if (!preg_match('/^(?:\w+\:{2})?on[A-Z]{1}[\w+]*$/', $handler)) {
+                if (! preg_match('/^(?:\w+\:{2})?on[A-Z]{1}[\w+]*$/', $handler)) {
                     throw new SystemException(Lang::get('backend::lang.ajax_handler.invalid_name', ['name'=>$handler]));
                 }
 
@@ -454,12 +453,11 @@ class Controller extends ControllerBase
                     $partialList = explode('&', $partialList);
 
                     foreach ($partialList as $partial) {
-                        if (!preg_match('/^(?!.*\/\/)[a-z0-9\_][a-z0-9\_\-\/]*$/i', $partial)) {
+                        if (! preg_match('/^(?!.*\/\/)[a-z0-9\_][a-z0-9\_\-\/]*$/i', $partial)) {
                             throw new SystemException(Lang::get('backend::lang.partial.invalid_name', ['name'=>$partial]));
                         }
                     }
-                }
-                else {
+                } else {
                     $partialList = [];
                 }
 
@@ -468,7 +466,7 @@ class Controller extends ControllerBase
                 /*
                  * Execute the handler
                  */
-                if (!$result = $this->runAjaxHandler($handler)) {
+                if (! $result = $this->runAjaxHandler($handler)) {
                     throw new ApplicationException(Lang::get('backend::lang.ajax_handler.not_found', ['name'=>$handler]));
                 }
 
@@ -508,17 +506,14 @@ class Controller extends ControllerBase
                  */
                 if (is_array($result)) {
                     $responseContents = array_merge($responseContents, $result);
-                }
-                elseif (is_string($result)) {
+                } elseif (is_string($result)) {
                     $responseContents['result'] = $result;
-                }
-                elseif (is_object($result)) {
+                } elseif (is_object($result)) {
                     return $result;
                 }
 
                 return Response::make()->setContent($responseContents);
-            }
-            catch (ValidationException $ex) {
+            } catch (ValidationException $ex) {
                 /*
                  * Handle validation error gracefully
                  */
@@ -526,23 +521,20 @@ class Controller extends ControllerBase
                 $responseContents = [];
                 $responseContents['#layout-flash-messages'] = $this->makeLayoutPartial('flash_messages');
                 $responseContents['X_OCTOBER_ERROR_FIELDS'] = $ex->getFields();
+
                 throw new AjaxException($responseContents);
-            }
-            catch (MassAssignmentException $ex) {
+            } catch (MassAssignmentException $ex) {
                 throw new ApplicationException(Lang::get('backend::lang.model.mass_assignment_failed', ['attribute' => $ex->getMessage()]));
-            }
-            catch (Exception $ex) {
+            } catch (Exception $ex) {
                 throw $ex;
             }
         }
-
-        return null;
     }
 
     /**
      * Tries to find and run an AJAX handler in the page action.
      * The method stops as soon as the handler is found.
-     * @return boolean Returns true if the handler was found. Returns false otherwise.
+     * @return bool Returns true if the handler was found. Returns false otherwise.
      */
     protected function runAjaxHandler($handler)
     {
@@ -573,7 +565,6 @@ class Controller extends ControllerBase
          *             }
          *         }
          *     });
-         *
          */
         if ($event = $this->fireSystemEvent('backend.ajax.beforeRunHandler', [$handler])) {
             return $event;
@@ -594,23 +585,24 @@ class Controller extends ControllerBase
                 throw new SystemException($this->fatalError);
             }
 
-            if (!isset($this->widget->{$widgetName})) {
+            if (! isset($this->widget->{$widgetName})) {
                 throw new SystemException(Lang::get('backend::lang.widget.not_bound', ['name'=>$widgetName]));
             }
 
             if (($widget = $this->widget->{$widgetName}) && $widget->methodExists($handlerName)) {
                 $result = $this->runAjaxHandlerForWidget($widget, $handlerName);
+
                 return $result ?: true;
             }
-        }
-        else {
+        } else {
             /*
              * Process page specific handler (index_onSomething)
              */
-            $pageHandler = $this->action . '_' . $handler;
+            $pageHandler = $this->action.'_'.$handler;
 
             if ($this->methodExists($pageHandler)) {
                 $result = call_user_func_array([$this, $pageHandler], $this->params);
+
                 return $result ?: true;
             }
 
@@ -619,6 +611,7 @@ class Controller extends ControllerBase
              */
             if ($this->methodExists($handler)) {
                 $result = call_user_func_array([$this, $handler], $this->params);
+
                 return $result ?: true;
             }
 
@@ -631,6 +624,7 @@ class Controller extends ControllerBase
             foreach ((array) $this->widget as $widget) {
                 if ($widget->methodExists($handler)) {
                     $result = $this->runAjaxHandlerForWidget($widget, $handler);
+
                     return $result ?: true;
                 }
             }
@@ -675,9 +669,9 @@ class Controller extends ControllerBase
      */
     public function getId($suffix = null)
     {
-        $id = class_basename(get_called_class()) . '-' . $this->action;
+        $id = class_basename(get_called_class()).'-'.$this->action;
         if ($suffix !== null) {
-            $id .= '-' . $suffix;
+            $id .= '-'.$suffix;
         }
 
         return $id;
@@ -690,6 +684,7 @@ class Controller extends ControllerBase
     public function setStatusCode($code)
     {
         $this->statusCode = (int) $code;
+
         return $this;
     }
 
@@ -701,6 +696,7 @@ class Controller extends ControllerBase
     public function setResponse($response)
     {
         $this->responseOverride = $response;
+
         return $this;
     }
 
@@ -724,7 +720,7 @@ class Controller extends ControllerBase
             $partial = null;
         }
 
-        if (!$partial) {
+        if (! $partial) {
             $partial = array_get($params, 'partial', $name);
         }
 
@@ -732,7 +728,7 @@ class Controller extends ControllerBase
             'hintName'    => $name,
             'hintPartial' => $partial,
             'hintContent' => array_get($params, 'content'),
-            'hintParams'  => $params
+            'hintParams'  => $params,
         ] + $params);
     }
 
@@ -743,7 +739,7 @@ class Controller extends ControllerBase
      */
     public function onHideBackendHint()
     {
-        if (!$name = post('name')) {
+        if (! $name = post('name')) {
             throw new ApplicationException('Missing a hint name.');
         }
 
@@ -757,11 +753,12 @@ class Controller extends ControllerBase
     /**
      * Checks if a hint has been hidden by the user.
      * @param  string $name Unique key name
-     * @return boolean
+     * @return bool
      */
     public function isBackendHintHidden($name)
     {
         $hiddenHints = UserPreference::forUser()->get('backend::hints.hidden', []);
+
         return array_key_exists($name, $hiddenHints);
     }
 
@@ -777,7 +774,7 @@ class Controller extends ControllerBase
      */
     protected function verifyCsrfToken()
     {
-        if (!Config::get('cms.enableCsrfProtection')) {
+        if (! Config::get('cms.enableCsrfProtection')) {
             return true;
         }
 
@@ -787,7 +784,7 @@ class Controller extends ControllerBase
 
         $token = Request::input('_token') ?: Request::header('X-CSRF-TOKEN');
 
-        if (!strlen($token)) {
+        if (! strlen($token)) {
             return false;
         }
 
@@ -810,9 +807,9 @@ class Controller extends ControllerBase
         // @todo if year >= 2018 change default from false to null
         $forceSecure = Config::get('cms.backendForceSecure', false);
         if ($forceSecure === null) {
-            $forceSecure = !Config::get('app.debug', false);
+            $forceSecure = ! Config::get('app.debug', false);
         }
 
-        return !$forceSecure;
+        return ! $forceSecure;
     }
 }

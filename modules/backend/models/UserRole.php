@@ -1,17 +1,19 @@
-<?php namespace Backend\Models;
+<?php
+
+namespace Backend\Models;
 
 use Backend\Classes\AuthManager;
 use October\Rain\Auth\Models\Role as RoleBase;
 
 /**
- * Administrator role
+ * Administrator role.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class UserRole extends RoleBase
 {
     const CODE_DEVELOPER = 'developer';
+
     const CODE_PUBLISHER = 'publisher';
 
     /**
@@ -32,7 +34,7 @@ class UserRole extends RoleBase
      */
     public $hasMany = [
         'users' => [User::class, 'key' => 'role_id'],
-        'users_count' => [User::class, 'key' => 'role_id', 'count' => true]
+        'users_count' => [User::class, 'key' => 'role_id', 'count' => true],
     ];
 
     public function filterFields($fields)
@@ -60,13 +62,13 @@ class UserRole extends RoleBase
 
     public function isSystemRole()
     {
-        if (!$this->code || !strlen(trim($this->code))) {
+        if (! $this->code || ! strlen(trim($this->code))) {
             return false;
         }
 
         if ($this->is_system || in_array($this->code, [
             self::CODE_DEVELOPER,
-            self::CODE_PUBLISHER
+            self::CODE_PUBLISHER,
         ])) {
             return true;
         }

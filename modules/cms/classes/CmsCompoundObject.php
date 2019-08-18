@@ -1,24 +1,25 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use Ini;
 use Lang;
 use Cache;
 use Config;
-use Cms\Twig\Loader as TwigLoader;
-use Cms\Twig\Extension as CmsTwigExtension;
+use ApplicationException;
 use Cms\Components\ViewBag;
+use Twig\Source as TwigSource;
+use Cms\Twig\Loader as TwigLoader;
+use Twig\Environment as TwigEnvironment;
+use Cms\Twig\Extension as CmsTwigExtension;
 use System\Twig\Extension as SystemTwigExtension;
 use October\Rain\Halcyon\Processors\SectionParser;
-use Twig\Source as TwigSource;
-use Twig\Environment as TwigEnvironment;
-use ApplicationException;
 
 /**
  * This is a base class for CMS objects that have multiple sections - pages, partials and layouts.
  * The class implements functionality for the compound object file parsing. It also provides a way
  * to access parameters defined in the INI settings section as the object properties.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class CmsCompoundObject extends CmsObject
@@ -34,7 +35,7 @@ class CmsCompoundObject extends CmsObject
      * to their own array inside the 'components' key.
      */
     public $settings = [
-        'components' => []
+        'components' => [],
     ];
 
     /**
@@ -49,7 +50,7 @@ class CmsCompoundObject extends CmsObject
     protected $fillable = [
         'markup',
         'settings',
-        'code'
+        'code',
     ];
 
     /**
@@ -62,7 +63,7 @@ class CmsCompoundObject extends CmsObject
         'where',
         'sortBy',
         'whereComponent',
-        'withComponent'
+        'withComponent',
     ];
 
     /**
@@ -145,7 +146,7 @@ class CmsCompoundObject extends CmsObject
     {
         $safeMode = Config::get('cms.enableSafeMode', null);
         if ($safeMode === null) {
-            $safeMode = !Config::get('app.debug', false);
+            $safeMode = ! Config::get('app.debug', false);
         }
 
         if ($safeMode && $this->isDirty('code') && strlen(trim($this->code))) {
@@ -159,7 +160,7 @@ class CmsCompoundObject extends CmsObject
 
     /**
      * Runs components defined in the settings
-     * Process halts if a component returns a value
+     * Process halts if a component returns a value.
      * @return void
      */
     public function runComponents()
@@ -192,7 +193,7 @@ class CmsCompoundObject extends CmsObject
         $manager = ComponentManager::instance();
         $components = [];
         foreach ($this->settings as $setting => $value) {
-            if (!is_array($value)) {
+            if (! is_array($value)) {
                 continue;
             }
 
@@ -215,8 +216,8 @@ class CmsCompoundObject extends CmsObject
      */
     public function getComponent($componentName)
     {
-        if (!($componentSection = $this->hasComponent($componentName))) {
-            return null;
+        if (! ($componentSection = $this->hasComponent($componentName))) {
+            return;
         }
 
         return ComponentManager::instance()->makeComponent(
@@ -237,7 +238,6 @@ class CmsCompoundObject extends CmsObject
         $componentName = $componentManager->resolve($componentName);
 
         foreach ($this->settings['components'] as $sectionName => $values) {
-
             $result = $sectionName;
 
             if ($sectionName == $componentName) {
@@ -257,7 +257,6 @@ class CmsCompoundObject extends CmsObject
             if ($sectionName == $componentName) {
                 return $result;
             }
-
         }
 
         return false;
@@ -275,8 +274,7 @@ class CmsCompoundObject extends CmsObject
 
         if (self::$objectComponentPropertyMap !== null) {
             $objectComponentMap = self::$objectComponentPropertyMap;
-        }
-        else {
+        } else {
             $cached = Cache::get($key, false);
             $unserialized = $cached ? @unserialize(@base64_decode($cached)) : false;
             $objectComponentMap = $unserialized ?: [];
@@ -295,10 +293,9 @@ class CmsCompoundObject extends CmsObject
             return [];
         }
 
-        if (!isset($this->settings['components'])) {
+        if (! isset($this->settings['components'])) {
             $objectComponentMap[$objectCode] = [];
-        }
-        else {
+        } else {
             foreach ($this->settings['components'] as $name => $settings) {
                 $nameParts = explode(' ', $name);
                 if (count($nameParts) > 1) {
@@ -306,7 +303,7 @@ class CmsCompoundObject extends CmsObject
                 }
 
                 $component = $this->getComponent($name);
-                if (!$component) {
+                if (! $component) {
                     continue;
                 }
 
@@ -360,7 +357,7 @@ class CmsCompoundObject extends CmsObject
 
         $componentName = 'viewBag';
 
-        if (!isset($this->settings['components'][$componentName])) {
+        if (! isset($this->settings['components'][$componentName])) {
             $viewBag = new ViewBag(null, []);
             $viewBag->name = $componentName;
 
@@ -390,7 +387,7 @@ class CmsCompoundObject extends CmsObject
     //
 
     /**
-     * Returns the Twig content string
+     * Returns the Twig content string.
      * @return string
      */
     public function getTwigContent()
@@ -415,6 +412,7 @@ class CmsCompoundObject extends CmsObject
         $twig->addExtension(new SystemTwigExtension);
 
         $stream = $twig->tokenize(new TwigSource($markup === false ? $this->markup : $markup, 'getTwigNodeTree'));
+
         return $twig->parse($stream);
     }
 
@@ -485,6 +483,7 @@ class CmsCompoundObject extends CmsObject
     {
         if (in_array($method, $this->passthru)) {
             $collection = $this->get();
+
             return call_user_func_array([$collection, $method], $parameters);
         }
 

@@ -1,13 +1,14 @@
-<?php namespace Backend\FormWidgets;
+<?php
 
-use Backend\Models\Preference as BackendPreference;
+namespace Backend\FormWidgets;
+
 use Backend\Classes\FormWidgetBase;
+use Backend\Models\Preference as BackendPreference;
 
 /**
  * Code Editor
  * Renders a code editor field.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class CodeEditor extends FormWidgetBase
@@ -22,12 +23,12 @@ class CodeEditor extends FormWidgetBase
     public $language = 'php';
 
     /**
-     * @var boolean Determines whether the gutter is visible.
+     * @var bool Determines whether the gutter is visible.
      */
     public $showGutter = true;
 
     /**
-     * @var boolean Indicates whether the the word wrapping is enabled.
+     * @var bool Indicates whether the the word wrapping is enabled.
      */
     public $wordWrap = true;
 
@@ -37,28 +38,28 @@ class CodeEditor extends FormWidgetBase
     public $codeFolding = 'manual';
 
     /**
-     * @var boolean Automatically close tags and special characters,
+     * @var bool Automatically close tags and special characters,
      * like quotation marks, parenthesis, or brackets.
      */
     public $autoClosing = true;
 
     /**
-     * @var boolean Indicates whether the the editor uses spaces for indentation.
+     * @var bool Indicates whether the the editor uses spaces for indentation.
      */
     public $useSoftTabs = true;
 
     /**
-     * @var boolean Sets the size of the indentation.
+     * @var bool Sets the size of the indentation.
      */
     public $tabSize = 4;
 
     /**
-     * @var integer Sets the font size.
+     * @var int Sets the font size.
      */
     public $fontSize = 12;
 
     /**
-     * @var integer Sets the editor margin size.
+     * @var int Sets the editor margin size.
      */
     public $margin = 0;
 
@@ -78,7 +79,7 @@ class CodeEditor extends FormWidgetBase
     public $highlightActiveLine = true;
 
     /**
-     * @var boolean If true, the editor is set to read-only mode
+     * @var bool If true, the editor is set to read-only mode
      */
     public $readOnly = false;
 
@@ -88,17 +89,17 @@ class CodeEditor extends FormWidgetBase
     public $autocompletion = 'manual';
 
     /**
-     * @var boolean If true, the editor activate use Snippets
+     * @var bool If true, the editor activate use Snippets
      */
     public $enableSnippets = true;
 
     /**
-     * @var boolean If true, the editor show Indent Guides
+     * @var bool If true, the editor show Indent Guides
      */
     public $displayIndentGuides = true;
 
     /**
-     * @var boolean If true, the editor show Print Margin
+     * @var bool If true, the editor show Print Margin
      */
     public $showPrintMargin = false;
 
@@ -107,12 +108,12 @@ class CodeEditor extends FormWidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'codeeditor';
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -139,21 +140,22 @@ class CodeEditor extends FormWidgetBase
             'autocompletion',
             'enableSnippets',
             'displayIndentGuides',
-            'showPrintMargin'
+            'showPrintMargin',
         ]);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
         $this->prepareVars();
+
         return $this->makePartial('codeeditor');
     }
 
     /**
-     * Prepares the widget data
+     * Prepares the widget data.
      */
     public function prepareVars()
     {
@@ -183,7 +185,7 @@ class CodeEditor extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function loadAssets()
     {
@@ -208,12 +210,11 @@ class CodeEditor extends FormWidgetBase
         $this->theme = $preferences->editor_theme;
         $this->showInvisibles = $preferences->editor_show_invisibles;
         $this->highlightActiveLine = $preferences->editor_highlight_active_line;
-        $this->useSoftTabs = !$preferences->editor_use_hard_tabs;
+        $this->useSoftTabs = ! $preferences->editor_use_hard_tabs;
         $this->showGutter = $preferences->editor_show_gutter;
         $this->autocompletion = $preferences->editor_autocompletion;
         $this->enableSnippets = $preferences->editor_enable_snippets;
         $this->displayIndentGuides = $preferences->editor_display_indent_guides;
         $this->showPrintMargin = $preferences->editor_show_print_margin;
     }
-
 }

@@ -1,12 +1,13 @@
-<?php namespace Cms\Twig;
+<?php
+
+namespace Cms\Twig;
 
 use Twig\Node\Node as TwigNode;
 use Twig\Compiler as TwigCompiler;
 
 /**
- * Represents a page node
+ * Represents a page node.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class PageNode extends TwigNode
@@ -25,7 +26,6 @@ class PageNode extends TwigNode
     {
         $compiler
             ->addDebugInfo($this)
-            ->write("echo \$this->env->getExtension('Cms\Twig\Extension')->pageFunction();\n")
-        ;
+            ->write("echo \$this->env->getExtension('Cms\Twig\Extension')->pageFunction();\n");
     }
 }

@@ -1,4 +1,6 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use Illuminate\Console\Command;
 use System\Classes\UpdateManager;
@@ -9,7 +11,6 @@ use Symfony\Component\Console\Input\InputOption;
  *
  * This destroys all database tables that are registered for October and all plugins.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class OctoberDown extends Command
@@ -31,14 +32,13 @@ class OctoberDown extends Command
      */
     public function handle()
     {
-        if (!$this->confirmToProceed('This will DESTROY all database tables.')) {
+        if (! $this->confirmToProceed('This will DESTROY all database tables.')) {
             return;
         }
 
         UpdateManager::instance()
             ->setNotesOutput($this->output)
-            ->uninstall()
-        ;
+            ->uninstall();
     }
 
     /**

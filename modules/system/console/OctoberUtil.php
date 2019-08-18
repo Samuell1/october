@@ -1,16 +1,18 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use App;
-use Lang;
 use File;
+use Lang;
 use Config;
-use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
-use System\Classes\UpdateManager;
-use System\Classes\CombineAssets;
 use Exception;
 use System\Models\Parameter;
+use Illuminate\Console\Command;
+use System\Classes\CombineAssets;
+use System\Classes\UpdateManager;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * Console command for other utility commands.
@@ -30,12 +32,10 @@ use System\Models\Parameter;
  * - set build: Pull the latest stable build number from the update gateway and set it as the current build number.
  * - set project --projectId=<id>: Set the projectId for this october instance.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class OctoberUtil extends Command
 {
-
     use \Illuminate\Console\ConfirmableTrait;
 
     /**
@@ -58,10 +58,10 @@ class OctoberUtil extends Command
 
         $methods = preg_grep('/^util/', get_class_methods(get_called_class()));
         $list = array_map(function ($item) {
-            return "october:".snake_case($item, " ");
+            return 'october:'.snake_case($item, ' ');
         }, $methods);
 
-        if (!$this->argument('name')) {
+        if (! $this->argument('name')) {
             $message = 'There are no commands defined in the "util" namespace.';
             if (1 == count($list)) {
                 $message .= "\n\nDid you mean this?\n    ";
@@ -70,11 +70,13 @@ class OctoberUtil extends Command
             }
 
             $message .= implode("\n    ", $list);
+
             throw new \InvalidArgumentException($message);
         }
 
-        if (!method_exists($this, $method)) {
+        if (! method_exists($this, $method)) {
             $this->error(sprintf('Utility command "%s" does not exist!', $command));
+
             return;
         }
 
@@ -115,16 +117,16 @@ class OctoberUtil extends Command
         /*
          * Skip setting the build number if no database is detected to set it within
          */
-        if (!App::hasDatabase()) {
+        if (! App::hasDatabase()) {
             $this->comment('No database detected - skipping setting the build number.');
+
             return;
         }
 
         try {
             $build = UpdateManager::instance()->setBuildNumberManually();
             $this->comment('*** October sets build: '.$build);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->comment('*** You were kicked from #october by Ex: ('.$ex->getMessage().')');
         }
 
@@ -156,12 +158,13 @@ class OctoberUtil extends Command
     {
         $this->comment('Compiling registered asset bundles...');
 
-        Config::set('cms.enableAssetMinify', !$this->option('debug'));
+        Config::set('cms.enableAssetMinify', ! $this->option('debug'));
         $combiner = CombineAssets::instance();
         $bundles = $combiner->getBundles($type);
 
-        if (!$bundles){
+        if (! $bundles) {
             $this->comment('Nothing to compile!');
+
             return;
         }
 
@@ -172,7 +175,7 @@ class OctoberUtil extends Command
         foreach ($bundles as $bundleType) {
             foreach ($bundleType as $destination => $assets) {
                 $destination = File::symbolizePath($destination);
-                $publicDest = File::localToPublic(realpath(dirname($destination))) . '/' . basename($destination);
+                $publicDest = File::localToPublic(realpath(dirname($destination))).'/'.basename($destination);
 
                 $combiner->combineToFile($assets, $destination);
                 $shortAssets = implode(', ', array_map('basename', $assets));
@@ -188,32 +191,32 @@ class OctoberUtil extends Command
 
     protected function utilCompileLang()
     {
-        if (!$locales = Lang::get('system::lang.locale')) {
+        if (! $locales = Lang::get('system::lang.locale')) {
             return;
         }
 
         $this->comment('Compiling client-side language files...');
 
         $locales = array_keys($locales);
-        $stub = base_path() . '/modules/system/assets/js/lang/lang.stub';
+        $stub = base_path().'/modules/system/assets/js/lang/lang.stub';
 
         foreach ($locales as $locale) {
 
             /*
              * Generate messages
              */
-            $fallbackPath = base_path() . '/modules/system/lang/en/client.php';
-            $srcPath = base_path() . '/modules/system/lang/'.$locale.'/client.php';
+            $fallbackPath = base_path().'/modules/system/lang/en/client.php';
+            $srcPath = base_path().'/modules/system/lang/'.$locale.'/client.php';
 
             $messages = require $fallbackPath;
             if (File::isFile($srcPath) && $fallbackPath != $srcPath) {
                 $messages = array_replace_recursive($messages, require $srcPath);
             }
-            
+
             /*
              * Load possible replacements from /lang
              */
-            $overridePath = base_path() . '/lang/'.$locale.'/system/client.php';
+            $overridePath = base_path().'/lang/'.$locale.'/system/client.php';
             if (File::isFile($overridePath)) {
                 $messages = array_replace_recursive($messages, require $overridePath);
             }
@@ -221,7 +224,7 @@ class OctoberUtil extends Command
             /*
              * Compile from stub and save file
              */
-            $destPath = base_path() . '/modules/system/assets/js/lang/lang.'.$locale.'.js';
+            $destPath = base_path().'/modules/system/assets/js/lang/lang.'.$locale.'.js';
 
             $contents = str_replace(
                 ['{{locale}}', '{{messages}}'],
@@ -232,7 +235,7 @@ class OctoberUtil extends Command
             /*
              * Include the moment localization data
              */
-            $momentPath = base_path() . '/modules/system/assets/ui/vendor/moment/locale/'.$locale.'.js';
+            $momentPath = base_path().'/modules/system/assets/ui/vendor/moment/locale/'.$locale.'.js';
             if (File::exists($momentPath)) {
                 $contents .= PHP_EOL.PHP_EOL.File::get($momentPath).PHP_EOL;
             }
@@ -242,7 +245,7 @@ class OctoberUtil extends Command
             /*
              * Output notes
              */
-            $publicDest = File::localToPublic(realpath(dirname($destPath))) . '/' . basename($destPath);
+            $publicDest = File::localToPublic(realpath(dirname($destPath))).'/'.basename($destPath);
 
             $this->comment($locale.'/'.basename($srcPath));
             $this->comment(sprintf(' -> %s', $publicDest));
@@ -251,7 +254,7 @@ class OctoberUtil extends Command
 
     protected function utilPurgeThumbs()
     {
-        if (!$this->confirmToProceed('This will PERMANENTLY DELETE all thumbs in the uploads directory.')) {
+        if (! $this->confirmToProceed('This will PERMANENTLY DELETE all thumbs in the uploads directory.')) {
             return;
         }
 
@@ -266,7 +269,7 @@ class OctoberUtil extends Command
         $purgeFunc = function ($targetDir) use (&$purgeFunc, &$totalCount) {
             if ($files = File::glob($targetDir.'/thumb_*')) {
                 foreach ($files as $file) {
-                    $this->info('Purged: '. basename($file));
+                    $this->info('Purged: '.basename($file));
                     $totalCount++;
                     @unlink($file);
                 }
@@ -283,15 +286,14 @@ class OctoberUtil extends Command
 
         if ($totalCount > 0) {
             $this->comment(sprintf('Successfully deleted %s thumbs', $totalCount));
-        }
-        else {
+        } else {
             $this->comment('No thumbs found to delete');
         }
     }
 
     protected function utilPurgeUploads()
     {
-        if (!$this->confirmToProceed('This will PERMANENTLY DELETE files in the uploads directory that do not exist in the "system_files" table.')) {
+        if (! $this->confirmToProceed('This will PERMANENTLY DELETE files in the uploads directory that do not exist in the "system_files" table.')) {
             return;
         }
 
@@ -300,7 +302,7 @@ class OctoberUtil extends Command
 
     protected function utilPurgeOrphans()
     {
-        if (!$this->confirmToProceed('This will PERMANENTLY DELETE files in "system_files" that do not belong to any other model.')) {
+        if (! $this->confirmToProceed('This will PERMANENTLY DELETE files in "system_files" that do not belong to any other model.')) {
             return;
         }
 
@@ -314,19 +316,23 @@ class OctoberUtil extends Command
     {
         foreach (File::directories(plugins_path()) as $authorDir) {
             foreach (File::directories($authorDir) as $pluginDir) {
-                if (!File::isDirectory($pluginDir.'/.git')) continue;
-                $exec = 'cd ' . $pluginDir . ' && ';
+                if (! File::isDirectory($pluginDir.'/.git')) {
+                    continue;
+                }
+                $exec = 'cd '.$pluginDir.' && ';
                 $exec .= 'git pull 2>&1';
-                echo 'Updating plugin: '. basename(dirname($pluginDir)) .'.'. basename($pluginDir) . PHP_EOL;
+                echo 'Updating plugin: '.basename(dirname($pluginDir)).'.'.basename($pluginDir).PHP_EOL;
                 echo shell_exec($exec);
             }
         }
 
         foreach (File::directories(themes_path()) as $themeDir) {
-            if (!File::isDirectory($themeDir.'/.git')) continue;
-            $exec = 'cd ' . $themeDir . ' && ';
+            if (! File::isDirectory($themeDir.'/.git')) {
+                continue;
+            }
+            $exec = 'cd '.$themeDir.' && ';
             $exec .= 'git pull 2>&1';
-            echo 'Updating theme: '. basename($themeDir) . PHP_EOL;
+            echo 'Updating theme: '.basename($themeDir).PHP_EOL;
             echo shell_exec($exec);
         }
     }
@@ -335,8 +341,9 @@ class OctoberUtil extends Command
     {
         $projectId = $this->option('projectId');
 
-        if (empty($projectId)){
-            $this->error("No projectId defined, use --projectId=<id> to set a projectId");
+        if (empty($projectId)) {
+            $this->error('No projectId defined, use --projectId=<id> to set a projectId');
+
             return;
         }
 
@@ -348,7 +355,5 @@ class OctoberUtil extends Command
             'system::project.name'  => $result['name'],
             'system::project.owner' => $result['owner'],
         ]);
-
     }
-
 }

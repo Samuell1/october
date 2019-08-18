@@ -1,4 +1,6 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use Cms\Classes\Theme;
 use Illuminate\Console\Command;
@@ -10,7 +12,6 @@ use Symfony\Component\Console\Input\InputArgument;
  *
  * This switches the active theme to another one, saved to the database.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class ThemeUse extends Command
@@ -35,14 +36,14 @@ class ThemeUse extends Command
      */
     public function handle()
     {
-        if (!$this->confirmToProceed('Change the active theme?')) {
+        if (! $this->confirmToProceed('Change the active theme?')) {
             return;
         }
 
         $newThemeName = $this->argument('name');
         $newTheme = Theme::load($newThemeName);
 
-        if (!$newTheme->exists($newThemeName)) {
+        if (! $newTheme->exists($newThemeName)) {
             return $this->error(sprintf('The theme %s does not exist.', $newThemeName));
         }
 

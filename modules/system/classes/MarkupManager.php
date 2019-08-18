@@ -1,15 +1,16 @@
-<?php namespace System\Classes;
+<?php
+
+namespace System\Classes;
 
 use Str;
-use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
+use ApplicationException;
 use Twig\TwigFilter as TwigSimpleFilter;
 use Twig\TwigFunction as TwigSimpleFunction;
-use ApplicationException;
+use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
 
 /**
  * This class manages Twig functions, token parsers and filters.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class MarkupManager
@@ -17,7 +18,9 @@ class MarkupManager
     use \October\Rain\Support\Traits\Singleton;
 
     const EXTENSION_FILTER = 'filters';
+
     const EXTENSION_FUNCTION = 'functions';
+
     const EXTENSION_TOKEN_PARSER = 'tokens';
 
     /**
@@ -69,12 +72,12 @@ class MarkupManager
 
         foreach ($plugins as $id => $plugin) {
             $items = $plugin->registerMarkupTags();
-            if (!is_array($items)) {
+            if (! is_array($items)) {
                 continue;
             }
 
             foreach ($items as $type => $definitions) {
-                if (!is_array($definitions)) {
+                if (! is_array($definitions)) {
                     continue;
                 }
 
@@ -88,7 +91,7 @@ class MarkupManager
      * The callback function should register menu items by calling the manager's
      * `registerFunctions`, `registerFilters`, `registerTokenParsers` function.
      * The manager instance is passed to the callback function as an argument.
-     * Usage:
+     * Usage:.
      *
      *     MarkupManager::registerCallback(function($manager){
      *         $manager->registerFilters([...]);
@@ -119,26 +122,27 @@ class MarkupManager
             $this->$items = [];
         }
 
-        if (!array_key_exists($type, $this->$items)) {
+        if (! array_key_exists($type, $this->$items)) {
             $this->$items[$type] = [];
         }
 
         foreach ($definitions as $name => $definition) {
-
             switch ($type) {
                 case self::EXTENSION_TOKEN_PARSER:
                     $this->$items[$type][] = $definition;
+
                     break;
                 case self::EXTENSION_FILTER:
                 case self::EXTENSION_FUNCTION:
                     $this->$items[$type][$name] = $definition;
+
                     break;
             }
         }
     }
 
     /**
-     * Registers a CMS Twig Filter
+     * Registers a CMS Twig Filter.
      * @param array $definitions An array of the extension definitions.
      */
     public function registerFilters(array $definitions)
@@ -147,7 +151,7 @@ class MarkupManager
     }
 
     /**
-     * Registers a CMS Twig Function
+     * Registers a CMS Twig Function.
      * @param array $definitions An array of the extension definitions.
      */
     public function registerFunctions(array $definitions)
@@ -156,7 +160,7 @@ class MarkupManager
     }
 
     /**
-     * Registers a CMS Twig Token Parser
+     * Registers a CMS Twig Token Parser.
      * @param array $definitions An array of the extension definitions.
      */
     public function registerTokenParsers(array $definitions)
@@ -222,7 +226,7 @@ class MarkupManager
      */
     public function makeTwigFunctions($functions = [])
     {
-        if (!is_array($functions)) {
+        if (! is_array($functions)) {
             $functions = [];
         }
 
@@ -235,11 +239,12 @@ class MarkupManager
                 $callable = function ($name) use ($callable) {
                     $arguments = array_slice(func_get_args(), 1);
                     $method = $this->isWildCallable($callable, Str::camel($name));
+
                     return call_user_func_array($method, $arguments);
                 };
             }
 
-            if (!is_callable($callable)) {
+            if (! is_callable($callable)) {
                 throw new ApplicationException(sprintf('The markup function for %s is not callable.', $name));
             }
 
@@ -256,7 +261,7 @@ class MarkupManager
      */
     public function makeTwigFilters($filters = [])
     {
-        if (!is_array($filters)) {
+        if (! is_array($filters)) {
             $filters = [];
         }
 
@@ -269,11 +274,12 @@ class MarkupManager
                 $callable = function ($name) use ($callable) {
                     $arguments = array_slice(func_get_args(), 1);
                     $method = $this->isWildCallable($callable, Str::camel($name));
+
                     return call_user_func_array($method, $arguments);
                 };
             }
 
-            if (!is_callable($callable)) {
+            if (! is_callable($callable)) {
                 throw new ApplicationException(sprintf('The markup filter for %s is not callable.', $name));
             }
 
@@ -290,13 +296,13 @@ class MarkupManager
      */
     public function makeTwigTokenParsers($parsers = [])
     {
-        if (!is_array($parsers)) {
+        if (! is_array($parsers)) {
             $parsers = [];
         }
 
         $extraParsers = $this->listTokenParsers();
         foreach ($extraParsers as $obj) {
-            if (!$obj instanceof TwigTokenParser) {
+            if (! $obj instanceof TwigTokenParser) {
                 continue;
             }
 
@@ -326,18 +332,16 @@ class MarkupManager
                 if ($replaceWith) {
                     $isWild = $callable;
                     $isWild[0] = str_replace('*', $replaceWith, $callable[0]);
-                }
-                else {
+                } else {
                     $isWild = true;
                 }
             }
 
-            if (!empty($callable[1]) && strpos($callable[1], '*') !== false) {
+            if (! empty($callable[1]) && strpos($callable[1], '*') !== false) {
                 if ($replaceWith) {
                     $isWild = $isWild ?: $callable;
                     $isWild[1] = str_replace('*', $replaceWith, $callable[1]);
-                }
-                else {
+                } else {
                     $isWild = true;
                 }
             }

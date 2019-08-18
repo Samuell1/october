@@ -1,19 +1,19 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use Illuminate\Console\Command;
-use System\Classes\PluginManager;
 use System\Models\PluginVersion;
+use System\Classes\PluginManager;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * Console command to disable a plugin.
  *
- * @package october\system
  * @author Lucas Zamora
  */
 class PluginDisable extends Command
 {
-
     /**
      * The console command name.
      * @var string
@@ -36,7 +36,7 @@ class PluginDisable extends Command
         $pluginName = $this->argument('name');
         $pluginName = $pluginManager->normalizeIdentifier($pluginName);
 
-        if (!$pluginManager->hasPlugin($pluginName)) {
+        if (! $pluginManager->hasPlugin($pluginName)) {
             return $this->error(sprintf('Unable to find a registered plugin called "%s"', $pluginName));
         }
 
@@ -46,7 +46,6 @@ class PluginDisable extends Command
         $plugin = PluginVersion::where('code', $pluginName)->first();
         $plugin->is_disabled = true;
         $plugin->save();
-
 
         $this->output->writeln(sprintf('<info>%s:</info> disabled.', $pluginName));
     }

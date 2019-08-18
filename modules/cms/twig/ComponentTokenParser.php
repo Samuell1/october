@@ -1,16 +1,17 @@
-<?php namespace Cms\Twig;
+<?php
 
-use Twig\Node\Node as TwigNode;
+namespace Cms\Twig;
+
 use Twig\Token as TwigToken;
-use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
+use Twig\Node\Node as TwigNode;
 use Twig\Error\SyntaxError as TwigErrorSyntax;
+use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
 
 /**
  * Parser for the `{% component %}` Twig tag.
  *
  *     {% component "pluginComponent" %}
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class ComponentTokenParser extends TwigTokenParser
@@ -31,7 +32,7 @@ class ComponentTokenParser extends TwigTokenParser
         $nodes = [$name];
 
         $end = false;
-        while (!$end) {
+        while (! $end) {
             $current = $stream->next();
 
             switch ($current->getType()) {
@@ -39,10 +40,12 @@ class ComponentTokenParser extends TwigTokenParser
                     $paramNames[] = $current->getValue();
                     $stream->expect(TwigToken::OPERATOR_TYPE, '=');
                     $nodes[] = $this->parser->getExpressionParser()->parseExpression();
+
                     break;
 
                 case TwigToken::BLOCK_END_TYPE:
                     $end = true;
+
                     break;
 
                 default:
@@ -51,6 +54,7 @@ class ComponentTokenParser extends TwigTokenParser
                         $stream->getCurrent()->getLine(),
                         $stream->getSourceContext()
                     );
+
                     break;
             }
         }

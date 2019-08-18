@@ -1,16 +1,17 @@
-<?php namespace System\Models;
+<?php
+
+namespace System\Models;
 
 use View;
 use Model;
+use File as FileHelper;
+use ApplicationException;
 use System\Classes\MailManager;
 use October\Rain\Mail\MailParser;
-use ApplicationException;
-use File as FileHelper;
 
 /**
- * Mail layout
+ * Mail layout.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class MailLayout extends Model
@@ -45,7 +46,7 @@ class MailLayout extends Model
      * @var array Options array
      */
     protected $jsonable = [
-        'options'
+        'options',
     ];
 
     public static $codeCache;
@@ -102,7 +103,7 @@ class MailLayout extends Model
             $code = $this->code;
         }
 
-        if (!$definition = array_get($definitions, $code)) {
+        if (! $definition = array_get($definitions, $code)) {
             throw new ApplicationException('Unable to find a registered layout with code: '.$code);
         }
 
@@ -133,7 +134,7 @@ class MailLayout extends Model
 
         $this->name = array_get($sections, 'settings.name', '???');
         $this->content_css = $css;
-        $this->content_html =  array_get($sections, 'html');
+        $this->content_html = array_get($sections, 'html');
         $this->content_text = array_get($sections, 'text');
     }
 
@@ -141,5 +142,4 @@ class MailLayout extends Model
     {
         return MailParser::parse(FileHelper::get(View::make($code)->getPath()));
     }
-
 }

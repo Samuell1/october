@@ -16,17 +16,17 @@ return [
         'active_theme' => [
             'online' => 'オンライン',
             'maintenance' => 'メンテナンスモード',
-        ]
+        ],
     ],
     'theme' => [
         'active' => [
-            'not_set' => "アクティブなテーマが設定されていません。",
+            'not_set' => 'アクティブなテーマが設定されていません。',
             'not_found' => 'アクティブなテーマが見つかりません。',
         ],
         'edit' => [
-            'not_set' => "編集テーマが設定されていません。",
-            'not_found' => "編集テーマが見つかりません。",
-            'not_match' => "アクセスしようとしてるオブジェクトは、編集中のテーマに所属していません。ページを再読み込みしてください。",
+            'not_set' => '編集テーマが設定されていません。',
+            'not_found' => '編集テーマが見つかりません。',
+            'not_match' => 'アクセスしようとしてるオブジェクトは、編集中のテーマに所属していません。ページを再読み込みしてください。',
         ],
         'settings_menu' => 'フロントエンドのテーマ',
         'settings_menu_description' => 'インストール済みのテーマのプレビュー一覧とアクティブテーマの選択。',
@@ -43,12 +43,12 @@ return [
     ],
     'page' => [
         'not_found' => [
-            'label' => "ページが見つかりません。",
-            'help' => "要求されているページが見つかりません。",
+            'label' => 'ページが見つかりません。',
+            'help' => '要求されているページが見つかりません。',
         ],
         'custom_error' => [
-            'label' => "ページエラー。",
-            'help' => "申し訳ありません。何かが間違っているようで、ページが表示できません。",
+            'label' => 'ページエラー。',
+            'help' => '申し訳ありません。何かが間違っているようで、ページが表示できません。',
         ],
         'menu_label' => 'ページ',
         'unsaved_label' => '保存されていないページ',
@@ -70,7 +70,7 @@ return [
     ],
     'partial' => [
         'not_found_name' => "':name'パーシャルが見つかりません。",
-        'invalid_name' => "正しくないパーシャル名：:name。",
+        'invalid_name' => '正しくないパーシャル名：:name。',
         'menu_label' => 'パーシャル',
         'unsaved_label' => '保存されていないパーシャル(s)',
         'no_list_records' => 'パーシャルが見つかりません。',
@@ -88,11 +88,11 @@ return [
         'new' => '新コンテンツファイル',
     ],
     'ajax_handler' => [
-        'invalid_name' => "正しくないAjaxハンドラ名：:name。",
+        'invalid_name' => '正しくないAjaxハンドラ名：:name。',
         'not_found' => "':name' Ajaxハンドラが見つかりません。",
     ],
     'cms' => [
-        'menu_label' => "CMS",
+        'menu_label' => 'CMS',
     ],
     'sidebar' => [
         'add' => '追加',
@@ -119,7 +119,7 @@ return [
         'exit_fullscreen' => '全画面モードを解除する',
     ],
     'asset' => [
-        'menu_label' => "アセット",
+        'menu_label' => 'アセット',
         'unsaved_label' => '保存されていないアセット',
         'drop_down_add_title' => '追加...',
         'drop_down_operation_title' => 'アクション...',
@@ -161,21 +161,21 @@ return [
         'path' => 'パス',
     ],
     'component' => [
-        'menu_label' => "コンポーネント",
-        'unnamed' => "名前なし",
-        'no_description' => "説明なし",
-        'alias' => "エイリアス",
-        'alias_description' => "ページやレイアウトコードの中で使用される、一意のコンポーネント名。",
-        'validation_message' => "ラテン文字、数字、下線(_)で構成された、コンポーネントエイリアスが必要です。エイリアスはラテン文字で始まらなくてなりません。",
-        'invalid_request' => "コンポーネントデータが正しくないため、テンプレートは保存できません。",
+        'menu_label' => 'コンポーネント',
+        'unnamed' => '名前なし',
+        'no_description' => '説明なし',
+        'alias' => 'エイリアス',
+        'alias_description' => 'ページやレイアウトコードの中で使用される、一意のコンポーネント名。',
+        'validation_message' => 'ラテン文字、数字、下線(_)で構成された、コンポーネントエイリアスが必要です。エイリアスはラテン文字で始まらなくてなりません。',
+        'invalid_request' => 'コンポーネントデータが正しくないため、テンプレートは保存できません。',
         'no_records' => 'コンポーネントが見つかりません。',
         'not_found' => "':name'コンポーネントが見つかりません。",
         'method_not_found' => "':name'コンポーネントは、':method'メソッドを持っていません。",
     ],
     'template' => [
-        'invalid_type' => "未知のテンプレートタイプ。",
-        'not_found' => "リクエストされたテンプレートが見つかりません。",
-        'saved'=> "テンプレートを保存しました。",
+        'invalid_type' => '未知のテンプレートタイプ。',
+        'not_found' => 'リクエストされたテンプレートが見つかりません。',
+        'saved'=> 'テンプレートを保存しました。',
     ],
     'permissions' => [
         'name' => 'CMS',

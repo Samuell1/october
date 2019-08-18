@@ -1,4 +1,6 @@
-<?php namespace Cms\Controllers;
+<?php
+
+namespace Cms\Controllers;
 
 use Url;
 use Lang;
@@ -7,28 +9,27 @@ use Config;
 use Request;
 use Exception;
 use BackendMenu;
+use Cms\Classes\Page;
+use Cms\Classes\Asset;
+use Cms\Classes\Theme;
+use Cms\Classes\Layout;
+use Cms\Classes\Router;
+use Cms\Classes\Content;
+use Cms\Classes\Partial;
+use ApplicationException;
 use Cms\Widgets\AssetList;
+use System\Helpers\DateTime;
 use Cms\Widgets\TemplateList;
 use Cms\Widgets\ComponentList;
-use Cms\Classes\Page;
-use Cms\Classes\Theme;
-use Cms\Classes\Router;
-use Cms\Classes\Layout;
-use Cms\Classes\Partial;
-use Cms\Classes\Content;
-use Cms\Classes\CmsCompoundObject;
+use Backend\Classes\Controller;
 use Cms\Classes\ComponentManager;
 use Cms\Classes\ComponentPartial;
-use Backend\Classes\Controller;
-use System\Helpers\DateTime;
+use Cms\Classes\CmsCompoundObject;
 use October\Rain\Router\Router as RainRouter;
-use ApplicationException;
-use Cms\Classes\Asset;
 
 /**
- * CMS index
+ * CMS index.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class Index extends Controller
@@ -48,7 +49,7 @@ class Index extends Controller
         'cms.manage_assets',
         'cms.manage_pages',
         'cms.manage_layouts',
-        'cms.manage_partials'
+        'cms.manage_partials',
     ];
 
     /**
@@ -61,7 +62,7 @@ class Index extends Controller
         BackendMenu::setContext('October.Cms', 'cms', true);
 
         try {
-            if (!($theme = Theme::getEditTheme())) {
+            if (! ($theme = Theme::getEditTheme())) {
                 throw new ApplicationException(Lang::get('cms::lang.theme.edit.not_found'));
             }
 
@@ -86,8 +87,7 @@ class Index extends Controller
             new ComponentList($this, 'componentList');
 
             new AssetList($this, 'assetList');
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->handleError($ex);
         }
     }
@@ -97,7 +97,7 @@ class Index extends Controller
     //
 
     /**
-     * Index page action
+     * Index page action.
      * @return void
      */
     public function index()
@@ -121,7 +121,7 @@ class Index extends Controller
     }
 
     /**
-     * Opens an existing template from the index page
+     * Opens an existing template from the index page.
      * @return array
      */
     public function index_onOpenTemplate()
@@ -146,13 +146,13 @@ class Index extends Controller
                 'form'          => $widget,
                 'templateType'  => $type,
                 'templateTheme' => $this->theme->getDirName(),
-                'templateMtime' => $template->mtime
-            ])
+                'templateMtime' => $template->mtime,
+            ]),
         ];
     }
 
     /**
-     * Saves the template currently open
+     * Saves the template currently open.
      * @return array
      */
     public function onSave()
@@ -179,22 +179,21 @@ class Index extends Controller
         foreach ($fields as $field) {
             if (array_key_exists($field, $saveData)) {
                 $templateData[$field] = $saveData[$field];
-            }
-            elseif (array_key_exists($field, $postData)) {
+            } elseif (array_key_exists($field, $postData)) {
                 $templateData[$field] = $postData[$field];
             }
         }
 
-        if (!empty($templateData['markup']) && Config::get('cms.convertLineEndings', false) === true) {
+        if (! empty($templateData['markup']) && Config::get('cms.convertLineEndings', false) === true) {
             $templateData['markup'] = $this->convertLineEndings($templateData['markup']);
         }
 
-        if (!empty($templateData['code']) && Config::get('cms.convertLineEndings', false) === true) {
+        if (! empty($templateData['code']) && Config::get('cms.convertLineEndings', false) === true) {
             $templateData['code'] = $this->convertLineEndings($templateData['code']);
         }
 
         if (
-            !Request::input('templateForceSave') && $template->mtime
+            ! Request::input('templateForceSave') && $template->mtime
             && Request::input('templateMtime') != $template->mtime
         ) {
             throw new ApplicationException('mtime-mismatch');
@@ -204,7 +203,7 @@ class Index extends Controller
         $template->fill($templateData);
         $template->save();
 
-        /**
+        /*
          * @event cms.template.save
          * Fires after a CMS template (page|partial|layout|content|asset) has been saved.
          *
@@ -228,7 +227,7 @@ class Index extends Controller
         $result = [
             'templatePath'  => $template->fileName,
             'templateMtime' => $template->mtime,
-            'tabTitle'      => $this->getTabTitle($type, $template)
+            'tabTitle'      => $this->getTabTitle($type, $template),
         ];
 
         if ($type === 'page') {
@@ -242,7 +241,7 @@ class Index extends Controller
     }
 
     /**
-     * Displays a form that suggests the template has been edited elsewhere
+     * Displays a form that suggests the template has been edited elsewhere.
      * @return string
      */
     public function onOpenConcurrencyResolveForm()
@@ -251,7 +250,7 @@ class Index extends Controller
     }
 
     /**
-     * Create a new template
+     * Create a new template.
      * @return array
      */
     public function onCreateTemplate()
@@ -273,13 +272,13 @@ class Index extends Controller
                 'form'          => $widget,
                 'templateType'  => $type,
                 'templateTheme' => $this->theme->getDirName(),
-                'templateMtime' => null
-            ])
+                'templateMtime' => null,
+            ]),
         ];
     }
 
     /**
-     * Deletes multiple templates at the same time
+     * Deletes multiple templates at the same time.
      * @return array
      */
     public function onDeleteTemplates()
@@ -298,12 +297,11 @@ class Index extends Controller
                     $deleted[] = $path;
                 }
             }
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $error = $ex->getMessage();
         }
 
-        /**
+        /*
          * @event cms.template.delete
          * Fires after a CMS template (page|partial|layout|content|asset) has been deleted.
          *
@@ -325,12 +323,12 @@ class Index extends Controller
         return [
             'deleted' => $deleted,
             'error'   => $error,
-            'theme'   => Request::input('theme')
+            'theme'   => Request::input('theme'),
         ];
     }
 
     /**
-     * Deletes a template
+     * Deletes a template.
      * @return void
      */
     public function onDelete()
@@ -348,7 +346,7 @@ class Index extends Controller
     }
 
     /**
-     * Returns list of available templates
+     * Returns list of available templates.
      * @return array
      */
     public function onGetTemplateList()
@@ -356,8 +354,9 @@ class Index extends Controller
         $this->validateRequestTheme();
 
         $page = Page::inTheme($this->theme);
+
         return [
-            'layouts' => $page->getLayoutOptions()
+            'layouts' => $page->getLayoutOptions(),
         ];
     }
 
@@ -367,16 +366,16 @@ class Index extends Controller
      */
     public function onExpandMarkupToken()
     {
-        if (!$alias = post('tokenName')) {
+        if (! $alias = post('tokenName')) {
             throw new ApplicationException(trans('cms::lang.component.no_records'));
         }
 
         // Can only expand components at this stage
-        if ((!$type = post('tokenType')) && $type !== 'component') {
+        if ((! $type = post('tokenType')) && $type !== 'component') {
             return;
         }
 
-        if (!($names = (array) post('component_names')) || !($aliases = (array) post('component_aliases'))) {
+        if (! ($names = (array) post('component_names')) || ! ($aliases = (array) post('component_aliases'))) {
             throw new ApplicationException(trans('cms::lang.component.not_found', ['name' => $alias]));
         }
 
@@ -384,7 +383,7 @@ class Index extends Controller
             throw new ApplicationException(trans('cms::lang.component.not_found', ['name' => $alias]));
         }
 
-        if (!$componentName = array_get($names, $index)) {
+        if (! $componentName = array_get($names, $index)) {
             throw new ApplicationException(trans('cms::lang.component.not_found', ['name' => $alias]));
         }
 
@@ -402,7 +401,7 @@ class Index extends Controller
     //
 
     /**
-     * Validate that the current request is within the active theme
+     * Validate that the current request is within the active theme.
      * @return void
      */
     protected function validateRequestTheme()
@@ -413,7 +412,7 @@ class Index extends Controller
     }
 
     /**
-     * Reolves a template type to its class name
+     * Reolves a template type to its class name.
      * @param string $type
      * @return string
      */
@@ -424,10 +423,10 @@ class Index extends Controller
             'partial' => Partial::class,
             'layout'  => Layout::class,
             'content' => Content::class,
-            'asset'   => Asset::class
+            'asset'   => Asset::class,
         ];
 
-        if (!array_key_exists($type, $types)) {
+        if (! array_key_exists($type, $types)) {
             throw new ApplicationException(trans('cms::lang.template.invalid_type'));
         }
 
@@ -435,7 +434,7 @@ class Index extends Controller
     }
 
     /**
-     * Returns an existing template of a given type
+     * Returns an existing template of a given type.
      * @param string $type
      * @param string $path
      * @return mixed
@@ -444,11 +443,11 @@ class Index extends Controller
     {
         $class = $this->resolveTypeClassName($type);
 
-        if (!($template = call_user_func([$class, 'load'], $this->theme, $path))) {
+        if (! ($template = call_user_func([$class, 'load'], $this->theme, $path))) {
             throw new ApplicationException(trans('cms::lang.template.not_found'));
         }
 
-        /**
+        /*
          * @event cms.template.processSettingsAfterLoad
          * Fires immediately after a CMS template (page|partial|layout|content|asset) has been loaded and provides an opportunity to interact with it.
          *
@@ -471,7 +470,7 @@ class Index extends Controller
     }
 
     /**
-     * Creates a new template of a given type
+     * Creates a new template of a given type.
      * @param string $type
      * @return mixed
      */
@@ -479,7 +478,7 @@ class Index extends Controller
     {
         $class = $this->resolveTypeClassName($type);
 
-        if (!($template = $class::inTheme($this->theme))) {
+        if (! ($template = $class::inTheme($this->theme))) {
             throw new ApplicationException(trans('cms::lang.template.not_found'));
         }
 
@@ -487,7 +486,7 @@ class Index extends Controller
     }
 
     /**
-     * Returns the text for a template tab
+     * Returns the text for a template tab.
      * @param string $type
      * @param string $template
      * @return string
@@ -496,7 +495,7 @@ class Index extends Controller
     {
         if ($type === 'page') {
             $result = $template->title ?: $template->getFileName();
-            if (!$result) {
+            if (! $result) {
                 $result = trans('cms::lang.page.new');
             }
 
@@ -505,7 +504,7 @@ class Index extends Controller
 
         if ($type === 'partial' || $type === 'layout' || $type === 'content' || $type === 'asset') {
             $result = in_array($type, ['asset', 'content']) ? $template->getFileName() : $template->getBaseFileName();
-            if (!$result) {
+            if (! $result) {
                 $result = trans('cms::lang.'.$type.'.new');
             }
 
@@ -529,10 +528,10 @@ class Index extends Controller
             'partial' => '~/modules/cms/classes/partial/fields.yaml',
             'layout'  => '~/modules/cms/classes/layout/fields.yaml',
             'content' => '~/modules/cms/classes/content/fields.yaml',
-            'asset'   => '~/modules/cms/classes/asset/fields.yaml'
+            'asset'   => '~/modules/cms/classes/asset/fields.yaml',
         ];
 
-        if (!array_key_exists($type, $formConfigs)) {
+        if (! array_key_exists($type, $formConfigs)) {
             throw new ApplicationException(trans('cms::lang.template.not_found'));
         }
 
@@ -544,7 +543,7 @@ class Index extends Controller
     }
 
     /**
-     * Processes the component settings so they are ready to be saved
+     * Processes the component settings so they are ready to be saved.
      * @param array $settings
      * @return array
      */
@@ -605,7 +604,6 @@ class Index extends Controller
          *     $CmsIndexController->bindEvent('template.processSettingsBeforeSave', function ((object) $dataHolder) {
          *         // Make some modifications to the $dataHolder object
          *     });
-         *
          */
         $dataHolder = (object) ['settings' => $settings];
         $this->fireSystemEvent('cms.template.processSettingsBeforeSave', [$dataHolder]);
@@ -614,7 +612,7 @@ class Index extends Controller
     }
 
     /**
-     * Binds the active form widget to the controller
+     * Binds the active form widget to the controller.
      * @return void
      */
     protected function bindFormWidgetToController()

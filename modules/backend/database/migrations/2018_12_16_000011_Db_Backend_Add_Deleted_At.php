@@ -7,7 +7,7 @@ class DbBackendAddDeletedAt extends Migration
 {
     public function up()
     {
-        if (!Schema::hasColumn('backend_users', 'deleted_at')) {
+        if (! Schema::hasColumn('backend_users', 'deleted_at')) {
             Schema::table('backend_users', function (Blueprint $table) {
                 $table->timestamp('deleted_at')->nullable()->after('updated_at');
             });

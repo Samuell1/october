@@ -3,7 +3,7 @@
 return [
     'auth' => [
         'title' => 'Beheeromgeving',
-        'invalid_login' => 'De ingevoerde gegevens leveren geen resultaat. Controleer je invoer en probeer het opnieuw.'
+        'invalid_login' => 'De ingevoerde gegevens leveren geen resultaat. Controleer je invoer en probeer het opnieuw.',
     ],
     'field' => [
         'invalid_type' => 'Ongeldig type veld: :type.',
@@ -19,7 +19,7 @@ return [
         'untitled' => 'Naamloos',
         '404' => [
             'label'     => 'Sorry, we kunnen deze pagina niet meer vinden.',
-            'help'      => "We hebben ons best gedaan, maar het lijkt erop dat deze pagina niet (meer) bestaat of misschien verhuisd is.",
+            'help'      => 'We hebben ons best gedaan, maar het lijkt erop dat deze pagina niet (meer) bestaat of misschien verhuisd is.',
             'back_link' => 'Terug naar de homepagina.',
         ],
         'access_denied' => [
@@ -42,7 +42,7 @@ return [
     ],
     'ajax_handler' => [
         'invalid_name' => 'Ongeldige AJAX verzoek met naam: :name.',
-        'not_found' => "Het AJAX verzoek ':name' kon niet worden gevonden."
+        'not_found' => "Het AJAX verzoek ':name' kon niet worden gevonden.",
     ],
     'account' => [
         'signed_in_as' => 'Ingelogd als :full_name',
@@ -304,7 +304,7 @@ return [
     ],
     'pagelist' => [
         'page_link' => 'Pagina link',
-        'select_page' => 'Selecteer een pagina...'
+        'select_page' => 'Selecteer een pagina...',
     ],
     'relation' => [
         'missing_config' => "Het gedrag (behavior) van deze relatie bevat geen instellingen voor ':config'.",
@@ -544,8 +544,8 @@ return [
             'iso_8859_14' => 'ISO-8859-14 (Latin-8, Celtic)',
             'iso_8859_15' => 'ISO-8859-15 (Latin-9, Western European revision with euro sign)',
             'windows_1251' => 'Windows-1251 (CP1251)',
-            'windows_1252' => 'Windows-1252 (CP1252)'
-        ]
+            'windows_1252' => 'Windows-1252 (CP1252)',
+        ],
     ],
     'permissions' => [
         'manage_media' => 'Beheer media',

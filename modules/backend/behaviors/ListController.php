@@ -1,4 +1,6 @@
-<?php namespace Backend\Behaviors;
+<?php
+
+namespace Backend\Behaviors;
 
 use Lang;
 use Event;
@@ -21,7 +23,6 @@ use Backend\Classes\ControllerBehavior;
  * values as either a YAML file, located in the controller view directory,
  * or directly as a PHP array.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class ListController extends ControllerBehavior
@@ -57,7 +58,7 @@ class ListController extends ControllerBehavior
     protected $filterWidgets = [];
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $requiredProperties = ['listConfig'];
 
@@ -74,7 +75,7 @@ class ListController extends ControllerBehavior
     protected $actions = ['index'];
 
     /**
-     * Behavior constructor
+     * Behavior constructor.
      * @param \Backend\Classes\Controller $controller
      */
     public function __construct($controller)
@@ -87,8 +88,7 @@ class ListController extends ControllerBehavior
         if (is_array($controller->listConfig)) {
             $this->listDefinitions = $controller->listConfig;
             $this->primaryDefinition = key($this->listDefinitions);
-        }
-        else {
+        } else {
             $this->listDefinitions = ['list' => $controller->listConfig];
             $this->primaryDefinition = 'list';
         }
@@ -113,12 +113,12 @@ class ListController extends ControllerBehavior
     }
 
     /**
-     * Prepare the widgets used by this action
+     * Prepare the widgets used by this action.
      * @return void
      */
     public function makeList($definition = null)
     {
-        if (!$definition || !isset($this->listDefinitions[$definition])) {
+        if (! $definition || ! isset($this->listDefinitions[$definition])) {
             $definition = $this->primaryDefinition;
         }
 
@@ -202,7 +202,7 @@ class ListController extends ControllerBehavior
          */
         if (isset($listConfig->toolbar)) {
             $toolbarConfig = $this->makeConfig($listConfig->toolbar);
-            $toolbarConfig->alias = $widget->alias . 'Toolbar';
+            $toolbarConfig->alias = $widget->alias.'Toolbar';
             $toolbarWidget = $this->makeWidget('Backend\Widgets\Toolbar', $toolbarConfig);
             $toolbarWidget->bindToController();
             $toolbarWidget->cssClasses[] = 'list-header';
@@ -213,6 +213,7 @@ class ListController extends ControllerBehavior
             if ($searchWidget = $toolbarWidget->getSearchWidget()) {
                 $searchWidget->bindEvent('search.submit', function () use ($widget, $searchWidget) {
                     $widget->setSearchTerm($searchWidget->getActiveTerm());
+
                     return $widget->onRefresh();
                 });
 
@@ -235,7 +236,7 @@ class ListController extends ControllerBehavior
             $widget->cssClasses[] = 'list-flush';
 
             $filterConfig = $this->makeConfig($listConfig->filter);
-            $filterConfig->alias = $widget->alias . 'Filter';
+            $filterConfig->alias = $widget->alias.'Filter';
             $filterWidget = $this->makeWidget('Backend\Widgets\Filter', $filterConfig);
             $filterWidget->bindToController();
 
@@ -298,8 +299,9 @@ class ListController extends ControllerBehavior
          */
         $checkedIds = post('checked');
 
-        if (!$checkedIds || !is_array($checkedIds) || !count($checkedIds)) {
+        if (! $checkedIds || ! is_array($checkedIds) || ! count($checkedIds)) {
             Flash::error(Lang::get('backend::lang.list.delete_selected_empty'));
+
             return $this->controller->listRefresh();
         }
 
@@ -308,7 +310,7 @@ class ListController extends ControllerBehavior
          */
         $definition = post('definition', $this->primaryDefinition);
 
-        if (!isset($this->listDefinitions[$definition])) {
+        if (! isset($this->listDefinitions[$definition])) {
             throw new ApplicationException(Lang::get('backend::lang.list.missing_parent_definition', compact('definition')));
         }
 
@@ -341,8 +343,7 @@ class ListController extends ControllerBehavior
             }
 
             Flash::success(Lang::get('backend::lang.list.delete_selected_success'));
-        }
-        else {
+        } else {
             Flash::error(Lang::get('backend::lang.list.delete_selected_empty'));
         }
 
@@ -356,11 +357,11 @@ class ListController extends ControllerBehavior
      */
     public function listRender($definition = null)
     {
-        if (!count($this->listWidgets)) {
+        if (! count($this->listWidgets)) {
             throw new ApplicationException(Lang::get('backend::lang.list.behavior_not_ready'));
         }
 
-        if (!$definition || !isset($this->listDefinitions[$definition])) {
+        if (! $definition || ! isset($this->listDefinitions[$definition])) {
             $definition = $this->primaryDefinition;
         }
 
@@ -394,7 +395,7 @@ class ListController extends ControllerBehavior
     public function listMakePartial($partial, $params = [])
     {
         $contents = $this->controller->makePartial('list_'.$partial, $params + $this->vars, false);
-        if (!$contents) {
+        if (! $contents) {
             $contents = $this->makePartial($partial, $params);
         }
 
@@ -408,11 +409,11 @@ class ListController extends ControllerBehavior
      */
     public function listRefresh($definition = null)
     {
-        if (!count($this->listWidgets)) {
+        if (! count($this->listWidgets)) {
             $this->makeLists();
         }
 
-        if (!$definition || !isset($this->listDefinitions[$definition])) {
+        if (! $definition || ! isset($this->listDefinitions[$definition])) {
             $definition = $this->primaryDefinition;
         }
 
@@ -425,7 +426,7 @@ class ListController extends ControllerBehavior
      */
     public function listGetWidget($definition = null)
     {
-        if (!$definition) {
+        if (! $definition) {
             $definition = $this->primaryDefinition;
         }
 
@@ -438,11 +439,11 @@ class ListController extends ControllerBehavior
      */
     public function listGetConfig($definition = null)
     {
-        if (!$definition) {
+        if (! $definition) {
             $definition = $this->primaryDefinition;
         }
 
-        if (!$config = array_get($this->listConfig, $definition)) {
+        if (! $config = array_get($this->listConfig, $definition)) {
             $config = $this->listConfig[$definition] = $this->makeConfig($this->listDefinitions[$definition], $this->requiredConfig);
         }
 
@@ -472,7 +473,7 @@ class ListController extends ControllerBehavior
     }
 
     /**
-     * Controller override: Extend supplied model
+     * Controller override: Extend supplied model.
      * @param Model $model
      * @return Model
      */
@@ -529,7 +530,7 @@ class ListController extends ControllerBehavior
     }
 
     /**
-     * Replace a table column value (<td>...</td>)
+     * Replace a table column value (<td>...</td>).
      * @param  Model $record The populated model used for the column
      * @param  string $columnName The column name to override
      * @param  string $definition List definition (optional)
@@ -540,7 +541,7 @@ class ListController extends ControllerBehavior
     }
 
     /**
-     * Replace the entire table header contents (<th>...</th>) with custom HTML
+     * Replace the entire table header contents (<th>...</th>) with custom HTML.
      * @param  string $columnName The column name to override
      * @param  string $definition List definition (optional)
      * @return string HTML view
@@ -558,14 +559,14 @@ class ListController extends ControllerBehavior
     {
         $calledClass = self::getCalledExtensionClass();
         Event::listen('backend.list.extendColumns', function ($widget) use ($calledClass, $callback) {
-            if (!is_a($widget->getController(), $calledClass)) {
+            if (! is_a($widget->getController(), $calledClass)) {
                 return;
             }
             call_user_func_array($callback, [$widget, $widget->model]);
         });
     }
 
-     /**
+    /**
      * Static helper for extending filter scopes.
      * @param  callable $callback
      * @return void
@@ -574,7 +575,7 @@ class ListController extends ControllerBehavior
     {
         $calledClass = self::getCalledExtensionClass();
         Event::listen('backend.filter.extendScopes', function ($widget) use ($calledClass, $callback) {
-            if (!is_a($widget->getController(), $calledClass)) {
+            if (! is_a($widget->getController(), $calledClass)) {
                 return;
             }
             call_user_func_array($callback, [$widget]);

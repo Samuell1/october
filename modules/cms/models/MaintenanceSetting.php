@@ -1,4 +1,6 @@
-<?php namespace Cms\Models;
+<?php
+
+namespace Cms\Models;
 
 use Model;
 use Cms\Classes\Page;
@@ -6,9 +8,8 @@ use Cms\Classes\Theme;
 use ApplicationException;
 
 /**
- * Maintenance mode settings
+ * Maintenance mode settings.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class MaintenanceSetting extends Model
@@ -19,7 +20,7 @@ class MaintenanceSetting extends Model
      * @var array Behaviors implemented by this model.
      */
     public $implement = [
-        \System\Behaviors\SettingsModel::class
+        \System\Behaviors\SettingsModel::class,
     ];
 
     /**
@@ -33,7 +34,7 @@ class MaintenanceSetting extends Model
     public $settingsFields = 'fields.yaml';
 
     /**
-     * Validation rules
+     * Validation rules.
      */
     public $rules = [];
 
@@ -49,7 +50,7 @@ class MaintenanceSetting extends Model
 
     public function getCmsPageOptions()
     {
-        if (!$theme = Theme::getEditTheme()) {
+        if (! $theme = Theme::getEditTheme()) {
             throw new ApplicationException('Unable to find the active theme.');
         }
 
@@ -62,7 +63,7 @@ class MaintenanceSetting extends Model
      */
     public function beforeValidate()
     {
-        if (!$theme = Theme::getEditTheme()) {
+        if (! $theme = Theme::getEditTheme()) {
             throw new ApplicationException('Unable to find the active theme.');
         }
 
@@ -84,8 +85,7 @@ class MaintenanceSetting extends Model
             && ($cmsPage = array_get($themeMap, $theme->getDirName()))
         ) {
             $this->cms_page = $cmsPage;
-        }
-        else {
+        } else {
             $this->is_enabled = false;
         }
     }

@@ -27,7 +27,7 @@ return [
         'numeric' => ":attribute ha d'estar entre :min i :max.",
         'file'    => ":attribute ha d'estar entre :min i :max kilobytes.",
         'string'  => ":attribute ha d'estar entre :min i :max caràcters.",
-        'array'   => ":attribute ha de tenir entre :min i :max elements.",
+        'array'   => ':attribute ha de tenir entre :min i :max elements.',
     ],
     'boolean'              => 'El camp :attribute ha de ser cert o fals.',
     'confirmed'            => 'La confirmació de :attribute no quadra.',

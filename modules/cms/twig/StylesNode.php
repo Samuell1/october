@@ -1,12 +1,13 @@
-<?php namespace Cms\Twig;
+<?php
+
+namespace Cms\Twig;
 
 use Twig\Node\Node as TwigNode;
 use Twig\Compiler as TwigCompiler;
 
 /**
- * Represents a "styles" node
+ * Represents a "styles" node.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class StylesNode extends TwigNode
@@ -26,7 +27,6 @@ class StylesNode extends TwigNode
         $compiler
             ->addDebugInfo($this)
             ->write("echo \$this->env->getExtension('Cms\Twig\Extension')->assetsFunction('css');\n")
-            ->write("echo \$this->env->getExtension('Cms\Twig\Extension')->displayBlock('styles');\n")
-        ;
+            ->write("echo \$this->env->getExtension('Cms\Twig\Extension')->displayBlock('styles');\n");
     }
 }

@@ -1,16 +1,17 @@
-<?php namespace Cms\Models;
+<?php
+
+namespace Cms\Models;
 
 use Lang;
 use Model;
-use Cms\Classes\Theme as CmsTheme;
-use System\Classes\CombineAssets;
 use Exception;
 use System\Models\File;
+use System\Classes\CombineAssets;
+use Cms\Classes\Theme as CmsTheme;
 
 /**
- * Customization data used by a theme
+ * Customization data used by a theme.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class ThemeData extends Model
@@ -69,15 +70,15 @@ class ThemeData extends Model
     }
 
     /**
-     * Clear asset cache after saving to ensure `assetVar` form fields take 
+     * Clear asset cache after saving to ensure `assetVar` form fields take
      * immediate effect.
      */
     public function afterSave()
     {
         try {
             CombineAssets::resetCache();
+        } catch (Exception $ex) {
         }
-        catch (Exception $ex) {}
     }
 
     /**
@@ -94,8 +95,7 @@ class ThemeData extends Model
 
         try {
             $themeData = self::firstOrCreate(['theme' => $dirName]);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             // Database failed
             $themeData = new self(['theme' => $dirName]);
         }
@@ -116,14 +116,13 @@ class ThemeData extends Model
          * Repeater form fields store arrays and must be jsonable.
          */
         foreach ($this->getFormFields() as $id => $field) {
-            if (!isset($field['type'])) {
+            if (! isset($field['type'])) {
                 continue;
             }
 
             if ($field['type'] === 'repeater') {
                 $this->jsonable[] = $id;
-            }
-            elseif ($field['type'] === 'fileupload') {
+            } elseif ($field['type'] === 'fileupload') {
                 $this->attachOne[$id] = File::class;
                 unset($data[$id]);
             }
@@ -141,7 +140,7 @@ class ThemeData extends Model
      */
     public function beforeValidate()
     {
-        if (!$this->exists) {
+        if (! $this->exists) {
             $this->setDefaultValues();
         }
     }
@@ -151,7 +150,6 @@ class ThemeData extends Model
      */
     public function initFormFields()
     {
-
     }
 
     /**
@@ -189,7 +187,7 @@ class ThemeData extends Model
      */
     public function getFormFields()
     {
-        if (!$theme = CmsTheme::load($this->theme)) {
+        if (! $theme = CmsTheme::load($this->theme)) {
             throw new Exception(Lang::get('Unable to find theme with name :name', $this->theme));
         }
 
@@ -209,7 +207,7 @@ class ThemeData extends Model
         $result = [];
 
         foreach ($this->getFormFields() as $attribute => $field) {
-            if (!$varName = array_get($field, 'assetVar')) {
+            if (! $varName = array_get($field, 'assetVar')) {
                 continue;
             }
 
@@ -227,11 +225,11 @@ class ThemeData extends Model
     {
         $theme = CmsTheme::getActiveTheme();
 
-        if (!$theme){
+        if (! $theme) {
             return;
         }
 
-        if (!$theme->hasCustomData()) {
+        if (! $theme->hasCustomData()) {
             return;
         }
 
@@ -251,7 +249,7 @@ class ThemeData extends Model
     public static function getCombinerCacheKey()
     {
         $theme = CmsTheme::getActiveTheme();
-        if (!$theme->hasCustomData()) {
+        if (! $theme->hasCustomData()) {
             return '';
         }
 

@@ -1,4 +1,6 @@
-<?php namespace System;
+<?php
+
+namespace System;
 
 use App;
 use View;
@@ -6,26 +8,26 @@ use Event;
 use Config;
 use Backend;
 use Request;
-use BackendMenu;
 use BackendAuth;
-use Twig\Environment as TwigEnvironment;
-use System\Classes\MailManager;
-use System\Classes\ErrorHandler;
-use System\Classes\MarkupManager;
-use System\Classes\PluginManager;
-use System\Classes\SettingsManager;
-use System\Classes\UpdateManager;
-use System\Twig\Engine as TwigEngine;
-use System\Twig\Loader as TwigLoader;
-use System\Twig\Extension as TwigExtension;
+use BackendMenu;
 use System\Models\EventLog;
 use System\Models\MailSetting;
+use System\Classes\MailManager;
+use System\Classes\ErrorHandler;
 use System\Classes\CombineAssets;
+use System\Classes\MarkupManager;
+use System\Classes\PluginManager;
+use System\Classes\UpdateManager;
 use Backend\Classes\WidgetManager;
-use October\Rain\Support\ModuleServiceProvider;
-use October\Rain\Router\Helper as RouterHelper;
+use System\Classes\SettingsManager;
 use Illuminate\Pagination\Paginator;
+use System\Twig\Engine as TwigEngine;
+use System\Twig\Loader as TwigLoader;
 use Illuminate\Support\Facades\Schema;
+use Twig\Environment as TwigEnvironment;
+use System\Twig\Extension as TwigExtension;
+use October\Rain\Router\Helper as RouterHelper;
+use October\Rain\Support\ModuleServiceProvider;
 
 class ServiceProvider extends ModuleServiceProvider
 {
@@ -61,7 +63,7 @@ class ServiceProvider extends ModuleServiceProvider
          */
         foreach (Config::get('cms.loadModules', []) as $module) {
             if (strtolower(trim($module)) != 'system') {
-                App::register('\\' . $module . '\ServiceProvider');
+                App::register('\\'.$module.'\ServiceProvider');
             }
         }
 
@@ -99,7 +101,7 @@ class ServiceProvider extends ModuleServiceProvider
     }
 
     /**
-     * Register singletons
+     * Register singletons.
      */
     protected function registerSingletons()
     {
@@ -121,7 +123,7 @@ class ServiceProvider extends ModuleServiceProvider
     }
 
     /**
-     * Check for CLI or system/updates route and disable any plugin initialization
+     * Check for CLI or system/updates route and disable any plugin initialization.
      */
     protected function registerPrivilegedActions()
     {
@@ -135,7 +137,7 @@ class ServiceProvider extends ModuleServiceProvider
         $backendUri = RouterHelper::normalizeUrl(Config::get('cms.backendUri', 'backend'));
         foreach ($requests as $request) {
             if (substr($request, 0, 1) == '@') {
-                $request = $backendUri . substr($request, 1);
+                $request = $backendUri.substr($request, 1);
             }
 
             if (stripos($path, $request) === 0) {
@@ -178,7 +180,7 @@ class ServiceProvider extends ModuleServiceProvider
                 'url_*'          => ['Url', '*'],
                 'html_*'         => ['Html', '*'],
                 'form_*'         => ['Form', '*'],
-                'form_macro'     => ['Form', '__call']
+                'form_macro'     => ['Form', '__call'],
             ]);
 
             $manager->registerFilters([
@@ -201,7 +203,7 @@ class ServiceProvider extends ModuleServiceProvider
     }
 
     /**
-     * Register command line specifics
+     * Register command line specifics.
      */
     protected function registerConsole()
     {
@@ -210,7 +212,7 @@ class ServiceProvider extends ModuleServiceProvider
          */
         Event::listen('console.schedule', function ($schedule) {
             // Fix initial system migration with plugins that use settings for scheduling - see #3208
-            if (App::hasDatabase() && !Schema::hasTable(UpdateManager::instance()->getMigrationTableName())) {
+            if (App::hasDatabase() && ! Schema::hasTable(UpdateManager::instance()->getMigrationTableName())) {
                 return;
             }
 
@@ -261,6 +263,7 @@ class ServiceProvider extends ModuleServiceProvider
     {
         Event::listen('exception.beforeRender', function ($exception, $httpCode, $request) {
             $handler = new ErrorHandler;
+
             return $handler->handleException($exception);
         });
     }
@@ -288,6 +291,7 @@ class ServiceProvider extends ModuleServiceProvider
         App::singleton('twig.environment', function ($app) {
             $twig = new TwigEnvironment(new TwigLoader, ['auto_reload' => true]);
             $twig->addExtension(new TwigExtension);
+
             return $twig;
         });
 
@@ -339,7 +343,7 @@ class ServiceProvider extends ModuleServiceProvider
         Event::listen('mailer.beforeAddContent', function ($mailer, $message, $view, $data, $raw, $plain) {
             $method = $raw === null ? 'addContentToMailer' : 'addRawContentToMailer';
             $plainOnly = $view === null; // When "plain-text only" email is sent, $view is null, this sets the flag appropriately
-            return !MailManager::instance()->$method($message, $raw ?: $view ?: $plain, $data, $plainOnly);
+            return ! MailManager::instance()->$method($message, $raw ?: $view ?: $plain, $data, $plainOnly);
         });
     }
 
@@ -356,8 +360,8 @@ class ServiceProvider extends ModuleServiceProvider
                     'iconSvg'     => 'modules/system/assets/images/cog-icon.svg',
                     'url'         => Backend::url('system/settings'),
                     'permissions' => [],
-                    'order'       => 1000
-                ]
+                    'order'       => 1000,
+                ],
             ]);
         });
 
@@ -391,7 +395,7 @@ class ServiceProvider extends ModuleServiceProvider
         WidgetManager::instance()->registerReportWidgets(function ($manager) {
             $manager->registerReportWidget(\System\ReportWidgets\Status::class, [
                 'label'   => 'backend::lang.dashboard.status.widget_title_default',
-                'context' => 'dashboard'
+                'context' => 'dashboard',
             ]);
         });
     }
@@ -405,20 +409,20 @@ class ServiceProvider extends ModuleServiceProvider
             $manager->registerPermissions('October.System', [
                 'system.manage_updates' => [
                     'label' => 'system::lang.permissions.manage_software_updates',
-                    'tab' => 'system::lang.permissions.name'
+                    'tab' => 'system::lang.permissions.name',
                 ],
                 'system.access_logs' => [
                     'label' => 'system::lang.permissions.access_logs',
-                    'tab' => 'system::lang.permissions.name'
+                    'tab' => 'system::lang.permissions.name',
                 ],
                 'system.manage_mail_settings' => [
                     'label' => 'system::lang.permissions.manage_mail_settings',
-                    'tab' => 'system::lang.permissions.name'
+                    'tab' => 'system::lang.permissions.name',
                 ],
                 'system.manage_mail_templates' => [
                     'label' => 'system::lang.permissions.manage_mail_templates',
-                    'tab' => 'system::lang.permissions.name'
-                ]
+                    'tab' => 'system::lang.permissions.name',
+                ],
             ]);
         });
     }
@@ -441,7 +445,7 @@ class ServiceProvider extends ModuleServiceProvider
                     'icon'        => 'icon-cloud-download',
                     'url'         => Backend::url('system/updates'),
                     'permissions' => ['system.manage_updates'],
-                    'order'       => 300
+                    'order'       => 300,
                 ],
                 'administrators' => [
                     'label'       => 'backend::lang.user.menu_label',
@@ -450,7 +454,7 @@ class ServiceProvider extends ModuleServiceProvider
                     'icon'        => 'icon-users',
                     'url'         => Backend::url('backend/users'),
                     'permissions' => ['backend.manage_users'],
-                    'order'       => 400
+                    'order'       => 400,
                 ],
                 'mail_templates' => [
                     'label'       => 'system::lang.mail_templates.menu_label',
@@ -459,7 +463,7 @@ class ServiceProvider extends ModuleServiceProvider
                     'icon'        => 'icon-envelope-square',
                     'url'         => Backend::url('system/mailtemplates'),
                     'permissions' => ['system.manage_mail_templates'],
-                    'order'       => 610
+                    'order'       => 610,
                 ],
                 'mail_settings' => [
                     'label'       => 'system::lang.mail.menu_label',
@@ -468,7 +472,7 @@ class ServiceProvider extends ModuleServiceProvider
                     'icon'        => 'icon-envelope',
                     'class'       => 'System\Models\MailSetting',
                     'permissions' => ['system.manage_mail_settings'],
-                    'order'       => 620
+                    'order'       => 620,
                 ],
                 'mail_brand_settings' => [
                     'label'       => 'system::lang.mail_brand.menu_label',
@@ -477,7 +481,7 @@ class ServiceProvider extends ModuleServiceProvider
                     'icon'        => 'icon-paint-brush',
                     'url'         => Backend::url('system/mailbrandsettings'),
                     'permissions' => ['system.manage_mail_templates'],
-                    'order'       => 630
+                    'order'       => 630,
                 ],
                 'event_logs' => [
                     'label'       => 'system::lang.event_log.menu_label',
@@ -487,7 +491,7 @@ class ServiceProvider extends ModuleServiceProvider
                     'url'         => Backend::url('system/eventlogs'),
                     'permissions' => ['system.access_logs'],
                     'order'       => 900,
-                    'keywords'    => 'error exception'
+                    'keywords'    => 'error exception',
                 ],
                 'request_logs' => [
                     'label'       => 'system::lang.request_log.menu_label',
@@ -497,7 +501,7 @@ class ServiceProvider extends ModuleServiceProvider
                     'url'         => Backend::url('system/requestlogs'),
                     'permissions' => ['system.access_logs'],
                     'order'       => 910,
-                    'keywords'    => '404 error'
+                    'keywords'    => '404 error',
                 ],
                 'log_settings' => [
                     'label'       => 'system::lang.log.menu_label',
@@ -506,14 +510,14 @@ class ServiceProvider extends ModuleServiceProvider
                     'icon'        => 'icon-dot-circle-o',
                     'class'       => 'System\Models\LogSetting',
                     'permissions' => ['system.manage_logs'],
-                    'order'       => 990
+                    'order'       => 990,
                 ],
             ]);
         });
     }
 
     /**
-     * Register asset bundles
+     * Register asset bundles.
      */
     protected function registerAssetBundles()
     {
@@ -531,17 +535,18 @@ class ServiceProvider extends ModuleServiceProvider
     }
 
     /**
-     * Extends the validator with custom rules
+     * Extends the validator with custom rules.
      */
     protected function registerValidator()
     {
-        $this->app->resolving('validator', function($validator) {
+        $this->app->resolving('validator', function ($validator) {
             /*
              * Allowed file extensions, as opposed to mime types.
              * - extensions: png,jpg,txt
              */
             $validator->extend('extensions', function ($attribute, $value, $parameters) {
                 $extension = strtolower($value->getClientOriginalExtension());
+
                 return in_array($extension, $parameters);
             });
 

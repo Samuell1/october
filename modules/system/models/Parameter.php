@@ -1,4 +1,6 @@
-<?php namespace System\Models;
+<?php
+
+namespace System\Models;
 
 use Cache;
 use October\Rain\Database\Model;
@@ -7,7 +9,6 @@ use October\Rain\Database\Model;
  * Parameters model
  * Used for storing internal application parameters.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class Parameter extends Model
@@ -49,7 +50,7 @@ class Parameter extends Model
         }
 
         $record = static::findRecord($key);
-        if (!$record) {
+        if (! $record) {
             return static::$cache[$key] = $default;
         }
 
@@ -68,11 +69,12 @@ class Parameter extends Model
             foreach ($key as $_key => $_value) {
                 static::set($_key, $_value);
             }
+
             return true;
         }
 
         $record = static::findRecord($key);
-        if (!$record) {
+        if (! $record) {
             $record = new static;
             list($namespace, $group, $item) = $record->parseKey($key);
             $record->namespace = $namespace;
@@ -84,6 +86,7 @@ class Parameter extends Model
         $record->save();
 
         static::$cache[$key] = $value;
+
         return true;
     }
 
@@ -95,18 +98,19 @@ class Parameter extends Model
     public function reset($key)
     {
         $record = static::findRecord($key);
-        if (!$record) {
+        if (! $record) {
             return false;
         }
 
         $record->delete();
 
         unset(static::$cache[$key]);
+
         return true;
     }
 
     /**
-     * Returns a record (cached)
+     * Returns a record (cached).
      * @return self
      */
     public static function findRecord($key)

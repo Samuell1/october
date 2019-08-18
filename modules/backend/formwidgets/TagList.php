@@ -1,16 +1,20 @@
-<?php namespace Backend\FormWidgets;
+<?php
+
+namespace Backend\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
 
 /**
- * Tag List Form Widget
+ * Tag List Form Widget.
  */
 class TagList extends FormWidgetBase
 {
     use \Backend\Traits\FormModelWidget;
 
     const MODE_ARRAY = 'array';
+
     const MODE_STRING = 'string';
+
     const MODE_RELATION = 'relation';
 
     //
@@ -57,12 +61,12 @@ class TagList extends FormWidgetBase
     //
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected $defaultAlias = 'taglist';
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -73,12 +77,12 @@ class TagList extends FormWidgetBase
             'mode',
             'nameFrom',
             'useKey',
-            'placeholder'
+            'placeholder',
         ]);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render()
     {
@@ -88,7 +92,7 @@ class TagList extends FormWidgetBase
     }
 
     /**
-     * Prepares the form widget view data
+     * Prepares the form widget view data.
      */
     public function prepareVars()
     {
@@ -101,7 +105,7 @@ class TagList extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getSaveValue($value)
     {
@@ -123,15 +127,14 @@ class TagList extends FormWidgetBase
      */
     protected function hydrateRelationSaveValue($names)
     {
-        if (!$names) {
+        if (! $names) {
             return $names;
         }
 
         $relationModel = $this->getRelationModel();
         $existingTags = $relationModel
             ->whereIn($this->nameFrom, $names)
-            ->lists($this->nameFrom, $relationModel->getKeyName())
-        ;
+            ->lists($this->nameFrom, $relationModel->getKeyName());
 
         $newTags = $this->customTags ? array_diff($names, $existingTags) : [];
 
@@ -144,7 +147,7 @@ class TagList extends FormWidgetBase
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getLoadValue()
     {
@@ -167,7 +170,7 @@ class TagList extends FormWidgetBase
     {
         $options = $this->formField->options();
 
-        if (!$options && $this->mode === static::MODE_RELATION) {
+        if (! $options && $this->mode === static::MODE_RELATION) {
             $options = $this->getRelationModel()->lists($this->nameFrom);
         }
 
@@ -180,7 +183,7 @@ class TagList extends FormWidgetBase
      */
     protected function getCustomSeparators()
     {
-        if (!$this->customTags) {
+        if (! $this->customTags) {
             return false;
         }
 
@@ -202,5 +205,4 @@ class TagList extends FormWidgetBase
             case 'space': return ' ';
         }
     }
-
 }

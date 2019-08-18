@@ -1,8 +1,8 @@
 <?php
 
+use Backend\Models\User as AdminModel;
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
-use Backend\Models\User as AdminModel;
 
 class DbBackendAddSuperuserFlag extends Migration
 {

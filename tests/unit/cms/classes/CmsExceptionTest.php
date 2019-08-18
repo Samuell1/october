@@ -2,11 +2,11 @@
 
 use Cms\Classes\Page;
 use Cms\Classes\Theme;
-use Cms\Classes\Router;
 use Cms\Classes\Layout;
+use Cms\Classes\Router;
+use Cms\Classes\CodeParser;
 use Cms\Classes\Controller;
 use Cms\Classes\CmsException;
-use Cms\Classes\CodeParser;
 use October\Rain\Exception\SystemException;
 
 class CmsExceptionTest extends TestCase
@@ -40,5 +40,4 @@ class CmsExceptionTest extends TestCase
         $this->assertEquals('PHP Content', $exception->getErrorType());
         $this->assertEquals('This is a general error', $exception->getMessage());
     }
-
 }

@@ -1,4 +1,6 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use File;
 use Artisan;
@@ -10,7 +12,6 @@ use Symfony\Component\Console\Input\InputOption;
  *
  * This removes the demo theme and plugin. A great way to start a fresh project!
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class OctoberFresh extends Command
@@ -32,7 +33,7 @@ class OctoberFresh extends Command
      */
     public function handle()
     {
-        if (!$this->confirmToProceed('Are you sure?')) {
+        if (! $this->confirmToProceed('Are you sure?')) {
             return;
         }
 
@@ -43,8 +44,7 @@ class OctoberFresh extends Command
             File::deleteDirectory($demoThemePath);
 
             $this->info('Demo has been removed! Enjoy a fresh start.');
-        }
-        else {
+        } else {
             $this->error('Demo theme is already removed.');
         }
     }

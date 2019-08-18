@@ -1,40 +1,40 @@
-<?php namespace Backend\Controllers;
+<?php
+
+namespace Backend\Controllers;
 
 use View;
 use Backend;
 use Response;
-use System\Models\File as FileModel;
-use Backend\Classes\Controller;
-use ApplicationException;
 use Exception;
+use ApplicationException;
+use Backend\Classes\Controller;
+use System\Models\File as FileModel;
 
 /**
- * Backend files controller
+ * Backend files controller.
  *
  * Used for delivering protected system files, and generating URLs
  * for accessing them.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
- *
  */
 class Files extends Controller
 {
     /**
-     * Output file, or fall back on the 404 page
+     * Output file, or fall back on the 404 page.
      */
     public function get($code = null)
     {
         try {
             return $this->findFileObject($code)->output('inline', true);
+        } catch (Exception $ex) {
         }
-        catch (Exception $ex) {}
 
         return Response::make(View::make('backend::404'), 404);
     }
 
     /**
-     * Output thumbnail, or fall back on the 404 page
+     * Output thumbnail, or fall back on the 404 page.
      */
     public function thumb($code = null, $width = 100, $height = 100, $mode = 'auto', $extension = 'auto')
     {
@@ -45,8 +45,8 @@ class Files extends Controller
                 compact('mode', 'extension'),
                 true
             );
+        } catch (Exception $ex) {
         }
-        catch (Exception $ex) {}
 
         return Response::make(View::make('backend::404'), 404);
     }
@@ -58,7 +58,7 @@ class Files extends Controller
      */
     public static function getDownloadUrl($file)
     {
-        return Backend::url('backend/files/get/' . self::getUniqueCode($file));
+        return Backend::url('backend/files/get/'.self::getUniqueCode($file));
     }
 
     /**
@@ -71,7 +71,7 @@ class Files extends Controller
      */
     public static function getThumbUrl($file, $width, $height, $options)
     {
-        return Backend::url('backend/files/thumb/' . self::getUniqueCode($file)) . '/' . $width . '/' . $height . '/' . $options['mode'] . '/' . $options['extension'];
+        return Backend::url('backend/files/thumb/'.self::getUniqueCode($file)).'/'.$width.'/'.$height.'/'.$options['mode'].'/'.$options['extension'];
     }
 
     /**
@@ -81,12 +81,13 @@ class Files extends Controller
      */
     public static function getUniqueCode($file)
     {
-        if (!$file) {
-            return null;
+        if (! $file) {
+            return;
         }
 
-        $hash = md5($file->file_name . '!' . $file->disk_name);
-        return base64_encode($file->id . '!' . $hash);
+        $hash = md5($file->file_name.'!'.$file->disk_name);
+
+        return base64_encode($file->id.'!'.$hash);
     }
 
     /**
@@ -96,7 +97,7 @@ class Files extends Controller
      */
     protected function findFileObject($code)
     {
-        if (!$code) {
+        if (! $code) {
             throw new ApplicationException('Missing code');
         }
 
@@ -107,18 +108,18 @@ class Files extends Controller
 
         list($id, $hash) = $parts;
 
-        if (!$file = FileModel::find((int) $id)) {
+        if (! $file = FileModel::find((int) $id)) {
             throw new ApplicationException('Unable to find file');
         }
 
-        /**
+        /*
          * Ensure that the file model utilized for this request is
          * the one specified in the relationship configuration
          */
         if ($file->attachment) {
             $fileModel = $file->attachment->{$file->field}()->getRelated();
 
-            /**
+            /*
              * Only attempt to get file model through its assigned class
              * when the assigned class differs from the default one that
              * the file has already been loaded from

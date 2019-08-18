@@ -1,12 +1,13 @@
-<?php namespace Backend\Classes;
+<?php
+
+namespace Backend\Classes;
 
 use October\Rain\Html\Helper as HtmlHelper;
 
 /**
  * Filter scope definition
- * A translation of the filter scope configuration
+ * A translation of the filter scope configuration.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class FilterScope
@@ -103,6 +104,7 @@ class FilterScope
     {
         $this->type = strtolower($type) ?: $this->type;
         $this->config = $this->evalConfig($config);
+
         return $this;
     }
 
@@ -140,6 +142,7 @@ class FilterScope
         if (array_key_exists('disabled', $config)) {
             $this->disabled = $config['disabled'];
         }
+
         return $config;
     }
 
@@ -156,7 +159,7 @@ class FilterScope
         }
 
         if ($this->idPrefix) {
-            $id = $this->idPrefix . '-' . $id;
+            $id = $this->idPrefix.'-'.$id;
         }
 
         return HtmlHelper::nameToId($id);

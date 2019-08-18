@@ -1,4 +1,6 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use File;
 use Event;
@@ -13,12 +15,10 @@ use Symfony\Component\Console\Input\InputArgument;
  * This command will create symbolic links to files and directories
  * that are commonly required to be publicly available.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class OctoberMirror extends Command
 {
-
     /**
      * The console command name.
      */
@@ -85,7 +85,7 @@ class OctoberMirror extends Command
         $paths->directories = $this->directories;
         $paths->wildcards = $this->wildcards;
 
-        /**
+        /*
          * @event system.console.mirror.extendPaths
          * Enables extending the `php artisan october:mirror` command
          *
@@ -123,7 +123,7 @@ class OctoberMirror extends Command
 
         $dest = $this->getDestinationPath().'/'.$file;
 
-        if (!File::isFile($src) || File::isFile($dest)) {
+        if (! File::isFile($src) || File::isFile($dest)) {
             return false;
         }
 
@@ -138,11 +138,11 @@ class OctoberMirror extends Command
 
         $dest = $this->getDestinationPath().'/'.$directory;
 
-        if (!File::isDirectory($src) || File::isDirectory($dest)) {
+        if (! File::isDirectory($src) || File::isDirectory($dest)) {
             return false;
         }
 
-        if (!File::isDirectory(dirname($dest))) {
+        if (! File::isDirectory(dirname($dest))) {
             File::makeDirectory(dirname($dest), 0755, true);
         }
 
@@ -159,7 +159,7 @@ class OctoberMirror extends Command
 
         $startDir = base_path().'/'.$start;
 
-        if (!File::isDirectory($startDir)) {
+        if (! File::isDirectory($startDir)) {
             return false;
         }
 
@@ -189,10 +189,10 @@ class OctoberMirror extends Command
 
         $destPath = $this->argument('destination');
         if (realpath($destPath) === false) {
-            $destPath = base_path() . '/' . $destPath;
+            $destPath = base_path().'/'.$destPath;
         }
 
-        if (!File::isDirectory($destPath)) {
+        if (! File::isDirectory($destPath)) {
             File::makeDirectory($destPath, 0755, true);
         }
 
@@ -216,7 +216,7 @@ class OctoberMirror extends Command
             array_shift($file);
         }
 
-        return str_repeat('../', count($dir)) . implode('/', $file);
+        return str_repeat('../', count($dir)).implode('/', $file);
     }
 
     /**

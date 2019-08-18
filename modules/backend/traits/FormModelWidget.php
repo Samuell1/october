@@ -1,25 +1,24 @@
-<?php namespace Backend\Traits;
+<?php
+
+namespace Backend\Traits;
 
 use Lang;
-use ApplicationException;
 use Exception;
+use ApplicationException;
 
 /**
- * Form Model Widget Trait
+ * Form Model Widget Trait.
  *
  * Special logic for for form widgets that use a database stored model.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
-
 trait FormModelWidget
 {
-
     /**
      * Returns the final model and attribute name of
      * a nested HTML array attribute.
-     * Eg: list($model, $attribute) = $this->resolveModelAttribute($this->valueFrom);
+     * Eg: list($model, $attribute) = $this->resolveModelAttribute($this->valueFrom);.
      * @param  string $attribute.
      * @return array
      */
@@ -27,11 +26,10 @@ trait FormModelWidget
     {
         try {
             return $this->formField->resolveModelAttribute($this->model, $attribute);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             throw new ApplicationException(Lang::get('backend::lang.model.missing_relation', [
                 'class' => get_class($this->model),
-                'relation' => $attribute
+                'relation' => $attribute,
             ]));
         }
     }
@@ -45,17 +43,17 @@ trait FormModelWidget
     {
         list($model, $attribute) = $this->resolveModelAttribute($this->valueFrom);
 
-        if (!$model) {
+        if (! $model) {
             throw new ApplicationException(Lang::get('backend::lang.model.missing_relation', [
                 'class' => get_class($this->model),
-                'relation' => $this->valueFrom
+                'relation' => $this->valueFrom,
             ]));
         }
 
-        if (!$model->hasRelation($attribute)) {
+        if (! $model->hasRelation($attribute)) {
             throw new ApplicationException(Lang::get('backend::lang.model.missing_relation', [
                 'class' => get_class($model),
-                'relation' => $attribute
+                'relation' => $attribute,
             ]));
         }
 
@@ -71,17 +69,17 @@ trait FormModelWidget
     {
         list($model, $attribute) = $this->resolveModelAttribute($this->valueFrom);
 
-        if (!$model) {
+        if (! $model) {
             throw new ApplicationException(Lang::get('backend::lang.model.missing_relation', [
                 'class' => get_class($this->model),
-                'relation' => $this->valueFrom
+                'relation' => $this->valueFrom,
             ]));
         }
 
-        if (!$model->hasRelation($attribute)) {
+        if (! $model->hasRelation($attribute)) {
             throw new ApplicationException(Lang::get('backend::lang.model.missing_relation', [
                 'class' => get_class($model),
-                'relation' => $attribute
+                'relation' => $attribute,
             ]));
         }
 
@@ -96,7 +94,7 @@ trait FormModelWidget
     protected function getRelationType()
     {
         list($model, $attribute) = $this->resolveModelAttribute($this->valueFrom);
+
         return $model->getRelationType($attribute);
     }
-
 }

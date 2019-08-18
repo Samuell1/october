@@ -1,4 +1,6 @@
-<?php namespace Cms\Facades;
+<?php
+
+namespace Cms\Facades;
 
 use October\Rain\Support\Facade;
 

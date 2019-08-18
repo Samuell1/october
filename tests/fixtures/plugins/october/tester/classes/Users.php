@@ -1,4 +1,6 @@
-<?php namespace October\Tester\Classes;
+<?php
+
+namespace October\Tester\Classes;
 
 class Users
 {

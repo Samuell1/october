@@ -1,12 +1,13 @@
-<?php namespace Cms\Twig;
+<?php
+
+namespace Cms\Twig;
 
 use Twig\Node\Node as TwigNode;
 use Twig\Compiler as TwigCompiler;
 
 /**
- * Represents a "default" node
+ * Represents a "default" node.
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class DefaultNode extends TwigNode
@@ -25,7 +26,6 @@ class DefaultNode extends TwigNode
     {
         $compiler
             ->addDebugInfo($this)
-            ->write("echo '<!-- X_OCTOBER_DEFAULT_BLOCK_CONTENT -->';\n")
-        ;
+            ->write("echo '<!-- X_OCTOBER_DEFAULT_BLOCK_CONTENT -->';\n");
     }
 }

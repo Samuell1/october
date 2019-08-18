@@ -1,23 +1,23 @@
-<?php namespace System\Console;
+<?php
 
+namespace System\Console;
+
+use Exception;
 use Cms\Classes\Theme;
 use Cms\Classes\ThemeManager;
+use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use Illuminate\Console\Command;
-use Exception;
 
 /**
  * Console command to remove a theme.
  *
  * This completely deletes an existing theme, including all files and directories.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class ThemeRemove extends Command
 {
-
     use \Illuminate\Console\ConfirmableTrait;
 
     /**
@@ -42,16 +42,16 @@ class ThemeRemove extends Command
         $themeName = $this->argument('name');
         $themeExists = Theme::exists($themeName);
 
-        if (!$themeExists) {
+        if (! $themeExists) {
             $themeName = strtolower(str_replace('.', '-', $themeName));
             $themeExists = Theme::exists($themeName);
         }
 
-        if (!$themeExists) {
+        if (! $themeExists) {
             return $this->error(sprintf('The theme %s does not exist.', $themeName));
         }
 
-        if (!$this->confirmToProceed(sprintf('This will DELETE theme "%s" from the filesystem and database.', $themeName))) {
+        if (! $this->confirmToProceed(sprintf('This will DELETE theme "%s" from the filesystem and database.', $themeName))) {
             return;
         }
 
@@ -59,8 +59,7 @@ class ThemeRemove extends Command
             $themeManager->deleteTheme($themeName);
 
             $this->info(sprintf('The theme %s has been deleted.', $themeName));
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->error($ex->getMessage());
         }
     }

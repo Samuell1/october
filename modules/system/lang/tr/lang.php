@@ -48,10 +48,10 @@ return [
         'vn' => 'Tiếng việt',
     ],
     'directory' => [
-        'create_fail' => "Klasör oluşturulamıyor: :name",
+        'create_fail' => 'Klasör oluşturulamıyor: :name',
     ],
     'file' => [
-        'create_fail' => "Dosya oluşturulamıyor: :name",
+        'create_fail' => 'Dosya oluşturulamıyor: :name',
     ],
     'combiner' => [
         'not_found' => "Kombine dosyası: ':name' bulunamadı.",

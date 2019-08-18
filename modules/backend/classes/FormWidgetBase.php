@@ -1,17 +1,17 @@
-<?php namespace Backend\Classes;
+<?php
+
+namespace Backend\Classes;
 
 use October\Rain\Html\Helper as HtmlHelper;
 
 /**
  * Form Widget base class
- * Widgets used specifically for forms
+ * Widgets used specifically for forms.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 abstract class FormWidgetBase extends WidgetBase
 {
-
     //
     // Configurable properties
     //
@@ -66,7 +66,7 @@ abstract class FormWidgetBase extends WidgetBase
     protected $valueFrom;
 
     /**
-     * Constructor
+     * Constructor.
      * @param $controller Controller Active controller object.
      * @param $formField FormField Object containing general form field information.
      * @param $configuration array Configuration the relates to this widget.
@@ -92,7 +92,7 @@ abstract class FormWidgetBase extends WidgetBase
     }
 
     /**
-     * Retrieve the parent form for this formwidget
+     * Retrieve the parent form for this formwidget.
      *
      * @return Backend\Widgets\Form|null
      */
@@ -117,7 +117,8 @@ abstract class FormWidgetBase extends WidgetBase
     public function getId($suffix = null)
     {
         $id = parent::getId($suffix);
-        $id .= '-' . $this->fieldName;
+        $id .= '-'.$this->fieldName;
+
         return HtmlHelper::nameToId($id);
     }
 
@@ -143,11 +144,10 @@ abstract class FormWidgetBase extends WidgetBase
             return $this->formField->value;
         }
 
-        $defaultValue = !$this->model->exists
+        $defaultValue = ! $this->model->exists
             ? $this->formField->getDefaultFromData($this->data ?: $this->model)
             : null;
 
         return $this->formField->getValueFromData($this->data ?: $this->model, $defaultValue);
     }
-
 }

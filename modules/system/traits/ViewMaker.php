@@ -1,19 +1,20 @@
-<?php namespace System\Traits;
+<?php
+
+namespace System\Traits;
 
 use File;
 use Lang;
 use Block;
-use SystemException;
+use Config;
 use Exception;
 use Throwable;
+use SystemException;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
-use Config;
 
 /**
  * View Maker Trait
- * Adds view based methods to a class
+ * Adds view based methods to a class.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 trait ViewMaker
@@ -54,8 +55,7 @@ trait ViewMaker
 
         if (is_array($path)) {
             $this->viewPath = array_merge($path, $this->viewPath);
-        }
-        else {
+        } else {
             array_unshift($this->viewPath, $path);
         }
     }
@@ -79,14 +79,14 @@ trait ViewMaker
     public function makePartial($partial, $params = [], $throwException = true)
     {
         $notRealPath = realpath($partial) === false || is_dir($partial) === true;
-        if (!File::isPathSymbol($partial) && $notRealPath) {
-            $folder = strpos($partial, '/') !== false ? dirname($partial) . '/' : '';
-            $partial = $folder . '_' . strtolower(basename($partial)).'.htm';
+        if (! File::isPathSymbol($partial) && $notRealPath) {
+            $folder = strpos($partial, '/') !== false ? dirname($partial).'/' : '';
+            $partial = $folder.'_'.strtolower(basename($partial)).'.htm';
         }
 
         $partialPath = $this->getViewPath($partial);
 
-        if (!File::exists($partialPath)) {
+        if (! File::exists($partialPath)) {
             if ($throwException) {
                 throw new SystemException(Lang::get('backend::lang.partial.not_found_name', ['name' => $partialPath]));
             }
@@ -105,8 +105,9 @@ trait ViewMaker
      */
     public function makeView($view)
     {
-        $viewPath = $this->getViewPath(strtolower($view) . '.htm');
+        $viewPath = $this->getViewPath(strtolower($view).'.htm');
         $contents = $this->makeFileContents($viewPath);
+
         return $this->makeViewContent($contents);
     }
 
@@ -125,6 +126,7 @@ trait ViewMaker
         // Append any undefined block content to the body block
         Block::set('undefinedBlock', $contents);
         Block::append('body', Block::get('undefinedBlock'));
+
         return $this->makeLayout($layout);
     }
 
@@ -143,9 +145,9 @@ trait ViewMaker
             return '';
         }
 
-        $layoutPath = $this->getViewPath($layout . '.htm', $this->layoutPath);
+        $layoutPath = $this->getViewPath($layout.'.htm', $this->layoutPath);
 
-        if (!File::exists($layoutPath)) {
+        if (! File::exists($layoutPath)) {
             if ($throwException) {
                 throw new SystemException(Lang::get('cms::lang.layout.not_found_name', ['name' => $layoutPath]));
             }
@@ -157,16 +159,16 @@ trait ViewMaker
     }
 
     /**
-     * Renders a layout partial
+     * Renders a layout partial.
      * @param string $partial The view to load.
      * @param array $params Parameter variables to pass to the view.
      * @return string The layout partial contents
      */
     public function makeLayoutPartial($partial, $params = [])
     {
-        if (!File::isLocalPath($partial) && !File::isPathSymbol($partial)) {
-            $folder = strpos($partial, '/') !== false ? dirname($partial) . '/' : '';
-            $partial = $folder . '_' . strtolower(basename($partial));
+        if (! File::isLocalPath($partial) && ! File::isPathSymbol($partial)) {
+            $folder = strpos($partial, '/') !== false ? dirname($partial).'/' : '';
+            $partial = $folder.'_'.strtolower(basename($partial));
         }
 
         return $this->makeLayout($partial, $params);
@@ -182,28 +184,28 @@ trait ViewMaker
      */
     public function getViewPath($fileName, $viewPath = null)
     {
-        if (!isset($this->viewPath)) {
+        if (! isset($this->viewPath)) {
             $this->viewPath = $this->guessViewPath();
         }
 
-        if (!$viewPath) {
+        if (! $viewPath) {
             $viewPath = $this->viewPath;
         }
 
         $fileName = File::symbolizePath($fileName);
 
         if (File::isLocalPath($fileName) ||
-            (!Config::get('cms.restrictBaseDir', true) && realpath($fileName) !== false)
+            (! Config::get('cms.restrictBaseDir', true) && realpath($fileName) !== false)
         ) {
             return $fileName;
         }
 
-        if (!is_array($viewPath)) {
+        if (! is_array($viewPath)) {
             $viewPath = [$viewPath];
         }
 
         foreach ($viewPath as $path) {
-            $_fileName = File::symbolizePath($path) . '/' . $fileName;
+            $_fileName = File::symbolizePath($path).'/'.$fileName;
             if (File::isFile($_fileName)) {
                 return $_fileName;
             }
@@ -221,14 +223,14 @@ trait ViewMaker
      */
     public function makeFileContents($filePath, $extraParams = [])
     {
-        if (!strlen($filePath) ||
-            !File::isFile($filePath) ||
-            (!File::isLocalPath($filePath) && Config::get('cms.restrictBaseDir', true))
+        if (! strlen($filePath) ||
+            ! File::isFile($filePath) ||
+            (! File::isLocalPath($filePath) && Config::get('cms.restrictBaseDir', true))
         ) {
             return '';
         }
 
-        if (!is_array($extraParams)) {
+        if (! is_array($extraParams)) {
             $extraParams = [];
         }
 
@@ -245,11 +247,9 @@ trait ViewMaker
         // an exception is thrown. This prevents any partial views from leaking.
         try {
             include $filePath;
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $this->handleViewException($e, $obLevel);
-        }
-        catch (Throwable $e) {
+        } catch (Throwable $e) {
             $this->handleViewException(new FatalThrowableError($e), $obLevel);
         }
 
@@ -262,7 +262,6 @@ trait ViewMaker
      * @param  \Exception  $e
      * @param  int  $obLevel
      * @return void
-     *
      */
     protected function handleViewException($e, $obLevel)
     {
@@ -282,6 +281,7 @@ trait ViewMaker
     public function guessViewPath($suffix = '', $isPublic = false)
     {
         $class = get_called_class();
+
         return $this->guessViewPathFrom($class, $suffix, $isPublic);
     }
 
@@ -296,7 +296,8 @@ trait ViewMaker
     {
         $classFolder = strtolower(class_basename($class));
         $classFile = realpath(dirname(File::fromClass($class)));
-        $guessedPath = $classFile ? $classFile . '/' . $classFolder . $suffix : null;
+        $guessedPath = $classFile ? $classFile.'/'.$classFolder.$suffix : null;
+
         return $isPublic ? File::localToPublic($guessedPath) : $guessedPath;
     }
 }

@@ -1,4 +1,6 @@
-<?php namespace System\Models;
+<?php
+
+namespace System\Models;
 
 use Lang;
 use Model;
@@ -8,7 +10,6 @@ use System\Classes\PluginManager;
 /**
  * Stores information about current plugin versions.
  *
- * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
 class PluginVersion extends Model
@@ -77,7 +78,7 @@ class PluginVersion extends Model
     protected $appends = ['slug'];
 
     /**
-     * After the model is populated
+     * After the model is populated.
      */
     public function afterFetch()
     {
@@ -98,8 +99,7 @@ class PluginVersion extends Model
 
             if ($this->is_disabled) {
                 $manager->disablePlugin($this->code, true);
-            }
-            else {
+            } else {
                 $manager->enablePlugin($this->code, true);
             }
 
@@ -108,8 +108,7 @@ class PluginVersion extends Model
             if (($configDisabled = Config::get('cms.disablePlugins')) && is_array($configDisabled)) {
                 $this->disabledByConfig = in_array($this->code, $configDisabled);
             }
-        }
-        else {
+        } else {
             $this->name = $this->code;
             $this->description = Lang::get('system::lang.plugins.unknown_plugin');
             $this->orphaned = true;
@@ -122,11 +121,11 @@ class PluginVersion extends Model
      */
     public function getIsUpdatableAttribute()
     {
-        return !$this->is_disabled && !$this->disabledBySystem && !$this->disabledByConfig;
+        return ! $this->is_disabled && ! $this->disabledBySystem && ! $this->disabledByConfig;
     }
 
     /**
-     * Only include enabled plugins
+     * Only include enabled plugins.
      * @param $query
      * @return mixed
      */
@@ -136,7 +135,7 @@ class PluginVersion extends Model
     }
 
     /**
-     * Returns the current version for a plugin
+     * Returns the current version for a plugin.
      * @param  string $pluginCode Plugin code. Eg: Acme.Blog
      * @return string
      */

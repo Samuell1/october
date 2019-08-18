@@ -35,15 +35,15 @@ return [
     ],
 
     'mediamanager' => [
-        'insert_link' => "Inserisci collegamento elemento multimediale",
-        'insert_image' => "Inserisci immagine",
-        'insert_video' => "Inserisci video",
-        'insert_audio' => "Inserisci audio",
-        'invalid_file_empty_insert' => "Si prega di selezionare un file di cui inserire il collegamento.",
-        'invalid_file_single_insert' => "Si prega di selezionare un singolo file.",
+        'insert_link' => 'Inserisci collegamento elemento multimediale',
+        'insert_image' => 'Inserisci immagine',
+        'insert_video' => 'Inserisci video',
+        'insert_audio' => 'Inserisci audio',
+        'invalid_file_empty_insert' => 'Si prega di selezionare un file di cui inserire il collegamento.',
+        'invalid_file_single_insert' => 'Si prega di selezionare un singolo file.',
         'invalid_image_empty_insert' => "Si prega di selezionare l\'immagine/le immagini da inserire.",
-        'invalid_video_empty_insert' => "Si prega di selezionare un file video da inserire.",
-        'invalid_audio_empty_insert' => "Si prega di selezionare un file audio da inserire.",
+        'invalid_video_empty_insert' => 'Si prega di selezionare un file video da inserire.',
+        'invalid_audio_empty_insert' => 'Si prega di selezionare un file audio da inserire.',
     ],
 
     'alert' => [
@@ -56,12 +56,12 @@ return [
         'nextMonth' => 'Mese successivo',
         'months' => ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
         'weekdays' => ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
-        'weekdaysShort' => ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab']
+        'weekdaysShort' => ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
     ],
 
     'filter' => [
         'group' => [
-            'all' => 'tutti'
+            'all' => 'tutti',
         ],
         'dates' => [
             'all' => 'tutte',
@@ -69,8 +69,8 @@ return [
             'reset_button_text'  => 'Reimposta',
             'date_placeholder' => 'Data',
             'after_placeholder' => 'Dopo',
-            'before_placeholder' => 'Prima'
-        ]
+            'before_placeholder' => 'Prima',
+        ],
     ],
 
     'eventlog' => [
@@ -86,7 +86,7 @@ return [
             'openWith' => 'Apri con',
             'remember_choice' => 'Ricorda l\'opzione selezionata per questa sessione',
             'open' => 'Apri',
-            'cancel' => 'Annulla'
-        ]
-    ]
+            'cancel' => 'Annulla',
+        ],
+    ],
 ];

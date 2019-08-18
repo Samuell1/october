@@ -1,13 +1,14 @@
-<?php namespace Backend\Classes;
+<?php
 
-use October\Rain\Html\Helper as HtmlHelper;
-use October\Rain\Extension\Extendable;
+namespace Backend\Classes;
+
 use stdClass;
+use October\Rain\Extension\Extendable;
+use October\Rain\Html\Helper as HtmlHelper;
 
 /**
  * Widget base class.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 abstract class WidgetBase extends Extendable
@@ -41,7 +42,7 @@ abstract class WidgetBase extends Extendable
     protected $defaultAlias = 'widget';
 
     /**
-     * Constructor
+     * Constructor.
      * @param \Backend\Classes\Controller $controller
      * @param array $configuration Proactive configuration definition.
      */
@@ -62,7 +63,7 @@ abstract class WidgetBase extends Extendable
         /*
          * If no alias is set by the configuration.
          */
-        if (!isset($this->alias)) {
+        if (! isset($this->alias)) {
             $this->alias = $this->config->alias ?? $this->defaultAlias;
         }
 
@@ -76,7 +77,7 @@ abstract class WidgetBase extends Extendable
         /*
          * Initialize the widget.
          */
-        if (!$this->getConfig('noInit', false)) {
+        if (! $this->getConfig('noInit', false)) {
             $this->init();
         }
     }
@@ -149,11 +150,11 @@ abstract class WidgetBase extends Extendable
         $id = class_basename(get_called_class());
 
         if ($this->alias != $this->defaultAlias) {
-            $id .= '-' . $this->alias;
+            $id .= '-'.$this->alias;
         }
 
         if ($suffix !== null) {
-            $id .= '-' . $suffix;
+            $id .= '-'.$suffix;
         }
 
         return HtmlHelper::nameToId($id);
@@ -166,7 +167,7 @@ abstract class WidgetBase extends Extendable
      */
     public function getEventHandler($name)
     {
-        return $this->alias . '::' . $name;
+        return $this->alias.'::'.$name;
     }
 
     /**
@@ -186,7 +187,7 @@ abstract class WidgetBase extends Extendable
          * First part will be the field name, pop it off
          */
         $fieldName = array_shift($keyParts);
-        if (!isset($this->config->{$fieldName})) {
+        if (! isset($this->config->{$fieldName})) {
             return $default;
         }
 
@@ -196,7 +197,7 @@ abstract class WidgetBase extends Extendable
          * Loop the remaining key parts and build a result
          */
         foreach ($keyParts as $key) {
-            if (!array_key_exists($key, $result)) {
+            if (! array_key_exists($key, $result)) {
                 return $default;
             }
 

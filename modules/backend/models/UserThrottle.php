@@ -1,11 +1,12 @@
-<?php namespace Backend\Models;
+<?php
+
+namespace Backend\Models;
 
 use October\Rain\Auth\Models\Throttle as ThrottleBase;
 
 /**
- * Administrator throttling model
+ * Administrator throttling model.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class UserThrottle extends ThrottleBase
@@ -19,6 +20,6 @@ class UserThrottle extends ThrottleBase
      * @var array Relations
      */
     public $belongsTo = [
-        'user' => User::class
+        'user' => User::class,
     ];
 }

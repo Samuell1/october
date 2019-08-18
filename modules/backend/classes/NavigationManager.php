@@ -1,4 +1,6 @@
-<?php namespace Backend\Classes;
+<?php
+
+namespace Backend\Classes;
 
 use Event;
 use BackendAuth;
@@ -7,7 +9,6 @@ use System\Classes\PluginManager;
 /**
  * Manages the backend navigation.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class NavigationManager
@@ -27,7 +28,9 @@ class NavigationManager
     protected $contextSidenavPartials = [];
 
     protected $contextOwner;
+
     protected $contextMainMenuItemCode;
+
     protected $contextSideMenuItemCode;
 
     protected static $mainItemDefaults = [
@@ -40,7 +43,7 @@ class NavigationManager
         'url'         => null,
         'permissions' => [],
         'order'       => 500,
-        'sideMenu'    => []
+        'sideMenu'    => [],
     ];
 
     protected static $sideItemDefaults = [
@@ -53,7 +56,7 @@ class NavigationManager
         'counterLabel'=> null,
         'order'       => -1,
         'attributes'  => [],
-        'permissions' => []
+        'permissions' => [],
     ];
 
     /**
@@ -70,7 +73,7 @@ class NavigationManager
     }
 
     /**
-     * Loads the menu items from modules and plugins
+     * Loads the menu items from modules and plugins.
      * @return void
      */
     protected function loadItems()
@@ -89,7 +92,7 @@ class NavigationManager
 
         foreach ($plugins as $id => $plugin) {
             $items = $plugin->registerNavigation();
-            if (!is_array($items)) {
+            if (! is_array($items)) {
                 continue;
             }
 
@@ -115,7 +118,7 @@ class NavigationManager
         $this->items = $this->filterItemPermissions($user, $this->items);
 
         foreach ($this->items as $item) {
-            if (!$item->sideMenu || !count($item->sideMenu)) {
+            if (! $item->sideMenu || ! count($item->sideMenu)) {
                 continue;
             }
 
@@ -124,7 +127,9 @@ class NavigationManager
              */
             $orderCount = 0;
             foreach ($item->sideMenu as $sideMenuItem) {
-                if ($sideMenuItem->order !== -1) continue;
+                if ($sideMenuItem->order !== -1) {
+                    continue;
+                }
                 $sideMenuItem->order = ($orderCount += 100);
             }
 
@@ -146,7 +151,7 @@ class NavigationManager
      * Registers a callback function that defines menu items.
      * The callback function should register menu items by calling the manager's
      * `registerMenuItems` method. The manager instance is passed to the callback
-     * function as an argument. Usage:
+     * function as an argument. Usage:.
      *
      *     BackendMenu::registerCallback(function($manager){
      *         $manager->registerMenuItems([...]);
@@ -189,7 +194,7 @@ class NavigationManager
      */
     public function registerMenuItems($owner, array $definitions)
     {
-        if (!$this->items) {
+        if (! $this->items) {
             $this->items = [];
         }
 
@@ -197,7 +202,7 @@ class NavigationManager
     }
 
     /**
-     * Dynamically add an array of main menu items
+     * Dynamically add an array of main menu items.
      * @param string $owner
      * @param array  $definitions
      */
@@ -209,7 +214,7 @@ class NavigationManager
     }
 
     /**
-     * Dynamically add a single main menu item
+     * Dynamically add a single main menu item.
      * @param string $owner
      * @param string $code
      * @param array  $definitions
@@ -224,7 +229,7 @@ class NavigationManager
 
         $item = (object) array_merge(self::$mainItemDefaults, array_merge($definition, [
             'code'  => $code,
-            'owner' => $owner
+            'owner' => $owner,
         ]));
 
         $this->items[$itemKey] = $item;
@@ -235,7 +240,7 @@ class NavigationManager
     }
 
     /**
-     * Removes a single main menu item
+     * Removes a single main menu item.
      */
     public function removeMainMenuItem($owner, $code)
     {
@@ -244,7 +249,7 @@ class NavigationManager
     }
 
     /**
-     * Dynamically add an array of side menu items
+     * Dynamically add an array of side menu items.
      * @param string $owner
      * @param string $code
      * @param array  $definitions
@@ -257,7 +262,7 @@ class NavigationManager
     }
 
     /**
-     * Dynamically add a single side menu item
+     * Dynamically add a single side menu item.
      * @param string $owner
      * @param string $code
      * @param string $sideCode
@@ -267,7 +272,7 @@ class NavigationManager
     {
         $itemKey = $this->makeItemKey($owner, $code);
 
-        if (!isset($this->items[$itemKey])) {
+        if (! isset($this->items[$itemKey])) {
             return false;
         }
 
@@ -275,7 +280,7 @@ class NavigationManager
 
         $definition = array_merge($definition, [
             'code'  => $sideCode,
-            'owner' => $owner
+            'owner' => $owner,
         ]);
 
         if (isset($mainItem->sideMenu[$sideCode])) {
@@ -288,12 +293,12 @@ class NavigationManager
     }
 
     /**
-     * Removes a single main menu item
+     * Removes a single main menu item.
      */
     public function removeSideMenuItem($owner, $code, $sideCode)
     {
         $itemKey = $this->makeItemKey($owner, $code);
-        if (!isset($this->items[$itemKey])) {
+        if (! isset($this->items[$itemKey])) {
             return false;
         }
 
@@ -318,9 +323,9 @@ class NavigationManager
 
             if ($item->counter !== null && is_callable($item->counter)) {
                 $item->counter = call_user_func($item->counter, $item);
-            } elseif (!empty((int) $item->counter)) {
+            } elseif (! empty((int) $item->counter)) {
                 $item->counter = (int) $item->counter;
-            } elseif (!empty($sideItems = $this->listSideMenuItems($item->owner, $item->code))) {
+            } elseif (! empty($sideItems = $this->listSideMenuItems($item->owner, $item->code))) {
                 $item->counter = 0;
                 foreach ($sideItems as $sideItem) {
                     $item->counter += $sideItem->counter;
@@ -349,12 +354,13 @@ class NavigationManager
             foreach ($this->listMainMenuItems() as $item) {
                 if ($this->isMainMenuItemActive($item)) {
                     $activeItem = $item;
+
                     break;
                 }
             }
         }
 
-        if (!$activeItem) {
+        if (! $activeItem) {
             return [];
         }
 
@@ -414,10 +420,10 @@ class NavigationManager
      */
     public function getContext()
     {
-        return (object)[
+        return (object) [
             'mainMenuCode' => $this->contextMainMenuItemCode,
             'sideMenuCode' => $this->contextSideMenuItemCode,
-            'owner' => $this->contextOwner
+            'owner' => $this->contextOwner,
         ];
     }
 
@@ -434,7 +440,7 @@ class NavigationManager
     /**
      * Determines if a main menu item is active.
      * @param mixed $item Specifies the item object.
-     * @return boolean Returns true if the menu item is active.
+     * @return bool Returns true if the menu item is active.
      */
     public function isMainMenuItemActive($item)
     {
@@ -442,7 +448,7 @@ class NavigationManager
     }
 
     /**
-     * Returns the currently active main menu item
+     * Returns the currently active main menu item.
      * @param mixed $item Returns the item object or null.
      */
     public function getActiveMainMenuItem()
@@ -452,19 +458,18 @@ class NavigationManager
                 return $item;
             }
         }
-
-        return null;
     }
 
     /**
      * Determines if a side menu item is active.
      * @param mixed $item Specifies the item object.
-     * @return boolean Returns true if the side item is active.
+     * @return bool Returns true if the side item is active.
      */
     public function isSideMenuItemActive($item)
     {
         if ($this->contextSideMenuItemCode === true) {
             $this->contextSideMenuItemCode = null;
+
             return true;
         }
 
@@ -506,12 +511,12 @@ class NavigationManager
      */
     protected function filterItemPermissions($user, array $items)
     {
-        if (!$user) {
+        if (! $user) {
             return $items;
         }
 
         $items = array_filter($items, function ($item) use ($user) {
-            if (!$item->permissions || !count($item->permissions)) {
+            if (! $item->permissions || ! count($item->permissions)) {
                 return true;
             }
 

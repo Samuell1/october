@@ -1,4 +1,6 @@
-<?php namespace Backend\Classes;
+<?php
+
+namespace Backend\Classes;
 
 use Str;
 use Html;
@@ -7,9 +9,8 @@ use October\Rain\Html\Helper as HtmlHelper;
 
 /**
  * Form Field definition
- * A translation of the form field configuration
+ * A translation of the form field configuration.
  *
- * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
 class FormField
@@ -193,6 +194,7 @@ class FormField
     public function tab($value)
     {
         $this->tab = $value;
+
         return $this;
     }
 
@@ -203,6 +205,7 @@ class FormField
     public function span($value = 'full')
     {
         $this->span = $value;
+
         return $this;
     }
 
@@ -213,6 +216,7 @@ class FormField
     public function size($value = 'large')
     {
         $this->size = $value;
+
         return $this;
     }
 
@@ -226,9 +230,9 @@ class FormField
         if ($value === null) {
             if (is_array($this->options)) {
                 return $this->options;
-            }
-            elseif (is_callable($this->options)) {
+            } elseif (is_callable($this->options)) {
                 $callable = $this->options;
+
                 return $callable();
             }
 
@@ -332,8 +336,7 @@ class FormField
 
         if (isset($config['valueFrom'])) {
             $this->valueFrom = $config['valueFrom'];
-        }
-        else {
+        } else {
             $this->valueFrom = $this->fieldName;
         }
 
@@ -376,20 +379,21 @@ class FormField
     /**
      * Sets the attributes for this field in a given position.
      * - field: Attributes are added to the form field element (input, select, textarea, etc)
-     * - container: Attributes are added to the form field container (div.form-group)
+     * - container: Attributes are added to the form field container (div.form-group).
      * @param  array $items
      * @param  string $position
      * @return void
      */
     public function attributes($items, $position = 'field')
     {
-        if (!is_array($items)) {
+        if (! is_array($items)) {
             return;
         }
 
         $multiArray = array_filter($items, 'is_array');
-        if (!$multiArray) {
+        if (! $multiArray) {
             $this->attributes[$position] = $items;
+
             return;
         }
 
@@ -408,7 +412,7 @@ class FormField
      */
     public function hasAttribute($name, $position = 'field')
     {
-        if (!isset($this->attributes[$position])) {
+        if (! isset($this->attributes[$position])) {
             return false;
         }
 
@@ -458,14 +462,14 @@ class FormField
     }
 
     /**
-     * Adds attributes used specifically by the Trigger API
+     * Adds attributes used specifically by the Trigger API.
      * @param  array $attributes
      * @param  string $position
      * @return array
      */
     protected function filterTriggerAttributes($attributes, $position = 'field')
     {
-        if (!$this->trigger || !is_array($this->trigger)) {
+        if (! $this->trigger || ! is_array($this->trigger)) {
             return $attributes;
         }
 
@@ -502,8 +506,7 @@ class FormField
         // Final compilation
         if ($this->arrayName) {
             $fullTriggerField = $triggerForm.'['.implode('][', HtmlHelper::nameToArray($triggerField)).']'.$triggerMulti;
-        }
-        else {
+        } else {
             $fullTriggerField = $triggerField.$triggerMulti;
         }
 
@@ -511,25 +514,25 @@ class FormField
             'data-trigger' => '[name="'.$fullTriggerField.'"]',
             'data-trigger-action' => $triggerAction,
             'data-trigger-condition' => $triggerCondition,
-            'data-trigger-closest-parent' => 'form, div[data-control="formwidget"]'
+            'data-trigger-closest-parent' => 'form, div[data-control="formwidget"]',
         ];
 
         return $attributes + $newAttributes;
     }
 
     /**
-     * Adds attributes used specifically by the Input Preset API
+     * Adds attributes used specifically by the Input Preset API.
      * @param  array $attributes
      * @param  string $position
      * @return array
      */
     protected function filterPresetAttributes($attributes, $position = 'field')
     {
-        if (!$this->preset || $position != 'field') {
+        if (! $this->preset || $position != 'field') {
             return $attributes;
         }
 
-        if (!is_array($this->preset)) {
+        if (! is_array($this->preset)) {
             $this->preset = ['field' => $this->preset, 'type' => 'slug'];
         }
 
@@ -538,15 +541,14 @@ class FormField
 
         if ($this->arrayName) {
             $fullPresetField = $this->arrayName.'['.implode('][', HtmlHelper::nameToArray($presetField)).']';
-        }
-        else {
+        } else {
             $fullPresetField = $presetField;
         }
 
         $newAttributes = [
             'data-input-preset' => '[name="'.$fullPresetField.'"]',
             'data-input-preset-type' => $presetType,
-            'data-input-preset-closest-parent' => 'form'
+            'data-input-preset-closest-parent' => 'form',
         ];
 
         if ($prefixInput = array_get($this->preset, 'prefixInput')) {
@@ -593,7 +595,7 @@ class FormField
         }
 
         if ($this->idPrefix) {
-            $id = $this->idPrefix . '-' . $id;
+            $id = $this->idPrefix.'-'.$id;
         }
 
         return HtmlHelper::nameToId($id);
@@ -620,6 +622,7 @@ class FormField
     public function getValueFromData($data, $default = null)
     {
         $fieldName = $this->valueFrom ?: $this->fieldName;
+
         return $this->getFieldNameFromData($fieldName, $data, $default);
     }
 
@@ -638,12 +641,10 @@ class FormField
         if ($this->defaults !== '') {
             return $this->defaults;
         }
-
-        return null;
     }
 
     /**
-     * Returns the final model and attribute name of a nested attribute. Eg:
+     * Returns the final model and attribute name of a nested attribute. Eg:.
      *
      *     list($model, $attribute) = $this->resolveAttribute('person[phone]');
      *
@@ -688,28 +689,23 @@ class FormField
          * relation value, all others will look up the relation object as normal.
          */
         foreach ($keyParts as $key) {
-
             if ($result instanceof Model && $result->hasRelation($key)) {
                 if ($key == $lastField) {
                     $result = $result->getRelationValue($key) ?: $default;
-                }
-                else {
+                } else {
                     $result = $result->{$key};
                 }
-            }
-            elseif (is_array($result)) {
-                if (!array_key_exists($key, $result)) {
+            } elseif (is_array($result)) {
+                if (! array_key_exists($key, $result)) {
                     return $default;
                 }
                 $result = $result[$key];
-            }
-            else {
-                if (!isset($result->{$key})) {
+            } else {
+                if (! isset($result->{$key})) {
                     return $default;
                 }
                 $result = $result->{$key};
             }
-
         }
 
         return $result;

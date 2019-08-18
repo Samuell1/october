@@ -1,4 +1,6 @@
-<?php namespace Cms\Twig;
+<?php
+
+namespace Cms\Twig;
 
 use Twig\Token as TwigToken;
 use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
@@ -8,7 +10,6 @@ use Twig\TokenParser\AbstractTokenParser as TwigTokenParser;
  *
  *     {% styles %}
  *
- * @package october\cms
  * @author Alexey Bobkov, Samuel Georges
  */
 class StylesTokenParser extends TwigTokenParser
@@ -23,6 +24,7 @@ class StylesTokenParser extends TwigTokenParser
     {
         $stream = $this->parser->getStream();
         $stream->expect(TwigToken::BLOCK_END_TYPE);
+
         return new StylesNode($token->getLine(), $this->getTag());
     }
 
